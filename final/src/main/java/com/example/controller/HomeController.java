@@ -74,16 +74,16 @@ public class HomeController {
 	public void home() {			
 	}
 	
-	   /*이미지파일 브라우저에 출력*/ 
-    @Resource(name="uploadPath") /*파일 업로드를 위해 필요*/
+	   /*�씠誘몄��뙆�씪 釉뚮씪�슦���뿉 異쒕젰*/ 
+    @Resource(name="uploadPath") /*�뙆�씪 �뾽濡쒕뱶瑜� �쐞�빐 �븘�슂*/
      private String path;
 
- // 이미지파일 브라우저에 출력
+ // �씠誘몄��뙆�씪 釉뚮씪�슦���뿉 異쒕젰
     @RequestMapping("/display")
     @ResponseBody
     public ResponseEntity<byte[]> display(String fileName) throws Exception {
        ResponseEntity<byte[]> result = null;
-       // display fileName이 있는 경우
+       // display fileName�씠 �엳�뒗 寃쎌슦
        if (!fileName.equals("")) {
           File file = new File(path + File.separator + fileName);
           HttpHeaders header = new HttpHeaders();
