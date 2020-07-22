@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BoardMapper">
+    <select id="list" resultType="com.example.domain.BoardVO">
+        select * from board
+    </select>
+    <select id="read" resultType="com.example.domain.BoardVO">
+		select * from board where b_no=#{b_no}   
+    </select>
+    <insert id="insert">
+     	insert into board(id,title,content,image,date) 
+     	values(#{id},#{title},#{content},#{image},now())
+    </insert>
+    <delete id="delete">
+    	delete from board where b_no=#{b_no}
+    </delete>
+    <update id="update">
+    	update board set title=#{title},content=#{content},image=#{image} where b_no=#{b_no}
+    </update>
+    
+    <select id="BnoRead" resultType="int">
+		select * from board where id=#{id} and title=#{title} and content=#{content}
+		and image=#{image}
+    </select>
+	<insert id="addB_imagelist">
+		insert into b_imagelist(images,b_no) values(#{images},#{b_no})
+	</insert>
+	<select id="getB_imagelist" resultType="string">
+		select images from b_imagelist where b_no=#{b_no} 
+	</select>
+	<delete id="delB_imagelist">
+		delete from b_imagelist where b_no=#{b_no}
+	</delete>
+	
+</mapper>
