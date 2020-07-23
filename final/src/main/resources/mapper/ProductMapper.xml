@@ -4,4 +4,8 @@
 	<select id="productList" resultType="com.example.domain.ProductVO">
 		select * from product limit 0,10
 	</select>
+	
+	<select id="read" resultType="com.example.domain.ProductVO">
+		select * from product where p_no=#{p_no}
+	</select>
 </mapper>

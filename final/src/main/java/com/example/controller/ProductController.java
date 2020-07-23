@@ -27,4 +27,9 @@ public class ProductController {
 	public List<ProductVO> productList(){
 		return pmapper.productList();
 	}
+	
+	@RequestMapping("/read")
+	public void read(Model model, int p_no) {
+		model.addAttribute("read", pmapper.read(p_no));
+	}
 }

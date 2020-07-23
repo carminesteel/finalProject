@@ -19,6 +19,7 @@
 </head>
 <body>
 	<jsp:include page="../menu.jsp"></jsp:include>
+	<br><br><br><br><br><br>
 	<table id=productMenu height=116px>
 		<tr>
 			<td><a class=menuB href="">BEST</a>&emsp;&emsp;&emsp;<a class=menuB href="">아트굿즈</a>&emsp;&emsp;&emsp;<a class=menuB href="">판매자</a>
@@ -29,6 +30,7 @@
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each .}}
 			<div class="box">
+				<input type="hidden" value="{{p_no}}" class="p_no">
 				<div class="image"><img src="{{image}}"/></div>
 				<div class="title">{{title}}</div>
 				<div class="price">{{price}}</div>
@@ -43,6 +45,11 @@
 
 <script>
 	getList();
+	
+	$("#tab").on("click", ".box .image", function(){
+		var p_no=$(this).parent().find(".p_no").val();
+		location.href="/product/read?p_no="+p_no;
+	});
 	
 	function getList(){
 		$.ajax({
