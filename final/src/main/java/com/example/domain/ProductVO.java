@@ -15,7 +15,14 @@ public class ProductVO {
 	private int report;
 	private Date date;
 	private ArrayList<String> images;
+	private int quantity;
 	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public ArrayList<String> getImages() {
 		return images;
 	}

@@ -21,7 +21,11 @@
 	<jsp:include page="../menu.jsp"></jsp:include>
 	<table id=productMenu height=116px>
 		<tr>
-			<td><a class=menuB href="">BEST</a>&emsp;&emsp;&emsp;<a class=menuB href="">아트굿즈</a>&emsp;&emsp;&emsp;<a class=menuB href="">판매자</a>
+			<td>
+				<a class=menuB href="">BEST</a>&emsp;&emsp;&emsp;
+				<a class=menuB href="">아트굿즈</a>&emsp;&emsp;&emsp;
+				<a class=menuB href="">판매자</a>
+			</td>
 		</tr>
 	</table>
 	
@@ -49,7 +53,6 @@
 	$("#tab").on("click", ".image", function(){		
 		var p_no=$(this).parent().find(".p_no").val();
 		var id=$(this).parent().find(".id").html();
-		alert(id)
 		location.href="/product/read?p_no="+p_no+"&id="+id;
 	});
 	
