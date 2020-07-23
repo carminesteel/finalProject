@@ -85,7 +85,7 @@ public class ProductController {
 	@ResponseBody
 	public ResponseEntity<byte[]> display(String fileName) throws Exception {
 		ResponseEntity<byte[]> result = null;
-		// display fileName�씠 �엳�뒗 寃쎌슦
+		// display fileName占쎌뵠 占쎌뿳占쎈뮉 野껋럩�뒭
 		if (!fileName.equals("")) {
 			File file = new File(path + File.separator + fileName);
 			HttpHeaders header = new HttpHeaders();

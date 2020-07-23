@@ -29,6 +29,7 @@
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each .}}
 			<div class="box">
+				<input type="hidden" value="{{p_no}}" class="p_no">
 				<div class="image"><img src="/display?fileName={{image}}"/></div>
 				<div class="title">{{title}}</div>
 				<div class="price">{{price}}</div>
@@ -43,6 +44,11 @@
 
 <script>
 	getList();
+	
+	$("#tab").on("click", ".image", function(){
+		var p_no=$(this).parent().find(".p_no").val();
+		location.href="/product/read?p_no="+p_no;
+	});
 	
 	function getList(){
 		$.ajax({
