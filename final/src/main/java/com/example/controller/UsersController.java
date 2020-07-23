@@ -60,6 +60,12 @@ public class UsersController {
 		return "login/loginPostNaver";
 	}
 
+	@RequestMapping(value="/login/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login/login";
+	}
+	
 	@RequestMapping("/login/insert")
 	public void insert() {
 
