@@ -22,4 +22,8 @@
 	<select id="read" resultType="com.example.domain.ProductVO">
 		select * from product where p_no=#{p_no}
 	</select>
+	
+	<update id="updateViewCnt">
+		update product set view = view+1 where id=#{id}
+	</update>
 </mapper>

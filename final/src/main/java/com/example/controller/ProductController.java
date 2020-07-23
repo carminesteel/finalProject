@@ -45,12 +45,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/read")
-	public void read(Model model, int p_no) {
-		model.addAttribute("read", pmapper.read(p_no));
+	public void read(Model model, int p_no, String id) {
+		pmapper.updateViewCnt(id);
+		model.addAttribute("read", pmapper.read(p_no));				
 	}
+	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public void insert(){
-		
+	public void insert(){		
 	}
 	
 	@Resource(name="uploadPath")

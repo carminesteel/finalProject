@@ -34,6 +34,7 @@
 				<div class="title">{{title}}</div>
 				<div class="price">{{price}}</div>
 				<div class="content">{{content}}</div>
+				<div class="id" style="display:none">{{id}}</div>
 			</div>
 		{{/each}}
 	</script>
@@ -45,9 +46,11 @@
 <script>
 	getList();
 	
-	$("#tab").on("click", ".image", function(){
+	$("#tab").on("click", ".image", function(){		
 		var p_no=$(this).parent().find(".p_no").val();
-		location.href="/product/read?p_no="+p_no;
+		var id=$(this).parent().find(".id").html();
+		alert(id)
+		location.href="/product/read?p_no="+p_no+"&id="+id;
 	});
 	
 	function getList(){
