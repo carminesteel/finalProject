@@ -17,9 +17,8 @@
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
-<body>
+<body style="padding-top: 73px; margin-left: 0px; width: 100%;">
 	<jsp:include page="../menu.jsp"></jsp:include>
-	<br><br><br><br><br><br>
 	<table id=productMenu height=116px>
 		<tr>
 			<td><a class=menuB href="">BEST</a>&emsp;&emsp;&emsp;<a class=menuB href="">아트굿즈</a>&emsp;&emsp;&emsp;<a class=menuB href="">판매자</a>
@@ -30,8 +29,7 @@
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each .}}
 			<div class="box">
-				<input type="hidden" value="{{p_no}}" class="p_no">
-				<div class="image"><img src="{{image}}"/></div>
+				<div class="image"><img src="/display?fileName={{image}}"/></div>
 				<div class="title">{{title}}</div>
 				<div class="price">{{price}}</div>
 				<div class="content">{{content}}</div>
@@ -45,11 +43,6 @@
 
 <script>
 	getList();
-	
-	$("#tab").on("click", ".box .image", function(){
-		var p_no=$(this).parent().find(".p_no").val();
-		location.href="/product/read?p_no="+p_no;
-	});
 	
 	function getList(){
 		$.ajax({

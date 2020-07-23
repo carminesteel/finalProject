@@ -5,6 +5,20 @@
 		select * from product limit 0,10
 	</select>
 	
+	<insert id="insert">
+		insert into product (id, title, content, image, price)
+		values (#{id}, #{title}, #{content}, #{image}, #{price})
+	</insert>
+	
+	<insert id="attachInsert">
+		insert into p_imageList(p_no, images) values(#{p_no},#{images})
+	</insert>
+	
+	<select id="P_noRead" resultType="int">
+		select p_no from product where id=#{id} and title=#{title} and content=#{content}
+		and image=#{image} and price=#{price}
+	</select>
+	
 	<select id="read" resultType="com.example.domain.ProductVO">
 		select * from product where p_no=#{p_no}
 	</select>
