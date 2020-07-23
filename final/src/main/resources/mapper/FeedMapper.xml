@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.FeedMapper">
+    <select id="TargetRead" resultType="string">
+        select target from follower where follower=#{id}
+    </select>
+    
+    <select id="TargetBoardCount" resultType="int">
+    	select count(*) from board where id=#{target}
+    </select>
+    
+    <select id="TargetBoardListRead" resultType="com.example.domain.BoardVO">
+        select * from board where id=#{target}
+    </select>
+</mapper>
