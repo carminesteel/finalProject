@@ -11,8 +11,8 @@
    <bean id="dataSource"
       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-      <property name="url" value="jdbc:log4jdbc:mysql://192.168.0.140:3306/finaldb"></property>
-      <property name="username" value="final"></property>
+      <property name="url" value="jdbc:log4jdbc:mysql://192.168.0.108:3306/finaldb"></property>
+      <property name="username" value="finalProject"></property>
       <property name="password" value="pass"></property>
    </bean>
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

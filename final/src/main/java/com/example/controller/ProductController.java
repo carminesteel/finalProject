@@ -35,13 +35,19 @@ public class ProductController {
 	
 	@RequestMapping("/list")
 	public void list(Model model) {
-		model.addAttribute("productList", pmapper.productList());
+		model.addAttribute("bestList", pmapper.bestList());
 	}
 	
-	@RequestMapping("/rest/list")
+	@RequestMapping("/rest/bestlist")
 	@ResponseBody
-	public List<ProductVO> productList(){
-		return pmapper.productList();
+	public List<ProductVO> bestList(){
+		return pmapper.bestList();
+	}
+	
+	@RequestMapping("/rest/artgoods")
+	@ResponseBody
+	public List<ProductVO> artgoods(){
+		return pmapper.artgoods();
 	}
 	
 	@RequestMapping("/read")
@@ -86,7 +92,6 @@ public class ProductController {
 	@ResponseBody
 	public ResponseEntity<byte[]> display(String fileName) throws Exception {
 		ResponseEntity<byte[]> result = null;
-		// display fileName占쎌뵠 占쎌뿳占쎈뮉 野껋럩�뒭
 		if (!fileName.equals("")) {
 			File file = new File(path + File.separator + fileName);
 			HttpHeaders header = new HttpHeaders();
