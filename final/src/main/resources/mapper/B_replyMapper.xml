@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.B_replyMapper">
+    <select id="rlist" resultType="com.example.domain.B_replyVO">
+        select * from b_reply where b_no=#{b_no}
+        order by r_no
+    </select>
+    <insert id="insert">
+    	insert into b_reply(b_no, content, replyer ,date)
+    	values(#{b_no},#{content},#{replyer},now());
+    </insert>
+    <select id="total" resultType="int">
+    	select count(*) from b_reply where b_no=#{b_no}
+    </select>
+	<delete id="delete">
+		delete from b_reply where r_no=#{r_no}
+	</delete>
+</mapper>
