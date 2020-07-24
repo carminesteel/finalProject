@@ -9,6 +9,8 @@ import com.example.domain.ProductVO;
 public interface ProductMapper {
 	public List<ProductVO> bestList();
 	public List<ProductVO> artgoods();
+	public List<ProductVO> creater();
+	public List<ProductVO> proimage(String id);
 	public ProductVO read(int p_no);
 	public void insert(ProductVO vo);
 	public int P_noRead(ProductVO vo);

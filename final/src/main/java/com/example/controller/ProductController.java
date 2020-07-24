@@ -35,7 +35,7 @@ public class ProductController {
 	
 	@RequestMapping("/list")
 	public void list(Model model) {
-		model.addAttribute("bestList", pmapper.bestList());
+		model.addAttribute("creater", pmapper.creater());
 	}
 	
 	@RequestMapping("/rest/bestlist")
@@ -48,6 +48,13 @@ public class ProductController {
 	@ResponseBody
 	public List<ProductVO> artgoods(){
 		return pmapper.artgoods();
+	}
+	
+	@RequestMapping("/rest/proimage")
+	@ResponseBody
+	public List<ProductVO> proimage(String id){
+		System.out.println(pmapper.proimage(id));
+		return pmapper.proimage(id);
 	}
 	
 	@RequestMapping("/read")

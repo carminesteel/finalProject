@@ -3,7 +3,7 @@ package com.example.domain;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ProductVO {
+public class ProductVO extends UsersVO{
 	private int p_no;
 	private String id;
 	private String title;

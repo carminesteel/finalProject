@@ -11,8 +11,9 @@
 		.menuB{text-decoration:none;color:black;}
 		.menuB:hover{cursor:pointer;}
 		body {width:1000px;}
-		#besttab, #artgoods{width:1000px;margin:auto;overflow:hidden;}
+		#besttab, #artgoodstab, #creatertab{width:1000px;margin:auto;overflow:hidden;}
 		.box{width:200px;float:left;text-align:center; margin:auto;}
+		.creater{width:500px;float:left;text-align:center; margin:auto;}
 		.image img{whitd:150px; height:120px; margin:auto; margin-bottom:5px;}
 	</style>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -32,7 +33,6 @@
 	</table>
 	
 	<div id="best">
-		<h1>요즘 인기있는 상품이에요.</h1>
 		<div id="besttab" ></div>
 		<script id="besttemp" type="text/x-handlebars-template">
 			{{#each .}}
@@ -49,7 +49,7 @@
 	</div>
 	
 	<div id="artgoods" style="display:none">
-		<div id="artgoodstab" ></div>
+		<div id="artgoodstab"></div>
 		<script id="artgoodstemp" type="text/x-handlebars-template">
 			{{#each .}}
 				<div class="box">
@@ -64,6 +64,30 @@
 		</script>
 	</div>
 	
+	<div id="creater">
+		<div id="creatertab">
+			<c:forEach items="${creater}" var="creater">
+				<div class="creater">
+					<img src="/display?fileName=${creater.u_image}" width=100 height=100/>
+					<div style="float:right">
+						<div class="createrid">${creater.id}</div><br>
+						<div>${creater.introduce}</div>
+					</div>
+					
+					<div class="proimagetab"></div>
+					<script class="proimagetemp" type="text/x-handlebars-template">
+						{{#each .}}
+							<div class="proimagebox">
+								<div class="image"><img src="/display?fileName={{image}}"/></div>
+							</div>
+						{{/each}}
+					</script>
+				</div>
+				
+			</c:forEach>
+		</div>
+	</div>
+		
 	<jsp:include page="../footer.jsp"></jsp:include>
 	
 </body>
@@ -71,16 +95,27 @@
 <script>
 	getBest();
 	artgoods();
+	$("#best").hide();
 	$("#artgoods").hide();
+	//$("#creater").hide();
+	
+	$("#bestmenu").on("click", function(){
+		$("#best").show();
+		$("#artgoods").hide();
+		$("#creater").hide();
+	});
 	
 	$("#artgoodsmenu").on("click", function(){
 		$("#best").hide();
 		$("#artgoods").show();
+		$("#creater").hide();
 	});
 	
-	$("#bestmenu").on("click", function(){
+	$("#purchasemenu").on("click", function(){
+		$("#best").hide();
 		$("#artgoods").hide();
-		$("#best").show();
+		$("#creater").show();
+		proimage();
 	});
 	
 	$("#besttab").on("click", ".image", function(){		
@@ -116,6 +151,23 @@
 				var temp=Handlebars.compile($("#artgoodstemp").html());
 				$("#artgoodstab").html(temp(data));
 			}
+		});
+	}
+	
+	function proimage(){
+		$("#creatertab .creater").each(function(){
+			var id=$("#creatertab .creater").find(".createrid").html();
+			$.ajax({
+				type:"get",
+				url:"/product/rest/proimage",
+				data:{"id":id},
+				dataType:"json",
+				success:function(data){
+					id=$("#creatertab .creater").find(".createrid").html();
+					var temp=Handlebars.compile($(".proimagetemp").html());
+					$(".proimagetab").html(temp(data));
+				}
+			});
 		});
 	}
 </script>

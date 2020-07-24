@@ -17,8 +17,13 @@
 
 <table id=menu style="height:80px;width:100%;box-shadow:0 5px 15px rgba(0, 0, 0, 0.5);">
    <tr>
-      <td id=logo style=float:left;margin-top:16px;padding-left:65px><a class=menuA href="">Artists</a></td>
-      <td><a class=menuA href="/feed/feed">피드</a>&emsp;&emsp;&emsp;<a class=menuA href="">탐색</a>&emsp;&emsp;&emsp;<a class=menuA href="">아트굿즈</a>&emsp;&emsp;&emsp;<a class=menuA href="">전시</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+      <td id=logo style=float:left;margin-top:16px;padding-left:65px><a class=menuA href="/">Artists</a></td>
+      <td>
+      	<a class=menuA href="/feed/feed">피드</a>&emsp;&emsp;&emsp;
+      	<a class=menuA href="/board/list">탐색</a>&emsp;&emsp;&emsp;
+      	<a class=menuA href="/product/list">아트굿즈</a>&emsp;&emsp;&emsp;
+      	<a class=menuA href="/exh/list">전시</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      </td>
       <c:if test="${position==null}">
       		<td style=float:right;padding-right:65px;><a class=menuA href="/login/login">로그인</a></td>
       </c:if>
