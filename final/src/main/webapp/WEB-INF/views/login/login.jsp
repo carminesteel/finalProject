@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type = "text/javascript" src = "https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
 <style>
 #bg {
 	position: fixed;
@@ -127,6 +128,7 @@ body::before {
 	cursor: pointer;
 	margin-left:2px;
 	margin-bottom:6px;
+	outline: none;
 }
 
 .caption {
@@ -151,7 +153,7 @@ body::before {
 		</div>
 		<div id=tlqkf>
 		<h1 style="height:10px;">Login</h1>
-		<span>이곳이 처음이신가요?<a id="userInsert">회원가입</a></span>
+		<span>이곳이 처음이신가요?<a id="userInsert" style="color:red;">회원가입</a></span>
 		<br><br><br><br>
 		<form name="frm" action="login" method="post">
 			<div class="int-area">
@@ -268,7 +270,7 @@ $(btn).on('click', function() {
    
    //회원가입 버튼을 눌렀을 때
    $("#userInsert").on("click" , function(){
-	   window.open("/login/insert","","width=700, height=1400");
+	   window.open("/login/agree","","width=600, height=800");
    })
 </script>
 </html>
