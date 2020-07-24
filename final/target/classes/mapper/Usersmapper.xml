@@ -4,4 +4,10 @@
     <select id="read" resultType="com.example.domain.UsersVO">
         select * from users where id=#{id}
     </select>
+      
+    
+    <insert id="insert">
+    	insert into users (id,pass,name,nickname,phone,introduce,addr,email,u_image) 
+    	values(#{id},#{pass},#{name},#{nickname},#{phone},#{introduce},#{addr},#{email},#{u_image})
+    </insert>
 </mapper>

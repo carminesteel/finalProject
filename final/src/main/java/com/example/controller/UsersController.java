@@ -1,5 +1,6 @@
 package com.example.controller;
 
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -54,20 +55,44 @@ public class UsersController {
 		return result;
 	}
 
+	//네이버 로그인 관련 (아직 완성x)
 	@RequestMapping(value = "loginPostNaver", method = RequestMethod.GET)
 	public String loginPOSTNaver(HttpSession session) {
 
 		return "login/loginPostNaver";
 	}
 
-	@RequestMapping(value="/login/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/login/login";
+	//회원가입 눌렀을 때 뜨는 (동의 창)
+	@RequestMapping("/login/agree")
+	public void agree() {
+	}
+
+	//아이디 중복검사
+	@RequestMapping("/insert/read")
+	@ResponseBody
+	public Integer Iread(String id) {
+		System.out.println(id);
+		int cnt=-1;
+		UsersVO vo=mapper.read(id);
+		if(vo==null){
+			cnt=0;
+		}else{
+			cnt=1;
+		}
+		return cnt;
 	}
 	
-	@RequestMapping("/login/insert")
-	public void insert() {
-
+	//회원가입 페이지로 이동 
+		@RequestMapping("/login/insert")
+		public void insert() {
+		}
+	
+	@RequestMapping(value="/login/insert", method=RequestMethod.POST)
+	public String insertPost(UsersVO vo){
+		mapper.insert(vo);
+		return "redirect:/login/hello";
+	}
+	@RequestMapping("/login/hello")
+	public void hello() {
 	}
 }

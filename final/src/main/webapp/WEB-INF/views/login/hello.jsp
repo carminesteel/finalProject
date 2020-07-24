@@ -25,8 +25,12 @@
 </head>
 <body>
 	<h1>환영합니다 싀벌련아!!!!</h1>
-
+	
 	<h3>창을 닫고 로그인을 해주세요 싀벌련아!!!</h3>
+	<h1>asdasas</h1>
+	<span>${name}님 환영합니다</span> 
+
+
 
 	<div class="btn-area" style="text-align: center;">
 		<button id="btn">메인으로</button>
