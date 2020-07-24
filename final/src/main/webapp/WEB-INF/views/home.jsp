@@ -95,7 +95,7 @@ li {
 
 .gallery-wrapper .btn-prev, .gallery-wrapper .btn-next {
 	position: absolute;
-	top: 225px;
+	top: 190px;
 	font-size: 26px;
 }
 
