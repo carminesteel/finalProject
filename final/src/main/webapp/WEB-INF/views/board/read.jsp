@@ -11,7 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
-
+	<jsp:include page="../menu.jsp"></jsp:include>
 	<h1>[작품정보]</h1>
 	<form name="frm" method="post" action="update" enctype="multipart/form-data">
 		<input type="hidden" name="b_no" value="${vo.b_no}">
@@ -79,6 +79,7 @@
 	</form>
 	<hr>
 	<jsp:include page="../b_reply/list.jsp"></jsp:include>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
 $("#btnReply").hide();

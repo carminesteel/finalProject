@@ -7,14 +7,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>댓글</title>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <style>
 	#tbl1{text-align:center;}
 </style>	
 </head>
 <body>
 	<form action="/b_reply/insert" method="post" name="rfrm">
-		<input type="hidden" name="b_no" id="b_no" value="${vo.b_no}">
-		<input type="hidden" name="replyer" value="user">
+		<input type="hidden" name="b_no" value="${vo.b_no}">
+		<input type="hidden" name="replyer" value="${id}">
 		<input type="text" name="content" size=50>
 		<input type="submit" value="입력">
 		
@@ -23,7 +25,8 @@
 	
 	
 	<form action="/b_reply/delete" method="post" name="rfrm1">
-	<table id=tbl1 width=600>
+	<table id=tbl1 width=600></table>
+	<script id="temp" type="text/x-handlebars-template">	
 		<tr>
 			<td width=70>댓글번호</td>
 			<td width=100>작성자</td>
@@ -31,31 +34,56 @@
 			<td width=170>날짜</td>
 			<td width=30></td>
 		</tr>
-		<c:forEach items="${rlist}" var="rvo">
+		{{#each .}}
 		<tr class="row">
-			<td class="r_no" >${rvo.r_no}</td>
-			<td>${rvo.replyer}</td>	
-			<td>${rvo.content}</td>
-			<td><fmt:formatDate value="${rvo.date}" pattern="yyyy-MM-dd kk:mm:ss"/></td>
-
-			<td class="b_no">${rvo.b_no}</td>
+			<td class="r_no" >{{r_no}}</td>
+			<td class="replyer" >{{replyer}}</td>	
+			<td class="content" >{{content}}</td>
+			<td>{{date}}</td>
+			<td class="b_no">{{b_no}}</td>
 			<td><input type="button" value="삭제" class="rbtnDelete"></td>		
-			
 		</tr>
-		</c:forEach>
-	</table>
+		{{/each}}
+	</script>
+	
 </form>
 </body>
 <script>
-var b_no = $("#tbl1 .row").find(".b_no").html();
+var b_no = "${vo.b_no}";
 $("#tbl1").find(".row .b_no").hide();
+R_list();
+
+function R_list(){
+$.ajax({
+	type:"post",
+	url:"/b_reply/read",
+	data:{"b_no":b_no},
+	success:function(data){
+		var temp=Handlebars.compile($("#temp").html());
+		$("#tbl1").html(temp(data));
+	}
+});
+}
+
 $(rfrm).submit(function(e){
 	e.preventDefault();
 	if($(rfrm.content).val()==""){
 		alert("내용을 입력해주세요");
 	}else{
-		rfrm.submit();
-	}
+		if(!confirm("입력하시겠습니까?")) return;
+		var b_no=$(rfrm.b_no).val();
+		var replyer=$(rfrm.replyer).val();
+		var content=$(rfrm.content).val();
+		$.ajax({
+			type:"post",
+			url:"/b_reply/insert",
+			data:{"b_no":b_no,"replyer":replyer,"content":content},
+			success:function(){		
+				R_list();
+				}
+			
+		})
+	 }
 });
 
 $("#tbl1").on("click", ".row .rbtnDelete", function(){
@@ -66,7 +94,7 @@ $("#tbl1").on("click", ".row .rbtnDelete", function(){
 	      url:"/b_reply/delete",
 	      data:{"r_no":r_no},
 	      success:function(){
-	         location.href="/board/read?b_no="+b_no;
+	    	  R_list();
 	      }
 	   });
 	

@@ -8,16 +8,15 @@
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
+	<jsp:include page="../menu.jsp"></jsp:include>
 	<h1>[게시판 등록]</h1>
 	<form name="frm" method="post" action="insert"  enctype="multipart/form-data">
 	<table border=1>
-			<tr>
-				<td>id</td>
-				<td><input type="text" name="id"></td>
- 			</tr>
-			<tr>
+			
+				<tr>
+				
 				<th width=100>Title</th>
-				<td><input type="text" name="title" size=50></td>
+				<td><input type="text" name="title" size=50><input type="hidden" name="id" value="${id}"></td>
 			</tr>
 			<tr>
 				<td>대표이미지</td>
@@ -45,6 +44,7 @@
 		<input type="reset" value="취소">
 		<input type="button" value="목록" onClick="location.href='list'">
 	</form>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
 //이미지를 클릭했을때

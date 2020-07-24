@@ -52,7 +52,6 @@ public void insert() {
 public void read(Model model, int b_no) {
 	model.addAttribute("vo",mapper.read(b_no));
 	model.addAttribute("list", mapper.getB_imagelist(b_no));
-	model.addAttribute("rlist", rmapper.rlist(b_no));
 }
 @RequestMapping(value="insert", method=RequestMethod.POST)
 public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //업로드할 파일을 받을때
