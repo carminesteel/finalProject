@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.e_replyMapper">
+    <select id="list" resultType="com.example.domain.e_replyVO">
+        select * from e_reply where e_no=#{e_no}
+    </select>
+    <insert id="insert">
+    	insert into e_reply(replyer,content,date,e_no) values(#{replyer},#{content},now(),#{e_no})
+    </insert>
+    <delete id="delete">
+    	delete from e_reply where r_no=#{r_no}
+    </delete>
+</mapper>

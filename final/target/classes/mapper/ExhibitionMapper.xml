@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ExhibitionMapper">
+    <select id="list" resultType="com.example.domain.ExhibitionVO">
+        select * from exhibition
+    </select>
+	<select id="read" resultType="com.example.domain.ExhibitionVO">
+		select * from exhibition where e_no=#{e_no}
+	</select>
+	<select id="replyCount" resultType="int">
+		select count(*) from e_reply where e_no=#{e_no}
+	</select>
+	<insert id="insert">
+    	insert into exhibition(title,content,date,addr,addr_detail,image) 
+    	values(#{title},#{content},#{date},#{addr},#{addr_detail},#{image}) 
+	</insert>
+	<select id="getE_imagelist" resultType="string">
+    	select images from e_imagelist where e_no=#{e_no}
+    </select>
+    <insert id="addE_imagelist">
+    	insert into e_imagelist(e_no,images) values(#{e_no},#{images})
+    </insert>
+    <delete id="delE_imagelist">
+    	delete from e_imagelist where e_no=#{e_no}
+    </delete>
+	<select id="EnoRead" resultType="int">
+		select e_no from exhibition where title=#{title} and image=#{image}
+	</select>
+</mapper>
