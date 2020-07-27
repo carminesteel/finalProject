@@ -95,4 +95,10 @@ public class UsersController {
 	@RequestMapping("/login/hello")
 	public void hello() {
 	}
+	
+	@RequestMapping(value="/login/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login/login";
+	}
 }
