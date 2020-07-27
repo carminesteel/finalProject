@@ -1,6 +1,6 @@
 package com.example.domain;
 
-public class UsersVO {	
+public class UsersVO extends ProductVO{	
 	private String id;//아이디
 	private String pass;//비번
 	private String name;//이름

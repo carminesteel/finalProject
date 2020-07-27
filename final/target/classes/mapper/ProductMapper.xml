@@ -9,12 +9,8 @@
 		select * from product limit 0,10
 	</select>
 	
-	<select id="creater" resultType="com.example.domain.ProductVO">
-		select p.*, u.* from product p, users u where p.id=u.id
-	</select>
-	
 	<select id="proimage" resultType="com.example.domain.ProductVO">
-		select * from product where id=#{id}
+		select id, image from (select * from product) p
 	</select>
 	
 	<insert id="insert">

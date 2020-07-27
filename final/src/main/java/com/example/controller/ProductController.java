@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.ProductVO;
 import com.example.mapper.ProductMapper;
+import com.example.mapper.UsersMapper;
 import com.example.service.ProductService;
 
 @Controller
@@ -31,11 +32,16 @@ public class ProductController {
 	ProductMapper pmapper;
 	
 	@Autowired
+	UsersMapper umapper;
+	
+	@Autowired
 	ProductService pService;
 	
 	@RequestMapping("/list")
 	public void list(Model model) {
-		model.addAttribute("creater", pmapper.creater());
+		model.addAttribute("users", umapper.list());
+		model.addAttribute("proimage", umapper.proimage());
+		
 	}
 	
 	@RequestMapping("/rest/bestlist")
@@ -50,11 +56,11 @@ public class ProductController {
 		return pmapper.artgoods();
 	}
 	
+	
 	@RequestMapping("/rest/proimage")
 	@ResponseBody
-	public List<ProductVO> proimage(String id){
-		System.out.println(pmapper.proimage(id));
-		return pmapper.proimage(id);
+	public List<ProductVO> proimage(){
+		return pmapper.proimage();
 	}
 	
 	@RequestMapping("/read")

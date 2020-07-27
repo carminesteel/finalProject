@@ -13,7 +13,7 @@
 		body {width:1000px;}
 		#besttab, #artgoodstab, #creatertab{width:1000px;margin:auto;overflow:hidden;}
 		.box{width:200px;float:left;text-align:center; margin:auto;}
-		.creater{width:500px;float:left;text-align:center; margin:auto;}
+		.creater{width:450px;float:left;text-align:center; margin:auto;}
 		.image img{whitd:150px; height:120px; margin:auto; margin-bottom:5px;}
 	</style>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -66,28 +66,23 @@
 	
 	<div id="creater">
 		<div id="creatertab">
-			<c:forEach items="${creater}" var="creater">
-				<div class="creater">
-					<img src="/display?fileName=${creater.u_image}" width=100 height=100/>
+			<c:forEach items="${users}" var="creater">
+				<div class="creater" style="border:1px solid black">
+					<img src="/display?fileName=${creater.u_image}" width=300 height=300/>
 					<div style="float:right">
 						<div class="createrid">${creater.id}</div><br>
 						<div>${creater.introduce}</div>
 					</div>
 					
-					<div class="proimagetab"></div>
-					<script class="proimagetemp" type="text/x-handlebars-template">
-						{{#each .}}
-							<div class="proimagebox">
-								<div class="image"><img src="/display?fileName={{image}}"/></div>
-							</div>
-						{{/each}}
-					</script>
+					<c:forEach items="${proimage}" var="image">
+					<c:if test="${creater.id==image.id}">
+						<div><img src="/display?fileName=${image.image}" width=100 height=100></div>
+					</c:if>
+					</c:forEach>
 				</div>
-				
 			</c:forEach>
 		</div>
 	</div>
-		
 	<jsp:include page="../footer.jsp"></jsp:include>
 	
 </body>
@@ -115,7 +110,18 @@
 		$("#best").hide();
 		$("#artgoods").hide();
 		$("#creater").show();
-		proimage();
+		//proimage();
+		
+		var array=[];
+		$("#tab .row").each(function(){
+			var id=$(this).find(".createrid").html();
+			alert(id);
+			var data={"id":id};
+			array.push(data);
+		});
+		var template=Handlebars.compile($(".creatertemp").html());
+		$(".creatertab").html(template(array));
+
 	});
 	
 	$("#besttab").on("click", ".image", function(){		
@@ -153,23 +159,32 @@
 			}
 		});
 	}
-	
+	/*
 	function proimage(){
 		$("#creatertab .creater").each(function(){
-			var id=$("#creatertab .creater").find(".createrid").html();
+			var id=$(this).find(".createrid").html();
 			$.ajax({
 				type:"get",
 				url:"/product/rest/proimage",
 				data:{"id":id},
 				dataType:"json",
+				error:function(){
+					alert("xxxx");
+				},
 				success:function(data){
-					id=$("#creatertab .creater").find(".createrid").html();
-					var temp=Handlebars.compile($(".proimagetemp").html());
-					$(".proimagetab").html(temp(data));
+					//alert(id);
+					for(var i=0; i<=data.length-1; i++){
+						//alert(data[i]["id"]);
+						if(id==data[i]["id"]){
+							//alert(id+"   !@@!   "+data[i]["id"]);
+							var temp=Handlebars.compile($(".creatertemp").html());
+							$(".creatertab").html(temp(data));
+						}
+					}
 				}
 			});
 		});
-	}
+	}*/
 </script>
 
 </html>

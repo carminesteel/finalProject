@@ -4,7 +4,14 @@
     <select id="read" resultType="com.example.domain.UsersVO">
         select * from users where id=#{id}
     </select>
-      
+    
+    <select id="list" resultType="com.example.domain.UsersVO">
+    	select p.*, u.* from users u, product p where p.id=u.id and position=1 group by p.id;
+    </select>
+    
+    <select id="proimage" resultType="com.example.domain.UsersVO">
+    	select p.*, u.* from users u, product p where p.id=u.id and position=1;
+    </select>
     
     <insert id="insert">
     	insert into users (id,pass,name,nickname,phone,introduce,addr,email,u_image) 
