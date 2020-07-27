@@ -4,62 +4,243 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8">
-   <title>[상품정보]</title>
-   <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<meta charset="UTF-8">
+<title>[상품정보]</title>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<style>
+.input-group{
+width: 120px;
+  margin: 40px auto;
+  position:absolute;
+  left:1410px;
+  top:540px;
+}
+
+.btn-danger, .btn-success{
+	background-color:#2e6cb5;
+	border-color:#2e6cb5;
+}
+
+.btn-danger:hover, .btn-success:hover{
+	background-color:#2e6cb5;
+	border-color:#2e6cb5;
+}
+
+.btn-danger:hover, .btn-success:hover{
+	background-color:#2e6cb5;
+	border-color:#2e6cb5;
+}
+
+html {font-family:Noto Sans KR}
+
+#exBody {
+	background-color: #e9ecef;
+	z-index: 1;
+}
+
+#exCenter {
+	background-color: white;
+	width: 1276px;
+	margin: auto;
+	z-index: 2;
+}
+
+.detailMenu {width:376px;}
+
+.detailMenu:hover {
+			background-color: #373e46;
+		    color: white;
+		    cursor: pointer;		    
+		}		
+.pButton{cursor: pointer;}
+.pButton:hover{background-color:#74a4d7; color:white; border-color:#74a4d7;}
+a:hover{text-decoration:none;color:black;}
+#pBody{ width: 1275px; height: 1000px; margin: auto;}
+#imgSection{width: 660px; height: 920px; display: inline-block; float: left;}
+#mainImg{width: 574px; height: 572px; margin-left: 67px; margin-top: 102px;}
+#thumbImg{text-align:center;margin-left:35px;margin-top:-50px;}
+.thumbs{background-color: black; display: inline-block; height: 81px; width: 81px; margin-top: 105px;}
+#pInfo{width: 611px; height: 920px; display: inline-block; float: left;}
+#pTitle{font-size: 40pt; font-family: Noto Sans KR; font-weight: 500; margin-top: 80px; margin-bottom: 0px;margin-left:35px;}
+#pPrice{font-size:43px; font-family: Noto Sans KR; font-weight: 700; float: right; margin: 0px;margin-bottom:20px;margin-right:55px;color:#2e6cb5;letter-spacing:-4px}
+#pointArea{width: 523px; height: 230px; border: 1px solid #2e6cb5; display: inline-block; float: left;margin-left:32px;padding:20px}
+#pMenu{width:1130px;margin:auto;border-collapse:collapse;}
+.reviews{border-bottom:1px solid #74a4d7;font-size:17px;letter-spacing:-1px}
+.rContent{width:510px;margin:auto}
+.pButtons{font-size:20px;font-weight:300}
+
+</style>
+
 </head>
-<body>
-   <jsp:include page="../menu.jsp"></jsp:include>
-   <table id=productMenu height=116px>
-      <tr>
-         <td><a class=menuB href="">BEST</a>&emsp;&emsp;&emsp;<a class=menuB href="">아트굿즈</a>&emsp;&emsp;&emsp;<a class=menuB href="">판매자</a>
-      </tr>
-   </table>
-         <form name="frm" action="update" method="post">
-         <input type="hidden" name="bno" value="${read.p_no}">
-         
-         <table class="tab" border=1>
-         <tr>
-            <td width=100>제목</td>
-            <td><input type="text" name="title" size=50 value="${read.title}"></td>
-         </tr>
-         <tr>
-            <td width=100>이미지</td>
-            <td>
-               <img src="/display?fileName=${read.image}"/>
-            </td>
-         </tr>
-         <tr>
-            <td width=100>상세이미지</td>
-            <td>
-               <c:forEach items="${imageread}" var="images">
-                     <img src="/display?fileName=${images}"/>
-               </c:forEach>
-            </td>
-         </tr>
-         <tr>
-            <td width=100>내용</td>
-            <td>
-               <textarea rows="10" cols="52" name="content">${read.content}</textarea>
-            </td>
-         </tr>
-         <tr>
-            <td>작성자</td>
-            <td><input type="text" name="writer" readonly size=10 value="${read.id}"></td>
-         </tr>
-         <tr>
-            <td>작성일</td>
-            <td>
-               <fmt:formatDate value="${read.date}" pattern="yyyy년 MM월 dd일"/>
-            </td>
-         </tr>
-         </table>
-         <input type="submit" value="수정">
-         <input type="button" value="삭제" id="btnDelete">
-         <input type="reset" value="취소">
-         <input type="button" value="목록" id="btnList">
-      </form>
-   <jsp:include page="../footer.jsp"></jsp:include>
+<body style="padding-top: 73px; margin-left: 0px; width: 100%;">
+	<jsp:include page="../menu.jsp"></jsp:include>
+	<div id=exBody>
+		<div id=exCenter>
+			<div id=pBody>
+				<div id=imgSection>
+					<img id=mainImg src="/display?fileName=productSample.jpg">
+					<div id=thumbImg>
+						<div class=thumbs></div>
+						<div class=thumbs></div>
+						<div class=thumbs></div>
+						<div class=thumbs></div>
+						<div class=thumbs></div>
+						<div class=thumbs></div>
+					</div>
+				</div>
+				<div id="pInfo"><br>
+					<h1 id=pTitle>${read.title}</h1>
+					<p>
+					<h1 id="pPrice">${read.price}원</h1>
+					<br>
+					<div id="pointArea">
+						<div style="display: inline-block; float: left;">
+							<t style="font-family:Noto Sans KR;font-size:20px;font-weight:500;">신규고객 전용 혜택</t><br> <t style="font-family:Noto Sans KR;font-size:12px;font-weight:500;">첫 구매시 결제금액의 50%를 할인해드립니다!</t>
+							<div style="letter-spacing:-1px;text-align:right;margin-top:20px;border-bottom:1px solid #2e6cb5;font-size:20px;padding-bottom:10px;margin-bottom:20px;font-weight:600"><span style="font-size:25px;font-weight:900;">김홍철</span>님의 예상 적립 포인트</div>
+							<div style="padding:10px;color:white;background-color:#74a4d7;height:41px;width:475px;margin:auto;font-size:16px;font-weight:600">총 상품금액 (${read.price}*3)의
+								1%<span style="float:right;">150point</span>
+							</div>
+						</div>
+					</div>
+					<div style="border-bottom: 1px solid #2e6cb5; float: left; width: 523px;height:80px;padding:20px;padding-top:0px;margin-left:32px;">
+					<br>
+						<span style="font-size:16px;font-weight:500">배송비 : 2500원</span>
+
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-danger btn-number"
+										data-type="minus" data-field="quant[2]">
+										<span class="glyphicon glyphicon-minus"></span>
+									</button>
+								</span> <input type="text" name="quant[2]"
+									class="form-control input-number" value="1" min="1" max="100" style="text-align:center">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-success btn-number"
+										data-type="plus" data-field="quant[2]">
+										<span class="glyphicon glyphicon-plus"></span>
+									</button>
+								</span>
+							</div>
+							<br> <span style="font-size: 12px;">50,000원 이상구매시 배송비
+								무료</span>
+						</div>
+						<div style="display: inline-block; float: left;">
+						<div style="text-align:right;margin-bottom:60px;margin-top:20px"><span style="font-size:16px">수량 개</span>&emsp;&emsp;<span style="font-size:25px">총 금액 : </span><span style="font-family: Noto Sans KR; font-size: 30pt;color:#2e6cb5;font-size:45px;letter-spacing:-4px;margin-right:15px">price</span></div>
+							<div style="width:523px;height:116px;text-align:center;margin-left:40px;">
+								<div class="pButton" style="width:254px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;line-height:49px">
+								<t class="pButtons">장바구니</t>
+								</div>
+								<div class="pButton" style="width:254px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;line-height:49px">
+								<t class="pButtons">쪽지보내기</t>
+								</div>
+								<div class="pButton" style="width:513px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;margin-top:5px;line-height:49px">
+								<t class="pButtons" style="font-size:25px">구매하기</t>
+								</div>
+							</div>
+					</div>
+				</div>
+				<div style="font-family:Noto Sans KR;float:left;margin-left:70px;font-size:20px;"><br>
+					리뷰수 <span style="font-size:30px">N</span>&emsp; 평점 <span style="font-size:30px">N/N</span>
+				</div>
+			</div>
+			<div style="border-bottom:1px solid #74a4d7;border-top:1px solid #74a4d7;height:100px;width:1130px;margin:auto;font-family:Noto Sans KR;font-size:25px;font-weight:700;text-align:center;line-height:100px;">베스트 상품리뷰</div>
+			<table style="height:475px;width:575px;margin:auto;border-collapse:collapse;">
+				<tr><td class=reviews><div class=rContent>[rating]<br>asdofk*** : 아 존나이뻐 미칠거같애여아 존나이뻐 미칠거같애여 아 존나이뻐 미칠거같애여아 존나이뻐 미칠거같애여아 존나이뻐 </div></td></tr>
+				<tr><td class=reviews><div class=rContent>[rating]<br>asdofk*** : 만족합니다 두번째 구매해요 사랑해요 작가님 건강하세요 사랑ㄷ해요</div></td></tr>
+				<tr><td style="border-bottom:none;font-size:17px;letter-spacing:-1px;"><div class=rContent>[rating]<br>asdofk*** : 너무 맘에 들어서 세번째 구매해요</div></td></tr>
+			</table>
+			
+			<table id=pMenu>
+				<tr style="height:100px;border-top:1px solid #74a4d7;border-bottom:1px solid #74a4d7;text-align:center;font-family:Noto Sans KR;font-size:25px;font-weight:700;">
+					<td class=detailMenu>상세정보</td>
+					<td class=detailMenu>상품리뷰</td>
+					<td class=detailMenu>Q&A</td>
+				</tr>
+				<tr style="text-align:center">
+					<td colspan=3><img src="/display?fileName=productImageSample.jpg"></td>
+				</tr>
+			</table>
+
+			<input type="button" value="목록" id="btnList">
+		</div>
+	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
+<script>
+$('.btn-number').click(function(e){
+    e.preventDefault();
+    
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+            
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            } 
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(type == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
+        }
+    } else {
+        input.val(0);
+    }
+});
+$('.input-number').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+$('.input-number').change(function() {
+    
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+    
+    name = $(this).attr('name');
+    if(valueCurrent >= minValue) {
+        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    
+    
+});
+$(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) || 
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+</script>
 </html>
