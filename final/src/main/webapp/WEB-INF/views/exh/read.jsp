@@ -15,10 +15,11 @@
 <body>
 	<jsp:include page="../menu.jsp"/>
 	<h1>[전시작품]</h1>
+	<form action="delete" name="frm" method="post">
 		<input type="hidden" name="e_no" value="${vo.e_no}">
 		<table id="tbl2" border=1 width=1000>
 			<tr>
-				<td class="image" width=400><img src="/display?fileName=${vo.image}"></td>	
+				<td class="image" width=200><img src="/display?fileName=${vo.image}"></td>	
 				<td width=500>
 					<h3>${vo.title}</h3>
 					<br>
@@ -31,6 +32,8 @@
 			</tr>
 		</table>
 		<input type="button" value="수정" id="eUpdate">
+		<input type="button" value="삭제" id="eDelete">
+	</form>
 	<hr>
 		<span id="infoMenu">상세정보</span>
 		<span id="MapMenu">장소/전시장 도면</span>
@@ -58,6 +61,12 @@
 	<jsp:include page="../footer.jsp"/>
 </body>
 <script>
+	//게시물 삭제
+	$("#eDelete").on("click",function(){
+		if(!confirm("삭제하시겠습니까?")) return;
+		frm.submit();
+	});
+
 	$("#reply").hide();
 	$("#map").hide();
 	
@@ -83,7 +92,7 @@
 		e.preventDefault();
 	});
 	$("#eUpdate").on("click",function(){
-		location.href="update";
+		location.href="update?e_no="+e_no;
 	});
 </script>
 </html>

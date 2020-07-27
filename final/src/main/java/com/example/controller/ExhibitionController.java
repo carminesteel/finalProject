@@ -36,8 +36,50 @@ public class ExhibitionController {
 	@Autowired
 	ExhibitionService service;
 	
-	@RequestMapping("exh/update")
-	public void update() {
+	@RequestMapping(value="/exh/delete", method=RequestMethod.POST)
+	public String delete(int e_no) {
+		service.delete(e_no);
+		return "redirect:list";
+	}
+
+	@RequestMapping("/exh/update") public void update(Model model,int e_no) {
+		model.addAttribute("vo", mapper.read(e_no));
+		model.addAttribute("images", mapper.getE_imagelist(e_no));
+		
+	}
+	
+	@RequestMapping(value="/exh/update", method=RequestMethod.POST)
+	public String updatePost(ExhibitionVO vo,MultipartHttpServletRequest multi)  throws Exception{
+		String date=vo.getDate()+"~"+vo.getDate2();
+		vo.setDate(date);
+		 MultipartFile file=multi.getFile("file");
+	      //대표 이미지 파일업로드
+	      if(!file.isEmpty()){
+	         //예전이미지가 있으면 삭제
+	         String oldImage=vo.getImage();
+	         if(!oldImage.equals("")){
+	            new File(path + File.separator + oldImage).delete();
+	         }
+	         
+	         String image=System.currentTimeMillis() + file.getOriginalFilename();
+	         file.transferTo(new File(path + File.separator + image));
+	         vo.setImage(image);
+	      }
+	      
+			//첨부파일업로드
+			List<MultipartFile> files = multi.getFiles("files");
+			ArrayList<String> images= new ArrayList<String>();
+			for(MultipartFile addFile:files) {
+				if(!addFile.isEmpty()) {
+					String image=System.currentTimeMillis() + addFile.getOriginalFilename();
+					addFile.transferTo(new File(path+File.separator+ image));
+					images.add(image);
+				}
+			}
+			vo.setImages(images);
+			/* System.out.println(vo.toString()); */
+			service.update(vo);
+			return "redirect:list";  
 
 	}
 	
@@ -53,7 +95,8 @@ public class ExhibitionController {
 	public void list(Model model) {
 		model.addAttribute("list",mapper.list());
 	}
-
+	
+		
 	@RequestMapping("exh/insert")
 	public void insert(ExhibitionVO vo) {
 		

@@ -26,4 +26,10 @@
 	<select id="EnoRead" resultType="int">
 		select e_no from exhibition where title=#{title} and image=#{image}
 	</select>
+	<update id="update">
+		update exhibition set title=#{title}, content=#{content}, tel=#{tel}, addr=#{addr}, addr_detail=#{addr_detail}, image=#{image}, date=#{date} where e_no=#{e_no}
+	</update>
+	<delete id="delete">
+    	delete from exhibition where e_no=#{e_no}
+    </delete>
 </mapper>
