@@ -74,11 +74,13 @@
 						<div>${creater.introduce}</div>
 					</div>
 					
+					<div>
 					<c:forEach items="${proimage}" var="image">
 					<c:if test="${creater.id==image.id}">
-						<div><img src="/display?fileName=${image.image}" width=100 height=100></div>
+						<img src="/display?fileName=${image.image}" width=100 height=100>
 					</c:if>
 					</c:forEach>
+					</div>
 				</div>
 			</c:forEach>
 		</div>

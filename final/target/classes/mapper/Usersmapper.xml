@@ -10,7 +10,7 @@
     </select>
     
     <select id="proimage" resultType="com.example.domain.UsersVO">
-    	select p.*, u.* from users u, product p where p.id=u.id and position=1;
+    	select p.*, u.* from users u, product p where p.id=u.id and position=1
     </select>
     
     <insert id="insert">
