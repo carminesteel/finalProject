@@ -24,7 +24,7 @@
 	<h1>[전시작품]</h1>
 	<form action="delete" name="frm" method="post">
 		<input type="hidden" name="e_no" value="${vo.e_no}">
-		<input type="hidden" value="${vo.id}" name="id">
+		<input type="hidden" value="${id}" name="id">
 		<table id="tbl2" style="width:1130px;margin:auto;border-collapse:collapse;">
 			<tr>
 				<td class="image"><img src="/display?fileName=${vo.image}" width=300 height=500></td>	
@@ -39,11 +39,13 @@
 				</td>		
 			</tr>
 		</table>
-		<div id="Allbtn">
-			<input type="button" value="수정" id="eUpdate">
-			<input type="button" value="삭제" id="eDelete">
-			<input type="button" value="목록" onClick="location.href='list'">
-		</div>
+		<c:if test="${id==vo.id}">
+			<div id="Allbtn">
+				<input type="button" value="수정" id="eUpdate">
+				<input type="button" value="삭제" id="eDelete">
+				<input type="button" value="목록" onClick="location.href='list'">
+			</div>
+		</c:if>
 	</form>
 	<table style="width:1130px;margin:auto;border-collapse:collapse;">
 	   <tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">

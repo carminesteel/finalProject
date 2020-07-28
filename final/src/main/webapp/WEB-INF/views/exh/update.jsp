@@ -21,7 +21,7 @@
 	<jsp:include page="../menu.jsp" />
 	<form name="frm" action="update" method="post"	enctype="multipart/form-data">
 		<input type="hidden" name="e_no" value="${vo.e_no}">
-		<input type="hidden" value="${vo.id}" name="id">
+		<input type="hidden" value="${id}" name="id">
 		<table id="tbl2" border=1 width=1000>
 			<tr>
 				<td class="image">			

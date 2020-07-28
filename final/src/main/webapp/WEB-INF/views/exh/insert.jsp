@@ -16,7 +16,7 @@
 	<jsp:include page="../menu.jsp" />
 	<h1>[전시회 등록]</h1>
 	<form action="insert" name="frm" method="post" enctype="multipart/form-data">
-		<input type="hidden" value="${vo.id}" name="id">
+		<input type="hidden" value="${id}" name="id">
 		<table id="tbl2" border=1>
 			<tr>
 				<td>대표이미지</td>

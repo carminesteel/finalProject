@@ -13,6 +13,7 @@
 	</style>
 </head>
 <body>
+	<input type="hidden" value="${id}" id="id">
 	<div id="tbl"></div>
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each list}}
@@ -20,7 +21,7 @@
 			<div class="replydate">
 				<b>{{replyer}}</b>
 				<a>{{date}}</a>
-				<button r_no={{r_no}}>삭제</button>
+				<button r_no={{r_no}} style="{{printStyle replyer}}">삭제</button>
 			</div>
 			<div class="content">{{content}}</div>
 		</div>
@@ -31,7 +32,18 @@
 </body>
 <script>
 	var e_no="${vo.e_no}";
+	var id=$("#id").val();
 	getList();
+
+	Handlebars.registerHelper("printStyle",function(replyer){
+	var src;
+	if(id!=replyer){
+		src="display:none;";
+	}else if(id==replyer){
+		src="color:red;";
+	}
+	return src;
+});
 	
 	function getList(){
 		$.ajax({
@@ -54,22 +66,20 @@
 			alert("댓글을 입력하세요");
 			return;
 		}
-		var replyer="user2";
+		
 		$.ajax({
 			type:"post",
 			url:"/reply/insert",
-			data:{"e_no":e_no,"replyer":replyer,"content":content},
+			data:{"e_no":e_no,"replyer":id,"content":content},
 			success:function(){
 				alert("댓글을 등록하였습니다.");
 				$("#txtReply").val("");		
 				getList();
 				$("#re").html(++re);
-				return false;
 			}
 		});
 	});
 	
-	var Dre = "${re}";
 	$("#tbl").on("click",".replydate button",function(){
 		var r_no=$(this).attr("r_no");
 		if(!confirm("삭제하시겠습니까?")) return;
@@ -79,7 +89,7 @@
 			data:{"r_no":r_no},
 			success:function(){				
 				alert("댓글이 삭제되었습니다");				
-				$("#re").html(--Dre);
+				$("#re").html(--re);
 				getList();
 			}
 		});
