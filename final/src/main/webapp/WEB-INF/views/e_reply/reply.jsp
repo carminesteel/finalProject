@@ -27,7 +27,10 @@
 		</div>
 		{{/each}}
 	</script>
-	<div><input type="text" id="txtReply" size=60>&nbsp;&nbsp;<button id="btnInsert">입력</button></div>
+	<div>
+		<input type="text" id="txtReply" size=60>&nbsp;&nbsp;
+		<button id="btnInsert">입력</button>
+	</div>
 	<br>
 </body>
 <script>
@@ -62,10 +65,18 @@
 	var re = "${re}";
 	$("#btnInsert").on("click",function(){
 		var content=$("#txtReply").val();
-		if(content==""){
+		
+		if(id==""){
+			if(confirm("로그인이 필요합니다.") == true){    //확인눌렀을때
+				location.href="/login/login";
+			}else{   //취소 눌렀을때
+			    return;
+			}
+		}else if(content==""){
 			alert("댓글을 입력하세요");
 			return;
 		}
+
 		
 		$.ajax({
 			type:"post",
