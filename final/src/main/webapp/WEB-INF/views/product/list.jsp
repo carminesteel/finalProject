@@ -7,14 +7,16 @@
 	<meta charset="UTF-8">
 	<title>[상품목록]</title>
 	<style>
+		.creatertab .proimage td{display:none;}
+	 	.creatertab .proimage td:nth-child(1), .creatertab .proimage td:nth-child(2), .creatertab .proimage td:nth-child(3){display:inline-block}
 		#productMenu{width:1780px;font-family:YDIYGO330;font-size:24px;margin:auto;vertical-align:middle}
 		.menuB{text-decoration:none;color:black;}
 		.menuB:hover{cursor:pointer;}
 		body {width:1000px;}
-		#besttab, #artgoodstab, #creatertab{width:1000px;margin:auto;overflow:hidden;}
+		#besttab, #artgoodstab{width:1000px;margin:auto;overflow:hidden;}
+		#creater{width:1000px;margin:auto;overflow:hidden;}
+		.creatertab{width:450px;float:left;text-align:center; margin:auto;}
 		.box{width:200px;float:left;text-align:center; margin:auto;}
-		.creater{width:450px;float:left;text-align:center; margin:auto;}
-		.image img{whitd:150px; height:120px; margin:auto; margin-bottom:5px;}
 	</style>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -65,6 +67,25 @@
 	</div>
 	
 	<div id="creater">
+		<c:forEach items="${users}" var="creater">
+			<table class="creatertab" style="border:1px solid black">
+					<tr class="creater">
+						<td width=149><img src="/display?fileName=${creater.u_image}" width=100 height=100/></td>
+						<td width=149>${creater.id}<br>${creater.introduce}</td>
+						<td width=149><em>상품개수</em></td>
+					</tr>
+					<tr class="proimage">
+						<c:forEach items="${proimage}" var="image">
+						<c:if test="${creater.id==image.id}">
+							<td class="image" width=149 style="float:left"><img src="/display?fileName=${image.image}" width=100 height=100></td>
+						</c:if>
+						</c:forEach>
+					</tr>
+			</table>
+		</c:forEach>
+	</div>
+	
+<%-- 	<div id="creater">
 		<div id="creatertab">
 			<c:forEach items="${users}" var="creater">
 				<div class="creater" style="border:1px solid black">
@@ -84,7 +105,7 @@
 				</div>
 			</c:forEach>
 		</div>
-	</div>
+	</div> --%>
 	<jsp:include page="../footer.jsp"></jsp:include>
 	
 </body>
