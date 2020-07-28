@@ -7,14 +7,17 @@
 	<meta charset="UTF-8">
 	<title>[상품목록]</title>
 	<style>
+		.creatertab .proimage td{display:none;}
+	 	.creatertab .proimage td:nth-child(1), .creatertab .proimage td:nth-child(2), .creatertab .proimage td:nth-child(3){display:inline-block}
 		#productMenu{width:1780px;font-family:YDIYGO330;font-size:24px;margin:auto;vertical-align:middle}
 		.menuB{text-decoration:none;color:black;}
 		.menuB:hover{cursor:pointer;}
 		body {width:1000px;}
-		#besttab, #artgoodstab, #creatertab{width:1000px;margin:auto;overflow:hidden;}
+		#besttab, #artgoodstab{width:1000px;margin:auto;overflow:hidden;}
+		#creater{width:1100px;margin:auto;overflow:hidden;}
+		.creatertab{width:500px;float:left;margin:auto;}
 		.box{width:200px;float:left;text-align:center; margin:auto;}
-		.creater{width:450px;float:left;text-align:center; margin:auto;}
-		.image img{whitd:150px; height:120px; margin:auto; margin-bottom:5px;}
+		.image img{whitd:150px; height:120px; margin:auto;}
 	</style>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -65,6 +68,31 @@
 	</div>
 	
 	<div id="creater">
+		<c:forEach items="${users}" var="creater">
+			<table class="creatertab" style="border:1px solid black;margin:20px; padding:10px;" height=230>
+					<tr class="creater">
+						<td width=149 colspan=3 style="padding:10px;">
+							<img src="/display?fileName=${creater.u_image}" style="float:left; border-radius:50%;" width=70 height=70/>
+							<span style="text-align:left;width:200px;float:left;padding-left:10px;">
+								<p style="font-weight:bold; font-size:20px; margin:0; margin-top:15px;">${creater.id}</p>
+								<p style="font-size:15px; margin:0; margin-top:10px;" >${creater.introduce}</p>
+							</span>
+							<span style="float:right; background:#e9e9e9; position:relative; top:35px; padding:5px; border-radius:15px 15px 15px 15px; font-size:13px; width:80px; height:18px; text-align:center;">상품개수</span>
+						</td>
+					</tr>
+					<tr class="proimage">
+						<c:forEach items="${proimage}" var="image">
+						<c:if test="${creater.id==image.id}">
+							<td width=150 height=200 style="margin:2px;"><img src="/display?fileName=${image.image}" width=100% height=100%></td>
+						</c:if>
+						</c:forEach>
+					</tr>
+			</table>
+		</c:forEach>
+	</div>
+	
+<%-- 	<div id="creater">
+
 		<div id="creatertab">
 			<c:forEach items="${users}" var="creater">
 				<div class="creater" style="border:1px solid black">
@@ -84,7 +112,7 @@
 				</div>
 			</c:forEach>
 		</div>
-	</div>
+	</div> --%>
 	<jsp:include page="../footer.jsp"></jsp:include>
 	
 </body>
