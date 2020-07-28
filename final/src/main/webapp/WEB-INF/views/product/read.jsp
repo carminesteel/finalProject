@@ -66,7 +66,7 @@ a:hover{text-decoration:none;color:black;}
 .thumbs{background-color: black; display: inline-block; height: 81px; width: 81px; margin-top: 105px;}
 #pInfo{width: 611px; height: 920px; display: inline-block; float: left;}
 #pTitle{font-size: 40pt; font-family: Noto Sans KR; font-weight: 500; margin-top: 80px; margin-bottom: 0px;margin-left:35px;}
-#pPrice{font-size:43px; font-family: Noto Sans KR; font-weight: 700; float: right; margin: 0px;margin-bottom:20px;margin-right:55px;color:#2e6cb5;letter-spacing:-4px}
+#pPrice, #totPrice{font-size:43px; font-family: Noto Sans KR; font-weight: 700; float: right; margin: 0px;margin-bottom:20px;margin-right:55px;color:#2e6cb5;letter-spacing:-4px}
 #pointArea{width: 523px; height: 230px; border: 1px solid #2e6cb5; display: inline-block; float: left;margin-left:32px;padding:20px}
 #pMenu{width:1130px;margin:auto;border-collapse:collapse;}
 .reviews{border-bottom:1px solid #74a4d7;font-size:17px;letter-spacing:-1px}
@@ -92,6 +92,7 @@ a:hover{text-decoration:none;color:black;}
 						<div class=thumbs></div>
 					</div>
 				</div>
+				
 				<div id="pInfo"><br>
 					<h1 id=pTitle>${read.title}</h1>
 					<p>
@@ -101,8 +102,9 @@ a:hover{text-decoration:none;color:black;}
 						<div style="display: inline-block; float: left;">
 							<t style="font-family:Noto Sans KR;font-size:20px;font-weight:500;">신규고객 전용 혜택</t><br> <t style="font-family:Noto Sans KR;font-size:12px;font-weight:500;">첫 구매시 결제금액의 50%를 할인해드립니다!</t>
 							<div style="letter-spacing:-1px;text-align:right;margin-top:20px;border-bottom:1px solid #2e6cb5;font-size:20px;padding-bottom:10px;margin-bottom:20px;font-weight:600"><span style="font-size:25px;font-weight:900;">김홍철</span>님의 예상 적립 포인트</div>
-							<div style="padding:10px;color:white;background-color:#74a4d7;height:41px;width:475px;margin:auto;font-size:16px;font-weight:600">총 상품금액 (${read.price}*3)의
-								1%<span style="float:right;">150point</span>
+							<div style="padding:10px;color:white;background-color:#74a4d7;height:41px;width:475px;margin:auto;font-size:16px;font-weight:600">
+								<span id="pointCal" ></span>
+								<span id="point" style="float:right;">00point00</span>
 							</div>
 						</div>
 					</div>
@@ -116,7 +118,7 @@ a:hover{text-decoration:none;color:black;}
 										data-type="minus" data-field="quant[2]">
 										<span class="glyphicon glyphicon-minus"></span>
 									</button>
-								</span> <input type="text" name="quant[2]"
+								</span> <input type="text" name="quant[2]" id="quantity"
 									class="form-control input-number" value="1" min="1" max="100" style="text-align:center">
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-success btn-number"
@@ -129,7 +131,10 @@ a:hover{text-decoration:none;color:black;}
 								무료</span>
 						</div>
 						<div style="display: inline-block; float: left;">
-						<div style="text-align:right;margin-bottom:60px;margin-top:20px"><span style="font-size:16px">수량 개</span>&emsp;&emsp;<span style="font-size:25px">총 금액 : </span><span style="font-family: Noto Sans KR; font-size: 30pt;color:#2e6cb5;font-size:45px;letter-spacing:-4px;margin-right:15px">price</span></div>
+						<div style="text-align:right;margin-bottom:30px;margin-top:20px;height:70px;line-height:70px;">
+							<span id=quant style="font-size:16px"></span>&emsp;&emsp;<span style="font-size:25px;margin-right:5px">총 금액 :</span>
+							<span id="totPrice" style="font-family: Noto Sans KR; font-size: 30pt;color:#2e6cb5;font-size:45px;letter-spacing:-4px;margin-right:15px">price</span>
+							</div>
 							<div style="width:523px;height:116px;text-align:center;margin-left:40px;">
 								<div class="pButton" style="width:254px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;line-height:49px">
 								<t class="pButtons">장바구니</t>
@@ -137,12 +142,13 @@ a:hover{text-decoration:none;color:black;}
 								<div class="pButton" style="width:254px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;line-height:49px">
 								<t class="pButtons">쪽지보내기</t>
 								</div>
-								<div class="pButton" style="width:513px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;margin-top:5px;line-height:49px">
+								<div class="pButton" id="order" style="width:513px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;margin-top:5px;line-height:49px">
 								<t class="pButtons" style="font-size:25px">구매하기</t>
 								</div>
 							</div>
 					</div>
 				</div>
+				
 				<div style="font-family:Noto Sans KR;float:left;margin-left:70px;font-size:20px;"><br>
 					리뷰수 <span style="font-size:30px">N</span>&emsp; 평점 <span style="font-size:30px">N/N</span>
 				</div>
@@ -171,6 +177,42 @@ a:hover{text-decoration:none;color:black;}
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+
+
+/* 주소창에 있는 파라미터 값 가져오는 함수임 재밌게쓰세요 */
+
+	function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var totPrice;
+var quantity;
+
+getTotal();
+quant();
+
+function quant(){
+	quantity = $("#quantity").val(); 
+	$("#quant").html("수량 "+quantity+"개");
+}
+
+function getTotal(){
+	var price = $("#pPrice").html();
+	var quantity = $("#quantity").val();
+	var pr=parseInt(price);
+	var quan=parseInt(quantity);
+
+	totPrice = pr*quan;
+	var point=parseInt(totPrice*0.01);
+	$("#totPrice").html(totPrice+2500);
+	$("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
+	$("#point").html(point+" point");
+}
+
+/* 수량버튼 관련 스크립트 */
 $('.btn-number').click(function(e){
     e.preventDefault();
     
@@ -201,6 +243,8 @@ $('.btn-number').click(function(e){
     } else {
         input.val(0);
     }
+    quant();
+    getTotal();
 });
 $('.input-number').focusin(function(){
    $(this).data('oldValue', $(this).val());
@@ -242,5 +286,24 @@ $(".input-number").keydown(function (e) {
             e.preventDefault();
         }
     });
+    
+    $("#order").on("click",function(){
+    	alert("십새끼");
+    	var p_no = getParameterByName('p_no');
+		var id="${id}"
+		alert(p_no+id+quantity);
+    	$.ajax({    		 		
+    	    type:"post",
+    	    url:"/product/order",
+    	    data:{"id":id,"p_no":p_no,"quantity":quantity},
+    	    success:function(){
+    	     alert("주문완료")
+    	          }
+    	    ,error:function(request,status,error){
+    	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+    	    });
+    }) 
+
+    
 </script>
 </html>
