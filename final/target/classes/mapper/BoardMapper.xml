@@ -32,4 +32,25 @@
 		delete from b_imagelist where b_no=#{b_no}
 	</delete>
 	
+	
+	<!-- like 부문 -->
+	<select id="likeTableChk" resultType="int">
+		select count(*) from b_like where id=#{id} and b_no=#{b_no}
+	</select>
+	
+	<insert id="likeinsert">
+		insert into b_like values(#{id},#{b_no})
+	</insert>
+	
+	<delete id="likedelete">
+		delete from b_like where id=#{id} and b_no=#{b_no}
+	</delete>
+	
+	<select id="likeTableCnt" resultType="int">
+		select count(*) from b_like where b_no=#{b_no}
+	</select>
+	
+	<update id="B_likeUpdate">
+		update board set b_like=#{like} where b_no=#{b_no} 
+	</update>
 </mapper>

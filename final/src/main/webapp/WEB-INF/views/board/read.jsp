@@ -75,6 +75,7 @@
 		<input type="button" value="목록" onClick="location.href='list'">
 		<input type="button" value="댓글보기" id="btnReply">
 		<input type="button" value="댓글숨기기" id="btnReply2">
+		<input type="button" value="좋아요/${vo.b_like}" id="LikeBtn">
 		
 	</form>
 	<hr>
@@ -83,6 +84,21 @@
 </body>
 <script>
 $("#btnReply").hide();
+
+var id="${id}";
+var b_no="${vo.b_no}";
+
+$("#LikeBtn").on("click",function(){
+	$.ajax({
+		type:"post",
+		url:"/board/like/update",
+		data:{"id":id,"b_no":b_no},
+		dataType:"json",
+		success:function(data){
+			$("#LikeBtn").val("좋아요/"+data);
+		}
+	})
+})
 
 $("#btnReply").on("click",function(){
 	$(rfrm).show();

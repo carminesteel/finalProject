@@ -14,13 +14,14 @@
 	#tbl .row{float:left;margin:5px;}
 </style>
 <body>
-
+<jsp:include page="../menu.jsp"/>
 <h1>Feed</h1>
 	<div id=tbl border=1 ></div>
 	   <script id="temp" type="text/x-handlebars-template">
 		{{#each .}}
 			
 				<div width:200px class=row><img src="../display?fileName={{image}}" width=200 height=200>
+					<input type=hidden class="b_no" value="{{b_no}}">
 					<br>{{title}}
 					<br>좋아요:{{b_like}}
 					<br>{{id}}<br>{{content}}
@@ -28,6 +29,7 @@
 			
 		{{/each}}
 </script>
+<jsp:include page="../footer.jsp"/>
 </body>
 
 <script>
@@ -49,5 +51,11 @@ function getList(){
 }
 
 </script>
+<script>
 
+	$("#tbl").on("click",".row img", function() {
+		var b_no=$(this).parent().find(".b_no").val();
+		location.href = "/board/read?b_no=" + b_no;
+	});
+	</script>
 </html>

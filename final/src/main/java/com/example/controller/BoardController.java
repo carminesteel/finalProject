@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -46,8 +47,28 @@ public void list(Model model) {
 }
 @RequestMapping("insert")
 public void insert() {
-
 }
+@RequestMapping(value="/like/update", method = RequestMethod.POST)
+@ResponseBody
+public int LikeUpdate(@RequestParam(value ="id") String id,@RequestParam(value ="b_no") int b_no) {
+	int like=0;
+	int chk=mapper.likeTableChk(id, b_no);
+	
+	if(chk==0) {
+		mapper.likeinsert(id, b_no);
+		like=mapper.likeTableCnt(b_no);
+		mapper.B_likeUpdate(b_no, like);
+		System.out.println(like);
+	}else {
+		mapper.likedelete(id, b_no);
+		like=mapper.likeTableCnt(b_no);
+		mapper.B_likeUpdate(b_no, like);
+		System.out.println(like);
+	}
+	
+	return like;
+}
+
 @RequestMapping("read")
 public void read(Model model, int b_no) {
 	model.addAttribute("vo",mapper.read(b_no));
