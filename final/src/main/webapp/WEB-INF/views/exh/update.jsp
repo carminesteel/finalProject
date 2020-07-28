@@ -17,18 +17,16 @@
 		}
 	</style>
 </head>
-<body>
+<body style="padding-top: 73px; margin-left: 0px; width: 100%;">
 	<jsp:include page="../menu.jsp" />
-	<h1>[전시작품]</h1>
 	<form name="frm" action="update" method="post"	enctype="multipart/form-data">
 		<input type="hidden" name="e_no" value="${vo.e_no}">
+		<input type="hidden" value="${id}" name="id">
 		<table id="tbl2" border=1 width=1000>
 			<tr>
-				<td class="image">
-					 
-					
+				<td class="image">			
 					<c:if test="${vo.image!=null && vo.image!=''}">
-						<input type="file" name="file">
+						<input type="file" name="file" style="display:none;">
 						<img src="/display?fileName=${vo.image}" width=300 id="image" style=float:left;>
 					</c:if>
 					<c:if test="${vo.image==null || vo.image==''}">
@@ -42,7 +40,7 @@
 						Title<input type="text" value="${vo.title}" name="title">
 					</h3> <br> <br> <br>
 					<h4>
-						기간&nbsp;&nbsp;<input type="date" name="date">~<input type="date" name="date2">
+						기간&nbsp;&nbsp;<input type="date" name="date" value="${vo.date}">~<input type="date" name="date2" value="${vo.date}">
 					</h4>
 					<h4>
 						연락처&nbsp;&nbsp;<input type="text" value="${vo.tel}" name="tel">
@@ -51,8 +49,7 @@
 					<input type="button" class="btn-primary box" onclick="openAddress();" value="우편번호 찾기">
 					<input type="hidden" name="post" class="box" id="users_zipCode" placeholder="우편번호" required>
 					<input type="text" name="addr" class="box" value="${vo.addr}"
-						id="users_address" placeholder="주소" required>
-					
+						id="users_address" placeholder="주소" required>					
 					<h4>
 						상세주소&nbsp;&nbsp;<input type="text" value="${vo.addr_detail}"
 							name="addr_detail">
@@ -67,7 +64,7 @@
 					<textarea rows="20" cols="100" name="content">${vo.content}</textarea>
 				</div>
 				<div class="images" width=400>
-					<input type="file" name="files" accept="image/*" multiple>									
+					<input type="file" name="files" accept="image/*" multiple style="display:none;">									
 					<div id="listFile">
 						<c:forEach items="${images}" var="image">
 							<img id="images" src="/display?fileName=${image}">						

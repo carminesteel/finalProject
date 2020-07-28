@@ -53,8 +53,10 @@
 	<div id=exBody>
 		<div id=exCenter>
 			<div id=eTitle>Exhibition</div>
-			<div id=eContent>현재 진행중인 전시에요</div>		
-				<a href="/exh/insert" class=more><img id=eButton src="/display?fileName=eButton.png" /></a> <br>
+			<div id=eContent>현재 진행중인 전시에요</div>
+				<c:if test="${id!=null}">		
+					<a href="/exh/insert" class=more><img id=eButton src="/display?fileName=eButton.png" /></a> <br>
+				</c:if>	
 				<table id=eTable border=1>
 				<c:forEach items="${list}" var="vo">
 					<tr class="box">				
