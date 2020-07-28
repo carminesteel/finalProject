@@ -148,8 +148,8 @@ body::before {
 	<img src="../display?fileName=loginback.png" id="bg" alt="">
 	<section class="login-form">
 		<div  style="">
-			<h1 style="font-family:Helvetica33-ExtendedThin; font-size:80px; 
-			text-align:left; margin-left:40px; color:#fff;">Artists</h1>
+			<a style="font-family:Helvetica33-ExtendedThin; font-size:80px; 
+			text-align:left; margin-left:40px; color:#fff;" href="/">Artists</a>
 		</div>
 		<div id=tlqkf>
 		<h1 style="height:10px;">Login</h1>

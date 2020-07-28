@@ -1,6 +1,8 @@
 package com.example.controller;
 
 
+import java.io.File;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.UsersVO;
 import com.example.mapper.UsersMapper;
@@ -88,17 +92,28 @@ public class UsersController {
 		}
 	
 	@RequestMapping(value="/login/insert", method=RequestMethod.POST)
-	public String insertPost(UsersVO vo){
+	public String insertPost(UsersVO vo, HttpSession session,MultipartHttpServletRequest multi)throws Exception{
+		MultipartFile file=multi.getFile("file");		
+		session.setAttribute("id", vo.getId());
+		session.setAttribute("name", vo.getName());
+		//파일업로드
+		if(!file.isEmpty()) { // 업로드 파일이 비어있지 않으면 
+			String image=System.currentTimeMillis() + file.getOriginalFilename(); // 파일명이 중복되지않게 하기위해서 currentTimeMillis
+			file.transferTo(new File(path + File.separator + image));
+			vo.setU_image(image);
+		}
 		mapper.insert(vo);
 		return "redirect:/login/hello";
 	}
+	
+	
 	@RequestMapping("/login/hello")
 	public void hello() {
 	}
 	
-	@RequestMapping(value="/login/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/login/login";
+	
+	
+	@RequestMapping("/member/email_injeung")
+	public void email_injeung() {
 	}
 }
