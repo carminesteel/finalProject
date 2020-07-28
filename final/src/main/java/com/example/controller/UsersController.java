@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.io.File;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.UsersVO;
 import com.example.mapper.UsersMapper;
@@ -55,50 +58,75 @@ public class UsersController {
 		return result;
 	}
 
-	//네이버 로그인 관련 (아직 완성x)
-	@RequestMapping(value = "loginPostNaver", method = RequestMethod.GET)
-	public String loginPOSTNaver(HttpSession session) {
+	// 네이버 로그인 관련 (아직 완성x)
+	@RequestMapping("/login/naverlogin")
+	public String loginNaver() {
+		return "/login/naverlogin";
 
-		return "login/loginPostNaver";
 	}
 
-	//회원가입 눌렀을 때 뜨는 (동의 창)
+	@RequestMapping("/loginNaverResult")
+	public String loginNaverResult(String email, HttpSession session) {
+		session.setAttribute("id", email);
+		session.setAttribute("position", 1);
+		System.out.println(email);
+		return "redirect:http://localhost:8088/";
+	}
+
+	// 회원가입 눌렀을 때 뜨는 (동의 창)
 	@RequestMapping("/login/agree")
 	public void agree() {
 	}
 
-	//아이디 중복검사
+	// 아이디 중복검사
 	@RequestMapping("/insert/read")
 	@ResponseBody
 	public Integer Iread(String id) {
 		System.out.println(id);
-		int cnt=-1;
-		UsersVO vo=mapper.read(id);
-		if(vo==null){
-			cnt=0;
-		}else{
-			cnt=1;
+		int cnt = -1;
+		UsersVO vo = mapper.read(id);
+		if (vo == null) {
+			cnt = 0;
+		} else {
+			cnt = 1;
 		}
 		return cnt;
 	}
-	
-	//회원가입 페이지로 이동 
-		@RequestMapping("/login/insert")
-		public void insert() {
+
+	// 회원가입 페이지로 이동
+	@RequestMapping("/login/insert")
+	public void insert() {
+	}
+
+	@RequestMapping(value = "/login/insert", method = RequestMethod.POST)
+	public String insertPost(UsersVO vo, HttpSession session, MultipartHttpServletRequest multi) throws Exception {
+		MultipartFile file = multi.getFile("file");
+		session.setAttribute("id", vo.getId());
+		session.setAttribute("name", vo.getName());
+		// 파일업로드
+		if (!file.isEmpty()) { // 업로드 파일이 비어있지 않으면
+			String image = System.currentTimeMillis() + file.getOriginalFilename(); // 파일명이
+																					// 중복되지않게
+																					// 하기위해서
+																					// currentTimeMillis
+			file.transferTo(new File(path + File.separator + image));
+			vo.setU_image(image);
 		}
-	
-	@RequestMapping(value="/login/insert", method=RequestMethod.POST)
-	public String insertPost(UsersVO vo){
 		mapper.insert(vo);
 		return "redirect:/login/hello";
 	}
+
 	@RequestMapping("/login/hello")
 	public void hello() {
 	}
-	
-	@RequestMapping(value="/login/logout")
+
+	@RequestMapping("/member/email_injeung")
+	public void email_injeung() {
+	}
+
+	@RequestMapping(value = "/login/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();//dddd
+		session.invalidate();
 		return "redirect:/login/login";
 	}
 }

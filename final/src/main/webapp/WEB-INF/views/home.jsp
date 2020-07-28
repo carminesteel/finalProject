@@ -165,7 +165,7 @@ li {
 
 </head>
 <body style=padding-top:81px;>
-      
+   <jsp:include page="chat.jsp" />
    <jsp:include page="menu.jsp"/>
    
    <div id=banner class="gallery-wrapper">
