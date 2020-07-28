@@ -73,6 +73,12 @@ public class ProductController {
 	public void insert(){		
 	}
 	
+	@RequestMapping(value="/order", method=RequestMethod.POST)
+	public String order(String id, int p_no, int quantity) {
+		pService.order(id, p_no, quantity);
+		return "redirect:list";
+	}
+	
 	@Resource(name="uploadPath")
 	private String path;
 
@@ -100,6 +106,8 @@ public class ProductController {
 	      pService.insert(vo);
 	      return "redirect:list";
 	   }
+	
+
 	
 	@RequestMapping("/display")
 	@ResponseBody

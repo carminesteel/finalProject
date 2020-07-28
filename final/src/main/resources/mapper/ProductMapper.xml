@@ -34,4 +34,23 @@
 	<update id="updateViewCnt">
 		update product set view = view+1 where id=#{id}
 	</update>
+	
+	<select id="countP" resultType="int">
+		select count(*) from purchase where orders_id=#{orders_id} and product_no=#{product_no};
+	</select>
+	
+	<insert id="insertP">
+		insert into purchase (orders_id, quantity, product_no)
+		values (#{orders_id}, #{quantity}, #{product_no});
+	</insert>
+	
+	<update id="updateP">
+		update purchase set quantity=quantity+#{quantity} where orders_id=#{orders_id} and product_no=#{product_no};
+	</update>
+	
+	<insert id="insertO">
+		insert into orders (id)
+		values (#{id});
+	</insert>
+	
 </mapper>

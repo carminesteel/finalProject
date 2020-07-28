@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,19 @@ public class ProductServiceImpl implements ProductService{
 				pmapper.attachInsert(p_no, image);
 			}
 		}
+	}
+	
+	@Transactional
+	@Override
+	public void order(String id, int p_no, int quantity) {
+		
+		if(pmapper.countP(id, p_no)==0) {
+			pmapper.insertO(id);
+			pmapper.insertP(id, quantity, p_no);
+		}else if(pmapper.countP(id, p_no)==1) {
+			pmapper.insertO(id);
+			pmapper.updateP(quantity, id, p_no);
+		}	
 	}
 	
 }
