@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.mapper.ExhibitionMapper;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	
+	@Autowired
+	ExhibitionMapper emapper;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -41,7 +47,8 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
+		model.addAttribute("list",emapper.test());
+
 		return "home";
 	}
 	
@@ -60,18 +67,14 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping("/test")
-	public void test() {
-		
-	}
-	
 	@RequestMapping("/footer")
 	public void footer() {
 		
 	}
 	
 	@RequestMapping("/home")
-	public void home() {			
+	public void home(Model model) {	
+
 	}
 	
 	   /*�씠誘몄��뙆�씪 釉뚮씪�슦���뿉 異쒕젰*/ 
