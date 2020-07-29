@@ -28,8 +28,6 @@
 <body>
 
 
-
-
 	<form name="frm" action="/login/insert" method="post" id="myForm"	enctype="multipart/form-data">
 	
 		<table width=800 id="signup">

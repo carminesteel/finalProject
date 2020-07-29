@@ -6,12 +6,15 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 
 import com.example.domain.UsersVO;
 import com.example.mapper.UsersMapper;
@@ -21,6 +24,9 @@ public class UsersController {
 	@Autowired
 	UsersMapper mapper;
 
+	@Autowired 
+	BCryptPasswordEncoder passEncoder;
+	
 	/* 이미지파일 브라우저에 출력 */
 	@Resource(name = "uploadPath") /* 파일 업로드를 위해 필요 */
 	private String path;
@@ -37,7 +43,7 @@ public class UsersController {
 
 		UsersVO readVO = mapper.read(vo.getId());
 		if (readVO != null) {
-			if (readVO.getPass().equals(vo.getPass())) { // 로그인 성공
+			if (passEncoder.matches(vo.getPass(), readVO.getPass())) { // 로그인 성공
 				if (readVO.getPosition() == 1) {
 					result = 1; // 일반 user
 					session.setAttribute("id", readVO.getId());
@@ -48,11 +54,13 @@ public class UsersController {
 					session.setAttribute("id", readVO.getId());
 					session.setAttribute("name", readVO.getName());
 					session.setAttribute("position", readVO.getPosition());
-				} else {
+				} else if (readVO.getPosition() == 3){
 					result = 3; // 블랙유저
+				} else {
+					result = 4;//회원탈퇴
 				}
 			} else {
-				result = 4; // 비밀번호 틀렸을 경우
+				result = 5; // 비밀번호 틀렸을 경우
 			}
 		}
 		return result;
@@ -112,6 +120,7 @@ public class UsersController {
 			file.transferTo(new File(path + File.separator + image));
 			vo.setU_image(image);
 		}
+		vo.setPass(passEncoder.encode(vo.getPass()));
 		mapper.insert(vo);
 		return "redirect:/login/hello";
 	}
@@ -128,5 +137,30 @@ public class UsersController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/login/login";
+	}
+		
+	@RequestMapping("/login/mypage")
+	public void mypage(Model model,HttpSession session) {
+		String id=(String) session.getAttribute("id");
+		model.addAttribute("vo", mapper.read(id));
+	}
+	
+	@RequestMapping(value="/login/mypagePassChk", method=RequestMethod.POST)
+	@ResponseBody
+	public int mypagePassChk(UsersVO vo){
+		System.out.println("ㅎㅇ");
+		int chk=-1;
+			UsersVO readVO = mapper.read(vo.getId());
+			if(passEncoder.matches(vo.getPass(), readVO.getPass())){
+				chk=1;
+			}else{
+				chk=0;
+			}
+		
+		return chk;
+	}
+	@RequestMapping("/login/usersUpdate")
+	public void usersUpdate(){
+		
 	}
 }
