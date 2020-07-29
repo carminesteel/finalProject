@@ -165,7 +165,7 @@ li {
 
 </head>
 <body style=padding-top:81px;>
-   <jsp:include page="chat.jsp" />
+   <jsp:include page="chat.jsp"/>
    <jsp:include page="menu.jsp"/>
    
    <div id=banner class="gallery-wrapper">
@@ -258,7 +258,7 @@ li {
    <div id=exhibition>
       <div id=eTitle>Exhibition</div>
       <div id=eContent>다가오는 전시를 확인하세요.</div>
-      <a href="" class=more><img src="/display?fileName=more.png"/></a>
+      <a href="/exh/list" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
 	<jsp:include page="test.jsp"/>
 	<br><br>
