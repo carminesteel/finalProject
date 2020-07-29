@@ -48,6 +48,25 @@ public void list(Model model) {
 @RequestMapping("insert")
 public void insert() {
 }
+@RequestMapping("report")
+public void report() {
+}
+@RequestMapping(value="reportCnt", method=RequestMethod.POST)
+@ResponseBody
+public int reportCnt(@RequestParam(value="id") String id,@RequestParam(value="b_no") int b_no) { 
+	int cnt=-1;
+	cnt=mapper.reportCnt(id, b_no);
+	
+	return cnt;
+}
+@RequestMapping(value="reportInsert", method=RequestMethod.POST)
+@ResponseBody
+public void reportInsert(BoardVO vo) { 
+	mapper.reportInsert(vo);
+	vo.setReport(mapper.BoardReportCnt(vo.getB_no()));
+	mapper.updateReport(vo);
+}
+
 @RequestMapping(value="/like/update", method = RequestMethod.POST)
 @ResponseBody
 public int LikeUpdate(@RequestParam(value ="id") String id,@RequestParam(value ="b_no") int b_no) {
@@ -73,6 +92,7 @@ public int LikeUpdate(@RequestParam(value ="id") String id,@RequestParam(value =
 public void read(Model model, int b_no) {
 	model.addAttribute("vo",mapper.read(b_no));
 	model.addAttribute("list", mapper.getB_imagelist(b_no));
+	model.addAttribute("vo",service.read(b_no));
 }
 @RequestMapping(value="insert", method=RequestMethod.POST)
 public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //업로드할 파일을 받을때

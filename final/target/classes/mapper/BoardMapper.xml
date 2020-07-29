@@ -53,4 +53,22 @@
 	<update id="B_likeUpdate">
 		update board set b_like=#{like} where b_no=#{b_no} 
 	</update>
+	
+	<!-- report 부문 -->
+	<select id="reportCnt" resultType="int">
+		select count(*) from report where id=#{id} and b_no=#{b_no}
+	</select>
+	<insert id="reportInsert">
+		insert into report(id,content,date,b_no) values(#{id},#{content},now(),#{b_no})
+	</insert>
+	<select id="BoardReportCnt" resultType="int">
+		select count(*) from report where b_no=#{b_no}
+	</select>
+	<update id="updateReport">
+		update board set report=#{report} where b_no=#{b_no}
+	</update>
+	<!-- view 부문 -->
+	<update id="updateView">
+		update board set view = view +1 where b_no=#{b_no}
+	</update>
 </mapper>
