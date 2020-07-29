@@ -12,6 +12,8 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <style>
+.images{min-width:100%}
+
 .input-group{
 width: 120px;
   margin: 40px auto;
@@ -60,10 +62,11 @@ html {font-family:Noto Sans KR}
 .pButton:hover{background-color:#74a4d7; color:white; border-color:#74a4d7;}
 a:hover{text-decoration:none;color:black;}
 #pBody{ width: 1275px; height: 1000px; margin: auto;}
-#imgSection{width: 660px; height: 920px; display: inline-block; float: left;}
+#imgSection{width: 660px; height: 920px; display: inline-block; float: left;overflow:hidden}
+#imgSection img{max-height:100%;object-fit:contain;}
 #mainImg{width: 574px; height: 572px; margin-left: 67px; margin-top: 102px;}
 #thumbImg{text-align:center;margin-left:35px;margin-top:-50px;}
-.thumbs{background-color: black; display: inline-block; height: 81px; width: 81px; margin-top: 105px;}
+.thumbs{background-color: white;border:1px solid #b3c6e6; display: inline-block; height: 81px; width: 81px; margin-top: 105px;}
 #pInfo{width: 611px; height: 920px; display: inline-block; float: left;}
 #pTitle{font-size: 40pt; font-family: Noto Sans KR; font-weight: 500; margin-top: 80px; margin-bottom: 0px;margin-left:35px;}
 #pPrice, #totPrice{font-size:43px; font-family: Noto Sans KR; font-weight: 700; float: right; margin: 0px;margin-bottom:20px;margin-right:55px;color:#2e6cb5;letter-spacing:-4px}
@@ -167,13 +170,11 @@ a:hover{text-decoration:none;color:black;}
 				<tr style="text-align:center">
 					<td colspan=3>
 					<c:forEach items="${p_image}" var="p_image">
-						<div class="images"><img src="display?fileName=${p_image.p_images}" width=100 height=100></div>
+						<div class="images"><img src="display?fileName=${p_image.p_images}"></div>
 					</c:forEach>
 					</td>
 				</tr>
 			</table>
-
-			<input type="button" value="목록" id="btnList">
 		</div>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
