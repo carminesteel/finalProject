@@ -103,6 +103,7 @@ body {
 	float: left;
 	text-align: left;
 	margin-top: 40px;
+	border-radius:10px 10px 0px 0px
 }
 
 .box:hover {
@@ -115,6 +116,7 @@ body {
 	overflow: hidden;
 	height: 255px;
 	width: 255px;
+	border-radius:10px 10px 0px 0px
 }
 
 .image img {
