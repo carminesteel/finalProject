@@ -8,12 +8,13 @@
 <meta charset="UTF-8">
 <title>[상품목록]</title>
 <style>
-html {font-family:Noto Sans KR}
+html {
+	font-family: Noto Sans KR
+}
 
 #exBody {
 	background-color: #e9ecef;
 	z-index: 1;
-	
 }
 
 #exCenter {
@@ -33,18 +34,15 @@ html {font-family:Noto Sans KR}
 }
 
 #productMenu {
-	width: 1250px;
+	width: 100%;
 	font-size: 18px;
 	margin: auto;
 	height: 60px;
-	padding-top:0px];
+	padding-top: 0px];
 	padding-bottom: 0px;
-	padding-left:20px;
-	background:white;
-	border-radius:5px 5px 5px 5px;
-	position:absolute;
-	left:325px;
-	bottom:800px;
+	padding-left: 20px;
+	background: white;
+	border-radius: 5px 5px 5px 5px;
 }
 
 .menuB {
@@ -57,13 +55,19 @@ html {font-family:Noto Sans KR}
 	border-bottom: 2px solid black
 }
 
+.menuS {
+	cursor: pointer;
+	border-bottom: 2px solid black
+}
+
 body {
 	width: 1000px;
 }
 
 #besttab, #artgoodstab {
-	width: 1000px;
+	width: 1375px;
 	margin: auto;
+	text-align: center;
 	overflow: hidden;
 }
 
@@ -71,29 +75,54 @@ body {
 	width: 1275px;
 	margin: auto;
 	overflow: hidden;
-	padding-top:100px;
-	padding-bottom:50px;
+	padding-top: 40px;
+	padding-bottom: 40px;
 }
 
 .creatertab {
-	background:white;
+	background: white;
 	width: 616px;
-	height: 360px; float : left;
+	height: 360px;
+	float: left;
 	margin: auto;
 	float: left;
+}
+
+.creatertab:hover {
+	box-shadow: 1px 1px 8px #98a4b1;
+	cursor: pointer;
+	transition: box-shadow 500ms;
 }
 
 .box {
-	width: 200px;
+	margin-left:10px;
+	margin-right:10px;
+	background: white;
+	width: 255px;
+	height: 350px;
 	float: left;
-	text-align: center;
-	margin: auto;
+	text-align: left;
+	margin-top: 40px;
+}
+
+.box:hover {
+	cursor: pointer;
+	
+}
+
+.image {
+	display: block;
+	overflow: hidden;
+	height: 255px;
+	width: 255px;
 }
 
 .image img {
-	width: 150px;
-	height: 120px;
-	margin: auto;
+	vertical-align: middle;
+	display: block;
+	max-width: 100%;
+	min-height: 255px;
+	object-fit: cover
 }
 
 .proImg {
@@ -106,6 +135,7 @@ nav {
 	position: relative;
 	display: flex;
 	height: 55px;
+	padding-left: 790px;
 }
 
 nav a {
@@ -117,8 +147,13 @@ nav a {
 }
 
 #best, #artgoods {
-	padding-top:120px;
+	padding-bottom: 50px;
 }
+
+.price{font-size:24px;float:right;padding-bottom:0px;}
+.title{font-size:18px;font-weight:700;margin-top:5px;}
+.title, .price, .content{padding-left:10px;padding-right:10px;}
+
 </style>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
@@ -130,7 +165,7 @@ nav a {
 	<table id=productMenu>
 		<tr>
 			<td><nav>
-					<a class=menuB id="bestmenu">Best</a>&emsp;&emsp;&emsp; <a
+					<a class=menuS id="bestmenu">Best</a>&emsp;&emsp;&emsp; <a
 						class=menuB id="artgoodsmenu">Gallery</a>&emsp;&emsp;&emsp; <a
 						class=menuB id="purchasemenu">Artist</a>
 					<div class="nav-underline"></div>
@@ -148,9 +183,9 @@ nav a {
 				<div class="box">
 					<input type="hidden" value="{{p_no}}" class="p_no">
 					<div class="image"><img src="/display?fileName={{image}}"/></div>
-					<div class="title">{{title}}</div>
-					<div class="price">{{price}}원</div>
+					<div class="title">{{title}}</div>					
 					<div class="content">{{content}}</div>
+					<div class="price">{{price}}원</div>
 					<div class="id" style="display:none">{{id}}</div>
 				</div>
 			{{/each}}
@@ -164,9 +199,9 @@ nav a {
 				<div class="box">
 					<input type="hidden" value="{{p_no}}" class="p_no">
 					<div class="image"><img src="/display?fileName={{image}}"/></div>
-					<div class="title">{{title}}</div>
-					<div class="price">{{price}}원</div>
+					<div class="title">{{title}}</div>					
 					<div class="content">{{content}}</div>
+					<div class="price">{{price}}원</div>
 					<div class="id" style="display:none">{{id}}</div>
 				</div>
 			{{/each}}
@@ -230,25 +265,35 @@ nav a {
 </body>
 
 <script>
+
 	getBest();
 	artgoods();
-	$("#best").hide();
+	//$("#best").hide();
 	$("#artgoods").hide();
-	//$("#creater").hide();
+	$("#creater").hide();
 
 	$("#bestmenu").on("click", function() {
+		$("#bestmenu").attr("class","menuS")
+		$("#artgoodsmenu").attr("class","menuB")
+		$("#purchasemenu").attr("class","menuB")
 		$("#best").show();
 		$("#artgoods").hide();
 		$("#creater").hide();
 	});
 
 	$("#artgoodsmenu").on("click", function() {
+		$("#bestmenu").attr("class","menuB")
+		$("#artgoodsmenu").attr("class","menuS")
+		$("#purchasemenu").attr("class","menuB")
 		$("#best").hide();
 		$("#artgoods").show();
 		$("#creater").hide();
 	});
 
 	$("#purchasemenu").on("click", function() {
+		$("#bestmenu").attr("class","menuB")
+		$("#artgoodsmenu").attr("class","menuB")
+		$("#purchasemenu").attr("class","menuS")
 		$("#best").hide();
 		$("#artgoods").hide();
 		$("#creater").show();
