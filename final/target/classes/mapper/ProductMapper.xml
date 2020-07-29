@@ -19,7 +19,7 @@
 	</insert>
 	
 	<insert id="attachInsert">
-		insert into p_imageList(p_no, images) values(#{p_no},#{images})
+		insert into p_imageList(p_no, images, p_images) values(#{p_no},#{images},#{images})
 	</insert>
 	
 	<select id="P_noRead" resultType="int">
@@ -29,6 +29,14 @@
 	
 	<select id="read" resultType="com.example.domain.ProductVO">
 		select * from product where p_no=#{p_no}
+	</select>
+	
+	<select id="readimage" resultType="com.example.domain.ProductVO">
+		select * from p_imagelist where p_no=#{p_no} limit 0,5
+	</select>
+	
+	<select id="p_image" resultType="com.example.domain.ProductVO">
+		select * from p_imagelist where p_no=#{p_no}
 	</select>
 	
 	<update id="updateViewCnt">

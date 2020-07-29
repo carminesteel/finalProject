@@ -82,14 +82,13 @@ a:hover{text-decoration:none;color:black;}
 		<div id=exCenter>
 			<div id=pBody>
 				<div id=imgSection>
-					<img id=mainImg src="/display?fileName=productSample.jpg">
+					<img id=mainImg src="/display?fileName=${read.image}">
 					<div id=thumbImg>
-						<div class=thumbs></div>
-						<div class=thumbs></div>
-						<div class=thumbs></div>
-						<div class=thumbs></div>
-						<div class=thumbs></div>
-						<div class=thumbs></div>
+							<div class=thumbs><img src="/display?fileName=${read.image}" width=81 height=81></div>
+						<c:forEach items="${readimage}" var="readimage">
+							<div class=thumbs><img src="/display?fileName=${readimage.detail_images}" width=81 height=81></div>
+						</c:forEach>
+						
 					</div>
 				</div>
 				
@@ -167,7 +166,11 @@ a:hover{text-decoration:none;color:black;}
 					<td class=detailMenu>Q&A</td>
 				</tr>
 				<tr style="text-align:center">
-					<td colspan=3><img src="/display?fileName=productImageSample.jpg"></td>
+					<td colspan=3>
+					<c:forEach items="${p_image}" var="p_image">
+						<div class="images"><img src="display?fileName=${p_image.p_images}" width=100 height=100></div>
+					</c:forEach>
+					</td>
 				</tr>
 			</table>
 

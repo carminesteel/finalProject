@@ -15,6 +15,21 @@ public class ProductVO{
 	private int report;
 	private Date date;
 	private ArrayList<String> images;
+	private String p_images;
+	private String detail_images;
+	
+	public String getP_images() {
+		return p_images;
+	}
+	public void setP_images(String p_images) {
+		this.p_images = p_images;
+	}
+	public String getDetail_images() {
+		return detail_images;
+	}
+	public void setDetail_images(String detail_images) {
+		this.detail_images = detail_images;
+	}
 	private int quantity;
 	
 	public int getQuantity() {
@@ -93,9 +108,7 @@ public class ProductVO{
 	public String toString() {
 		return "ProductVO [p_no=" + p_no + ", id=" + id + ", title=" + title + ", content=" + content + ", image="
 				+ image + ", price=" + price + ", view=" + view + ", p_like=" + p_like + ", report=" + report
-				+ ", date=" + date + ", images=" + images + "]";
+				+ ", date=" + date + ", images=" + images + ", p_images=" + p_images + ", detail_images="
+				+ detail_images + ", quantity=" + quantity + "]";
 	}
-	
-
-	
 }

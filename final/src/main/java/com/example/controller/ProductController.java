@@ -66,7 +66,9 @@ public class ProductController {
 	@RequestMapping("/read")
 	public void read(Model model, int p_no, String id) {
 		pmapper.updateViewCnt(id);
-		model.addAttribute("read", pmapper.read(p_no));				
+		model.addAttribute("p_image", pmapper.p_image(p_no));
+		model.addAttribute("readimage", pmapper.readimage(p_no));
+		model.addAttribute("read", pmapper.read(p_no));
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
@@ -100,6 +102,7 @@ public class ProductController {
 	      pService.insert(vo);
 	      return "redirect:list";
 	   }
+	
 	
 	@RequestMapping("/display")
 	@ResponseBody
