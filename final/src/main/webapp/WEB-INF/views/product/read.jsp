@@ -88,7 +88,6 @@ a:hover{text-decoration:none;color:black;}
 						<c:forEach items="${readimage}" var="readimage">
 							<div class=thumbs><img src="/display?fileName=${readimage.detail_images}" width=81 height=81></div>
 						</c:forEach>
-						
 					</div>
 				</div>
 				
@@ -180,133 +179,130 @@ a:hover{text-decoration:none;color:black;}
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+	$("#imgSection").on("click", "#thumbImg .thumbs img", function(){
+		var src=$(this).attr("src");
+		$("#mainImg").attr("src",src);
+	});
 
-
-/* 주소창에 있는 파라미터 값 가져오는 함수임 재밌게쓰세요 */
-
+	/* 주소창에 있는 파라미터 값 가져오는 함수임 재밌게쓰세요 */
 	function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		results = regex.exec(location.search);
+	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
 
-var totPrice;
-var quantity;
+	var totPrice;
+	var quantity;
+	
+	getTotal();
+	quant();
 
-getTotal();
-quant();
+	function quant(){
+		quantity = $("#quantity").val(); 
+		$("#quant").html("수량 "+quantity+"개");
+	}
 
-function quant(){
-	quantity = $("#quantity").val(); 
-	$("#quant").html("수량 "+quantity+"개");
-}
+	function getTotal(){
+		var price = $("#pPrice").html();
+		var quantity = $("#quantity").val();
+		var pr=parseInt(price);
+		var quan=parseInt(quantity);
+	
+		totPrice = pr*quan;
+		var point=parseInt(totPrice*0.01);
+		$("#totPrice").html(totPrice+2500);
+		$("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
+		$("#point").html(point+" point");
+	}
 
-function getTotal(){
-	var price = $("#pPrice").html();
-	var quantity = $("#quantity").val();
-	var pr=parseInt(price);
-	var quan=parseInt(quantity);
+	/* 수량버튼 관련 스크립트 */
+	$('.btn-number').click(function(e){
+		e.preventDefault();
+	    
+		fieldName = $(this).attr('data-field');
+		type      = $(this).attr('data-type');
+		var input = $("input[name='"+fieldName+"']");
+		var currentVal = parseInt(input.val());
+		if (!isNaN(currentVal)) {
+			if(type == 'minus'){
+				if(currentVal > input.attr('min')) {
+					input.val(currentVal - 1).change();
+				} 
+				if(parseInt(input.val()) == input.attr('min')) {
+					$(this).attr('disabled', true);
+				}
+			}else if(type == 'plus'){
+				if(currentVal < input.attr('max')) {
+					input.val(currentVal + 1).change();
+				}
+				if(parseInt(input.val()) == input.attr('max')) {
+					$(this).attr('disabled', true);
+				}
+			}
+		}else{
+			input.val(0);
+		}
+		quant();
+		getTotal();
+	});
 
-	totPrice = pr*quan;
-	var point=parseInt(totPrice*0.01);
-	$("#totPrice").html(totPrice+2500);
-	$("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
-	$("#point").html(point+" point");
-}
+	$('.input-number').focusin(function(){
+		$(this).data('oldValue', $(this).val());
+	});
 
-/* 수량버튼 관련 스크립트 */
-$('.btn-number').click(function(e){
-    e.preventDefault();
+	$('.input-number').change(function() {
+		minValue =  parseInt($(this).attr('min'));
+		maxValue =  parseInt($(this).attr('max'));
+		valueCurrent = parseInt($(this).val());
+	    
+		name = $(this).attr('name');
+		if(valueCurrent >= minValue) {
+			$(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+		}else{
+			alert('Sorry, the minimum value was reached');
+			$(this).val($(this).data('oldValue'));
+		}
+		if(valueCurrent <= maxValue) {
+			$(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+		}else{
+			alert('Sorry, the maximum value was reached');
+			$(this).val($(this).data('oldValue'));
+		}
+	});
+
+	$(".input-number").keydown(function (e) {
+		// Allow: backspace, delete, tab, escape, enter and .
+		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+			// Allow: Ctrl+A
+			(e.keyCode == 65 && e.ctrlKey === true) || 
+			// Allow: home, end, left, right
+			(e.keyCode >= 35 && e.keyCode <= 39)) {
+				// let it happen, don't do anything
+			return;
+		}
+		// Ensure that it is a number and stop the keypress
+		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+			e.preventDefault();
+		}
+	});
     
-    fieldName = $(this).attr('data-field');
-    type      = $(this).attr('data-type');
-    var input = $("input[name='"+fieldName+"']");
-    var currentVal = parseInt(input.val());
-    if (!isNaN(currentVal)) {
-        if(type == 'minus') {
-            
-            if(currentVal > input.attr('min')) {
-                input.val(currentVal - 1).change();
-            } 
-            if(parseInt(input.val()) == input.attr('min')) {
-                $(this).attr('disabled', true);
-            }
-
-        } else if(type == 'plus') {
-
-            if(currentVal < input.attr('max')) {
-                input.val(currentVal + 1).change();
-            }
-            if(parseInt(input.val()) == input.attr('max')) {
-                $(this).attr('disabled', true);
-            }
-
-        }
-    } else {
-        input.val(0);
-    }
-    quant();
-    getTotal();
-});
-$('.input-number').focusin(function(){
-   $(this).data('oldValue', $(this).val());
-});
-$('.input-number').change(function() {
-    
-    minValue =  parseInt($(this).attr('min'));
-    maxValue =  parseInt($(this).attr('max'));
-    valueCurrent = parseInt($(this).val());
-    
-    name = $(this).attr('name');
-    if(valueCurrent >= minValue) {
-        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the minimum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
-    if(valueCurrent <= maxValue) {
-        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the maximum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
-    
-    
-});
-$(".input-number").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-             // Allow: Ctrl+A
-            (e.keyCode == 65 && e.ctrlKey === true) || 
-             // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-    
-    $("#order").on("click",function(){
-    	alert("십새끼");
-    	var p_no = getParameterByName('p_no');
+	$("#order").on("click",function(){
+		alert("십새끼");
+		var p_no = getParameterByName('p_no');
 		var id="${id}"
 		alert(p_no+id+quantity);
-    	$.ajax({    		 		
-    	    type:"post",
-    	    url:"/product/order",
-    	    data:{"id":id,"p_no":p_no,"quantity":quantity},
-    	    success:function(){
-    	     alert("주문완료")
-    	          }
-    	    ,error:function(request,status,error){
-    	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-    	    });
-    }) 
-
-    
+		$.ajax({    		 		
+			type:"post",
+			url:"/product/order",
+			data:{"id":id,"p_no":p_no,"quantity":quantity},
+			success:function(){
+				alert("주문완료")
+			},
+			error:function(request,status,error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	});
 </script>
 </html>
