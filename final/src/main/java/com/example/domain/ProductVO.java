@@ -9,6 +9,7 @@ public class ProductVO{
 	private String title;
 	private String content;
 	private String image;
+	private String name;
 	private int price;
 	private int view;
 	private int p_like;
@@ -18,6 +19,12 @@ public class ProductVO{
 	private String p_images;
 	private String detail_images;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getP_images() {
 		return p_images;
 	}

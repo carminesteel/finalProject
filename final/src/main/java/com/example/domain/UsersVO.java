@@ -13,6 +13,14 @@ public class UsersVO extends ProductVO{
 	private int follow;
 	private int follower;
 	private int position;
+	private int cnt;
+	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public String getId() {
 		return id;
 	}

@@ -102,7 +102,7 @@ a:hover{text-decoration:none;color:black;}
 					<div id="pointArea">
 						<div style="display: inline-block; float: left;">
 							<t style="font-family:Noto Sans KR;font-size:20px;font-weight:500;">신규고객 전용 혜택</t><br> <t style="font-family:Noto Sans KR;font-size:12px;font-weight:500;">첫 구매시 결제금액의 50%를 할인해드립니다!</t>
-							<div style="letter-spacing:-1px;text-align:right;margin-top:20px;border-bottom:1px solid #2e6cb5;font-size:20px;padding-bottom:10px;margin-bottom:20px;font-weight:600"><span style="font-size:25px;font-weight:900;">김홍철</span>님의 예상 적립 포인트</div>
+							<div style="letter-spacing:-1px;text-align:right;margin-top:20px;border-bottom:1px solid #2e6cb5;font-size:20px;padding-bottom:10px;margin-bottom:20px;font-weight:600"><span style="font-size:25px;font-weight:900;">${read.name}</span>님의 예상 적립 포인트</div>
 							<div style="padding:10px;color:white;background-color:#74a4d7;height:41px;width:475px;margin:auto;font-size:16px;font-weight:600">
 								<span id="pointCal" ></span>
 								<span id="point" style="float:right;">00point00</span>
@@ -212,9 +212,13 @@ a:hover{text-decoration:none;color:black;}
 	
 		totPrice = pr*quan;
 		var point=parseInt(totPrice*0.01);
-		$("#totPrice").html(totPrice+2500);
 		$("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
 		$("#point").html(point+" point");
+		if(totPrice>=50000){
+			$("#totPrice").html(totPrice);
+		}else{
+			$("#totPrice").html(totPrice+2500);
+		}
 	}
 
 	/* 수량버튼 관련 스크립트 */
