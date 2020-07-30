@@ -72,9 +72,10 @@
 			</tr>
 			
 		</table>
+		<c:if test="${id==vo.id}">
 		<input type="submit" value="수정">
-		<input type="reset" value="취소">
 		<input type="button" value="삭제" id="btnDelete">
+		</c:if>
 		<input type="button" value="목록" onClick="location.href='list'">
 		<input type="button" value="댓글보기" id="btnReply">
 		<input type="button" value="댓글숨기기" id="btnReply2">
