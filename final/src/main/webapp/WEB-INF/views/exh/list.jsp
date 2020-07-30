@@ -66,8 +66,8 @@
 							<br>
 							<br>
 							<br>
+							<b>${vo.title}</b>
 							<br>
-							${vo.title}
 							<br>
 							기간 :${vo.date}
 							<br>
