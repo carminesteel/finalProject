@@ -90,8 +90,14 @@ body {
 
 .creatertab:hover {
 	box-shadow: 1px 1px 8px #98a4b1;
-	cursor: pointer;
+
 	transition: box-shadow 500ms;
+}
+
+
+.creatertab .creater td:hover{
+	cursor:pointer;
+	
 }
 
 .box {
