@@ -31,6 +31,9 @@
 <body>
 	<jsp:include page="../menu.jsp"></jsp:include>
 	<h1>[작품]</h1>
+	<c:if test="${id!=null}">		
+			<a href="/board/insert" class=more><img id=bButton src="/display?fileName=eButton.png" /></a> <br>
+		</c:if>	
 	<div border=1 id="tbl">
 
 		<c:forEach items="${list}" var="vo">

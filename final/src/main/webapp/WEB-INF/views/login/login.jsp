@@ -240,6 +240,7 @@ body::before {
 	});
 </script>
 <script>
+var dest="${dest}";
 	$(frm).submit(function(e) {
 		e.preventDefault();
 		var id = $(frm.id).val();
@@ -257,6 +258,11 @@ body::before {
 				if (data == 1) {
 					alert("로그인 성공");
 					location.href = "/";
+					if(dest!=""){
+						location.href="${dest}";
+					}else{
+						location.href="/board/list";
+					}
 				} else if (data == 2) {
 					alert("관리자 로그인 성공");
 					location.href = "/";//관리자 메뉴로 이동 설정해주세요 만들어지면

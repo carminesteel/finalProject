@@ -218,54 +218,34 @@ nav a {
 
 			<div id="creater">
 				<c:forEach items="${users}" var="creater">
-					<table class="creatertab"
-						style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
+					<table class="creatertab" style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
 						<tr class="creater">
-							<td width=149 colspan=3 style="padding-bottom: 25px;"><img
-								src="/display?fileName=${creater.u_image}"
-								style="float: left; border-radius: 50%;" width=75 height=75 /> <span
-								style="text-align: left; width: 200px; float: left; padding-left: 25px;">
-									<p style="font-weight: bold; font-size: 24px; margin: 0;">${creater.id}</p>
-									<p style="font-size: 15px; margin: 0;">${creater.introduce}</p>
-							</span> <span
-								style="float: right; background: #e9e9e9; position: relative; top: 15px; padding: 5px; border-radius: 20px 20px 20px 20px; font-size: 13px; width: 80px; height: 28px; text-align: center;line-height:26px;color:#373e45">상품n개</span>
+							<td width=149 colspan=3 style="padding-bottom: 25px;">
+								<img src="/display?fileName=${creater.u_image}"	style="float: left; border-radius: 50%;" width=75 height=75 />
+								<span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
+										<p class="createrid" style="font-weight: bold; font-size: 24px; margin: 0;">${creater.id}</p>
+										<p style="font-size: 15px; margin: 0;">${creater.introduce}</p>
+								</span>
+								<span id="total" style="float: right; background: #e9e9e9; position: relative;
+									top: 15px; padding: 5px; border-radius: 20px 20px 20px 20px; font-size: 13px;
+									width: 80px; height: 28px; text-align: center;line-height:26px;color:#373e45">
+										상품개수 ${creater.cnt}개
+								</span>
 							</td>
 						</tr>
 						<tr class="proimage">
 							<c:forEach items="${proimage}" var="image">
 								<c:if test="${creater.id==image.id}">
-									<td width=180 height=190 style="margin: 2px;"><img
-										class=proImg src="/display?fileName=${image.image}" width=100%
-										height=100%></td>
+									<td width=180 height=190 style="margin: 2px;">
+										<img class=proImg src="/display?fileName=${image.image}" width=100% height=100%>
+										<span class="creater_no" style="display:none;">${image.p_no}</span>
+									</td>
 								</c:if>
 							</c:forEach>
 						</tr>
 					</table>
 				</c:forEach>
 			</div>
-
-			<%-- 	<div id="creater">
-
-		<div id="creatertab">
-			<c:forEach items="${users}" var="creater">
-				<div class="creater" style="border:1px solid black">
-					<img src="/display?fileName=${creater.u_image}" width=300 height=300/>
-					<div style="float:right">
-						<div class="createrid">${creater.id}</div><br>
-						<div>${creater.introduce}</div>
-					</div>
-					
-					<div>
-					<c:forEach items="${proimage}" var="image">
-					<c:if test="${creater.id==image.id}">
-						<img src="/display?fileName=${image.image}" width=100 height=100>
-					</c:if>
-					</c:forEach>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div> --%>
 		
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
@@ -276,7 +256,6 @@ nav a {
 
 	getBest();
 	artgoods();
-	//$("#best").hide();
 	$("#artgoods").hide();
 	$("#creater").hide();
 
@@ -305,20 +284,6 @@ nav a {
 		$("#best").hide();
 		$("#artgoods").hide();
 		$("#creater").show();
-		//proimage();
-
-		var array = [];
-		$("#tab .row").each(function() {
-			var id = $(this).find(".createrid").html();
-			alert(id);
-			var data = {
-				"id" : id
-			};
-			array.push(data);
-		});
-		var template = Handlebars.compile($(".creatertemp").html());
-		$(".creatertab").html(template(array));
-
 	});
 
 	$("#besttab").on("click", ".image", function() {
@@ -338,6 +303,12 @@ nav a {
 			}
 		});
 	}
+	
+	$("#creater").on("click", ".creatertab .proimage .proImg", function(){
+		var id = $(this).parent().parent().parent().find(".createrid").text();
+		var p_no=$(this).parent().find(".creater_no").text();
+		location.href = "/product/read?p_no=" + p_no + "&id=" + id;
+	});
 
 	$("#artgoodstab").on("click", ".image", function() {
 		var p_no = $(this).parent().find(".p_no").val();
@@ -356,32 +327,6 @@ nav a {
 			}
 		});
 	}
-	/*
-	function proimage(){
-		$("#creatertab .creater").each(function(){
-			var id=$(this).find(".createrid").html();
-			$.ajax({
-				type:"get",
-				url:"/product/rest/proimage",
-				data:{"id":id},
-				dataType:"json",
-				error:function(){
-					alert("xxxx");
-				},
-				success:function(data){
-					//alert(id);
-					for(var i=0; i<=data.length-1; i++){
-						//alert(data[i]["id"]);
-						if(id==data[i]["id"]){
-							//alert(id+"   !@@!   "+data[i]["id"]);
-							var temp=Handlebars.compile($(".creatertemp").html());
-							$(".creatertab").html(temp(data));
-						}
-					}
-				}
-			});
-		});
-	}*/
 </script>
 
 </html>
