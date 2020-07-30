@@ -101,33 +101,13 @@ body::before {
 	animation-iteration-count: 3;
 }
 
-@
-keyframes warning { 0% {
-	transform: : translateX( -8px);
+@keyframes warning { 
+   0%{transform:translateX(-8px);}
+   25%{transform:translateX(8px);}
+   50%{transform:translateX(-8px);}
+   75%{transform:translateX(8px);}
 }
 
-25%{
-transform
-:
- 
-translateX
-(8px);
-}
-50%{
-transform
-:
- 
-translateX
-(-8px);
-}
-75%{
-transform
-:
- 
-translateX
-(8px);
-}
-}
 .int-area input:focus+label, .int-area input:valid+label {
 	top: -2px;
 	font-size: 13px;
@@ -282,7 +262,9 @@ translateX
 					location.href = "/";//관리자 메뉴로 이동 설정해주세요 만들어지면
 				} else if (data == 3) {
 					alert("블럭처리된 계정");
-				} else if (data == 4) {
+				}  else if (data == 4) {
+					alert("회원탈퇴 계정");
+				}else if (data == 5) {
 					alert("비밀번호가 틀렸습니다.");
 					$(frm.pass).val("");
 					$(frm.pass).focus();
