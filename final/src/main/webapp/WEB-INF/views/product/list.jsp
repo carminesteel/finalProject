@@ -207,7 +207,7 @@ nav a {
 				<div class="box">
 					<input type="hidden" value="{{p_no}}" class="p_no">
 					<div class="image"><img src="/display?fileName={{image}}"/></div>
-					<div class="title">{{title}}</div>					
+					<div class="title">{{title}}</div>
 					<div class="content">{{content}}</div>
 					<div class="price">{{price}}원</div>
 					<div class="id" style="display:none">{{id}}</div>
