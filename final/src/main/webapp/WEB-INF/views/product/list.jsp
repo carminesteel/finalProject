@@ -61,7 +61,7 @@ html {
 }
 
 body {
-	width: 1000px;
+	width: 1000px;;
 }
 
 #besttab, #artgoodstab {
