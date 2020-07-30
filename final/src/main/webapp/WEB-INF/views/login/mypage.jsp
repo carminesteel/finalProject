@@ -17,7 +17,8 @@
 	margin-left:10px;
 	text-align: center;
 	overflow:hidden;
-	display: none;
+	display:inline-block;
+	float:left
 }
 
 #usertable{
@@ -41,14 +42,16 @@
 	margin-bottom: 6px;
 	outline: none;
 }
+
+#u_list {display:inline-block;}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
 
 </head>
-<body>
-	<div>
-		<jsp:include page="../menu.jsp" />
+<body style="padding-top: 73px; margin-left: 0px; width: 100%;height:1080px;">
+	<jsp:include page="../menu.jsp" />
+	<div style=height:1080px;>		
 		<br><br><br><br><br><br>
 		<div id="passChk">
 			<h4>비밀번호 확인</h4>
@@ -95,6 +98,9 @@
 			</tr>	
 			</table>
 		</div>
+		<div id=u_list>
+			<h1>씨발</h1>
+		</div>
 	</div>
 	<br>
 	<br>
@@ -104,6 +110,9 @@
 <script>
 	var id="${id}";
 
+	$("#userRead").hide();
+	$("#u_list").hide();
+	
  	$("#passChk").on("click", "button", function() {
 		var pass = $("#passChk").find("#chkPass").val();
 		if (pass != "") {
@@ -119,6 +128,7 @@
 						alert("확인되었습니다.");
 						$("#passChk").hide();
 						$("#userRead").show();
+						$("#u_list").show();
 					}
 				}
 			})

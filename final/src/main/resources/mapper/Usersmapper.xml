@@ -17,4 +17,5 @@
     	insert into users (id,pass,name,nickname,phone,introduce,addr,email,u_image) 
     	values(#{id},#{pass},#{name},#{nickname},#{phone},#{introduce},#{addr},#{email},#{u_image})
     </insert>
+    
 </mapper>
