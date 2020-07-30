@@ -225,7 +225,6 @@ nav a {
 									width: 80px; height: 28px; text-align: center;line-height:26px;color:#373e45">
 										상품개수 ${creater.cnt}개
 								</span>
-								<span class="creater_no" style="display:none;">${creater.p_no}</span>
 							</td>
 						</tr>
 						<tr class="proimage">
@@ -233,6 +232,7 @@ nav a {
 								<c:if test="${creater.id==image.id}">
 									<td width=180 height=190 style="margin: 2px;">
 										<img class=proImg src="/display?fileName=${image.image}" width=100% height=100%>
+										<span class="creater_no" style="display:none;">${image.p_no}</span>
 									</td>
 								</c:if>
 							</c:forEach>
@@ -300,7 +300,7 @@ nav a {
 	
 	$("#creater").on("click", ".creatertab .proimage .proImg", function(){
 		var id = $(this).parent().parent().parent().find(".createrid").text();
-		var p_no=$(this).parent().parent().parent().find(".creater_no").text();
+		var p_no=$(this).parent().find(".creater_no").text();
 		location.href = "/product/read?p_no=" + p_no + "&id=" + id;
 	});
 

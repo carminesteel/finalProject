@@ -293,10 +293,8 @@ a:hover{text-decoration:none;color:black;}
 	});
     
 	$("#order").on("click",function(){
-		alert("십새끼");
 		var p_no = getParameterByName('p_no');
 		var id="${id}"
-		alert(p_no+id+quantity);
 		$.ajax({    		 		
 			type:"post",
 			url:"/product/order",
