@@ -41,7 +41,7 @@
 			<td class="content" >{{content}}</td>
 			<td>{{date}}</td>
 			<td class="b_no">{{b_no}}</td>
-			<td><input type="button" value="삭제" class="rbtnDelete"></td>		
+			<td><input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}}"></td>		
 		</tr>
 		{{/each}}
 	</script>
@@ -51,6 +51,16 @@
 <script>
 var b_no = "${vo.b_no}";
 $("#tbl1").find(".row .b_no").hide();
+var id="${id}";
+Handlebars.registerHelper("printStyle",function(replyer){
+	var src;
+	if(id!=replyer){
+		src="display:none;";
+	}else if(id==replyer){
+		src="color:red;";
+	}
+	return src;
+});
 R_list();
 
 function R_list(){

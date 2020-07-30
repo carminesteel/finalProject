@@ -28,7 +28,15 @@
 
 	<context:component-scan
 	base-package="com.example.controller" />
-
+		<interceptors>
+		<interceptor>
+			<mapping path="/board/insert" />
+			<mapping path="/board/read" />
+			<mapping path="/e_reply/reply" />
+			<beans:bean id="AuthInterceptor"
+				class="com.example.interceptor.AuthInterceptor" />
+		</interceptor>
+	</interceptors>
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760" />
