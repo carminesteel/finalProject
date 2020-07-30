@@ -261,7 +261,7 @@ var dest="${dest}";
 					if(dest!=""){
 						location.href="${dest}";
 					}else{
-						location.href="/board/list";
+						location.href="/";
 					}
 				} else if (data == 2) {
 					alert("관리자 로그인 성공");

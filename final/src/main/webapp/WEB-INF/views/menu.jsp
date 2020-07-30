@@ -23,7 +23,9 @@
       	<a class=menuA href="/board/list">탐색</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/product/list">아트굿즈</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/exh/list">전시</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      	<c:if test="${position==1 || position==2}">
       	<a class=menuA href="/login/mypage">MyPage</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      	</c:if>
       </td>
       <c:if test="${position==null}">
       		<td style=float:right;padding-right:65px;><a class=menuA href="/login/login">로그인</a></td>

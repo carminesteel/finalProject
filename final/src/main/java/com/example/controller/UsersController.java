@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -162,5 +163,43 @@ public class UsersController {
 	@RequestMapping("/login/usersUpdate")
 	public void usersUpdate(){
 		
+	}
+	
+	@RequestMapping("/user/read")
+	public void userRead(Model model,String id) {
+		model.addAttribute("vo", mapper.read(id));
+	}
+	
+	
+	
+	@RequestMapping("/user/followChk")
+	@ResponseBody
+	public int followChk(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
+		int chk=mapper.followChk(follower, target);
+		
+		System.out.println(chk);
+		return chk;
+	}
+	
+	@RequestMapping("/user/followUpdate")
+	@ResponseBody
+	public int followUpdate(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
+		int chk=mapper.followChk(follower, target);
+		int followerCnt;
+		int followingCnt;
+		if(chk==0) {
+			mapper.followInsert(follower, target);
+			followerCnt=mapper.followerCnt(target);
+			followingCnt=mapper.followingCnt(follower);
+			mapper.followerUpdate(followerCnt, target);
+			mapper.followUpdate(followingCnt, follower);
+		}else {
+			mapper.followDelete(follower, target);
+			followerCnt=mapper.followerCnt(target);
+			followingCnt=mapper.followingCnt(follower);
+			mapper.followerUpdate(followerCnt, target);
+			mapper.followUpdate(followingCnt, follower);
+		}
+		return followerCnt;
 	}
 }

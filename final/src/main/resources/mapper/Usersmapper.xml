@@ -18,4 +18,26 @@
     	values(#{id},#{pass},#{name},#{nickname},#{phone},#{introduce},#{addr},#{email},#{u_image})
     </insert>
     
+    <select id="followChk" resultType="int">
+    	select count(*) from follower where follower=#{follower} and target=#{target}
+    </select>
+    
+    <insert id="followInsert">
+    	insert into follower values(#{follower},#{target})
+    </insert>
+    <delete id="followDelete">
+    	delete from follower where follower=#{follower} and target=#{target}
+    </delete>
+    <select id="followerCnt" resultType="int">
+    	select count(*) from follower where target=#{target}
+    </select>
+    <select id="followingCnt" resultType="int">
+    	select count(*) from follower where follower=#{follower}
+    </select>
+    <update id="followerUpdate">
+    	update users set follower = #{follower} where id=#{id}
+    </update>
+      <update id="followUpdate">
+    	update users set follow = #{follow} where id=#{id}
+    </update>
 </mapper>
