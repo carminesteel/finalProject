@@ -227,11 +227,11 @@ nav a {
                               <p class="createrid" style="font-weight: bold; font-size: 24px; margin: 0;">${creater.id}</p>
                               <p style="font-size: 15px; margin: 0;">${creater.introduce}</p>
                         </span>
-                        <span id="total" style="float: right; background: #e9e9e9; position: relative;
-                           top: 15px; padding: 5px; border-radius: 20px 20px 20px 20px; font-size: 13px;
-                           width: 80px; height: 28px; text-align: center;line-height:26px;color:#373e45">
-                              상품개수 ${creater.cnt}개
-                        </span>
+						<span id="total" style="float: right; background: #e9e9e9; position: relative;
+							top: 15px; padding: 5px; border-radius: 20px 20px 20px 20px; font-size: 13px;
+							width: 80px; height: 28px; text-align: center;line-height:26px;color:#373e45">
+							상품개수 ${creater.cnt}개
+						</span>
                      </td>
                   </tr>
                   <tr class="proimage">
