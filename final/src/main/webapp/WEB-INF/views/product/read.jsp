@@ -180,6 +180,35 @@ a:hover{text-decoration:none;color:black;}
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+	var totPrice;
+	var quantity;
+	
+	getTotal();
+	quant();
+
+	$("#order").on("click",function(){
+		if(!confirm("상품구매를 위해 구매페이지로 이동 하시겠습니까?")) return;
+		var id="${read.p_id}";
+		var p_no="${read.p_no}";
+		var p_image="${read.image}";
+		var title="${read.title}";
+		var price="${read.price}";
+		var quantity=$("#quantity").val();
+		
+		$.ajax({
+			type:"get",
+			url:"/cart/insert",
+			data:{"id":id, "p_no":p_no, "p_image":p_image, "title":title, "price":price, "quantity":quantity},
+			error:function(){
+				alert("xxx");
+			},
+			success:function(){
+				alert("구매페이지로 이동합니다.");
+				location.href="/cart/orders";
+			}
+		});
+	});
+	
 	$("#imgSection").on("click", "#thumbImg .thumbs img", function(){
 		var src=$(this).attr("src");
 		$("#mainImg").attr("src",src);
@@ -192,12 +221,6 @@ a:hover{text-decoration:none;color:black;}
 		results = regex.exec(location.search);
 	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
-
-	var totPrice;
-	var quantity;
-	
-	getTotal();
-	quant();
 
 	function quant(){
 		quantity = $("#quantity").val(); 
@@ -290,22 +313,6 @@ a:hover{text-decoration:none;color:black;}
 		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 			e.preventDefault();
 		}
-	});
-    
-	$("#order").on("click",function(){
-		var p_no = getParameterByName('p_no');
-		var id="${id}"
-		$.ajax({    		 		
-			type:"post",
-			url:"/product/order",
-			data:{"id":id,"p_no":p_no,"quantity":quantity},
-			success:function(){
-				alert("주문완료")
-			},
-			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
 	});
 </script>
 </html>

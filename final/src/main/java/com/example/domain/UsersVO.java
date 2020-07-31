@@ -2,6 +2,7 @@ package com.example.domain;
 
 public class UsersVO extends ProductVO{	
 	private String id;//아이디
+	private String u_id;
 	private String pass;//비번
 	private String name;//이름
 	private String nickname;//닉네임
@@ -15,6 +16,12 @@ public class UsersVO extends ProductVO{
 	private int position;
 	private int cnt;
 	
+	public String getU_id() {
+		return u_id;
+	}
+	public void setU_id(String u_id) {
+		this.u_id = u_id;
+	}
 	public int getCnt() {
 		return cnt;
 	}

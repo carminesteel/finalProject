@@ -44,6 +44,11 @@ public class ProductController {
 		model.addAttribute("proimage", umapper.proimage());
 	}
 	
+	@RequestMapping("/orders")
+	public void orders() {
+		
+	}
+	
 	@RequestMapping("/rest/bestlist")
 	@ResponseBody
 	public List<ProductVO> bestList(){

@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="read" resultType="com.example.domain.ProductVO">
-		select p.*, u.* from product p, users u where u.id=p.id and p_no=#{p_no}
+		select p.*, u.*, p.id p_id, u.id u_id from product p, users u where u.id=p.id and p_no=#{p_no}
 	</select>
 	
 	<select id="readimage" resultType="com.example.domain.ProductVO">

@@ -6,6 +6,7 @@ import java.util.Date;
 public class ProductVO{
 	private int p_no;
 	private String id;
+	private String p_id;
 	private String title;
 	private String content;
 	private String image;
@@ -19,6 +20,12 @@ public class ProductVO{
 	private String p_images;
 	private String detail_images;
 	
+	public String getP_id() {
+		return p_id;
+	}
+	public void setP_id(String p_id) {
+		this.p_id = p_id;
+	}
 	public String getName() {
 		return name;
 	}
