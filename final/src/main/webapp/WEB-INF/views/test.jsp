@@ -411,7 +411,7 @@ img-box block{width:690px;height:385.99px;
 <div class="v-story-wrap con" style="height:650px;">
     <h2 class="v-story-tt" data-aos="fade-up"></h2>
     <div class="v-story-slider" data-aos="fade-up">
-       <c:forEach items="${list}" var="vo">   
+       <c:forEach items="${elist}" var="vo">   
            <div class="slider-item">
                <a  class="block" href="exh/read?e_no=${vo.e_no}">     
                    <div class="img-box block">
