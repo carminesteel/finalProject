@@ -40,7 +40,6 @@ public class ProductController {
 	@RequestMapping("/list")
 	public void list(Model model) {
 		model.addAttribute("users", umapper.list());
-		
 		model.addAttribute("proimage", umapper.proimage());
 	}
 	

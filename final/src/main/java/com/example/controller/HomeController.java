@@ -2,8 +2,6 @@ package com.example.controller;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.mapper.BoardMapper;
 import com.example.mapper.ExhibitionMapper;
+import com.example.mapper.ProductMapper;
 
 /**
  * Handles requests for the application home page.
@@ -36,6 +35,9 @@ public class HomeController {
 	@Autowired
 	BoardMapper bMapper;
 	
+	@Autowired
+	ProductMapper pMapper;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -46,6 +48,7 @@ public class HomeController {
 		System.out.println("!");
 		model.addAttribute("elist",emapper.list());
 		model.addAttribute("list",bMapper.list());
+		model.addAttribute("plist",pMapper.artgoods());
 		return "home";
 	}
 

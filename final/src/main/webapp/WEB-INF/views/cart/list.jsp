@@ -32,7 +32,7 @@
    <div id="exBody">
       <table id="cart" border=1>
          <tr>
-            <td><input type="checkbox" id="checkAll"></td>
+            <td><input type="checkbox" id="checkAll" checked></td>
             <td>상품정보</td>
             <td>상품금액</td>
             <td>수량</td>
@@ -40,7 +40,7 @@
          </tr>
          <c:forEach items="${list}" var="cart">
          <tr class="row">
-            <td width=70><input type="checkbox" class="check"></td>
+            <td width=70><input type="checkbox" class="check" checked></td>
             <td width=488>
                <div class="id" style="display:none;">${cart.id}</div>
                <div class="p_no" style="display:none;">${cart.p_no}</div>
@@ -93,18 +93,23 @@
 </body>
 
 <script>
-
-   $("#order").on("click", function(){
-      var total=$("#cart .row .total").text();
-      alert(total);
-   });
-   
-   function total(){
-      var array=[];
-      $(".row").each(function(){
-         var total=$("#cart .row .total").text();
-      });
-   }
+	total();
+	
+	function total(){
+		var total=0;
+		$("#cart .row .check:checked").each(function(){
+			var row=$(this).parent().parent();
+			var price=row.find(".price").html();
+			var quantity=row.find(".quantity").val();
+			var sum=price*quantity;
+			total=total+sum;
+		});
+		$("#totSum").val(total);
+	};
+	
+	$(".check").change(function(){
+		total();
+	});
 
    $("#cart").on("click", ".row .minus", function(){
       var id=$(this).parent().parent().find(".id").html();
