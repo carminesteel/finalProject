@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ProductMapper">
+	<select id="bestList" resultType="com.example.domain.ProductVO">
+		select p.*, quantity from product p left join purchase pu on p.p_no=pu.p_no order by quantity desc limit 0,10
+	</select>
+	
+	<select id="artgoods" resultType="com.example.domain.ProductVO">
+		select * from product limit 0,10
+	</select>
+	
+	<select id="proimage" resultType="com.example.domain.ProductVO">
+		select id, image from (select * from product) p
+	</select>
+	
+	<insert id="insert">
+		insert into product (id, title, content, image, price)
+		values (#{id}, #{title}, #{content}, #{image}, #{price})
+	</insert>
+	
+	<insert id="attachInsert">
+		insert into p_imageList(p_no, images, p_images) values(#{p_no},#{images},#{images})
+	</insert>
+	
+	<select id="P_noRead" resultType="int">
+		select p_no from product where id=#{id} and title=#{title} and content=#{content}
+		and image=#{image} and price=#{price}
+	</select>
+	
+	<select id="read" resultType="com.example.domain.ProductVO">
+		select p.*, u.*, p.id p_id, u.id u_id from product p, users u where u.id=p.id and p_no=#{p_no}
+	</select>
+	
+	<select id="readimage" resultType="com.example.domain.ProductVO">
+		select * from p_imagelist where p_no=#{p_no} limit 0,5
+	</select>
+	
+	<select id="p_image" resultType="com.example.domain.ProductVO">
+		select * from p_imagelist where p_no=#{p_no}
+	</select>
+	
+	<update id="updateViewCnt">
+		update product set view = view+1 where id=#{id}
+	</update>
+</mapper>
