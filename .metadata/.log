@@ -1,0 +1,163 @@
+!SESSION 2020-08-03 09:20:15.730 -----------------------------------------------
+eclipse.buildId=4.15.0.I20200305-0155
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.glassfish.jersey.ext.entityfiltering 4 0 2020-08-03 09:20:17.112
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.glassfish.jersey.ext.entityfiltering [1061]
+  Unresolved requirement: Import-Package: javax.xml.bind; version="[2.3.0,3.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:462)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1844)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1837)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1778)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1742)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1664)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.springframework.ide.eclipse.boot.dash.cf 4 0 2020-08-03 09:20:17.114
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.springframework.ide.eclipse.boot.dash.cf [1096]
+  Unresolved requirement: Require-Bundle: org.springframework.ide.eclipse.boot.wizard
+    -> Bundle-SymbolicName: org.springframework.ide.eclipse.boot.wizard; bundle-version="3.9.13.202006180736-RELEASE"; singleton:="true"
+       org.springframework.ide.eclipse.boot.wizard [1105]
+         Unresolved requirement: Import-Package: org.glassfish.jersey.jackson; version="2.30.0"
+           -> Export-Package: org.glassfish.jersey.jackson; bundle-symbolic-name="org.glassfish.jersey.media.jersey-media-json-jackson"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.ws.rs.core"
+              org.glassfish.jersey.media.jersey-media-json-jackson [1063]
+                Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering; version="[2.30.0,3.0.0)"
+                  -> Export-Package: org.glassfish.jersey.message.filtering; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.annotation,javax.annotation.security,javax.inject,javax.ws.rs.core,org.glassfish.jersey.message.filtering.spi"
+                     org.glassfish.jersey.ext.entityfiltering [1061]
+                       Unresolved requirement: Import-Package: javax.xml.bind; version="[2.3.0,3.0.0)"
+                Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering.spi; version="[2.30.0,3.0.0)"
+                  -> Export-Package: org.glassfish.jersey.message.filtering.spi; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="org.glassfish.jersey.spi"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:462)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1844)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1837)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1778)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1742)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1664)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.springframework.ide.eclipse.boot.wizard 4 0 2020-08-03 09:20:17.114
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.springframework.ide.eclipse.boot.wizard [1105]
+  Unresolved requirement: Import-Package: org.glassfish.jersey.jackson; version="2.30.0"
+    -> Export-Package: org.glassfish.jersey.jackson; bundle-symbolic-name="org.glassfish.jersey.media.jersey-media-json-jackson"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.ws.rs.core"
+       org.glassfish.jersey.media.jersey-media-json-jackson [1063]
+         Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering; version="[2.30.0,3.0.0)"
+           -> Export-Package: org.glassfish.jersey.message.filtering; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.annotation,javax.annotation.security,javax.inject,javax.ws.rs.core,org.glassfish.jersey.message.filtering.spi"
+              org.glassfish.jersey.ext.entityfiltering [1061]
+                Unresolved requirement: Import-Package: javax.xml.bind; version="[2.3.0,3.0.0)"
+         Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering.spi; version="[2.30.0,3.0.0)"
+           -> Export-Package: org.glassfish.jersey.message.filtering.spi; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="org.glassfish.jersey.spi"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:462)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1844)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1837)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1778)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1742)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1664)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.springframework.ide.eclipse.buildship20 4 0 2020-08-03 09:20:17.114
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.springframework.ide.eclipse.buildship20 [1106]
+  Unresolved requirement: Require-Bundle: org.eclipse.buildship.core; bundle-version="[2.0.0,3.0.0)"; resolution:="optional"
+  Unresolved requirement: Require-Bundle: com.gradleware.tooling.model; resolution:="optional"
+  Unresolved requirement: Require-Bundle: org.springframework.ide.eclipse.boot.wizard
+    -> Bundle-SymbolicName: org.springframework.ide.eclipse.boot.wizard; bundle-version="3.9.13.202006180736-RELEASE"; singleton:="true"
+       org.springframework.ide.eclipse.boot.wizard [1105]
+         Unresolved requirement: Import-Package: org.glassfish.jersey.jackson; version="2.30.0"
+           -> Export-Package: org.glassfish.jersey.jackson; bundle-symbolic-name="org.glassfish.jersey.media.jersey-media-json-jackson"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.ws.rs.core"
+              org.glassfish.jersey.media.jersey-media-json-jackson [1063]
+                Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering; version="[2.30.0,3.0.0)"
+                  -> Export-Package: org.glassfish.jersey.message.filtering; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.annotation,javax.annotation.security,javax.inject,javax.ws.rs.core,org.glassfish.jersey.message.filtering.spi"
+                     org.glassfish.jersey.ext.entityfiltering [1061]
+                       Unresolved requirement: Import-Package: javax.xml.bind; version="[2.3.0,3.0.0)"
+                Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering.spi; version="[2.30.0,3.0.0)"
+                  -> Export-Package: org.glassfish.jersey.message.filtering.spi; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="org.glassfish.jersey.spi"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:462)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1844)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1837)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1778)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1742)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1664)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.springframework.ide.eclipse.buildship30 4 0 2020-08-03 09:20:17.115
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.springframework.ide.eclipse.buildship30 [1107]
+  Unresolved requirement: Require-Bundle: org.springframework.ide.eclipse.boot.wizard
+    -> Bundle-SymbolicName: org.springframework.ide.eclipse.boot.wizard; bundle-version="3.9.13.202006180736-RELEASE"; singleton:="true"
+       org.springframework.ide.eclipse.boot.wizard [1105]
+         Unresolved requirement: Import-Package: org.glassfish.jersey.jackson; version="2.30.0"
+           -> Export-Package: org.glassfish.jersey.jackson; bundle-symbolic-name="org.glassfish.jersey.media.jersey-media-json-jackson"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.ws.rs.core"
+              org.glassfish.jersey.media.jersey-media-json-jackson [1063]
+                Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering; version="[2.30.0,3.0.0)"
+                  -> Export-Package: org.glassfish.jersey.message.filtering; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="javax.annotation,javax.annotation.security,javax.inject,javax.ws.rs.core,org.glassfish.jersey.message.filtering.spi"
+                     org.glassfish.jersey.ext.entityfiltering [1061]
+                       Unresolved requirement: Import-Package: javax.xml.bind; version="[2.3.0,3.0.0)"
+                Unresolved requirement: Import-Package: org.glassfish.jersey.message.filtering.spi; version="[2.30.0,3.0.0)"
+                  -> Export-Package: org.glassfish.jersey.message.filtering.spi; bundle-symbolic-name="org.glassfish.jersey.ext.entityfiltering"; bundle-version="2.30.1.v20200513-1859"; version="2.30.1"; uses:="org.glassfish.jersey.spi"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:462)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1844)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1837)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1778)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1742)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1664)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.jface 2 0 2020-08-03 09:20:19.444
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-08-03 09:20:19.445
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@42fc744,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3db145f7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-08-03 09:20:24.054
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
