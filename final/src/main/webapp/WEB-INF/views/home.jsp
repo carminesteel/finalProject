@@ -44,7 +44,7 @@ body {
 #keyword {
 	text-align: center;
 	margin-top: 50px;
-	font-size: 22px
+	font-size: 20px
 }
 
 .more {
@@ -159,13 +159,14 @@ li {
 	height: 710px;
 }
 
-.imgDiv{
-	text-align:center;
+ .imgDiv{
 	
-}
+	margin-left:0;
+} 
 
 .imgContainer{
-	width:360px;
+	margin-left:15px;
+	width:350px;
 	height:300px;
 	display:inline-block;
 	border-radius: 5px 5px 5px 5px;
@@ -174,11 +175,13 @@ li {
 
 .imgInfo{
 	width:100%;
+	text-align:left;
+	padding-top:3px;
 }
 
 
 .imgContainer img{
-	width:360px;
+	width:350px;
 	height:300px;
 	object-fit:cover;
 	object-position:center;
@@ -252,11 +255,11 @@ li {
    <div id=explore>
       <div id=exTitle>Explore</div>
       <div id=exContent>최고의 작품들을 소개합니다.</div>
-      <div id=keyword>최신순&emsp;&nbsp;인기순&emsp;&nbsp;조회순</div>
+      <div id=keyword>최신순&emsp;&emsp;&nbsp;인기순&emsp;&emsp;&nbsp;조회순</div>
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
-   <div class="imgDiv" style="border:1px solid black;width:1855px;height:666px;margin:auto;">
-		<c:forEach items="${list}" var="list" begin="0" end="9">
+   <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
+		<c:forEach items="${list}" var="list" begin="1" end="10">
 			<div class="imgContainer">
 				<img src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
@@ -264,7 +267,12 @@ li {
 				<span class="hoverInfo2">${list.content}</span>
 				</div>
 				<div class="imgInfo">
-					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> ${list.nickname}</span>	<span>${list.view}</span>	<span>${list.b_like}</span>
+					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
+								  ${list.nickname}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${list.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${list.b_like}</span>
 				</div>
 				<br>
 			</div>
@@ -277,44 +285,54 @@ li {
       <div id=gContent>현재 제일 잘 나가는 굿즈에요.</div>
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
-   <table border=1 style=border-collapse:collapse;height:685px;width:1820px;margin:auto;>
-      <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      </tr>
-      <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      </tr>
-   </table>
+   <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
+		<c:forEach items="${plist}" var="plist" begin="1" end="10">
+			<div class="imgContainer">
+				<img src="display?fileName=${plist.image}"/>
+				<div class="hoverInfo">
+				<span class="hoverInfo1">${plist.title}</span><br><br><br>
+				<span class="hoverInfo2">${plist.price}원</span>
+				</div>
+				<div class="imgInfo">
+					<span><%-- <img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${plist.u_image}"/> --%> 
+								  ${plist.id}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${plist.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${plist.p_like}</span>
+				</div>
+				<br>
+			</div>
+			
+		</c:forEach>
+	</div>
    
    <div id=feed>
       <div id=fTitle>Feed</div>
       <div id=fContent>팔로우한 작가들의 최신 아트웍이에요.</div>
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
-   <table border=1 style=border-collapse:collapse;height:685px;width:1820px;margin:auto;>
-      <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      </tr>
-      <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      </tr>
-   </table>
+   <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
+		<c:forEach items="${list}" var="list" begin="1" end="10">
+			<div class="imgContainer">
+				<img src="display?fileName=${list.image}"/>
+				<div class="hoverInfo">
+				<span class="hoverInfo1">${list.title}</span><br><br><br>
+				<span class="hoverInfo2">${list.content}</span>
+				</div>
+				<div class="imgInfo">
+					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
+								  ${list.nickname}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${list.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${list.b_like}</span>
+				</div>
+				<br>
+			</div>
+			
+		</c:forEach>
+	</div>
    
    <div id=exhibition>
       <div id=eTitle>Exhibition</div>
