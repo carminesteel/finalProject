@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.BoardMapper">
     <select id="list" resultType="com.example.domain.BoardVO">
-        select * from board
+       select * from board
     </select>
     <select id="read" resultType="com.example.domain.BoardVO">
 		select * from board where b_no=#{b_no}   

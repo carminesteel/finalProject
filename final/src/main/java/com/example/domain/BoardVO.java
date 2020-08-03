@@ -14,7 +14,7 @@ public class BoardVO {
  private int report;
  private Date date;
  private ArrayList<String> images;
- 
+ private int cnt;
 
 public ArrayList<String> getImages() {
    return images;
@@ -76,6 +76,12 @@ public Date getDate() {
 }
 public void setDate(Date date) {
    this.date = date;
+}
+public int getCnt() {
+	return cnt;
+}
+public void setCnt(int cnt) {
+	this.cnt = cnt;
 }
 
 

@@ -9,6 +9,7 @@ public class B_replyVO extends BoardVO{
  private String replyer;
  private String content;
  private Date date;
+ private int replyCount;
 public int getR_no() {
 	return r_no;
 }
@@ -39,6 +40,12 @@ public String toString() {
 			+ date + ", getR_no()=" + getR_no() + ", getB_no()=" + getB_no() + ", getReplyer()=" + getReplyer()
 			+ ", getContent()=" + getContent() + ", getDate()=" + getDate() + ", getClass()=" + getClass()
 			+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+}
+public int getReplyCount() {
+	return replyCount;
+}
+public void setReplyCount(int replyCount) {
+	this.replyCount = replyCount;
 }
 
 }

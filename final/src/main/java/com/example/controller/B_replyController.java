@@ -25,9 +25,10 @@ public void list() {
 
 @RequestMapping(value="read", method=RequestMethod.POST)
 @ResponseBody
-	public ArrayList<B_replyVO> read(int b_no) {
+	public ArrayList<B_replyVO> read(int b_no,Model model) {
 		ArrayList<B_replyVO> array = new ArrayList<B_replyVO>();
 		array.addAll(mapper.rlist(b_no));
+		model.addAttribute("replyCount",mapper.replyCount(b_no));
 		System.out.println(array.toString());
 		return array;
 }

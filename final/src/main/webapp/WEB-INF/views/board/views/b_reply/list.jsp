@@ -14,7 +14,6 @@
 </style>	
 </head>
 <body>
-	<h1>댓글수${replyCount}</h1>
 	<form action="/b_reply/insert" method="post" name="rfrm">
 		<input type="hidden" name="b_no" value="${vo.b_no}">
 		<input type="hidden" name="replyer" value="${id}">
@@ -39,13 +38,10 @@
 		<tr class="row">
 			<td class="r_no" >{{r_no}}</td>
 			<td class="replyer" >{{replyer}}</td>	
-			<td> <input type="text" class="content" value={{content}}></td>
+			<td class="content" >{{content}}</td>
 			<td>{{date}}</td>
 			<td class="b_no">{{b_no}}</td>
-			<td>
-				<input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}}">
-		
-			</td>		
+			<td><input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}}"></td>		
 		</tr>
 		{{/each}}
 	</script>
@@ -65,6 +61,7 @@ Handlebars.registerHelper("printStyle",function(replyer){
 	}
 	return src;
 });
+
 R_list();
 
 function R_list(){
@@ -83,7 +80,11 @@ $(rfrm).submit(function(e){
 	e.preventDefault();
 	if($(rfrm.content).val()==""){
 		alert("내용을 입력해주세요");
-	}else{
+	}else if(id==""){
+		alert("로그인 화면으로 이동합니다.");
+		location.href="/login/login";
+	}
+	else{
 		if(!confirm("입력하시겠습니까?")) return;
 		var b_no=$(rfrm.b_no).val();
 		var replyer=$(rfrm.replyer).val();
@@ -99,7 +100,6 @@ $(rfrm).submit(function(e){
 		})
 	 }
 });
-
 
 $("#tbl1").on("click", ".row .rbtnDelete", function(){
 	var r_no=$(this).parent().parent().find(".r_no").html();
