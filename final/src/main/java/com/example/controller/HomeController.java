@@ -43,7 +43,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
+		System.out.println("!");
 		model.addAttribute("elist",emapper.list());
 		model.addAttribute("list",bMapper.list());
 		return "home";
