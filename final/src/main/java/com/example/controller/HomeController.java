@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.mapper.BoardMapper;
 import com.example.mapper.ExhibitionMapper;
 
 /**
@@ -28,65 +29,61 @@ import com.example.mapper.ExhibitionMapper;
  */
 @Controller
 public class HomeController {
-	
-	@Autowired
-	ExhibitionMapper emapper;
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("list",emapper.test());
-
-		return "home";
-	}
-	
-	@RequestMapping("/exRead")
-	public void exRead() {
-		
-	}
-	
-	@RequestMapping("/exList")
-	public void exList() {
-		
-	}
-	
-	@RequestMapping("/menu")
-	public void menu() {
-		
-	}
-	
-	@RequestMapping("/footer")
-	public void footer() {
-		
-	}
-	
-	@RequestMapping("/home")
-	public void home(Model model) {	
-
-	}
-	
-	   /*�씠誘몄��뙆�씪 釉뚮씪�슦���뿉 異쒕젰*/ 
-    @Resource(name="uploadPath") /*�뙆�씪 �뾽濡쒕뱶瑜� �쐞�빐 �븘�슂*/
+   
+   @Autowired
+   ExhibitionMapper emapper;
+   
+   @Autowired
+   BoardMapper bMapper;
+   
+   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+   
+   /**
+    * Simply selects the home view to render by returning its name.
+    */
+   @RequestMapping(value = "/", method = RequestMethod.GET)
+   public String home(Locale locale, Model model) {
+      
+      model.addAttribute("list",bMapper.list());
+      return "home";
+   }
+   
+   @RequestMapping("/exRead")
+   public void exRead() {
+      
+   }
+   
+   @RequestMapping("/exList")
+   public void exList() {
+      
+   }
+   
+   @RequestMapping("/menu")
+   public void menu() {
+      
+   }
+   
+   @RequestMapping("/footer")
+   public void footer() {
+      
+   }
+   
+   @RequestMapping("/home")
+   public void home(Model model) {   
+      model.addAttribute("list",bMapper.list());
+      System.out.println(bMapper.list());
+   }
+   
+      /* 씠誘몄  뙆 씪 釉뚮씪 슦   뿉 異쒕젰*/ 
+    @Resource(name="uploadPath") /* 뙆 씪  뾽濡쒕뱶瑜   쐞 빐  븘 슂*/
      private String path;
 
- // �씠誘몄��뙆�씪 釉뚮씪�슦���뿉 異쒕젰
+ //  씠誘몄  뙆 씪 釉뚮씪 슦   뿉 異쒕젰
     @RequestMapping("/display")
     @ResponseBody
     public ResponseEntity<byte[]> display(String fileName) throws Exception {
        ResponseEntity<byte[]> result = null;
-       // display fileName�씠 �엳�뒗 寃쎌슦
+       // display fileName 씠  엳 뒗 寃쎌슦
        if (!fileName.equals("")) {
           File file = new File(path + File.separator + fileName);
           HttpHeaders header = new HttpHeaders();

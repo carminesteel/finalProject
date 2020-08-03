@@ -2,73 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.BoardMapper">
     <select id="list" resultType="com.example.domain.BoardVO">
-       select * from board
+        select b.*, u.nickname, u.u_image from board b, users u where b.id=u.id;
     </select>
     <select id="read" resultType="com.example.domain.BoardVO">
-		select * from board where b_no=#{b_no}   
+      select * from board where b_no=#{b_no}   
     </select>
     <insert id="insert">
-     	insert into board(id,title,content,image,date) 
-     	values(#{id},#{title},#{content},#{image},now())
+        insert into board(id,title,content,image,date) 
+        values(#{id},#{title},#{content},#{image},now())
     </insert>
     <delete id="delete">
-    	delete from board where b_no=#{b_no}
+       delete from board where b_no=#{b_no}
     </delete>
     <update id="update">
-    	update board set title=#{title},content=#{content},image=#{image} where b_no=#{b_no}
+       update board set title=#{title},content=#{content},image=#{image} where b_no=#{b_no}
     </update>
     
     <select id="BnoRead" resultType="int">
-		select * from board where id=#{id} and title=#{title} and content=#{content}
-		and image=#{image}
+      select * from board where id=#{id} and title=#{title} and content=#{content}
+      and image=#{image}
     </select>
-	<insert id="addB_imagelist">
-		insert into b_imagelist(images,b_no) values(#{images},#{b_no})
-	</insert>
-	<select id="getB_imagelist" resultType="string">
-		select images from b_imagelist where b_no=#{b_no} 
-	</select>
-	<delete id="delB_imagelist">
-		delete from b_imagelist where b_no=#{b_no}
-	</delete>
-	
-	
-	<!-- like 부문 -->
-	<select id="likeTableChk" resultType="int">
-		select count(*) from b_like where id=#{id} and b_no=#{b_no}
-	</select>
-	
-	<insert id="likeinsert">
-		insert into b_like values(#{id},#{b_no})
-	</insert>
-	
-	<delete id="likedelete">
-		delete from b_like where id=#{id} and b_no=#{b_no}
-	</delete>
-	
-	<select id="likeTableCnt" resultType="int">
-		select count(*) from b_like where b_no=#{b_no}
-	</select>
-	
-	<update id="B_likeUpdate">
-		update board set b_like=#{like} where b_no=#{b_no} 
-	</update>
-	
-	<!-- report 부문 -->
-	<select id="reportCnt" resultType="int">
-		select count(*) from report where id=#{id} and b_no=#{b_no}
-	</select>
-	<insert id="reportInsert">
-		insert into report(id,content,date,b_no) values(#{id},#{content},now(),#{b_no})
-	</insert>
-	<select id="BoardReportCnt" resultType="int">
-		select count(*) from report where b_no=#{b_no}
-	</select>
-	<update id="updateReport">
-		update board set report=#{report} where b_no=#{b_no}
-	</update>
-	<!-- view 부문 -->
-	<update id="updateView">
-		update board set view = view +1 where b_no=#{b_no}
-	</update>
+   <insert id="addB_imagelist">
+      insert into b_imagelist(images,b_no) values(#{images},#{b_no})
+   </insert>
+   <select id="getB_imagelist" resultType="string">
+      select images from b_imagelist where b_no=#{b_no} 
+   </select>
+   <delete id="delB_imagelist">
+      delete from b_imagelist where b_no=#{b_no}
+   </delete>
+   
+   
+   <!-- like 부문 -->
+   <select id="likeTableChk" resultType="int">
+      select count(*) from b_like where id=#{id} and b_no=#{b_no}
+   </select>
+   
+   <insert id="likeinsert">
+      insert into b_like values(#{id},#{b_no})
+   </insert>
+   
+   <delete id="likedelete">
+      delete from b_like where id=#{id} and b_no=#{b_no}
+   </delete>
+   
+   <select id="likeTableCnt" resultType="int">
+      select count(*) from b_like where b_no=#{b_no}
+   </select>
+   
+   <update id="B_likeUpdate">
+      update board set b_like=#{like} where b_no=#{b_no} 
+   </update>
+   
+   <!-- report 부문 -->
+   <select id="reportCnt" resultType="int">
+      select count(*) from report where id=#{id} and b_no=#{b_no}
+   </select>
+   <insert id="reportInsert">
+      insert into report(id,content,date,b_no) values(#{id},#{content},now(),#{b_no})
+   </insert>
+   <select id="BoardReportCnt" resultType="int">
+      select count(*) from report where b_no=#{b_no}
+   </select>
+   <update id="updateReport">
+      update board set report=#{report} where b_no=#{b_no}
+   </update>
+   <!-- view 부문 -->
+   <update id="updateView">
+      update board set view = view +1 where b_no=#{b_no}
+   </update>
 </mapper>
