@@ -17,107 +17,90 @@
           color: white;
           cursor: pointer;
       }
-    #exBody {
-	background-color: #e9ecef;
-	z-index: 1;
-	}
-	
-	#exCenter {
-		background-color: white;
-		width: 1276px;
-		margin: auto;
-		z-index: 2;
-	}  
 	</style>
 </head>
 <body>
 	<jsp:include page="../menu.jsp"/>
-	<div id=exBody>
-		<div id=exCenter>
-			<h1>[전시작품]</h1>
-			<form action="delete" name="frm" method="post">
-				<input type="hidden" name="e_no" value="${vo.e_no}">
-				<input type="hidden" value="${id}" name="id">
-				<table id="tbl2" style="width:1130px;margin:auto;border-collapse:collapse;">
-					<tr>
-						<td class="image"><img src="/display?fileName=${vo.image}" width=300 height=500></td>	
-						<td width=500>
-							<h3>${vo.title}</h3>
-							<br>
-							<br>
-							<br>
-							<h4>기간&nbsp;&nbsp;${vo.date}</h4>
-							<h4>연락처&nbsp;&nbsp;${vo.tel}</h4>
-							<h4>장소&nbsp;&nbsp;${vo.addr_detail}&nbsp;&nbsp;<a href="">전시장소</a></h4>							
-							<br><br><br><br><br><br>
-							<div style="float:right;"><input type="button" value="목록으로" onClick="location.href='list'"></div>
-						</td>		
-					</tr>
-				</table>
-				<c:if test="${id==vo.id}">
-					<div id="Allbtn" style="float:right;margin-right:6%; margin-bottom:10px;">
-						<input type="button" value="수정" id="eUpdate">
-						<input type="button" value="삭제" id="eDelete">
-						
+	<h1>[전시작품]</h1>
+	<form action="delete" name="frm" method="post">
+		<input type="hidden" name="e_no" value="${vo.e_no}">
+		<input type="hidden" value="${id}" name="id">
+		<table id="tbl2" style="width:1130px;margin:auto;border-collapse:collapse;">
+			<tr>
+				<td class="image"><img src="/display?fileName=${vo.image}" width=300 height=500></td>	
+				<td width=500>
+					<h3>${vo.title}</h3>
+					<br>
+					<br>
+					<br>
+					<h4>기간&nbsp;&nbsp;${vo.date}</h4>
+					<h4>연락처&nbsp;&nbsp;${vo.tel}</h4>
+					<h4>장소&nbsp;&nbsp;${vo.addr_detail}&nbsp;&nbsp;<a href="">전시장소</a></h4>
+				</td>		
+			</tr>
+		</table>
+		<c:if test="${id==vo.id}">
+			<div id="Allbtn">
+				<input type="button" value="수정" id="eUpdate">
+				<input type="button" value="삭제" id="eDelete">
+				<input type="button" value="목록" onClick="location.href='list'">
+			</div>
+		</c:if>
+	</form>
+	<table style="width:1130px;margin:auto;border-collapse:collapse;">
+	   <tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
+	      <td id="infoMenu">상세정보</td>
+	      <td id="MapMenu">장소/전시장 도면</td>
+	      <td id="Menu">리뷰(<span id="re">${re}</span>)</td>
+	   </tr>
+	   <tr>
+	   		<td colspan=3>
+				<div id="info">
+					<h3>상세정보</h3>
+					<div><pre><c:out value="${vo.content}"/></pre></div>
+					<div class="image" width=400>						
+						<c:forEach items="${images}" var="image">
+							<img src="/display?fileName=${image}">
+						</c:forEach>
 					</div>
-				</c:if>
-			</form>
-			<table style="width:1130px;margin:auto;border-collapse:collapse;">
-			   <tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
-			      <td id="infoMenu">상세정보</td>
-			      <td id="MapMenu">장소/전시장 도면</td>
-			      <td id="Menu">리뷰(<span id="re">${re}</span>)</td>
-			   </tr>
-			   <tr>
-			   		<td colspan=3>
-						<div id="info">
-							<h3>상세정보</h3>
-							<div><pre><c:out value="${vo.content}"/></pre></div>
-							<div class="image" width=400>						
-								<c:forEach items="${images}" var="image">
-									<img src="/display?fileName=${image}">
-								</c:forEach>
-							</div>
-						</div>
-						<br>						
-						<div id="mapPage">			
-							<h3>전시장 주소</h3><h5> ${vo.addr},${vo.addr_detail}</h5>
-							<div id="map" style="width: 1100px; margin: auto;"><jsp:include page="map.jsp"/></div>								
-						</div>
-						<div id="reply">
-							<h3>리뷰쓰기</h3><jsp:include page="../e_reply/reply.jsp"/>
-						</div>
-			   		</td>
-			   </tr>
-			</table>
-			<br>
-		</div>
-	</div>		
+				</div>
+				<br>						
+				<div id="map" style="width: 600px; height: 400px; margin: auto;">			
+					<h3>전시회 장소</h3>
+					<jsp:include page="map.jsp"/>
+				</div>
+				<div id="reply">
+					<h3>리뷰쓰기</h3><jsp:include page="../e_reply/reply.jsp"/>
+				</div>
+	   		</td>
+	   </tr>
+	</table>
+	<br>
 	<jsp:include page="../footer.jsp"/>
 </body>
 <script>
 
 	$("#reply").hide();
-	$("#mapPage").hide();
+	$("#map").hide();
 
 	$("#Menu").on("click",function(){
 		$("#reply").show();
 		$("#info").hide();
-		$("#mapPage").hide();
+		$("#map").hide();
 	});
 	
 	$("#MapMenu").on("click",function(){
-		$("#mapPage").show();
+		$("#map").show();
 		$("#info").hide();
 		$("#reply").hide();
 	});
 	$("#infoMenu").on("click",function(){
 		$("#info").show();
 		$("#reply").hide();
-		$("#mapPage").hide();
+		$("#map").hide();
 	});
 	$("#tbl2").on("click","a",function(e){
-		$("#mapPage").show();
+		$("#map").show();
 		$("#info").hide();
 		$("#reply").hide();
 		e.preventDefault();

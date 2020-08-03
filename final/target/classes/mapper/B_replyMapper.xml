@@ -9,11 +9,10 @@
     	insert into b_reply(b_no, content, replyer ,date)
     	values(#{b_no},#{content},#{replyer},now());
     </insert>
-    <select id="replyCount" resultType="int">
+    <select id="total" resultType="int">
     	select count(*) from b_reply where b_no=#{b_no}
     </select>
 	<delete id="delete">
 		delete from b_reply where r_no=#{r_no}
 	</delete>
-	
 </mapper>

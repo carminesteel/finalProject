@@ -13,24 +13,11 @@ public class BoardVO {
  private int b_like;
  private int report;
  private Date date;
- private String nickname;
- private String u_image;
  private ArrayList<String> images;
+ 
 
 public ArrayList<String> getImages() {
    return images;
-}
-public String getNickname() {
-   return nickname;
-}
-public void setNickname(String nickname) {
-   this.nickname = nickname;
-}
-public String getU_image() {
-   return u_image;
-}
-public void setU_image(String u_image) {
-   this.u_image = u_image;
 }
 public void setImages(ArrayList<String> images) {
    this.images = images;
@@ -73,10 +60,10 @@ public void setView(int view) {
 }
 
 public int getB_like() {
-   return b_like;
+	return b_like;
 }
 public void setB_like(int b_like) {
-   this.b_like = b_like;
+	this.b_like = b_like;
 }
 public int getReport() {
    return report;

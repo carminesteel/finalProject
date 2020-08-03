@@ -15,84 +15,67 @@
 			margin: auto;
 			padding: 50px;
 		}
-    #exBody {
-	background-color: #e9ecef;
-	z-index: 1;
-	}
-	
-	#exCenter {
-		background-color: white;
-		width: 1276px;
-		margin: auto;
-		z-index: 2;
-	} 		
 	</style>
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;">
 	<jsp:include page="../menu.jsp" />
-	<div id=exBody>
-		<div id=exCenter>
-			<form name="frm" action="update" method="post"	enctype="multipart/form-data">
-				<input type="hidden" name="e_no" value="${vo.e_no}">
-				<input type="hidden" value="${id}" name="id">
-				<table id="tbl2" style="width:1130px;margin:auto;border-collapse:collapse;">
-					<tr>
-						<td class="image">			
-							<c:if test="${vo.image!=null && vo.image!=''}">
-								<input type="file" name="file" style="display:none;">
-								<img src="/display?fileName=${vo.image}" width=300 id="image" style=float:left;>
-							</c:if>
-							<c:if test="${vo.image==null || vo.image==''}">
-								<input type="file" name="file">
-								<img id="image" src="http://placehold.it/150x120" width=300 style=float:left;>
-							</c:if>
-							<input type="hidden" value="${vo.image}" name="image" >
-						</td>
-						<td width=500>
-							<h3>
-								Title&nbsp;&nbsp;<input type="text" value="${vo.title}" name="title">
-							</h3> <br> <br> <br>
-							<h4>
-								기간&nbsp;&nbsp;<input type="date" name="date" value="${vo.date}">~<input type="date" name="date2" value="${vo.date}">
-							</h4>
-							<h4>
-								연락처&nbsp;&nbsp;<input type="text" value="${vo.tel}" name="tel">
-							</h4>
-							<h4>전시장소</h4>
-							<input type="button" class="btn-primary box" onclick="openAddress();" value="우편번호 찾기">
-							<input type="hidden" name="post" class="box" id="users_zipCode" placeholder="우편번호" required>
-							<input type="text" name="addr" class="box" value="${vo.addr}"
-								id="users_address" placeholder="주소" required>					
-							<h4>
-								상세주소&nbsp;&nbsp;<input type="text" value="${vo.addr_detail}"
-									name="addr_detail">
-							</h4>
-						</td>
-					</tr>
-				</table>
-				<br>
-				<div style="float:right;margin-right:6%; margin-bottom:10px;">
-					<input type="submit" value="수정" >		
-				</div>
+	<form name="frm" action="update" method="post"	enctype="multipart/form-data">
+		<input type="hidden" name="e_no" value="${vo.e_no}">
+		<input type="hidden" value="${id}" name="id">
+		<table id="tbl2" border=1 width=1000>
+			<tr>
+				<td class="image">			
+					<c:if test="${vo.image!=null && vo.image!=''}">
+						<input type="file" name="file" style="display:none;">
+						<img src="/display?fileName=${vo.image}" width=300 id="image" style=float:left;>
+					</c:if>
+					<c:if test="${vo.image==null || vo.image==''}">
+						<input type="file" name="file">
+						<img id="image" src="http://placehold.it/150x120" width=300 style=float:left;>
+					</c:if>
+					<input type="hidden" value="${vo.image}" name="image" >
+				</td>
+				<td width=500>
+					<h3>
+						Title<input type="text" value="${vo.title}" name="title">
+					</h3> <br> <br> <br>
+					<h4>
+						기간&nbsp;&nbsp;<input type="date" name="date" value="${vo.date}">~<input type="date" name="date2" value="${vo.date}">
+					</h4>
+					<h4>
+						연락처&nbsp;&nbsp;<input type="text" value="${vo.tel}" name="tel">
+					</h4>
+					<h4>전시장소</h4>
+					<input type="button" class="btn-primary box" onclick="openAddress();" value="우편번호 찾기">
+					<input type="hidden" name="post" class="box" id="users_zipCode" placeholder="우편번호" required>
+					<input type="text" name="addr" class="box" value="${vo.addr}"
+						id="users_address" placeholder="주소" required>					
+					<h4>
+						상세주소&nbsp;&nbsp;<input type="text" value="${vo.addr_detail}"
+							name="addr_detail">
+					</h4>
+				</td>
+			</tr>
+		</table>		
+		<div>
+			<div id="info">
+				<h3>상세정보</h3>
 				<div>
-					<div id="info" style="width:1130px;margin:auto;border-collapse:collapse;">
-						<h3>상세정보</h3>
-						<div>
-							<textarea rows="20" cols="100" name="content">${vo.content}</textarea>
-						</div>
-						<div class="images" width=400>
-							<input type="file" name="files" accept="image/*" multiple style="display:none;">									
-							<div id="listFile">
-								<c:forEach items="${images}" var="image">
-									<img id="images" src="/display?fileName=${image}">						
-								</c:forEach>
-							</div>
-						</div>
+					<textarea rows="20" cols="100" name="content">${vo.content}</textarea>
+				</div>
+				<div class="images" width=400>
+					<input type="file" name="files" accept="image/*" multiple style="display:none;">									
+					<div id="listFile">
+						<c:forEach items="${images}" var="image">
+							<img id="images" src="/display?fileName=${image}">						
+						</c:forEach>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
+		<input type="submit" value="수정">
+	</form>
+
 	<jsp:include page="../footer.jsp" />
 </body>
 <script>

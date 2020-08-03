@@ -1,343 +1,220 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>[상품목록]</title>
-<style>
-html {
-   font-family: Noto Sans KR
-}
-
-#exBody {
-   background-color: #e9ecef;
-   z-index: 1;
-}
-
-#exCenter {
-   background-color: white;
-   width: 1276px;
-   margin: auto;
-   z-index: 2;
-}
-
-.creatertab .proimage td {
-   display: none;
-}
-
-.creatertab .proimage td:nth-child(1), .creatertab .proimage td:nth-child(2),
-   .creatertab .proimage td:nth-child(3) {
-   display: inline-block
-}
-
-#productMenu {
-   width: 100%;
-   font-size: 18px;
-   margin: auto;
-   height: 60px;
-   padding-top: 0px];
-   padding-bottom: 0px;
-   padding-left: 20px;
-   background: white;
-   border-radius: 5px 5px 5px 5px;
-}
-
-.menuB {
-   text-decoration: none;
-   color: black;
-}
-
-.menuB:hover {
-   cursor: pointer;
-   border-bottom: 2px solid black
-}
-
-.menuS {
-   cursor: pointer;
-   border-bottom: 2px solid black
-}
-
-body {
-   width: 1000px;;
-}
-
-#besttab, #artgoodstab {
-   width: 1375px;
-   margin: auto;
-   text-align: center;
-   overflow: hidden;
-}
-
-#creater {
-   width: 1275px;
-   margin: auto;
-   overflow: hidden;
-   padding-top: 40px;
-   padding-bottom: 40px;
-}
-
-.creatertab {
-   background: white;
-   width: 616px;
-   height: 360px;
-   float: left;
-   margin: auto;
-   float: left;
-}
-
-.creatertab:hover {
-   box-shadow: 1px 1px 8px #98a4b1;
-
-   transition: box-shadow 500ms;
-}
-
-
-.creatertab .creater td:hover{
-   cursor:pointer;
-   
-}
-
-.box {
-   margin-left:10px;
-   margin-right:10px;
-   background: white;
-   width: 255px;
-   height: 350px;
-   float: left;
-   text-align: left;
-   margin-top: 40px;
-   border-radius:10px 10px 0px 0px
-}
-
-.box:hover {
-   cursor: pointer;
-   
-}
-
-.image {
-   display: block;
-   overflow: hidden;
-   height: 255px;
-   width: 255px;
-   border-radius:10px 10px 0px 0px
-}
-
-.image img {
-   vertical-align: middle;
-   display: block;
-   max-width: 100%;
-   min-height: 255px;
-   object-fit: cover
-}
-
-.proImg {
-   max-width: 100%;
-   object-fit: cover;
-}
-
-/* 메뉴에 언더바 따라오게 */
-nav {
-   position: relative;
-   display: flex;
-   height: 55px;
-   padding-left: 790px;
-}
-
-nav a {
-   display: block;
-   padding: .95em 0;
-   color: #333;
-   text-decoration: none;
-   text-align: center;
-}
-
-#best, #artgoods {
-   padding-bottom: 50px;
-}
-
-.price{font-size:24px;float:right;padding-bottom:0px;}
-.title{font-size:18px;font-weight:700;margin-top:5px;}
-.title, .price, .content{padding-left:10px;padding-right:10px;}
-
-</style>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<meta charset="UTF-8">
+	<title>[상품목록]</title>
+	<style>
+		.creatertab .proimage td{display:none;}
+	 	.creatertab .proimage td:nth-child(1), .creatertab .proimage td:nth-child(2), .creatertab .proimage td:nth-child(3){display:inline-block}
+		#productMenu{width:1780px;font-family:YDIYGO330;font-size:24px;margin:auto;vertical-align:middle}
+		.menuB{text-decoration:none;color:black;}
+		.menuB:hover{cursor:pointer;}
+		body {width:1000px;}
+		#besttab, #artgoodstab{width:1000px;margin:auto;overflow:hidden;}
+		#creater{width:1100px;margin:auto;overflow:hidden;}
+		.creatertab{width:500px;float:left;margin:auto;}
+		.box{width:200px;float:left;text-align:center; margin:auto;}
+		.image img{whitd:150px; height:120px; margin:auto;}
+	</style>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;">
-   <jsp:include page="../menu.jsp"></jsp:include>
+	<jsp:include page="../menu.jsp"></jsp:include>
+	
+	<table id=productMenu height=116px>
+		<tr>
+			<td>
+				<a class=menuB id="bestmenu">BEST</a>&emsp;&emsp;&emsp;
+				<a class=menuB id="artgoodsmenu">아트굿즈</a>&emsp;&emsp;&emsp;
+				<a class=menuB id="purchasemenu">판매자</a>
+			</td>
+		</tr>
+	</table>
+	
+	<div id="best">
+		<div id="besttab" ></div>
+		<script id="besttemp" type="text/x-handlebars-template">
+			{{#each .}}
+				<div class="box">
+					<input type="hidden" value="{{p_no}}" class="p_no">
+					<div class="image"><img src="/display?fileName={{image}}"/></div>
+					<div class="title">{{title}}</div>
+					<div class="price">{{price}}원</div>
+					<div class="content">{{content}}</div>
+					<div class="id" style="display:none">{{id}}</div>
+				</div>
+			{{/each}}
+		</script>
+	</div>
+	
+	<div id="artgoods" style="display:none">
+		<div id="artgoodstab"></div>
+		<script id="artgoodstemp" type="text/x-handlebars-template">
+			{{#each .}}
+				<div class="box">
+					<input type="hidden" value="{{p_no}}" class="p_no">
+					<div class="image"><img src="/display?fileName={{image}}"/></div>
+					<div class="title">{{title}}</div>
+					<div class="price">{{price}}원</div>
+					<div class="content">{{content}}</div>
+					<div class="id" style="display:none">{{id}}</div>
+				</div>
+			{{/each}}
+		</script>
+	</div>
+	
+	<div id="creater">
+		<c:forEach items="${users}" var="creater">
+			<table class="creatertab" style="border:1px solid black;margin:20px; padding:10px;" height=230>
+					<tr class="creater">
+						<td width=149 colspan=3 style="padding:10px;">
+							<img src="/display?fileName=${creater.u_image}" style="float:left; border-radius:50%;" width=70 height=70/>
+							<span style="text-align:left;width:200px;float:left;padding-left:10px;">
+								<p style="font-weight:bold; font-size:20px; margin:0; margin-top:15px;">${creater.id}</p>
+								<p style="font-size:15px; margin:0; margin-top:10px;" >${creater.introduce}</p>
+							</span>
+							<span style="float:right; background:#e9e9e9; position:relative; top:35px; padding:5px; border-radius:15px 15px 15px 15px; font-size:13px; width:80px; height:18px; text-align:center;">상품개수</span>
+						</td>
+					</tr>
+					<tr class="proimage">
+						<c:forEach items="${proimage}" var="image">
+						<c:if test="${creater.id==image.id}">
+							<td width=150 height=200 style="margin:2px;"><img src="/display?fileName=${image.image}" width=100% height=100%></td>
+						</c:if>
+						</c:forEach>
+					</tr>
+			</table>
+		</c:forEach>
+	</div>
+	
+<%-- 	<div id="creater">
 
-   <table id=productMenu>
-      <tr>
-         <td><nav>
-               <a class=menuS id="bestmenu">Best</a>&emsp;&emsp;&emsp; <a
-                  class=menuB id="artgoodsmenu">Gallery</a>&emsp;&emsp;&emsp; <a
-                  class=menuB id="purchasemenu">Artist</a>
-               <div class="nav-underline"></div>
-            </nav></td>
-      </tr>
-   </table>
-
-   <div id=exBody style="padding-top:0px;">
-      
-
-         <div id="best">
-            <div id="besttab"></div>
-            <script id="besttemp" type="text/x-handlebars-template">
-         {{#each .}}
-            <div class="box">
-               <input type="hidden" value="{{p_no}}" class="p_no">
-               <div class="image"><img src="/display?fileName={{image}}"/></div>
-               <div class="title">{{title}}</div>               
-               <div class="content">{{content}}</div>
-               <div class="price">{{price}}원</div>
-               <div class="id" style="display:none">{{id}}</div>
-            </div>
-         {{/each}}
-      </script>
-         </div>
-
-         <div id="artgoods" style="display: none">
-            <div id="artgoodstab"></div>
-            <script id="artgoodstemp" type="text/x-handlebars-template">
-         {{#each .}}
-            <div class="box">
-               <input type="hidden" value="{{p_no}}" class="p_no">
-               <div class="image"><img src="/display?fileName={{image}}"/></div>
-               <div class="title">{{title}}</div>
-               <div class="content">{{content}}</div>
-               <div class="price">{{price}}원</div>
-               <div class="id" style="display:none">{{id}}</div>
-            </div>
-         {{/each}}
-      </script>
-         </div>
-
-         <div id="creater">
-            <c:forEach items="${users}" var="creater">
-               <table class="creatertab" style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
-                  <tr class="creater">
-                     <td id="creater" width=149 colspan=3 style="padding-bottom: 25px;">
-                        <input type=hidden id="c_id" value="${creater.id}">
-                        <img src="/display?fileName=${creater.u_image}"   style="float: left; border-radius: 50%;" width=75 height=75 />
-                        <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
-                              <p class="createrid" style="font-weight: bold; font-size: 24px; margin: 0;">${creater.id}</p>
-                              <p style="font-size: 15px; margin: 0;">${creater.introduce}</p>
-                        </span>
-						<span id="total" style="float: right; background: #e9e9e9; position: relative;
-							top: 15px; padding: 5px; border-radius: 20px 20px 20px 20px; font-size: 13px;
-							width: 80px; height: 28px; text-align: center;line-height:26px;color:#373e45">
-							상품개수 ${creater.cnt}개
-						</span>
-                     </td>
-                  </tr>
-                  <tr class="proimage">
-                     <c:forEach items="${proimage}" var="image">
-                        <c:if test="${creater.id==image.id}">
-                           <td width=180 height=190 style="margin: 2px;">
-                              <img class=proImg src="/display?fileName=${image.image}" width=100% height=100%>
-                              <span class="creater_no" style="display:none;">${image.p_no}</span>
-                           </td>
-                        </c:if>
-                     </c:forEach>
-                  </tr>
-               </table>
-            </c:forEach>
-         </div>
-      
-   </div>
-   <jsp:include page="../footer.jsp"></jsp:include>
-
+		<div id="creatertab">
+			<c:forEach items="${users}" var="creater">
+				<div class="creater" style="border:1px solid black">
+					<img src="/display?fileName=${creater.u_image}" width=300 height=300/>
+					<div style="float:right">
+						<div class="createrid">${creater.id}</div><br>
+						<div>${creater.introduce}</div>
+					</div>
+					
+					<div>
+					<c:forEach items="${proimage}" var="image">
+					<c:if test="${creater.id==image.id}">
+						<img src="/display?fileName=${image.image}" width=100 height=100>
+					</c:if>
+					</c:forEach>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div> --%>
+	<jsp:include page="../footer.jsp"></jsp:include>
+	
 </body>
 
 <script>
+	getBest();
+	artgoods();
+	$("#best").hide();
+	$("#artgoods").hide();
+	//$("#creater").hide();
+	
+	$("#bestmenu").on("click", function(){
+		$("#best").show();
+		$("#artgoods").hide();
+		$("#creater").hide();
+	});
+	
+	$("#artgoodsmenu").on("click", function(){
+		$("#best").hide();
+		$("#artgoods").show();
+		$("#creater").hide();
+	});
+	
+	$("#purchasemenu").on("click", function(){
+		$("#best").hide();
+		$("#artgoods").hide();
+		$("#creater").show();
+		//proimage();
+		
+		var array=[];
+		$("#tab .row").each(function(){
+			var id=$(this).find(".createrid").html();
+			alert(id);
+			var data={"id":id};
+			array.push(data);
+		});
+		var template=Handlebars.compile($(".creatertemp").html());
+		$(".creatertab").html(template(array));
 
-   getBest();
-   artgoods();
-   $("#artgoods").hide();
-   $("#creater").hide();
-
-   $("#bestmenu").on("click", function() {
-      $("#bestmenu").attr("class","menuS")
-      $("#artgoodsmenu").attr("class","menuB")
-      $("#purchasemenu").attr("class","menuB")
-      $("#best").show();
-      $("#artgoods").hide();
-      $("#creater").hide();
-   });
-
-   $("#artgoodsmenu").on("click", function() {
-      $("#bestmenu").attr("class","menuB")
-      $("#artgoodsmenu").attr("class","menuS")
-      $("#purchasemenu").attr("class","menuB")
-      $("#best").hide();
-      $("#artgoods").show();
-      $("#creater").hide();
-   });
-
-   $("#purchasemenu").on("click", function() {
-      $("#bestmenu").attr("class","menuB")
-      $("#artgoodsmenu").attr("class","menuB")
-      $("#purchasemenu").attr("class","menuS")
-      $("#best").hide();
-      $("#artgoods").hide();
-      $("#creater").show();
-   });
-
-   $("#besttab").on("click", ".image", function() {
-      var p_no = $(this).parent().find(".p_no").val();
-      var id = $(this).parent().find(".id").html();
-      location.href = "/product/read?p_no=" + p_no + "&id=" + id;
-   });
-
-   function getBest() {
-      $.ajax({
-         type : "get",
-         url : "/product/rest/bestlist",
-         dataType : "json",
-         success : function(data) {
-            var temp = Handlebars.compile($("#besttemp").html());
-            $("#besttab").html(temp(data));
-         }
-      });
-   }
-   
-   $("#creater").on("click", ".creatertab .proimage .proImg", function(){
-      var id = $(this).parent().parent().parent().find(".createrid").text();
-      var p_no=$(this).parent().find(".creater_no").text();
-      location.href = "/product/read?p_no=" + p_no + "&id=" + id;
-   });
-
-   $("#artgoodstab").on("click", ".image", function() {
-      var p_no = $(this).parent().find(".p_no").val();
-      var id = $(this).parent().find(".id").html();
-      location.href = "/product/read?p_no=" + p_no + "&id=" + id;
-   });
-
-   function artgoods() {
-      $.ajax({
-         type : "get",
-         url : "/product/rest/artgoods",
-         dataType : "json",
-         success : function(data) {
-            var temp = Handlebars.compile($("#artgoodstemp").html());
-            $("#artgoodstab").html(temp(data));
-         }
-      });
-   }
-   
-   //user read
-   $(".creatertab").on("click",".creater #creater",function(){
-      var id=$(this).find("#c_id").val();
-      if("${id}"!=id){
-      location.href = "/user/read?id=" + id;}
-      else{
-         location.href= "/login/mypage";
-      }
-   })
+	});
+	
+	$("#besttab").on("click", ".image", function(){		
+		var p_no=$(this).parent().find(".p_no").val();
+		var id=$(this).parent().find(".id").html();
+		location.href="/product/read?p_no="+p_no+"&id="+id;
+	});
+	
+	function getBest(){
+		$.ajax({
+			type:"get",
+			url:"/product/rest/bestlist",
+			dataType:"json",
+			success:function(data){
+				var temp=Handlebars.compile($("#besttemp").html());
+				$("#besttab").html(temp(data));
+			}
+		});
+	}
+	
+	$("#artgoodstab").on("click", ".image", function(){		
+		var p_no=$(this).parent().find(".p_no").val();
+		var id=$(this).parent().find(".id").html();
+		location.href="/product/read?p_no="+p_no+"&id="+id;
+	});
+	
+	function artgoods(){
+		$.ajax({
+			type:"get",
+			url:"/product/rest/artgoods",
+			dataType:"json",
+			success:function(data){
+				var temp=Handlebars.compile($("#artgoodstemp").html());
+				$("#artgoodstab").html(temp(data));
+			}
+		});
+	}
+	/*
+	function proimage(){
+		$("#creatertab .creater").each(function(){
+			var id=$(this).find(".createrid").html();
+			$.ajax({
+				type:"get",
+				url:"/product/rest/proimage",
+				data:{"id":id},
+				dataType:"json",
+				error:function(){
+					alert("xxxx");
+				},
+				success:function(data){
+					//alert(id);
+					for(var i=0; i<=data.length-1; i++){
+						//alert(data[i]["id"]);
+						if(id==data[i]["id"]){
+							//alert(id+"   !@@!   "+data[i]["id"]);
+							var temp=Handlebars.compile($(".creatertemp").html());
+							$(".creatertab").html(temp(data));
+						}
+					}
+				}
+			});
+		});
+	}*/
 </script>
 
 </html>

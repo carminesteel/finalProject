@@ -14,7 +14,6 @@
 </style>	
 </head>
 <body>
-	<h1>댓글수${replyCount}</h1>
 	<form action="/b_reply/insert" method="post" name="rfrm">
 		<input type="hidden" name="b_no" value="${vo.b_no}">
 		<input type="hidden" name="replyer" value="${id}">
@@ -39,13 +38,10 @@
 		<tr class="row">
 			<td class="r_no" >{{r_no}}</td>
 			<td class="replyer" >{{replyer}}</td>	
-			<td> <input type="text" class="content" value={{content}}></td>
+			<td class="content" >{{content}}</td>
 			<td>{{date}}</td>
 			<td class="b_no">{{b_no}}</td>
-			<td>
-				<input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}}">
-		
-			</td>		
+			<td><input type="button" value="삭제" class="rbtnDelete"></td>		
 		</tr>
 		{{/each}}
 	</script>
@@ -55,16 +51,6 @@
 <script>
 var b_no = "${vo.b_no}";
 $("#tbl1").find(".row .b_no").hide();
-var id="${id}";
-Handlebars.registerHelper("printStyle",function(replyer){
-	var src;
-	if(id!=replyer){
-		src="display:none;";
-	}else if(id==replyer){
-		src="color:red;";
-	}
-	return src;
-});
 R_list();
 
 function R_list(){
@@ -99,7 +85,6 @@ $(rfrm).submit(function(e){
 		})
 	 }
 });
-
 
 $("#tbl1").on("click", ".row .rbtnDelete", function(){
 	var r_no=$(this).parent().parent().find(".r_no").html();

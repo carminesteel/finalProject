@@ -41,10 +41,6 @@ public class ProductController {
 	public void list(Model model) {
 		model.addAttribute("users", umapper.list());
 		model.addAttribute("proimage", umapper.proimage());
-	}
-	
-	@RequestMapping("/orders")
-	public void orders() {
 		
 	}
 	
@@ -70,9 +66,7 @@ public class ProductController {
 	@RequestMapping("/read")
 	public void read(Model model, int p_no, String id) {
 		pmapper.updateViewCnt(id);
-		model.addAttribute("p_image", pmapper.p_image(p_no));
-		model.addAttribute("readimage", pmapper.readimage(p_no));
-		model.addAttribute("read", pmapper.read(p_no));
+		model.addAttribute("read", pmapper.read(p_no));				
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
@@ -84,6 +78,7 @@ public class ProductController {
 
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	   public String insertPost(ProductVO vo, MultipartHttpServletRequest multi)throws Exception {
+
 	      MultipartFile file = multi.getFile("file");
 	      if(!file.isEmpty()) {
 	         String image=System.currentTimeMillis() + file.getOriginalFilename();
@@ -105,7 +100,6 @@ public class ProductController {
 	      pService.insert(vo);
 	      return "redirect:list";
 	   }
-	
 	
 	@RequestMapping("/display")
 	@ResponseBody

@@ -6,44 +6,15 @@ import java.util.Date;
 public class ProductVO{
 	private int p_no;
 	private String id;
-	private String p_id;
 	private String title;
 	private String content;
 	private String image;
-	private String name;
 	private int price;
 	private int view;
 	private int p_like;
 	private int report;
 	private Date date;
 	private ArrayList<String> images;
-	private String p_images;
-	private String detail_images;
-	
-	public String getP_id() {
-		return p_id;
-	}
-	public void setP_id(String p_id) {
-		this.p_id = p_id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getP_images() {
-		return p_images;
-	}
-	public void setP_images(String p_images) {
-		this.p_images = p_images;
-	}
-	public String getDetail_images() {
-		return detail_images;
-	}
-	public void setDetail_images(String detail_images) {
-		this.detail_images = detail_images;
-	}
 	private int quantity;
 	
 	public int getQuantity() {
@@ -122,7 +93,9 @@ public class ProductVO{
 	public String toString() {
 		return "ProductVO [p_no=" + p_no + ", id=" + id + ", title=" + title + ", content=" + content + ", image="
 				+ image + ", price=" + price + ", view=" + view + ", p_like=" + p_like + ", report=" + report
-				+ ", date=" + date + ", images=" + images + ", p_images=" + p_images + ", detail_images="
-				+ detail_images + ", quantity=" + quantity + "]";
+				+ ", date=" + date + ", images=" + images + "]";
 	}
+	
+
+	
 }

@@ -20,12 +20,8 @@
 	height: 200px;
 }
 
-
-#tbl .row .view {
+#tbl .row .date {
 	text-align: right;
-}
-#tbl .row .like{
-	text-align: left;
 }
 </style>
 <meta charset="UTF-8">
@@ -35,9 +31,6 @@
 <body>
 	<jsp:include page="../menu.jsp"></jsp:include>
 	<h1>[작품]</h1>
-	<c:if test="${id!=null}">		
-			<a href="/board/insert" class=more><img id=bButton src="/display?fileName=eButton.png" /></a> <br>
-		</c:if>	
 	<div border=1 id="tbl">
 
 		<c:forEach items="${list}" var="vo">
@@ -46,22 +39,11 @@
 				<img src="display?fileName=${vo.image}" width=100>
 		
 				<input type="hidden" class="b_no" value="${vo.b_no}">
-				<div>
-					<div class="like">좋아요 : ${vo.b_like} 
-										조회수 : ${vo.view}
-										댓글수 : ${vo.cnt}
-										<%-- <c:if test="${vo.cnt==1}">
-										댓글수 : 0
-										</c:if>
-										<c:if test="${vo.cnt!=1}">
-										댓글수 : ${vo.cnt}
-										</c:if> --%>
-										
-					</div>
-					
+				<div class="date">
+					<fmt:formatDate value="${vo.date}" pattern="yyyy-MM-dd" />
 				</div>
-				
-				
+
+
 				<div class="title">${vo.title}</div>
 				<div class="content">${vo.content}</div>
 

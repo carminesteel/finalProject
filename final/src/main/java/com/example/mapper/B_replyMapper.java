@@ -10,8 +10,7 @@ import com.example.domain.Criteria;
 public interface B_replyMapper {
   public List<B_replyVO> rlist(int b_no);
   public void insert(B_replyVO vo);
-  public int replyCount(int b_no);
+  public int total(int b_no);
   public void delete(int r_no);
-
 }
 	

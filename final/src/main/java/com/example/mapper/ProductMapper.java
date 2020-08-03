@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.example.domain.CartVO;
 import com.example.domain.ProductVO;
 
 public interface ProductMapper {
@@ -12,8 +11,6 @@ public interface ProductMapper {
 	public List<ProductVO> artgoods();
 	public List<ProductVO> creater();
 	public List<ProductVO> proimage();
-	public List<ProductVO> readimage(int p_no);
-	public List<ProductVO> p_image(int p_no);
 	public ProductVO read(int p_no);
 	public void insert(ProductVO vo);
 	public int P_noRead(ProductVO vo);

@@ -25,12 +25,5 @@ public void likedelete(@Param(value = "id") String id,@Param(value = "b_no") int
 
 public int likeTableCnt(@Param(value = "b_no") int b_no);
 public void B_likeUpdate(@Param(value = "b_no") int b_no, @Param(value = "like") int like);
-//report
-public int reportCnt(@Param(value = "id") String id, @Param(value= "b_no") int b_no);
-public void reportInsert(BoardVO vo);
-public int BoardReportCnt(int b_no);
-public void updateReport(BoardVO vo);
 
-//view
-public void updateView(int b_no);
 }

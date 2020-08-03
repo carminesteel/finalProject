@@ -7,7 +7,7 @@
 <title>footer</title>
 <style>
 body{width:100%;}
-#divFooter{width:100%;height:304px;background-color:#191919;}
+#divFooter{width:100%;height:304px;background-color:#191919}
 #fLogo{text-align:center;font-family:Helvetica33-ExtendedThin;font-size:45px;color:white;position:relative;top:45px;}
 #fMenu{position:relative;top:85px;font-family:Noto Sans KR;color:#959595;text-align:center;}
 #fMenu a{text-decoration:none;color:#959595}

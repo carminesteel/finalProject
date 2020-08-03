@@ -22,10 +22,7 @@
 			</tr>
 			<tr>
 				<th width=100>제목</th>
-				<td>
-				<input type="text" name="title" value="${vo.title}" size=50>
-					<input type="button" value="신고하기" id="report">
-				</td>
+				<td><input type="text" name="title" value="${vo.title}" size=50></td>
 			</tr>
 			<tr>
 				<th width=100>아이디</th>
@@ -72,10 +69,9 @@
 			</tr>
 			
 		</table>
-		<c:if test="${id==vo.id}">
 		<input type="submit" value="수정">
+		<input type="reset" value="취소">
 		<input type="button" value="삭제" id="btnDelete">
-		</c:if>
 		<input type="button" value="목록" onClick="location.href='list'">
 		<input type="button" value="댓글보기" id="btnReply">
 		<input type="button" value="댓글숨기기" id="btnReply2">
@@ -91,11 +87,6 @@ $("#btnReply").hide();
 
 var id="${id}";
 var b_no="${vo.b_no}";
-
-$("#report").on("click", function(){
-	var b_no="${vo.b_no}";
-	window.open("/board/report?b_no="+b_no,"","width=500px, height=400px");
-});
 
 $("#LikeBtn").on("click",function(){
 	$.ajax({

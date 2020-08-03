@@ -28,37 +28,13 @@
 
 	<context:component-scan
 	base-package="com.example.controller" />
-		<interceptors>
-		<interceptor>
-			<mapping path="/board/insert" />
-			<mapping path="/board/read" />
-			<mapping path="/e_reply/reply" />
-			<beans:bean id="AuthInterceptor"
-				class="com.example.interceptor.AuthInterceptor" />
-		</interceptor>
-	</interceptors>
+
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="C:/final" />
-	</beans:bean>
-	<!-- 회원가입 메일 인증 -->
-	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<beans:property name="host" value="smtp.gmail.com" />
-		<beans:property name="port" value="587" /><!-- 465 or 25 -->
-		<beans:property name="username" value="jungjaejae4885@gmail.com" />
-		<beans:property name="password" value="1Q2W3e4r!!" />
-		<beans:property name="defaultEncoding" value="utf-8" />
-		<beans:property name="javaMailProperties">
-			<beans:props>
-				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
-				<beans:prop key="mail.smtp.auth">true</beans:prop>
-				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-				<beans:prop key="mail.debug">true</beans:prop>
-			</beans:props>
-		</beans:property>
 	</beans:bean>
 
 </beans:beans>
