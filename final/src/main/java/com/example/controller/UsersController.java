@@ -151,6 +151,7 @@ public class UsersController {
 	public void mypage(Model model,HttpSession session) {
 		String id=(String) session.getAttribute("id");
 		model.addAttribute("vo", mapper.read(id));
+		
 		model.addAttribute("blist",Mmapper.myBlist(id));
 		model.addAttribute("plist",Mmapper.myPlist(id));
 		
@@ -195,6 +196,29 @@ public class UsersController {
 	@RequestMapping("/user/read")
 	public void userRead(Model model,String id) {
 		model.addAttribute("vo", mapper.read(id));
+		
+		model.addAttribute("blist",Mmapper.myBlist(id));
+		model.addAttribute("plist",Mmapper.myPlist(id));
+		
+		List<String> followingList = Mmapper.myFollowing(id);
+		System.out.println(followingList.toString());
+		ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
+		if(followingList.size()>0) {
+			for(String following:followingList) {
+				followingInfo.add(Mmapper.UserRead(following));
+			}
+		}
+		model.addAttribute("followingInfo",followingInfo);
+
+		List<String> followerList = Mmapper.myFollower(id);
+		System.out.println(followerList.toString());
+		ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
+		if(followerList.size()>0) {
+			for(String follower:followerList) {
+				followerInfo.add(Mmapper.UserRead(follower));
+			}
+		}
+		model.addAttribute("followerInfo",followerInfo);
 	}
 	
 	

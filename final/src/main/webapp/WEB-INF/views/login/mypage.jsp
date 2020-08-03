@@ -123,43 +123,62 @@
 				
 				
 				<div id=Blist>
-					<c:forEach items="${blist}" var="bvo">
-						<div style="display:inline-block;float:left;">
-							<img src="../display?fileName=${bvo.image}" width=200 height=200>
-						</div>
-					</c:forEach>
+					<c:if test="${empty blist}">
+						<h1>등록한 게시물이 없습니다</h1>
+					</c:if>
+					<c:if test="${not empty blist}">
+						<c:forEach items="${blist}" var="bvo">
+							<div style="display:inline-block;float:left;">
+								<img src="../display?fileName=${bvo.image}" width=200 height=200>
+							</div>
+						</c:forEach>
+					</c:if>
 				</div>
 				
 				
 				
 				<div id=Plist>
+					<c:if test="${empty plist}">
+						<h1>등록한 상품이 없습니다</h1>
+					</c:if>
+					<c:if test="${not empty plist}">
 					<c:forEach items="${plist}" var="pvo">
 						<div style="display:inline-block;float:left;">
 							<img src="../display?fileName=${pvo.image}" width=200 height=200>
 						</div>
 					</c:forEach>
+					</c:if>
 				</div>
 				
 				
 				
 				<div id=followingList>
+					<c:if test="${empty followingInfo}">
+						<h1>당신이 팔로우한 사람이 없습니다.</h1>
+					</c:if>
+					<c:if test="${not empty followingInfo}">
 					<c:forEach items="${followingInfo}" var="followingList">
 						<div style="display:inline-block;float:left;">
-							<span>${followingList.name}</span>
 							<img src="../display?fileName=${followingList.u_image}" width=200 height=200>
 						</div>
 					</c:forEach>
+					</c:if>
 				</div>
 
 
 				
 				<div id=followerList>
+					<c:if test="${empty followerInfo}">
+						<h1>당신을 팔로우한 사람이 없습니다.</h1>
+					</c:if>
+					<c:if test="${not empty followerInfo}">
 					<c:forEach items="${followerInfo}" var="followerList">
 						<div style="display:inline-block;float:left;">
 							<span>${followerList.name}</span>
 							<img src="../display?fileName=${followerList.u_image}" width=200 height=200>
 						</div>
 					</c:forEach>
+					</c:if>
 				</div>
 			
 			</div>

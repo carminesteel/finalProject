@@ -45,6 +45,8 @@
 }
 
 #u_list {display:inline-block;}
+
+.mypageItems:hover{cursor:pointer;}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
@@ -85,6 +87,88 @@
 			<tr>
 				<td colspan=2><button id=follow value=""></button></td>
 			</table>
+			
+		</div>
+		<div id="mypageList" style="background:blue;display:inline-block;float:left;margin-left:10px;width:1400px;height:900px;" >
+			<div class="mypageItems" id="artWork" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>아트웍</h3>
+			</div>
+			<div class="mypageItems" id="goods" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>굿즈</h3>
+			</div>
+			<div class="mypageItems" id="following" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>팔로잉</h3>
+			</div>
+			<div class="mypageItems" id="follower2" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>팔로워</h3>
+			</div>
+			<div class="mypageItems" id="statistics" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>통계</h3>
+			</div>
+			
+			<div style="display:inline-block;float:center;background:yellow;margin:10px;width:1380px;height:820px;" >
+				
+				
+				<div id=Blist>
+					<c:if test="${empty blist}">
+						<h1>등록한 게시물이 없습니다</h1>
+					</c:if>
+					<c:if test="${not empty blist}">
+						<c:forEach items="${blist}" var="bvo">
+							<div style="display:inline-block;float:left;">
+								<img src="../display?fileName=${bvo.image}" width=200 height=200>
+							</div>
+						</c:forEach>
+					</c:if>
+				</div>
+				
+				
+				
+				<div id=Plist>
+					<c:if test="${empty plist}">
+						<h1>등록한 상품이 없습니다</h1>
+					</c:if>
+					<c:if test="${not empty plist}">
+					<c:forEach items="${plist}" var="pvo">
+						<div style="display:inline-block;float:left;">
+							<img src="../display?fileName=${pvo.image}" width=200 height=200>
+						</div>
+					</c:forEach>
+					</c:if>
+				</div>
+				
+				
+				
+				<div id=followingList>
+					<c:if test="${empty followingInfo}">
+						<h1>당신이 팔로우한 사람이 없습니다.</h1>
+					</c:if>
+					<c:if test="${not empty followingInfo}">
+					<c:forEach items="${followingInfo}" var="followingList">
+						<div style="display:inline-block;float:left;">
+							<img src="../display?fileName=${followingList.u_image}" width=200 height=200>
+						</div>
+					</c:forEach>
+					</c:if>
+				</div>
+
+
+				
+				<div id=followerList>
+					<c:if test="${empty followerInfo}">
+						<h1>당신을 팔로우한 사람이 없습니다.</h1>
+					</c:if>
+					<c:if test="${not empty followerInfo}">
+					<c:forEach items="${followerInfo}" var="followerList">
+						<div style="display:inline-block;float:left;">
+							<span>${followerList.name}</span>
+							<img src="../display?fileName=${followerList.u_image}" width=200 height=200>
+						</div>
+					</c:forEach>
+					</c:if>
+				</div>
+			
+			</div>
 		</div>
 	</div>
 	<br>
@@ -95,6 +179,38 @@
 <script>
 var follower="${id}";
 var target="${vo.id}";
+
+
+$("#Plist").hide();
+$("#followingList").hide();
+$("#followerList").hide();
+
+
+$("#artWork").click(function(){
+	$("#Blist").show();
+	$("#Plist").hide();
+	$("#followingList").hide();
+	$("#followerList").hide();
+})
+$("#goods").click(function(){
+	$("#Blist").hide();
+	$("#Plist").show();
+	$("#followingList").hide();
+	$("#followerList").hide();
+})
+$("#following").click(function(){
+	$("#Blist").hide();
+	$("#Plist").hide();
+	$("#followingList").show();
+	$("#followerList").hide();
+})
+$("#follower2").click(function(){
+	$("#Blist").hide();
+	$("#Plist").hide();
+	$("#followingList").hide();
+	$("#followerList").show();
+})
+
 
 getFollow();
 
@@ -125,5 +241,6 @@ $.ajax({
 		})
 	})
 	//잉쓰
+
 </script>
 </html>
