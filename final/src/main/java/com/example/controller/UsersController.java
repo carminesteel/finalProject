@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -16,15 +18,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-
 import com.example.domain.UsersVO;
+import com.example.mapper.MyPageMapper;
 import com.example.mapper.UsersMapper;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 @Controller
 public class UsersController {
 	@Autowired
 	UsersMapper mapper;
 
+	@Autowired
+	MyPageMapper Mmapper;
+	
+	
 	@Autowired 
 	BCryptPasswordEncoder passEncoder;
 	
@@ -144,6 +151,26 @@ public class UsersController {
 	public void mypage(Model model,HttpSession session) {
 		String id=(String) session.getAttribute("id");
 		model.addAttribute("vo", mapper.read(id));
+		model.addAttribute("blist",Mmapper.myBlist(id));
+		model.addAttribute("plist",Mmapper.myPlist(id));
+		
+		List<String> followingList = Mmapper.myFollowing(id);
+		ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
+		if(followingList.size()>0) {
+			for(String following:followingList) {
+				followingInfo.add(Mmapper.UserRead(following));
+			}
+		}
+		model.addAttribute("followingInfo",followingInfo);
+
+		List<String> followerList = Mmapper.myFollower(id);
+		ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
+		if(followerList.size()>0) {
+			for(String follower:followerList) {
+				followerInfo.add(Mmapper.UserRead(follower));
+			}
+		}
+		model.addAttribute("followerInfo",followerInfo);
 	}
 	
 	@RequestMapping(value="/login/mypagePassChk", method=RequestMethod.POST)

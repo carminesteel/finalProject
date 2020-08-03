@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +45,8 @@
 }
 
 #u_list {display:inline-block;}
+
+.mypageItems:hover{cursor:pointer;}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
@@ -98,20 +101,108 @@
 			</tr>	
 			</table>
 		</div>
-		<div id=u_list>
-			<h1>씨발</h1>
+		
+		<div id="mypageList" style="background:blue;display:inline-block;float:left;margin-left:10px;width:1400px;height:900px;" >
+			<div class="mypageItems" id="artWork" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>아트웍</h3>
+			</div>
+			<div class="mypageItems" id="goods" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>굿즈</h3>
+			</div>
+			<div class="mypageItems" id="following" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>팔로잉</h3>
+			</div>
+			<div class="mypageItems" id="follower" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>팔로워</h3>
+			</div>
+			<div class="mypageItems" id="statistics" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
+				<h3>통계</h3>
+			</div>
+			
+			<div style="display:inline-block;float:center;background:yellow;margin:10px;width:1380px;height:820px;" >
+				
+				
+				<div id=Blist>
+					<c:forEach items="${blist}" var="bvo">
+						<div style="display:inline-block;float:left;">
+							<img src="../display?fileName=${bvo.image}" width=200 height=200>
+						</div>
+					</c:forEach>
+				</div>
+				
+				
+				
+				<div id=Plist>
+					<c:forEach items="${plist}" var="pvo">
+						<div style="display:inline-block;float:left;">
+							<img src="../display?fileName=${pvo.image}" width=200 height=200>
+						</div>
+					</c:forEach>
+				</div>
+				
+				
+				
+				<div id=followingList>
+					<c:forEach items="${followingInfo}" var="followingList">
+						<div style="display:inline-block;float:left;">
+							<span>${followingList.name}</span>
+							<img src="../display?fileName=${followingList.u_image}" width=200 height=200>
+						</div>
+					</c:forEach>
+				</div>
+
+
+				
+				<div id=followerList>
+					<c:forEach items="${followerInfo}" var="followerList">
+						<div style="display:inline-block;float:left;">
+							<span>${followerList.name}</span>
+							<img src="../display?fileName=${followerList.u_image}" width=200 height=200>
+						</div>
+					</c:forEach>
+				</div>
+			
+			</div>
 		</div>
-	</div>
-	<br>
-	<br>
-	<br>
+		</div>
+
 	<jsp:include page="../footer.jsp" />
 </body>
 <script>
 	var id="${id}";
-
+	$("#Plist").hide();
+	$("#followingList").hide();
+	$("#followerList").hide();
+	
+	
+	$("#artWork").click(function(){
+		$("#Blist").show();
+		$("#Plist").hide();
+		$("#followingList").hide();
+		$("#followerList").hide();
+	})
+	$("#goods").click(function(){
+		$("#Blist").hide();
+		$("#Plist").show();
+		$("#followingList").hide();
+		$("#followerList").hide();
+	})
+	$("#following").click(function(){
+		$("#Blist").hide();
+		$("#Plist").hide();
+		$("#followingList").show();
+		$("#followerList").hide();
+	})
+	$("#follower").click(function(){
+		$("#Blist").hide();
+		$("#Plist").hide();
+		$("#followingList").hide();
+		$("#followerList").show();
+	})
+	
+	
 	$("#userRead").hide();
-	$("#u_list").hide();
+	$("#mypageList").hide();
 	
  	$("#passChk").on("click", "button", function() {
 		var pass = $("#passChk").find("#chkPass").val();
@@ -128,7 +219,9 @@
 						alert("확인되었습니다.");
 						$("#passChk").hide();
 						$("#userRead").show();
-						$("#u_list").show();
+						$("#mypageList").show();
+						/* getMyPageList(); */
+						
 					}
 				}
 			})
@@ -137,5 +230,16 @@
 			$("#passChk").find("#chkPass").focus();
 		}
 	}) 
+/* 	
+	function getMyPageList(){
+		$.ajax({
+			type:"post",
+			url:"/mypage/list",
+			data:{"id":id},
+			dataType:"json",
+			success:function(){
+			}
+		})
+ 	} */
 </script>
 </html>
