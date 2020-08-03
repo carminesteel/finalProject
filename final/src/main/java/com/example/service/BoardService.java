@@ -9,4 +9,5 @@ public interface BoardService {
  public List<String> getB_imagelist(int b_no);
  public void delete(int b_no);
  public void update(BoardVO vo);
+ public BoardVO read(int b_no);
 }

@@ -6,7 +6,7 @@
     </select>
     
     <select id="list" resultType="com.example.domain.UsersVO">
-    	select p.*, u.* from users u, product p where p.id=u.id and position=1 group by p.id;
+    	select p.*, u.*, count(*) cnt from users u, product p where p.id=u.id and position=1 group by p.id;
     </select>
     
     <select id="proimage" resultType="com.example.domain.UsersVO">
@@ -17,4 +17,27 @@
     	insert into users (id,pass,name,nickname,phone,introduce,addr,email,u_image) 
     	values(#{id},#{pass},#{name},#{nickname},#{phone},#{introduce},#{addr},#{email},#{u_image})
     </insert>
+    
+    <select id="followChk" resultType="int">
+    	select count(*) from follower where follower=#{follower} and target=#{target}
+    </select>
+    
+    <insert id="followInsert">
+    	insert into follower values(#{follower},#{target})
+    </insert>
+    <delete id="followDelete">
+    	delete from follower where follower=#{follower} and target=#{target}
+    </delete>
+    <select id="followerCnt" resultType="int">
+    	select count(*) from follower where target=#{target}
+    </select>
+    <select id="followingCnt" resultType="int">
+    	select count(*) from follower where follower=#{follower}
+    </select>
+    <update id="followerUpdate">
+    	update users set follower = #{follower} where id=#{id}
+    </update>
+      <update id="followUpdate">
+    	update users set follow = #{follow} where id=#{id}
+    </update>
 </mapper>

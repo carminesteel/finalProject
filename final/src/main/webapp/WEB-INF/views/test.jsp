@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 모바일에서 화면배율을 디바이스 크기 기준으로 설정 -->
 <!-- 이게 안되면 pc에서의 100px과 모바일에서의 100px이 디바이스 성능에 따라 달라집니다. -->
 
@@ -21,8 +21,8 @@ a {
 }
 
 .img-box > img {
-	   margin:auto;
-	
+      margin:auto;
+   
     display:block;
 }
 
@@ -240,6 +240,7 @@ html {
 
 .v-story-wrap .v-story-slider .slider-item > .v-story-desc-list > .v-story-desc-tt {
     font-size:14px;
+    text-overflow:ellipsis;
 }
 
 .v-story-wrap .v-story-slider .slider-item > .v-story-desc-list > .v-story-desc {
@@ -385,6 +386,10 @@ html {
     }
 }
 
+
+img-box block{width:690px;height:385.99px;
+}
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -406,97 +411,24 @@ html {
 <div class="v-story-wrap con" style="height:650px;">
     <h2 class="v-story-tt" data-aos="fade-up"></h2>
     <div class="v-story-slider" data-aos="fade-up">
-        <div class="slider-item">
-            <a href="#" class="block">
-                <div class="img-box block">
-                    <img src="/display?fileName=poster1.png" alt="" >
-                </div>
-                <div class="discover">
-                    <span class="discover-btn block"></span>
-                    <span class="discover-txt block">EXPLORE</span>
-                </div>
-            </a>
-            <div class="v-story-desc-list"><br>
-                <p class="v-story-desc">해피 인사이드</p>
-                <p class="v-story-desc-tt">이모티콘과 함께하는 행복한 상상 HAPPY INSIDE in 경주</p>              
-            </div>
-        </div>
-        <div class="slider-item">
-            <a href="#" class="block">
-                <div class="img-box">
-                    <img src="https://kimyang-sun.github.io/pf-img/samsung-img/v_story_bn_02.jpg" alt="">
-                </div>
-                <div class="discover">
-                    <span class="discover-btn block"></span>
-                    <span class="discover-txt block">EXPLORE</span>
-                </div>
-            </a>
-            <div class="v-story-desc-list"><br>
-                <p class="v-story-desc-tt">SAMSUNG WITHIN</p>
-                <p class="v-story-desc">밀리 바비 브라운과 함께하는<br>
-#SpreadTheLove</p>
-            </div>
-        </div>
-        <div class="slider-item">
-            <a href="#" class="block">
-                <div class="img-box">
-                    <img src="https://kimyang-sun.github.io/pf-img/samsung-img/v_story_bn_03.jpg" alt="">
-                </div>
-                <div class="discover">
-                    <span class="discover-btn block"></span>
-                    <span class="discover-txt block">EXPLORE</span>
-                </div>
-            </a>
-            <div class="v-story-desc-list"><br>
-                <p class="v-story-desc-tt">SAMSUNG WITHIN</p>
-                <p class="v-story-desc">초고화질 시대를 향한 거대한 도약</p>
-            </div>
-        </div>
-        <div class="slider-item">
-            <a href="#" class="block">
-                <div class="img-box">
-                    <img src="https://kimyang-sun.github.io/pf-img/samsung-img/v_story_bn_04.jpg" alt="">
-                </div>
-                <div class="discover">
-                    <span class="discover-btn block"></span>
-                    <span class="discover-txt block">EXPLORE</span>
-                </div>
-            </a>
-            <div class="v-story-desc-list"><br>
-                <p class="v-story-desc-tt">다양한 활용</p>
-                <p class="v-story-desc">젊은 기업가들에게 배우는 성공의 자세</p>
-            </div>
-        </div>
-        <div class="slider-item">
-            <a href="#" class="block">
-                <div class="img-box">
-                    <img src="https://kimyang-sun.github.io/pf-img/samsung-img/v_story_bn_05.jpg" alt="">
-                </div>
-                <div class="discover">
-                    <span class="discover-btn block"></span>
-                    <span class="discover-txt block">EXPLORE</span>
-                </div>
-            </a>
-            <div class="v-story-desc-list"><br>
-                <p class="v-story-desc-tt">SAMSUNG WITHIN</p>
-                <p class="v-story-desc">5G의 오늘과 내일</p>
-            </div>
-        </div>
-        <div class="slider-item">
-            <a href="#" class="block">
-                <div class="img-box">
-                    <img src="https://kimyang-sun.github.io/pf-img/samsung-img/v_story_bn_06.jpg" alt="">
-                </div>
-                <div class="discover">
-                    <span class="discover-btn block"></span>
-                    <span class="discover-txt block">EXPLORE</span>
-                </div>
-            </a>
-            <div class="v-story-desc-list"><br>
-                <p class="v-story-desc-tt">건강</p>
-                <p class="v-story-desc">나쁜 스마트폰 사용 습관 버리는 방법</p>
-            </div>
-        </div>
+       <c:forEach items="${list}" var="vo">   
+           <div class="slider-item">
+               <a  class="block" href="exh/read?e_no=${vo.e_no}">     
+                   <div class="img-box block">
+                       <img style="width:690px;height:385.99px;object-fit:cover;" src="/display?fileName=${vo.image}" alt="" >
+                   </div>                   
+                   <div class="discover">
+                       <span class="discover-btn block"></span>
+                       <span class="discover-txt block">EXPLORE</span>
+                   </div>
+               </a>
+               <div class="v-story-desc-list"><br>
+                   <p class="v-story-desc">${vo.title}</p>
+                   <br>
+                   <p class="v-story-desc-tt">${vo.date}</p>              
+               </div>
+           </div>
+      </c:forEach>  
     </div>
 </div>
 <script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>리뷰</title>
+	<title>리뷰작성</title>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
@@ -27,7 +27,17 @@
 		</div>
 		{{/each}}
 	</script>
-	<div><input type="text" id="txtReply" size=60>&nbsp;&nbsp;<button id="btnInsert">입력</button></div>
+	<br><br>
+	<c:if test="${re==0}">
+		<div style="text-align:center;color:gray;" id="reviewcnt">
+			<h4>아직 작성 된 리뷰가 없습니다.</h4>
+		</div>
+	</c:if>
+	<div>
+		<br><br>
+		<input type="text" id="txtReply" size=100>&nbsp;&nbsp;
+		<button id="btnInsert">입력</button>
+	</div>
 	<br>
 </body>
 <script>
@@ -62,22 +72,30 @@
 	var re = "${re}";
 	$("#btnInsert").on("click",function(){
 		var content=$("#txtReply").val();
-		if(content==""){
-			alert("댓글을 입력하세요");
-			return;
-		}
 		
-		$.ajax({
-			type:"post",
-			url:"/reply/insert",
-			data:{"e_no":e_no,"replyer":id,"content":content},
-			success:function(){
-				alert("댓글을 등록하였습니다.");
-				$("#txtReply").val("");		
-				getList();
-				$("#re").html(++re);
-			}
-		});
+		if(id==""){
+			if(confirm("로그인이 필요합니다.") == true){    //확인눌렀을때
+				location.href="/login/login";
+				}else{   //취소 눌렀을때
+			 	   return;
+				}
+			}else if(content==""){
+				alert("댓글을 입력하세요");
+				return;
+				}else if(id!=""){
+					$.ajax({ 
+						type:"post",
+						url:"/reply/insert",
+						data:{"e_no":e_no,"replyer":id,"content":content},
+						success:function(){
+							alert("댓글을 등록하였습니다.");
+							$("#txtReply").val("");		
+							$("#re").html(++re);
+							getList();
+							$("#reviewcnt").hide();
+						}
+					});
+			}	
 	});
 	
 	$("#tbl").on("click",".replydate button",function(){

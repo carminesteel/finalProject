@@ -13,11 +13,24 @@ public class BoardVO {
  private int b_like;
  private int report;
  private Date date;
+ private String nickname;
+ private String u_image;
  private ArrayList<String> images;
- 
 
 public ArrayList<String> getImages() {
    return images;
+}
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+public String getU_image() {
+	return u_image;
+}
+public void setU_image(String u_image) {
+	this.u_image = u_image;
 }
 public void setImages(ArrayList<String> images) {
    this.images = images;

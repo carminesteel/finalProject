@@ -18,5 +18,5 @@ public interface ExhibitionMapper {
 	public void delE_imagelist(int e_no);
 	public List<String> getE_imagelist(int e_no);
 	public void update(ExhibitionVO vo);
-
+	public List<ExhibitionVO> test();
 }

@@ -11,6 +11,11 @@
    <title>index</title>
    <style>
    
+html {
+	font-family:Noto Sans KR;
+}
+
+   
 body {
 	width: 100%;
 }
@@ -154,6 +159,62 @@ li {
 	height: 710px;
 }
 
+.imgDiv{
+	text-align:center;
+	
+}
+
+.imgContainer{
+	width:360px;
+	height:300px;
+	display:inline-block;
+	border-radius: 5px 5px 5px 5px;
+	background: black;
+}
+
+.imgInfo{
+	width:100%;
+}
+
+
+.imgContainer img{
+	width:360px;
+	height:300px;
+	object-fit:cover;
+	object-position:center;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.imgContainer img:hover {
+    opacity: 0.3;
+	cursor:pointer;
+}
+.imgContainer img:hover	+ .hoverInfo{
+	display:block;
+}
+
+
+.hoverInfo{
+	
+	width:300px;
+	height:110px;
+	position:absolute;
+	display:none;
+	margin-top:-120px;
+	margin-left:28px;
+}
+
+.hoverInfo1{	
+	float:left;
+	font-size:24px;
+	color:white;
+}
+
+.hoverInfo2{
+	float:left;
+	color:white;	
+}
+
 /* 전시부분 슬라이드 스타일 */
 
 
@@ -165,7 +226,7 @@ li {
 
 </head>
 <body style=padding-top:81px;>
-      
+   <jsp:include page="chat.jsp"/>
    <jsp:include page="menu.jsp"/>
    
    <div id=banner class="gallery-wrapper">
@@ -194,22 +255,22 @@ li {
       <div id=keyword>최신순&emsp;&nbsp;인기순&emsp;&nbsp;조회순</div>
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
-   <table border=1 style=border-collapse:collapse;height:685px;width:1820px;margin:auto;>
-      <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      </tr>
-      <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td> 
-      <td></td>
-      </tr>
-   </table>
+   <div class="imgDiv" style="border:1px solid black;width:1855px;height:666px;margin:auto;">
+		<c:forEach items="${list}" var="list" begin="0" end="9">
+			<div class="imgContainer">
+				<img src="display?fileName=${list.image}"/>
+				<div class="hoverInfo">
+				<span class="hoverInfo1">${list.title}</span><br><br><br>
+				<span class="hoverInfo2">${list.content}</span>
+				</div>
+				<div class="imgInfo">
+					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> ${list.nickname}</span>	<span>${list.view}</span>	<span>${list.b_like}</span>
+				</div>
+				<br>
+			</div>
+			
+		</c:forEach>
+	</div>
    
    <div id=goods>
       <div id=gTitle>Goods</div>
@@ -258,13 +319,14 @@ li {
    <div id=exhibition>
       <div id=eTitle>Exhibition</div>
       <div id=eContent>다가오는 전시를 확인하세요.</div>
-      <a href="" class=more><img src="/display?fileName=more.png"/></a>
+      <a href="/exh/list" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
 	<jsp:include page="test.jsp"/>
 	<br><br>
 	<jsp:include page="footer.jsp"/>
 </body>
 <script>
+
 	/* 홈 첫부분 슬라이드 구현 */
 	var JUI = JUI || {};
 
