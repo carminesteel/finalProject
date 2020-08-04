@@ -259,7 +259,7 @@ li {
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
-		<c:forEach items="${list}" var="list" begin="1" end="10">
+		<c:forEach items="${list}" var="list" begin="0" end="9">
 			<div class="imgContainer">
 				<img src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
@@ -286,7 +286,7 @@ li {
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
-		<c:forEach items="${plist}" var="plist" begin="1" end="10">
+		<c:forEach items="${plist}" var="plist" begin="0" end="9">
 			<div class="imgContainer">
 				<img src="display?fileName=${plist.image}"/>
 				<div class="hoverInfo">
@@ -313,20 +313,21 @@ li {
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
-		<c:forEach items="${list}" var="list" begin="1" end="10">
+		<c:forEach items="${flist}" var="flist" begin="0" end="9">
 			<div class="imgContainer">
-				<img src="display?fileName=${list.image}"/>
+				<img src="display?fileName=${flist.image}"/>
 				<div class="hoverInfo">
-				<span class="hoverInfo1">${list.title}</span><br><br><br>
-				<span class="hoverInfo2">${list.content}</span>
+				<span class="hoverInfo1">${flist.title}</span><br><br><br>
+				<span class="hoverInfo2">${flist.content}</span>
 				</div>
 				<div class="imgInfo">
-					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
-								  ${list.nickname}</span>&emsp;
+					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${flist.u_image}"/> 
+					
+								  ${flist.nickname}</span>&emsp;
 						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
-							<span>${list.view}</span>&emsp;
+							<span>${flist.view}</span>&emsp;
 						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
-							<span>${list.b_like}</span>
+							<span>${flist.b_like}</span>
 				</div>
 				<br>
 			</div>

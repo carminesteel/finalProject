@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.FeedMapper">
-    <select id="TargetRead" resultType="string">
-        select target from follower where follower=#{id}
+     
+     <select id="feedView" resultType="com.example.domain.BoardVO">
+    	select a.*
+    	from (select b.*, f.* from board b, follower f where b.id=f.target) a, board b 
+    	where follower=#{id}
+        group by b_no
+    	order by date desc;
     </select>
+
     
-    <select id="TargetBoardCount" resultType="int">
-    	select count(*) from board where id=#{target}
+    <select id="getFollowing" resultType="int">
+    select count(*) from follower where follower=#{id};
     </select>
-    
-    <select id="TargetBoardListRead" resultType="com.example.domain.BoardVO">
-        select * from board where id=#{target}
+       
+    <select id="feedList" resultType="com.example.domain.BoardVO">
+    	select a.*
+    	from (select b.*, f.* from board b, follower f where b.id=f.target) a, board b 
+    	where follower=#{id}
+    	group by target
+    	order by date desc
+    	limit 0,#{targetCnt}
     </select>
 </mapper>

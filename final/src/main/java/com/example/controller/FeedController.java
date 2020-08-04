@@ -27,22 +27,7 @@ public class FeedController {
 	@RequestMapping("/feed/list")
 	@ResponseBody
 	public ArrayList<BoardVO> list(String id,Model model) {
-		List<String> targets=mapper.TargetRead(id);
-		System.out.println(targets);
-		ArrayList<BoardVO> BoardList=new ArrayList<BoardVO>();
-		
-		if(targets.size()>0) {
-		for(String target:targets) {
-				int num=mapper.TargetBoardCount(target);
-				System.out.println(targets.size()+"=»çÀÌÁî /"+num+"°¹¼ö");
-				if(num>0) {
-					BoardList.add(mapper.TargetBoardListRead(target)); 
-					
-				}
-					
-			}
-		}
-		System.out.println(BoardList.toString());
+		ArrayList<BoardVO> BoardList=(ArrayList<BoardVO>) mapper.feedView(id);
 		return BoardList;
 	}
 	

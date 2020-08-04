@@ -17,27 +17,30 @@
 
 <table id=menu style="height:80px;width:100%;box-shadow:0 5px 15px rgba(0, 0, 0, 0.5);">
    <tr>
-      <td id=logo style=float:left;margin-top:16px;padding-left:65px><a class=menuA href="/">Artists</a></td>
+      <td id=logo style="margin-top:16px;padding-left:65px;width:150px;"><a class=menuA href="/">Artists</a></td>
       <td>
-      	<a class=menuA href="/feed/feed">피드</a>&emsp;&emsp;&emsp;
+      	<a class=menuA href="/feed/feed" style="margin-left:380px;">피드</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/board/list">탐색</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/product/list">아트굿즈</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/exh/list">전시</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      	<c:if test="${position==1 || position==2}">
-      	<a class=menuA href="/login/mypage">MyPage</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-      	</c:if>
       </td>
       <c:if test="${position==null}">
-      		<td style=float:right;padding-right:65px;><a class=menuA href="/login/login">로그인</a></td>
+      		<td style="width:450px;"><a class=menuA href="/login/login">로그인</a></td>
       </c:if>
       <c:if test="${position==1 || position==2}">
       		<c:if test="${position==1}">
       		
-      			<td style=float:right;padding-right:65px;><a class=menuA href="/login/logout">로그아웃</a></td>
+      			<td style="width:450px;">
+      			<span style=margin-right:30px;>${id}님 환영합니다!</span>
+      				<c:if test="${position==1 || position==2}">
+      					<a class=menuA href="/login/mypage" style="margin-right:30px">MyPage</a>
+      				</c:if>
+      				<a class=menuA href="/login/logout">로그아웃</a>
+      			</td>
       		</c:if>
       		<c:if test="${position==2}">
       		
-      			<td style=float:right;padding-right:65px;>관리자님&nbsp&nbsp<a class=menuA href="/login/logout">로그아웃</a></td>
+      			<td style=float:right;padding-right:65px;>관리자님&nbsp;&nbsp;<a class=menuA href="/login/logout">로그아웃</a></td>
       		</c:if>
       </c:if>
    </tr>
