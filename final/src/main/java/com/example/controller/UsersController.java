@@ -35,8 +35,8 @@ public class UsersController {
 	@Autowired 
 	BCryptPasswordEncoder passEncoder;
 	
-	/* ÀÌ¹ÌÁöÆÄÀÏ ºê¶ó¿ìÀú¿¡ Ãâ·Â */
-	@Resource(name = "uploadPath") /* ÆÄÀÏ ¾÷·Îµå¸¦ À§ÇØ ÇÊ¿ä */
+	/* ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ */
+	@Resource(name = "uploadPath") /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµå¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ */
 	private String path;
 
 	@RequestMapping("/login/login")
@@ -47,13 +47,13 @@ public class UsersController {
 	@RequestMapping(value = "/login/login", method = RequestMethod.POST)
 	@ResponseBody
 	public int loginPost(UsersVO vo, HttpSession session) {
-		int result = 0; // È¸¿ø Á¸ÀçÇÏÁö ¾ÊÀº °æ¿ì, ¾ÆÀÌµð Á¸ÀçÇÏÁö ¾Ê´Â °æ¿ì
+		int result = 0; // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½
 
 		UsersVO readVO = mapper.read(vo.getId());
 		if (readVO != null) {
-			if (passEncoder.matches(vo.getPass(), readVO.getPass())) { // ·Î±×ÀÎ ¼º°ø
+			if (passEncoder.matches(vo.getPass(), readVO.getPass())) { // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				if (readVO.getPosition() == 1) {
-					result = 1; // ÀÏ¹Ý user
+					result = 1; // ï¿½Ï¹ï¿½ user
 					session.setAttribute("id", readVO.getId());
 					session.setAttribute("name", readVO.getNickname());
 					session.setAttribute("position", readVO.getPosition());
@@ -63,18 +63,18 @@ public class UsersController {
 					session.setAttribute("name", readVO.getName());
 					session.setAttribute("position", readVO.getPosition());
 				} else if (readVO.getPosition() == 3){
-					result = 3; // ºí·¢À¯Àú
+					result = 3; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				} else {
-					result = 4;//È¸¿øÅ»Åð
+					result = 4;//È¸ï¿½ï¿½Å»ï¿½ï¿½
 				}
 			} else {
-				result = 5; // ºñ¹Ð¹øÈ£ Æ²·ÈÀ» °æ¿ì
+				result = 5; // ï¿½ï¿½Ð¹ï¿½È£ Æ²ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			}
 		}
 		return result;
 	}
 
-	// ³×ÀÌ¹ö ·Î±×ÀÎ °ü·Ã (¾ÆÁ÷ ¿Ï¼ºx)
+	// ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½x)
 	@RequestMapping("/login/naverlogin")
 	public String loginNaver() {
 		return "/login/naverlogin";
@@ -89,12 +89,12 @@ public class UsersController {
 		return "redirect:http://localhost:8088/";
 	}
 
-	// È¸¿ø°¡ÀÔ ´­·¶À» ¶§ ¶ß´Â (µ¿ÀÇ Ã¢)
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß´ï¿½ (ï¿½ï¿½ï¿½ï¿½ Ã¢)
 	@RequestMapping("/login/agree")
 	public void agree() {
 	}
 
-	// ¾ÆÀÌµð Áßº¹°Ë»ç
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ï¿½Ë»ï¿½
 	@RequestMapping("/insert/read")
 	@ResponseBody
 	public Integer Iread(String id) {
@@ -109,7 +109,7 @@ public class UsersController {
 		return cnt;
 	}
 
-	// È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping("/login/insert")
 	public void insert() {
 	}
@@ -119,11 +119,11 @@ public class UsersController {
 		MultipartFile file = multi.getFile("file");
 		session.setAttribute("id", vo.getId());
 		session.setAttribute("name", vo.getName());
-		// ÆÄÀÏ¾÷·Îµå
-		if (!file.isEmpty()) { // ¾÷·Îµå ÆÄÀÏÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é
-			String image = System.currentTimeMillis() + file.getOriginalFilename(); // ÆÄÀÏ¸íÀÌ
-																					// Áßº¹µÇÁö¾Ê°Ô
-																					// ÇÏ±âÀ§ÇØ¼­
+		// ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Îµï¿½
+		if (!file.isEmpty()) { // ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			String image = System.currentTimeMillis() + file.getOriginalFilename(); // ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½
+																					// ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê°ï¿½
+																					// ï¿½Ï±ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½
 																					// currentTimeMillis
 			file.transferTo(new File(path + File.separator + image));
 			vo.setU_image(image);
@@ -151,7 +151,6 @@ public class UsersController {
 	public void mypage(Model model,HttpSession session) {
 		String id=(String) session.getAttribute("id");
 		model.addAttribute("vo", mapper.read(id));
-		
 		model.addAttribute("blist",Mmapper.myBlist(id));
 		model.addAttribute("plist",Mmapper.myPlist(id));
 		
@@ -177,7 +176,7 @@ public class UsersController {
 	@RequestMapping(value="/login/mypagePassChk", method=RequestMethod.POST)
 	@ResponseBody
 	public int mypagePassChk(UsersVO vo){
-		System.out.println("¤¾¤·");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½");
 		int chk=-1;
 			UsersVO readVO = mapper.read(vo.getId());
 			if(passEncoder.matches(vo.getPass(), readVO.getPass())){

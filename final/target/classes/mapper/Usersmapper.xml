@@ -7,7 +7,7 @@
 
 	<select id="list" resultType="com.example.domain.UsersVO">
 		select p.*, u.*, count(*) cnt from users u, product p where p.id=u.id and
-		position=1 group by p.id;
+		position=1 group by p.id
 	</select>
 
 	<select id="proimage" resultType="com.example.domain.UsersVO">

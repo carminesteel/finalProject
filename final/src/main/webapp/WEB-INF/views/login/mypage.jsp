@@ -5,6 +5,28 @@
 <html>
 <head>
 <style>
+html {
+	font-family: Noto Sans KR;
+}
+
+#btn {
+	all: unset;
+	background: #2e6cb5;
+	width: 200px;
+	height: 35px;
+	color: white;
+	border-radius: 20px 20px 20px 20px;
+}
+
+#blist{
+	width:1118px;
+	height:886px;
+}
+
+#btn:hover{
+	cursor:pointer;
+}
+
 #passChk {
 	text-align: center;
 	width: 500px;
@@ -14,21 +36,17 @@
 }
 
 #userRead {
-	border: 2px solid black; width:420px;
-	margin-left:10px;
+	width: 304px;
+	height: 478px;
+	margin-right:30px;
 	text-align: center;
-	overflow:hidden;
-	display:inline-block;
-	float:left
+	overflow: hidden;
+	display: inline-block;
+	float: left;
+	background: white;
+	padding: 26px;
+	border-radius:5px 5px 5px 5px;
 }
-
-#usertable{
-	float:left;
-}
-
-#userRead table{margin:auto;}
-
-#userRead td{padding:7px;}
 
 .btn-area button {
 	width: 300px;
@@ -44,9 +62,52 @@
 	outline: none;
 }
 
-#u_list {display:inline-block;}
+#u_list {
+	display: inline-block;
+}
 
-.mypageItems:hover{cursor:pointer;}
+.mypageItems:hover {
+	cursor: pointer;
+}
+
+.mypageItems {
+	font-weight: light;
+	font-size: 20px;
+	margin-right:10px;
+	display:inline-block;float:left;width:80px;height:40px
+}
+
+#pTitle {
+	font-weight: bold;
+	font-size: 70px;
+	color: white;
+}
+
+#pContent {
+	font-weight: 200;
+	font-size: 30px;
+	color: white;
+}
+
+.infoC {
+	width: 100%;
+}
+
+.left {
+	width: 122px;
+	display: inline-block;
+	font-size: 17px;
+	height: 35px;
+	text-align: left
+}
+
+.right {
+	width: 122px;
+	display: inline-block;
+	font-size: 17px;
+	height: 35px;
+	text-align: right;
+}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
@@ -54,72 +115,85 @@
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;height:1080px;">
 	<jsp:include page="../menu.jsp" />
-	<div style=height:1080px;>		
-		<br><br><br><br><br><br>
-		<div id="passChk">
+	
+	<div style="background:#2b4163;height:1200px;padding:80px;padding-top:0px;padding-left:120px;">
+	<div style="height:220px;padding-left:15px;"><br><br>
+	<div id=pTitle>MyPage</div>
+	<div id=pContent>${vo.nickname} 님의 프로필입니다.</div>
+	</div>		
+		<!-- <div id="passChk">
 			<h4>비밀번호 확인</h4>
 			<input type="text" id="chkPass">
 			<button>확인</button>
-		</div> 
-		<div id="userRead">
-			<table>
-			<tr>
-				<td colspan=2><img src="../display?fileName=${vo.u_image}" width=200 height=200 style="border-radius:50%"/></td>
-			</tr>
-			<tr>
-				<td width=150>ID</td>
-				<td>${vo.id}</td>				
-			</tr>
-			<tr>
-				<td>이름</td>
+		</div> -->
+		<div style="width:1700px;height:1100px;text-align:center;">
+			<div id="userRead">
+				<div
+					style="width: 193px; height: 213px;margin: auto; display: inline-block">
+					<img src="../display?fileName=${vo.u_image}" width=113px
+						height=113px style="border-radius: 50%" /><br>
+					<div style="font-size: 26px; font-weight: bold">${vo.nickname}</div>
+					<br>
+					<div style="font-size: 13px;">${vo.introduce}</div>
+					<%-- <td>${vo.id}</td>				
+			
 				<td>${vo.name}</td>				
-			</tr>
-			<tr>
-				<td>닉네임</td>
-				<td>${vo.nickname}</td>				
-			</tr>
-			<tr>
-				<td>Phone</td>		
+			
+				<td></td>				
+			
 				<td>${vo.phone}</td>				
-			</tr>
-			<tr>
-				<td>자기소개</td>		
-				<td>${vo.introduce}</td>				
-			</tr>
-			<tr>
-				<td>주소</td>		
-				<td>${vo.addr}</td>			
-			</tr>
-			<tr>
-				<td>이메일</td>		
-				<td>${vo.email}</td>				
-			</tr>
-			<tr class="btn-area">
-				<td style="text-align:center; "colspan=2>
-					 <button id="btn" onClick="location.href='usersUpdate'">회원정보 수정</button>
-				</td>
-			</tr>	
-			</table>
-		</div>
+			
+				<td></td>				
 		
-		<div id="mypageList" style="background:blue;display:inline-block;float:left;margin-left:10px;width:1400px;height:900px;" >
-			<div class="mypageItems" id="artWork" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
-				<h3>아트웍</h3>
+				<td>${vo.addr}</td>			
+			
+				<td>${vo.email}</td>		 --%>
+				</div>
+				<br>
+				<br>
+				<button id="btn"
+					onClick="location.href='usersUpdate'">내 프로필 편집</button>
+				<br>
+				<br>
+				<div
+					style="width: 250px; height: 153px;display: inline-block; margin: auto">
+					<div class="infoC">
+						<span class=left>팔로우</span> <span class=right>${vo.follow}</span>
+					</div>
+					<div>
+						<span class=left>팔로워</span> <span class=right>${vo.follower}</span>
+					</div>
+					<div>
+						<span class=left>총 작품</span> <span class=right>3</span>
+					</div>
+					<div>
+						<span class=left>총 수익</span> <span class=right>4</span>
+					</div>
+				</div>
+				<div style="font-size:15px">
+					${vo.email}
+				</div>
 			</div>
-			<div class="mypageItems" id="goods" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
-				<h3>굿즈</h3>
+
+			<div id="mypageList" style="background:white;display:inline-block;float:left;margin-left:10px;width:1200px;height:950px;padding:30px;border-radius:6px 6px 6px 6px" >
+			<div style="width:1100px;font-weight:300">
+			<div class="mypageItems" id="artWork" >
+				아트웍
 			</div>
-			<div class="mypageItems" id="following" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
-				<h3>팔로잉</h3>
+			<div class="mypageItems" id="goods">
+				굿즈
 			</div>
-			<div class="mypageItems" id="follower" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
-				<h3>팔로워</h3>
+			<div class="mypageItems" id="following" >
+				팔로잉
 			</div>
-			<div class="mypageItems" id="statistics" style="background:red;display:inline-block;float:left;margin-left:10px;width:200px;height:60px;" >
-				<h3>통계</h3>
+			<div class="mypageItems" id="follower">
+				팔로워
+			</div>
+			<div class="mypageItems" id="statistics">
+			</div>
 			</div>
 			
-			<div style="display:inline-block;float:center;background:yellow;margin:10px;width:1380px;height:820px;" >
+			<div style="display:inline-block;float:center;margin:10px;width:1135px;height:870px;" >
 				
 				
 				<div id=Blist>
@@ -127,9 +201,12 @@
 						<h1>등록한 게시물이 없습니다</h1>
 					</c:if>
 					<c:if test="${not empty blist}">
+					<div style="display:inline-block;float:left;margin:17px">
+							<img src="../display?fileName=addWork.jpg" width=343 height=272>
+						</div>
 						<c:forEach items="${blist}" var="bvo">
-							<div style="display:inline-block;float:left;">
-								<img src="../display?fileName=${bvo.image}" width=200 height=200>
+							<div style="display:inline-block;float:left;margin:17px">
+								<img src="../display?fileName=${bvo.image}" width=343 height=272>
 							</div>
 						</c:forEach>
 					</c:if>
@@ -142,9 +219,12 @@
 						<h1>등록한 상품이 없습니다</h1>
 					</c:if>
 					<c:if test="${not empty plist}">
+					<div style="display:inline-block;float:left;margin:17px">
+							<img src="../display?fileName=addWork.jpg" width=343 height=272>
+						</div>
 					<c:forEach items="${plist}" var="pvo">
-						<div style="display:inline-block;float:left;">
-							<img src="../display?fileName=${pvo.image}" width=200 height=200>
+						<div style="display:inline-block;float:left;margin:17px">
+							<img src="../display?fileName=${pvo.image}" width=343 height=272>
 						</div>
 					</c:forEach>
 					</c:if>
@@ -174,7 +254,7 @@
 					<c:if test="${not empty followerInfo}">
 					<c:forEach items="${followerInfo}" var="followerList">
 						<div style="display:inline-block;float:left;">
-							<span>${followerList.name}</span>
+							<%-- <span>${followerList.name}</span> --%>
 							<img src="../display?fileName=${followerList.u_image}" width=200 height=200>
 						</div>
 					</c:forEach>
@@ -184,14 +264,15 @@
 			</div>
 		</div>
 		</div>
+		</div>
 
 	<jsp:include page="../footer.jsp" />
 </body>
 <script>
 	var id="${id}";
-	$("#Plist").hide();
+	/* $("#Plist").hide();
 	$("#followingList").hide();
-	$("#followerList").hide();
+	$("#followerList").hide(); */
 	
 	
 	$("#artWork").click(function(){
@@ -220,10 +301,10 @@
 	})
 	
 	
-	$("#userRead").hide();
-	$("#mypageList").hide();
+	/* $("#userRead").hide();
+	$("#mypageList").hide(); */
 	
- 	$("#passChk").on("click", "button", function() {
+	/*$("#passChk").on("click", "button", function() {
 		var pass = $("#passChk").find("#chkPass").val();
 		if (pass != "") {
 			$.ajax({
@@ -239,7 +320,7 @@
 						$("#passChk").hide();
 						$("#userRead").show();
 						$("#mypageList").show();
-						/* getMyPageList(); */
+						 getMyPageList(); 
 						
 					}
 				}
@@ -248,9 +329,9 @@
 			alert("비밀번호를 입력해주세요");
 			$("#passChk").find("#chkPass").focus();
 		}
-	}) 
-/* 	
-	function getMyPageList(){
+	}) */
+	
+	/* function getMyPageList(){
 		$.ajax({
 			type:"post",
 			url:"/mypage/list",
@@ -258,7 +339,7 @@
 			dataType:"json",
 			success:function(){
 			}
-		})
+		}) 
  	} */
 </script>
 </html>
