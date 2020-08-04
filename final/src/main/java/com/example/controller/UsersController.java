@@ -25,13 +25,16 @@ import com.mysql.fabric.xmlrpc.base.Array;
 
 @Controller
 public class UsersController {
-
 	@Autowired
 	UsersMapper mapper;
 
 	@Autowired
+	MyPageMapper Mmapper;
+	
+	
+	@Autowired 
 	BCryptPasswordEncoder passEncoder;
-
+	
 	/* 이미지파일 브라우저에 출력 */
 	@Resource(name = "uploadPath") /* 파일 업로드를 위해 필요 */
 	private String path;
@@ -59,10 +62,10 @@ public class UsersController {
 					session.setAttribute("id", readVO.getId());
 					session.setAttribute("name", readVO.getName());
 					session.setAttribute("position", readVO.getPosition());
-				} else if (readVO.getPosition() == 3) {
+				} else if (readVO.getPosition() == 3){
 					result = 3; // 블랙유저
 				} else {
-					result = 4;// 회원탈퇴
+					result = 4;//회원탈퇴
 				}
 			} else {
 				result = 5; // 비밀번호 틀렸을 경우
@@ -119,9 +122,9 @@ public class UsersController {
 		// 파일업로드
 		if (!file.isEmpty()) { // 업로드 파일이 비어있지 않으면
 			String image = System.currentTimeMillis() + file.getOriginalFilename(); // 파일명이
-			// 중복되지않게
-			// 하기위해서
-			// currentTimeMillis
+																					// 중복되지않게
+																					// 하기위해서
+																					// currentTimeMillis
 			file.transferTo(new File(path + File.separator + image));
 			vo.setU_image(image);
 		}
@@ -143,136 +146,111 @@ public class UsersController {
 		session.invalidate();
 		return "redirect:/login/login";
 	}
-
+		
 	@RequestMapping("/login/mypage")
-	public void mypage(Model model, HttpSession session) {
-		String id = (String) session.getAttribute("id");
+	public void mypage(Model model,HttpSession session) {
+		String id=(String) session.getAttribute("id");
 		model.addAttribute("vo", mapper.read(id));
-	}
-
-	@RequestMapping(value = "/login/mypagePassChk", method = RequestMethod.POST)
-	@ResponseBody
-	public int mypagePassChk(UsersVO vo) {
-		System.out.println("ㅎㅇ");
-		int chk = -1;
-		UsersVO readVO = mapper.read(vo.getId());
-		if (passEncoder.matches(vo.getPass(), readVO.getPass())) {
-			chk = 1;
-		} else {
-			chk = 0;
+		
+		model.addAttribute("blist",Mmapper.myBlist(id));
+		model.addAttribute("plist",Mmapper.myPlist(id));
+		
+		List<String> followingList = Mmapper.myFollowing(id);
+		ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
+		if(followingList.size()>0) {
+			for(String following:followingList) {
+				followingInfo.add(Mmapper.UserRead(following));
+			}
 		}
+		model.addAttribute("followingInfo",followingInfo);
 
+		List<String> followerList = Mmapper.myFollower(id);
+		ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
+		if(followerList.size()>0) {
+			for(String follower:followerList) {
+				followerInfo.add(Mmapper.UserRead(follower));
+			}
+		}
+		model.addAttribute("followerInfo",followerInfo);
+	}
+	
+	@RequestMapping(value="/login/mypagePassChk", method=RequestMethod.POST)
+	@ResponseBody
+	public int mypagePassChk(UsersVO vo){
+		System.out.println("ㅎㅇ");
+		int chk=-1;
+			UsersVO readVO = mapper.read(vo.getId());
+			if(passEncoder.matches(vo.getPass(), readVO.getPass())){
+				chk=1;
+			}else{
+				chk=0;
+			}
+		
 		return chk;
 	}
-
 	@RequestMapping("/login/usersUpdate")
-	public void usersUpdate() {
-
+	public void usersUpdate(){
+		
 	}
-
+	
 	@RequestMapping("/user/read")
-	public void userRead(Model model, String id) {
+	public void userRead(Model model,String id) {
 		model.addAttribute("vo", mapper.read(id));
-	}
+		
+		model.addAttribute("blist",Mmapper.myBlist(id));
+		model.addAttribute("plist",Mmapper.myPlist(id));
+		
+		List<String> followingList = Mmapper.myFollowing(id);
+		System.out.println(followingList.toString());
+		ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
+		if(followingList.size()>0) {
+			for(String following:followingList) {
+				followingInfo.add(Mmapper.UserRead(following));
+			}
+		}
+		model.addAttribute("followingInfo",followingInfo);
 
+		List<String> followerList = Mmapper.myFollower(id);
+		System.out.println(followerList.toString());
+		ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
+		if(followerList.size()>0) {
+			for(String follower:followerList) {
+				followerInfo.add(Mmapper.UserRead(follower));
+			}
+		}
+		model.addAttribute("followerInfo",followerInfo);
+	}
+	
+	
+	
 	@RequestMapping("/user/followChk")
 	@ResponseBody
-	public int followChk(@RequestParam(value = "follower") String follower,
-			@RequestParam(value = "target") String target) {
-		int chk = mapper.followChk(follower, target);
-
+	public int followChk(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
+		int chk=mapper.followChk(follower, target);
+		
 		System.out.println(chk);
 		return chk;
 	}
-
+	
 	@RequestMapping("/user/followUpdate")
 	@ResponseBody
-	public int followUpdate(@RequestParam(value = "follower") String follower,
-			@RequestParam(value = "target") String target) {
-		int chk = mapper.followChk(follower, target);
+	public int followUpdate(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
+		int chk=mapper.followChk(follower, target);
 		int followerCnt;
 		int followingCnt;
-		if (chk == 0) {
+		if(chk==0) {
 			mapper.followInsert(follower, target);
-			followerCnt = mapper.followerCnt(target);
-			followingCnt = mapper.followingCnt(follower);
+			followerCnt=mapper.followerCnt(target);
+			followingCnt=mapper.followingCnt(follower);
 			mapper.followerUpdate(followerCnt, target);
 			mapper.followUpdate(followingCnt, follower);
-		} else {
+		}else {
 			mapper.followDelete(follower, target);
-			followerCnt = mapper.followerCnt(target);
-			followingCnt = mapper.followingCnt(follower);
+			followerCnt=mapper.followerCnt(target);
+			followingCnt=mapper.followingCnt(follower);
 			mapper.followerUpdate(followerCnt, target);
 			mapper.followUpdate(followingCnt, follower);
 		}
 		return followerCnt;
-	}
-
-	// 아이디 찾기 맵핑
-	@RequestMapping("/login/idFind")
-	public void idFind() {
-	}
-
-	// 아이디 찾기
-	@RequestMapping(value = "/login/idFind", method = RequestMethod.POST)
-	public String find_id() throws Exception {
-		return "/login/login";
-	}
-
-	// 이메일로 아이디 찾기
-	@RequestMapping("/find_id/read")
-	@ResponseBody
-	public Integer Eread(String email) {
-		int cnt = mapper.find_id_cnt(email);
-		System.out.println(cnt);
-		return cnt;
-	}
-
-	@RequestMapping("/find_id/readid")
-	@ResponseBody
-	public UsersVO EreadId(String email) {
-		return mapper.find_id(email);
-	}
-	///////////////////////////////////////////////////////////////////////////////////////////////
-
-	// 비번 찾기 맵핑
-	@RequestMapping("/login/passFind")
-	public void passFind() {
-	}
-
-	// 아이디를 치면 이메일 찾기
-	@RequestMapping(value = "/login/passFind", method = RequestMethod.POST)
-	public String find_email() throws Exception {
-
-		return "/login/login";
-	}
-
-	// 아이디로 이메일 찾기
-	@RequestMapping("/find_email/read")
-	@ResponseBody
-	public Integer IIread(String id) {
-		int cnt = mapper.find_email_cnt(id);
-		System.out.println(cnt);
-		return cnt;
-	}
-
-	@RequestMapping("/find_email/readEmail")
-	@ResponseBody
-	public UsersVO IreadEmail(String id) {
-		return mapper.find_email(id);
-	}
-
-	// 비밀번호 찾기 이메일 인증
-	@RequestMapping("/memberPass/email_injeung")
-	public void emailPass_injeung() {
-	}
-
-	// 비밀번호 update
-	@RequestMapping(value = "/login/passFind/update", method = RequestMethod.POST)
-	@ResponseBody
-	public void update(UsersVO vo) {
-		vo.setPass(passEncoder.encode(vo.getPass()));
-		mapper.update(vo);
-
 	}
 }
