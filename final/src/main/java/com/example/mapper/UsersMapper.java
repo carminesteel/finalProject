@@ -20,5 +20,12 @@ public interface UsersMapper {
 	public int followingCnt(String follower);
 	public void followerUpdate(@Param(value="follower") int followerCnt, @Param(value="id") String target);
 	public void followUpdate(@Param(value="follow") int followingCnt, @Param(value="id") String follower);
+	/*아이디 찾기*/
+	public int find_id_cnt(String email);
+	public UsersVO find_id(String email);
+	/*비밀번호 찾기 부분*/
+	public int find_email_cnt(String id);
+	public UsersVO find_email(String email);
 	
+	public void update(UsersVO vo);
 }

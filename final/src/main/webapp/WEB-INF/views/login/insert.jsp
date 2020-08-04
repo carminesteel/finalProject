@@ -8,7 +8,6 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css" />
 <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
-<link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/login.css"/>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=285177e645b698276895abf188247b00&libraries=services"></script>
@@ -33,33 +32,33 @@
 		<table width=800 id="signup">
 			<tr id=id_row>
 				<td><input type="hidden" id=idchk value=-1> <input
-					type="text" class="box" placeholder="아이디" name="id" value="${id}" required> 
+					type="text" class="box" placeholder="아이디" name="id" value="" required> 
 					<input type="button" id=chkBtn value="중복체크"></td>
 			</tr>
 
 
 			<tr>
-				<td><input class="form-control" type="password" name="pass" value="${pass}"
+				<td><input class="form-control" type="password" name="pass" value=""
 					id="pass" placeholder="비밀번호" /> <span id="pwdRegErr"
 					class="help-block">8글자 이상 입력하세요.</span>
 			</tr>
 
 			<tr>
-				<td><input class="form-control" type="password" name="repass" value="${pass}"
+				<td><input class="form-control" type="password" name="repass" value=""
 					id="repass" placeholder="비밀번호 확인" /> <span id="rePwdErr"
 					class="help-block">비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
 			</tr>
 			<tr>
-				<td><input type="text" class="box" placeholder="이름" name="name" value="${name}"
+				<td><input type="text" class="box" placeholder="이름" name="name" value=""
 					required></td>
 			</tr>
 			<tr>
-				<td><input type="text" class="box" placeholder="닉네임" value="${nickname}"
+				<td><input type="text" class="box" placeholder="닉네임" value=""
 					name="nickname" required></td>
 			</tr>
 
 			<tr>
-				<td><input type="text" class="box" placeholder="TEL" value="${phone}"
+				<td><input type="text" class="box" placeholder="TEL" value=""
 					name="phone" required></td>
 			</tr>
 
@@ -67,6 +66,16 @@
 				<td><input class="form-control" type="text" name="email" id="email" placeholder="email" value="${emali}"/> 
 					<input type="button" id="sendMessage" value="이메일 인증">
 					<span id="emailErr"	class="help-block">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</span>
+			</tr>
+			
+			<tr id="chkEmail" style="display:none">
+				<td>
+				<input type="hidden" id=dice>
+				인증번호 입력 : <input type="number" name="email_injeung" placeholder="  인증번호를 입력하세요. ">
+				<button name="email_injeung_btn">확인</button>
+				<input type="hidden" id="injeung" value=0>
+				</td>
+				
 			</tr>
 
 			<tr>
@@ -103,12 +112,54 @@
 </body>
 <script>
 	//이메일 인증번호 전송 
-	$(frm).on("click", "#email_row #sendMessage", function(){
-		frm.action="/member/email";
+	$(frm).on("click", "#email_row #sendMessage", function(e){
+		e.preventDefault();
+		var email=$(frm.email).val();
+		if(email!=""){
+			$.ajax({
+				type:"post",
+				url:"/member/auth.do",
+				data:{"e_mail":email},
+				success:function(data){
+					alert("인증번호를 발송하였습니다.");
+					$("#dice").val(data);
+					$("#chkEmail").show();
+				}
+			})
+			
+		}else{
+			alert("Email을 입력해주세요");
+		}
+		
+		
+		/* frm.action="/member/email";
 		frm.method="post";
-		frm.submit();
+		frm.submit(); */
 	});
 
+	$(frm.email_injeung_btn).on("click",function(){
+		var dice=$("#dice").val();
+		var chkNum=$(frm.email_injeung).val();
+		if(chkNum!=""){
+			$.ajax({
+				type:"post",
+				url:"/member/join_injeung.do",
+				data:{"email_injeung":chkNum,"dice":dice},
+				dataType:"json",
+				success:function(data){
+					if(data==1){
+						alert("인증이 성공되었습니다.");
+						$("#injeung").val(1);
+					}else{
+						alert("인증이 실패하였습니다.");
+					}
+				}
+			})
+		}else{
+			alert("인증번호를 입력해주세요");
+		}
+	})
+	
 	//아이디 중복체크
 	$(frm).on("click", "#id_row #chkBtn", function() {
 		var id=$(frm.id).val();

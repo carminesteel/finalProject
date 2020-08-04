@@ -182,7 +182,9 @@ body::before {
 			<div id="naver_id_login" style="text-align: center;"></div>
 
 			<div class="caption">
-				<a href="">아아디 찾기</a><br> <a href="">비밀번호 찾기</a>
+				<a href="idFind">아아디 찾기</a><br>
+				<a href="passFind">비밀번호 찾기</a><br>
+				<a href="gaejiral">정재훈의 개지랄</a>
 			</div>
 		</div>
 	</section>
@@ -288,5 +290,6 @@ var dest="${dest}";
 	$("#userInsert").on("click", function() {
 		window.open("/login/agree", "", "width=600, height=800");
 	})
+	
 </script>
 </html>

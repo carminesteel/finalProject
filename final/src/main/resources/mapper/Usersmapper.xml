@@ -1,43 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.UsersMapper">
-    <select id="read" resultType="com.example.domain.UsersVO">
-        select * from users where id=#{id}
-    </select>
-    
-    <select id="list" resultType="com.example.domain.UsersVO">
-    	select p.*, u.*, count(*) cnt from users u, product p where p.id=u.id and position=1 group by p.id;
-    </select>
-    
-    <select id="proimage" resultType="com.example.domain.UsersVO">
-    	select p.*, u.* from users u, product p where p.id=u.id and position=1
-    </select>
-    
-    <insert id="insert">
-    	insert into users (id,pass,name,nickname,phone,introduce,addr,email,u_image) 
-    	values(#{id},#{pass},#{name},#{nickname},#{phone},#{introduce},#{addr},#{email},#{u_image})
-    </insert>
-    
-    <select id="followChk" resultType="int">
-    	select count(*) from follower where follower=#{follower} and target=#{target}
-    </select>
-    
-    <insert id="followInsert">
-    	insert into follower values(#{follower},#{target})
-    </insert>
-    <delete id="followDelete">
-    	delete from follower where follower=#{follower} and target=#{target}
-    </delete>
-    <select id="followerCnt" resultType="int">
-    	select count(*) from follower where target=#{target}
-    </select>
-    <select id="followingCnt" resultType="int">
-    	select count(*) from follower where follower=#{follower}
-    </select>
-    <update id="followerUpdate">
-    	update users set follower = #{follower} where id=#{id}
+	<select id="read" resultType="com.example.domain.UsersVO">
+		select * from users where id=#{id}
+	</select>
+
+	<select id="list" resultType="com.example.domain.UsersVO">
+		select p.*, u.*, count(*) cnt from users u, product p where p.id=u.id and
+		position=1 group by p.id;
+	</select>
+
+	<select id="proimage" resultType="com.example.domain.UsersVO">
+		select p.*, u.* from users u, product p where p.id=u.id and position=1
+	</select>
+
+	<insert id="insert">
+		insert into users (id,pass,name,nickname,phone,introduce,addr,email,u_image)
+		values(#{id},#{pass},#{name},#{nickname},#{phone},#{introduce},#{addr},#{email},#{u_image})
+	</insert>
+
+	<select id="followChk" resultType="int">
+		select count(*) from follower where follower=#{follower} and
+		target=#{target}
+	</select>
+
+	<insert id="followInsert">
+		insert into follower values(#{follower},#{target})
+	</insert>
+	<delete id="followDelete">
+		delete from follower where follower=#{follower} and target=#{target}
+	</delete>
+	<select id="followerCnt" resultType="int">
+		select count(*) from follower where target=#{target}
+	</select>
+	<select id="followingCnt" resultType="int">
+		select count(*) from follower where follower=#{follower}
+	</select>
+	<update id="followerUpdate">
+		update users set follower = #{follower} where id=#{id}
+	</update>
+	<update id="followUpdate">
+		update users set follow = #{follow} where id=#{id}
+	</update>
+	
+	
+	<!-- 아이디 찾기 -->
+	<select id="find_id_cnt" resultType="int">
+		select count(*) from users	where email = #{email}
+	</select>
+
+	<select id="find_id" resultType="com.example.domain.UsersVO">
+		select * from users where email	= #{email}
+	</select>
+	<!-- 비번찾기 부분 -->
+	<select id="find_email_cnt" resultType="int">
+		select count(*) from users where id = #{id}
+	</select>
+	<select id="find_email" resultType="com.example.domain.UsersVO">
+		select * from users where id= #{id}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="update">
+    	update users set pass=#{pass} where id=#{id}
     </update>
-      <update id="followUpdate">
-    	update users set follow = #{follow} where id=#{id}
-    </update>
+	
 </mapper>
