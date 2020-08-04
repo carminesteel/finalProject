@@ -1,8 +1,10 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,10 +17,27 @@ public class CartController {
    @Autowired
    CartMapper cmapper;
    
-   
    @RequestMapping("/list")
-   public void list(Model model, String id) {
-      model.addAttribute("list", cmapper.list(id));
+   public void cart(String id) {
+   }
+   
+   @RequestMapping("/rest/list")
+   @ResponseBody
+   public ArrayList<CartVO> list(String id) {
+	   List<CartVO> list = cmapper.list(id);
+	   ArrayList<CartVO> clist= new ArrayList<CartVO>();
+	   
+	   if(list.size()>0) {
+		   for(CartVO vo:list) {
+			   int price=vo.getPrice();
+			   int quantity=vo.getQuantity();
+			   vo.setSum(price, quantity);
+			   
+			   clist.add(vo);
+		   }
+	   }
+	   
+	   return clist;
    }
    
    @RequestMapping("/insert")
@@ -42,5 +61,12 @@ public class CartController {
    public String plus(CartVO cvo) {
       cmapper.plus(cvo);
       return "redirect:/cart/list?id="+cvo.getId();
+   }
+   
+   @RequestMapping("/rest/delete")
+   @ResponseBody
+   public String delete(CartVO cvo) {
+	   cmapper.delete(cvo);
+	   return "redirect:/cart/list?id="+cvo.getId();
    }
 }

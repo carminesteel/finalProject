@@ -2,16 +2,29 @@ package com.example.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CartVO {
    private String id;
    private int p_no;
+   
+   @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss", timezone="Asia/Seoul")
    private Date buydate;
    private String p_image;
    private String title;
    private int price;
    private int quantity;
+   private int sum;
    
-   public String getTitle() {
+   
+   public int getSum() {
+	return sum;
+}
+public void setSum(int price, int quantity) {
+	this.sum = price*quantity;
+}
+
+public String getTitle() {
       return title;
    }
    public void setTitle(String title) {
