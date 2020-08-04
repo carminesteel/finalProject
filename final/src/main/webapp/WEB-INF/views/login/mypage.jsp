@@ -108,6 +108,15 @@ html {
 	height: 35px;
 	text-align: right;
 }
+
+.creatertab {
+   background: white;
+   width: 300px;
+   height: 100px;
+   float: left;
+   margin: auto;
+}
+
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
@@ -238,9 +247,23 @@ html {
 					</c:if>
 					<c:if test="${not empty followingInfo}">
 					<c:forEach items="${followingInfo}" var="followingList">
-						<div style="display:inline-block;float:left;">
-							<img src="../display?fileName=${followingList.u_image}" width=200 height=200>
-						</div>
+						<table class="creatertab" style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
+							<tr>
+								 <td id="creater" width=100 colspan=3 style="padding-bottom: 25px;">
+			                        
+			                        <img src="../display?fileName=${followingList.u_image}"   style="float: left; border-radius: 50%;" width=75 height=75 />
+			                     </td>
+			                     <td>
+			                        <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
+			                              <p style="font-size: 15px; margin: 0;">${followingList.nickname}</p>
+			                        </span>
+			                        <br>
+									<span style="text-align:center; width: 200px; float: left; padding-left: 25px;">
+										${followingList.introduce}
+									</span>
+			                     </td>
+							</tr>
+						</table>
 					</c:forEach>
 					</c:if>
 				</div>
@@ -253,10 +276,24 @@ html {
 					</c:if>
 					<c:if test="${not empty followerInfo}">
 					<c:forEach items="${followerInfo}" var="followerList">
-						<div style="display:inline-block;float:left;">
-							<%-- <span>${followerList.name}</span> --%>
-							<img src="../display?fileName=${followerList.u_image}" width=200 height=200>
-						</div>
+						<table width=400 class="creatertab" style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
+							<tr>
+								 <td id="creater" width=149 colspan=3 style="padding-bottom: 25px;">
+			                        
+			                        <img src="../display?fileName=${followerList.u_image}" style="float: left; border-radius: 50%;" width=75 height=75 />
+			                        </td>
+			                     <td>
+			                        <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
+			                              
+			                              <p style="font-size: 15px; margin:0;">${followerList.nickname}</p>
+			                        </span>
+			                        <br>
+									<span id="total">
+										${followerList.introduce}
+									</span>
+			                     </td>
+							</tr>
+						</table>
 					</c:forEach>
 					</c:if>
 				</div>
