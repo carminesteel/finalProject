@@ -153,12 +153,14 @@ input[type="password"] {
 }
 
 .creatertab {
-	background: blue;
+	border:1px solid #ededed;
 	width: 550px;
 	height: 138px;
 	float: left;
 	margin: auto;
-	
+	margin-left:10px;
+	margin-bottom:10px;
+	border-radius:5px 5px 5px 5px;
 }
 
 .imgList {
@@ -298,16 +300,16 @@ input[type="password"] {
 					<c:forEach items="${followingInfo}" var="followingList">
 						<table class="creatertab">
 							<tr>
-								 <td id="creater" width=100 colspan=3 style="padding-bottom: 25px;">
+								 <td id="creater" style="width:126px;">
 			                        
-			                        <img src="../display?fileName=${followingList.u_image}"   style="float: left; border-radius: 50%;" width=75 height=75 />
+			                        <img src="../display?fileName=${followingList.u_image}"   style="border-radius: 50%;" width=80 height=80 />
 			                     </td>
 			                     <td>
 			                        <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
 			                              <p style="font-size: 15px; margin: 0;">${followingList.nickname}</p>
 			                        </span>
 			                        <br>
-									<span style="text-align:center; width: 200px; float: left; padding-left: 25px;">
+									<span style="text-align:left; width: 200px; float: left; padding-left: 25px;">
 										${followingList.introduce}
 									</span>
 			                     </td>
