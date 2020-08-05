@@ -17,7 +17,7 @@ public class BoardVO {
  private String u_image;
  //ddff
  private ArrayList<String> images;
-
+ private int r_cnt;
 public ArrayList<String> getImages() {
    return images;
 }
@@ -90,6 +90,12 @@ public Date getDate() {
 }
 public void setDate(Date date) {
    this.date = date;
+}
+public int getR_cnt() {
+	return r_cnt;
+}
+public void setR_cnt(int r_cnt) {
+	this.r_cnt = r_cnt;
 }
 
 

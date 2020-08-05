@@ -85,8 +85,11 @@
 	<hr>
 	<jsp:include page="../b_reply/list.jsp"></jsp:include>
 	<jsp:include page="../footer.jsp"></jsp:include>
+	
 </body>
 <script>
+
+
 $("#btnReply").hide();
 
 var id="${id}";

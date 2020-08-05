@@ -1,19 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<!DOCTYPE html>
+   pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>댓글</title>
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시판 목록</title>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script   src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<link rel="stylesheet"
+   href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+   integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+   crossorigin="anonymous">
+
 <style>
-	#tbl1{text-align:center;}
+
+	#tbl1,#tbl0{text-align:center;}
 </style>	
 </head>
 <body>
+	<h1>댓글수${replyCount}
+	</h1>
 	<form action="/b_reply/insert" method="post" name="rfrm">
 		<input type="hidden" name="b_no" value="${vo.b_no}">
 		<input type="hidden" name="replyer" value="${id}">
@@ -22,34 +33,63 @@
 		
 	</form>
 	
-	
-	
-	<form action="/b_reply/delete" method="post" name="rfrm1">
-	<table id=tbl1 width=600></table>
-	<script id="temp" type="text/x-handlebars-template">	
+	<table id=tbl0>
 		<tr>
-			<td width=70>댓글번호</td>
-			<td width=100>작성자</td>
+			<td width=100>댓글번호</td>
+			<td width=200>작성자</td>
 			<td width=200>내용</td>
-			<td width=170>날짜</td>
-			<td width=30></td>
+			<td width=200>날짜</td>
+			<td width=50>삭제</td>
 		</tr>
+	</table>
+	<table id=tbl1></table>
+	<script id="temp" type="text/x-handlebars-template">	
 		{{#each .}}
-		<tr class="row">
-			<td class="r_no" >{{r_no}}</td>
-			<td class="replyer" >{{replyer}}</td>	
-			<td class="content" >{{content}}</td>
-			<td>{{date}}</td>
-			<td class="b_no">{{b_no}}</td>
-			<td><input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}}"></td>		
+	<tr class="row">
+			<td class="r_no" width=115>{{r_no}}</td>
+			<td class="replyer" width=200>{{replyer}}</td>	
+			<td width=200> <input type="text" class="content" value={{content}}></td>
+			<td width=200>{{date}}</td>
+			<td width=50>
+				<input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}}">
+		
+			</td>		
 		</tr>
 		{{/each}}
-	</script>
-	
-</form>
+	</script>   
+
+	<div id="pagination">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<c:if test="${pm.prev}">
+					<li class="page-item"><a class="page-link"
+						href="${pm.startPage-1}" aria-label="Previous"> <span
+							aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+				<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+					<li class="page-item"><a class="page-link" href="${i}">${i}</a></li>
+				</c:forEach>
+				<c:if test="${pm.next}">
+					<li class="page-item"><a class="page-link"
+						href="${pm.endPage+1}" aria-label="Next"> <span
+							aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
+
 </body>
 <script>
 var b_no = "${vo.b_no}";
+var page=1;
+$("#pagination").on("click", ".page-item .page-link", function(e) {
+    e.preventDefault();
+    page = $(this).attr("href");
+    R_list();  
+ });
+
 $("#tbl1").find(".row .b_no").hide();
 var id="${id}";
 Handlebars.registerHelper("printStyle",function(replyer){
@@ -67,10 +107,12 @@ function R_list(){
 $.ajax({
 	type:"post",
 	url:"/b_reply/read",
-	data:{"b_no":b_no},
+	data:{"b_no":b_no,"page":page},
+	dataType:"json",
 	success:function(data){
 		var temp=Handlebars.compile($("#temp").html());
 		$("#tbl1").html(temp(data));
+		alert(data.pm.prev);
 	}
 });
 }
@@ -95,6 +137,7 @@ $(rfrm).submit(function(e){
 		})
 	 }
 });
+
 
 $("#tbl1").on("click", ".row .rbtnDelete", function(){
 	var r_no=$(this).parent().parent().find(".r_no").html();

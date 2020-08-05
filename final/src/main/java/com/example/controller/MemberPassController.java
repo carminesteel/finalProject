@@ -22,14 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.domain.UsersVO;
-import com.example.hansub_project.service.member.MemberService;
 
 @Controller // 컨트롤러 빈 선언
 public class MemberPassController {
 
    @Inject // 서비스를 호출하기 위해서 의존성을 주입
    JavaMailSender mailSender; // 메일 서비스를 사용하기 위해 의존성을 주입함.
-   MemberService memberservice; // 서비스를 호출하기 위해 의존성을 주입
 
    // 로깅을 위한 변수
    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);

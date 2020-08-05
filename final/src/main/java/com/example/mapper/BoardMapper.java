@@ -17,6 +17,8 @@ public Integer BnoRead(BoardVO vo);
 public void addB_imagelist(@Param("images")String images, @Param("b_no")int b_no);
 public List<String> getB_imagelist(int b_no);
 public void delB_imagelist(int b_no);
+public int r_cnt(int b_no);
+public void board_r_cnt_update(BoardVO vo);
 
 //like
 public int likeTableChk(@Param(value = "id") String id,@Param(value = "b_no") int b_no);

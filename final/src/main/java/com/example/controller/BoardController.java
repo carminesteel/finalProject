@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.BoardVO;
+import com.example.domain.Criteria;
+import com.example.domain.PageMaker;
 import com.example.mapper.B_replyMapper;
 import com.example.mapper.BoardMapper;
 import com.example.service.BoardService;
@@ -89,10 +91,18 @@ public int LikeUpdate(@RequestParam(value ="id") String id,@RequestParam(value =
 }
 
 @RequestMapping("read")
-public void read(Model model, int b_no) {
+public void read(Model model, int b_no,Criteria cri) {
+	cri.setPerPageNum(10);
+	PageMaker pm=new PageMaker();
+	pm.setCri(cri);
+	pm.setTotalCount(rmapper.replyCount(b_no));
+	model.addAttribute("cri",cri);
+	model.addAttribute("pm",pm);
 	model.addAttribute("vo",mapper.read(b_no));
 	model.addAttribute("list", mapper.getB_imagelist(b_no));
 	model.addAttribute("vo",service.read(b_no));
+	model.addAttribute("replyCount",rmapper.replyCount(b_no));
+	
 }
 @RequestMapping(value="insert", method=RequestMethod.POST)
 public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //업로드할 파일을 받을때

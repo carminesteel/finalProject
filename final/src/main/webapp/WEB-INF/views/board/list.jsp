@@ -20,8 +20,12 @@
 	height: 200px;
 }
 
-#tbl .row .date {
+
+#tbl .row .view {
 	text-align: right;
+}
+#tbl .row .like{
+	text-align: left;
 }
 </style>
 <meta charset="UTF-8">
@@ -42,11 +46,16 @@
 				<img src="display?fileName=${vo.image}" width=100>
 		
 				<input type="hidden" class="b_no" value="${vo.b_no}">
-				<div class="date">
-					<fmt:formatDate value="${vo.date}" pattern="yyyy-MM-dd" />
+				<div>
+					<div class="like">좋아요 : ${vo.b_like} 
+										조회수 : ${vo.view}
+										댓글수 : ${vo.r_cnt}
+										
+					</div>
+					
 				</div>
-
-
+				
+				
 				<div class="title">${vo.title}</div>
 				<div class="content">${vo.content}</div>
 
@@ -56,9 +65,11 @@
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+
 	$("#tbl").on("click",".row img", function() {
 		var b_no = $(this).parent().find(".b_no").val();
 		location.href = "read?b_no=" + b_no;
 	});
+	
 </script>
 </html>

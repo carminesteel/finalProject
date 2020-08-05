@@ -8,9 +8,11 @@ import com.example.domain.B_replyVO;
 import com.example.domain.Criteria;
 
 public interface B_replyMapper {
-  public List<B_replyVO> rlist(int b_no);
+  public List<B_replyVO> rlist(@Param("b_no") int b_no, @Param("cri") Criteria cri);
+
   public void insert(B_replyVO vo);
-  public int total(int b_no);
+  public int replyCount(int b_no);
   public void delete(int r_no);
+
 }
 	
