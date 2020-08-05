@@ -9,6 +9,10 @@
 <meta charset="UTF-8">
 <title>Exhibition List</title>
 <style>
+html {
+	font-family: Noto Sans KR
+}
+
 #exBody {
 	background-color: #e9ecef;
 	z-index: 1;
@@ -16,15 +20,18 @@
 
 #exCenter {
 	background-color: white;
-	width: 1276px;
+	width: 1186px;
 	margin: auto;
 	z-index: 2;
+	padding: 45px;
 }
 
 #eTitle {
 	font-family: Noto Sans KR;
 	font-weight: bold;
-	font-size: 50px
+	font-size: 70px;
+	height: 80px;
+	color:#373e45;
 }
 
 #eButton {
@@ -33,19 +40,40 @@
 	left: 1100px;
 }
 
-#eTable {
+.eTable {
+	width: 210px;
+	height:434px;
 	margin: auto;
 	border-collapse: collapse;
-	padding: 20px;
+	padding: 40px;
+	display: inline-block;
+	text-align:center;
+	border:1px solid #eeeeee;
 }
 
-#eTable td {
-	width: 300px;
-	height: 500px;
-	padding: 20px;
+.box {
+	
+	float: left;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+	display: inline-block;
+	
 }
-      .box{width:318px;float:left;text-align:center; margin:auto;}
-      .image{width:280px; height:320px; margin:auto; margin-bottom:5px;}
+
+.image {
+	width: 210px;
+	height: 292px;
+	margin: auto;
+	margin-bottom: 5px;
+}
+
+#eContent {
+	font-size: 30px;
+	font-weight: 300;
+	width: 600px;
+	color:#373e45
+}
 </style>
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;">
@@ -54,29 +82,27 @@
 		<div id=exCenter>
 			<div id=eTitle>Exhibition</div>
 			<div id=eContent>현재 진행중인 전시에요</div>
+				
 				<c:if test="${id!=null}">		
-					<a href="/exh/insert" class=more><img id=eButton src="/display?fileName=eButton.png" /></a> <br>
-				</c:if>	
-				<table id=eTable border=1>
+					<a style="position:absolute;left:340px;top:210px;" href="/exh/insert" class=more><img id=eButton src="/display?fileName=eButton.png" /></a>
+				</c:if>
+					
+				<br>
 				<c:forEach items="${list}" var="vo">
-					<tr class="box">				
-						<td>
-							<input type="hidden" value="${vo.e_no}" class="e_no">	
-							<img class="image" src="/display?fileName=${vo.image}">
-							<br>
-							<br>
-							<br>
-							<b>${vo.title}</b>
-							<br>
-							<br>
-							기간 :${vo.date}
-							<br>
-							장소 :${vo.addr_detail}
-							<br>
-						</td>
-					</tr>
+					<div class=eTable>
+						<div class="box">				
+							
+								<input type="hidden" value="${vo.e_no}" class="e_no">	
+								<img class="image" src="/display?fileName=${vo.image}">
+								<div style="all:unset;display:inline-block;width:210px;text-align:left;">
+								<span style="font-size:18px;"><b>${vo.title}</b></span><br>
+								<span style="color:#9da2a8;font-size:12px">${vo.date}</span><br>
+								<span>${vo.addr_detail}</span>
+								</div>
+						</div>
+					</div>
 				</c:forEach>
-				</table>
+				
 			
 			<br> <br> <br> <br> <br> <br> <br>
 			<br>
@@ -86,6 +112,21 @@
 </body>
 <script>
 	var e_no;
+	
+	mouseExh();
+	
+	function mouseExh(){
+		$(".eTable").mouseover(function(){
+			
+			$(this).css('cursor','pointer');
+			$(this).css('box-shadow','inset 0px 0px 5px 3px #eeeeee');
+		})
+		
+		$(".eTable").mouseout(function(){
+			$(this).css('border','1px solid #eeeeee');
+			$(this).css('box-shadow','');
+		})
+	}
 	
 	$(".box").on("click",function(e){
 		e.preventDefault();

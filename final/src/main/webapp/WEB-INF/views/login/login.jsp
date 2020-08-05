@@ -34,8 +34,9 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 100%;
 	background-size: cover;
+	overflow:hidden;
 }
 
 body::before {
@@ -52,9 +53,9 @@ body::before {
 	position: relative;
 	z-index: 2;
 	background: white;
-	padding: 40px;
-	height: 750px;
-	margin: 30px;
+	padding: 50px;
+	height: 720px;
+	width:423px;
 	border-radius: 20px;
 }
 
@@ -66,9 +67,8 @@ body::before {
 }
 
 .int-area {
-	width: 400px;
+	width: 315px;
 	position: relative;
-	margin-top: 20px;
 }
 
 .int-area:first-child {
@@ -79,18 +79,18 @@ body::before {
 	width: 100%;
 	padding: 20px 10px 10px;
 	border-radius: 25px;
-	border: none;
-	border-bottom: 1px solid #999;
+	border: 1px solid #999;
 	font-size: 20px;
 	color: black;
 	outline: none;
+	height:38px;
 }
 
 .int-area label {
 	position: absolute;
-	left: 10px;
-	top: 15px;
-	font-size: 18px;
+	left: 15px;
+	top: 10px;
+	font-size: 12px;
 	color: #999;
 	transition: all .5s ease;
 }
@@ -120,20 +120,20 @@ body::before {
 
 .btn-area button {
 	width: 222px;
-	height: 50px;
-	background: #166cea;
+	height: 49px;
+	background: #1e33d2;
 	color: #fff;
-	font-size: 20px;
+	font-size: 16px;
 	border: none;
 	border-radius: 8px;
 	cursor: pointer;
-	margin-left: 2px;
 	margin-bottom: 6px;
 	outline: none;
+	padding-bottom:4px;
 }
 
 .caption {
-	margin-top: 30px;
+	margin-top: 35px;
 	text-align: left;
 }
 
@@ -146,45 +146,49 @@ body::before {
 </head>
 <body>
 	<img src="../display?fileName=loginback.png" id="bg" alt="">
+	<!-- <div style="display:inline-block;text-align:right;position:absolute;color:white;font-size:30px;top:900px;left:400px;letter-spacing:-5;font-weight:300;line-height:33px;">
+		당신만을 위한 아트 플랫폼<br>
+		아티스트
+	</div> -->
 	<section class="login-form">
-		<div style="">
+		<div style="margin-top:140px">
 			<a
-				style="font-family: Helvetica33-ExtendedThin; font-size: 80px; text-align: left; margin-left: 40px; color: #fff;"
+				style="font-family: Helvetica33-ExtendedThin; font-size: 110px; text-align: left; color: #fff;text-decoration:none"
 				href="/">Artists</a>
 		</div>
 		<div id=tlqkf>
-			<h1 style="height: 10px;">Login</h1>
-			<span>이곳이 처음이신가요?<a id="userInsert" style="color: red;">회원가입</a></span>
+			<span style="font-size:40px;font-weight:500;letter-spacing:-2">Login</span><br>
+			<span style="font-size:18px;font-weight:200">이곳이 처음이신가요? <a id="userInsert" style="color: #1d35c9;cursor:pointer">회원가입</a></span>
+			<br>
 			<br>
 			<br>
 			<br>
 			<br>
 			<form name="frm" action="login" method="post">
 				<div class="int-area">
+				
 					<input type="text" name="id" id="id" autocomplete="off" required>
 					<label for="id">USER NAME</label>
 				</div>
 				<br>
-				<br>
 				<div class="int-area">
+				
 					<input type="password" name="pass" id="pass" autocomplete="off"
 						required> <label for="pass">PASSWORD</label>
 				</div>
 				<br>
-				<br>
 				<div class="btn-area" style="text-align: center;">
-					<button id="btn" type="submit">LOGIN</button>
+					<button id="btn" type="submit">로그인</button>
 					<br>
 				</div>
 			</form>
-			<a id="kakao-login-btn" style="margin-left: 90px;"></a> <a
+			<a id="kakao-login-btn" style="margin-left: 51px;"></a> <a
 				href="http://developers.kakao.com/logout"></a> <br>
 			<div id="naver_id_login" style="text-align: center;"></div>
-
+			<br><br>
 			<div class="caption">
-				<a href="idFind">아아디 찾기</a><br>
+				<a href="idFind">아이디 찾기</a><br>
 				<a href="passFind">비밀번호 찾기</a><br>
-				<a href="gaejiral">정재훈의 개지랄</a>
 			</div>
 		</div>
 	</section>

@@ -300,18 +300,16 @@ input[type="password"] {
 					<c:forEach items="${followingInfo}" var="followingList">
 						<table class="creatertab">
 							<tr>
-								 <td id="creater" style="width:126px;">
+								 <td id="creater" style="width:126px;text-align:center;">
 			                        
-			                        <img src="../display?fileName=${followingList.u_image}"   style="border-radius: 50%;" width=80 height=80 />
+			                        <img src="../display?fileName=${followingList.u_image}"   style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
 			                     </td>
-			                     <td>
-			                        <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
-			                              <p style="font-size: 15px; margin: 0;">${followingList.nickname}</p>
-			                        </span>
-			                        <br>
-									<span style="text-align:left; width: 200px; float: left; padding-left: 25px;">
-										${followingList.introduce}
-									</span>
+			                     <td style="text-align:left;">
+			                        <div style="font-size:20px;display:inline-block">${followingList.nickname}</div><br>		                       
+									<div style="display:inline-block;color:#acacac">${followingList.introduce}</div>
+			                     </td>
+			                     <td width=114px>
+			                     	<button style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
 			                     </td>
 							</tr>
 						</table>
@@ -329,19 +327,16 @@ input[type="password"] {
 					<c:forEach items="${followerInfo}" var="followerList">
 						<table class="creatertab">
 							<tr>
-								 <td id="creater" width=149 colspan=3 style="padding-bottom: 25px;">
+								 <td id="creater" style="width:126px;text-align:center;">
 			                        
-			                        <img src="../display?fileName=${followerList.u_image}" style="float: left; border-radius: 50%;" width=75 height=75 />
-			                        </td>
-			                     <td>
-			                        <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
-			                              
-			                              <p style="font-size: 15px; margin:0;">${followerList.nickname}</p>
-			                        </span>
-			                        <br>
-									<span id="total">
-										${followerList.introduce}
-									</span>
+			                        <img src="../display?fileName=${followerList.u_image}"   style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
+			                     </td>
+			                     <td style="text-align:left;">
+			                        <div style="font-size:20px;display:inline-block">${followerList.nickname}</div><br>		                       
+									<div style="display:inline-block;color:#acacac">${followerList.introduce}</div>
+			                     </td>
+			                     <td width=114px>
+			                     	<button style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
 			                     </td>
 							</tr>
 						</table>
