@@ -9,6 +9,45 @@ html {
 	font-family: Noto Sans KR;
 }
 
+.myImgs {
+	width: 343px;
+	height: 272px;
+	object-fit: cover;
+	border-radius:3px 3px 3px 3px;
+}
+
+#confirm {
+	all: unset;
+	border: 1px solid white;
+	color: white;
+	margin-left: 10px;
+	width: 40px;
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+}
+
+#confirm:hover {
+	cursor: pointer;
+}
+
+input[type="password"] {
+	height: 30px;
+	border-radius: 5px 5px 5px 5px
+}
+
+#warning {
+	color: white;
+	display: inline-block;
+	float: left;
+	height: 150px;
+	width: 400px;
+	text-align: left;
+	margin-left: 50px;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 2.0;
+}
+
 #btn {
 	all: unset;
 	background: #2e6cb5;
@@ -18,34 +57,35 @@ html {
 	border-radius: 20px 20px 20px 20px;
 }
 
-#blist{
-	width:1118px;
-	height:886px;
+#blist {
+	width: 1118px;
+	height: 886px;
 }
 
-#btn:hover{
-	cursor:pointer;
+#btn:hover {
+	cursor: pointer;
 }
 
 #passChk {
 	text-align: center;
-	width: 500px;
+	width: 800px;
 	height: 400px;
 	float: center;
 	margin: auto;
+	padding-top: 150px;
 }
 
 #userRead {
 	width: 304px;
 	height: 478px;
-	margin-right:30px;
+	margin-right: 30px;
 	text-align: center;
 	overflow: hidden;
 	display: inline-block;
 	float: left;
 	background: white;
 	padding: 26px;
-	border-radius:5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
 }
 
 .btn-area button {
@@ -73,8 +113,11 @@ html {
 .mypageItems {
 	font-weight: light;
 	font-size: 20px;
-	margin-right:10px;
-	display:inline-block;float:left;width:80px;height:40px
+	margin-right: 10px;
+	display: inline-block;
+	float: left;
+	width: 80px;
+	height: 40px
 }
 
 #pTitle {
@@ -110,31 +153,50 @@ html {
 }
 
 .creatertab {
-   background: white;
-   width: 300px;
-   height: 100px;
-   float: left;
-   margin: auto;
+	background: blue;
+	width: 550px;
+	height: 138px;
+	float: left;
+	margin: auto;
+	
 }
 
+.imgList {
+	display: inline-block;
+	float: left;
+	margin: 17px
+}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
 
 </head>
-<body style="padding-top: 73px; margin-left: 0px; width: 100%;height:1080px;">
+<body style="padding-top: 50px; margin-left: 0px; width: 100%;height:1080px;">
 	<jsp:include page="../menu.jsp" />
 	
 	<div style="background:#2b4163;height:1200px;padding:80px;padding-top:0px;padding-left:120px;">
-	<div style="height:220px;padding-left:15px;"><br><br>
+	<div id=pDiv style="height:220px;padding-left:15px;"><br><br>
 	<div id=pTitle>MyPage</div>
 	<div id=pContent>${vo.nickname} 님의 프로필입니다.</div>
 	</div>		
-		<!-- <div id="passChk">
-			<h4>비밀번호 확인</h4>
-			<input type="text" id="chkPass">
-			<button>확인</button>
-		</div> -->
+		<div id="passChk">
+				<img style="width: 150px; height: 150px; float: left; margin-left:70px;"
+					src="../display?fileName=warning.png" /><br>
+				<div id=warning>
+					현재 ${vo.nickname} 님의 개인정보에 접근하고 있습니다.<br> 더 진행하려면 비밀번호를
+					입력해주세요.
+				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			<div style="font-size:20px;color:white;">비밀번호 확인</div><br>
+			<input type="password" id="chkPass">
+			<button id="confirm">확인</button>
+		</div>
 		<div style="width:1700px;height:1100px;text-align:center;">
 			<div id="userRead">
 				<div
@@ -144,19 +206,6 @@ html {
 					<div style="font-size: 26px; font-weight: bold">${vo.nickname}</div>
 					<br>
 					<div style="font-size: 13px;">${vo.introduce}</div>
-					<%-- <td>${vo.id}</td>				
-			
-				<td>${vo.name}</td>				
-			
-				<td></td>				
-			
-				<td>${vo.phone}</td>				
-			
-				<td></td>				
-		
-				<td>${vo.addr}</td>			
-			
-				<td>${vo.email}</td>		 --%>
 				</div>
 				<br>
 				<br>
@@ -210,12 +259,12 @@ html {
 						<h1>등록한 게시물이 없습니다</h1>
 					</c:if>
 					<c:if test="${not empty blist}">
-					<div style="display:inline-block;float:left;margin:17px">
-							<img src="../display?fileName=addWork.jpg" width=343 height=272>
+					<div class="imgList">
+							<img src="../display?fileName=addWork.jpg">
 						</div>
 						<c:forEach items="${blist}" var="bvo">
-							<div style="display:inline-block;float:left;margin:17px">
-								<img src="../display?fileName=${bvo.image}" width=343 height=272>
+							<div style="display:inline-block;float:left;margin:17px;">
+								<img class="myImgs" src="../display?fileName=${bvo.image}">
 							</div>
 						</c:forEach>
 					</c:if>
@@ -228,12 +277,12 @@ html {
 						<h1>등록한 상품이 없습니다</h1>
 					</c:if>
 					<c:if test="${not empty plist}">
-					<div style="display:inline-block;float:left;margin:17px">
-							<img src="../display?fileName=addWork.jpg" width=343 height=272>
+					<div class = imgList>
+							<img src="../display?fileName=addWork.jpg">
 						</div>
 					<c:forEach items="${plist}" var="pvo">
-						<div style="display:inline-block;float:left;margin:17px">
-							<img src="../display?fileName=${pvo.image}" width=343 height=272>
+						<div style="display:inline-block;float:left;margin:17px;">
+							<img class="myImgs" src="../display?fileName=${pvo.image}">
 						</div>
 					</c:forEach>
 					</c:if>
@@ -247,7 +296,7 @@ html {
 					</c:if>
 					<c:if test="${not empty followingInfo}">
 					<c:forEach items="${followingInfo}" var="followingList">
-						<table class="creatertab" style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
+						<table class="creatertab">
 							<tr>
 								 <td id="creater" width=100 colspan=3 style="padding-bottom: 25px;">
 			                        
@@ -276,7 +325,7 @@ html {
 					</c:if>
 					<c:if test="${not empty followerInfo}">
 					<c:forEach items="${followerInfo}" var="followerList">
-						<table width=400 class="creatertab" style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
+						<table class="creatertab">
 							<tr>
 								 <td id="creater" width=149 colspan=3 style="padding-bottom: 25px;">
 			                        
@@ -307,9 +356,15 @@ html {
 </body>
 <script>
 	var id="${id}";
-	/* $("#Plist").hide();
+	/*  $("#userRead").hide();
+	$("#mypageList").hide(); 
+	 
+	$("#pDiv").hide(); */
+	
+	$("#Plist").hide();
 	$("#followingList").hide();
-	$("#followerList").hide(); */
+	$("#followerList").hide(); 
+	$("#passChk").hide();
 	
 	
 	$("#artWork").click(function(){
@@ -338,10 +393,9 @@ html {
 	})
 	
 	
-	/* $("#userRead").hide();
-	$("#mypageList").hide(); */
+ 	
 	
-	/*$("#passChk").on("click", "button", function() {
+	$("#passChk").on("click", "button", function() {
 		var pass = $("#passChk").find("#chkPass").val();
 		if (pass != "") {
 			$.ajax({
@@ -357,7 +411,8 @@ html {
 						$("#passChk").hide();
 						$("#userRead").show();
 						$("#mypageList").show();
-						 getMyPageList(); 
+						$("#pDiv").show();
+						/*  getMyPageList();  */
 						
 					}
 				}
@@ -366,7 +421,7 @@ html {
 			alert("비밀번호를 입력해주세요");
 			$("#passChk").find("#chkPass").focus();
 		}
-	}) */
+	}) 
 	
 	/* function getMyPageList(){
 		$.ajax({
