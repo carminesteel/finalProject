@@ -15,7 +15,7 @@ public class BoardVO {
  private Date date;
  private String nickname;
  private String u_image;
- //dd
+ //ddff
  private ArrayList<String> images;
 
 public ArrayList<String> getImages() {
