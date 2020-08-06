@@ -305,18 +305,26 @@ a:hover{text-decoration:none;color:black;}
 		}
 	});
     
+	//장바구니버튼
 	$("#order").on("click",function(){
-		var p_no = getParameterByName('p_no');
-		var id="${id}"
-		$.ajax({    		 		
-			type:"post",
-			url:"/product/order",
-			data:{"id":id,"p_no":p_no,"quantity":quantity},
-			success:function(){
-				alert("주문완료")
+		if(!confirm("상품구매를 위해 장바구니로 이동 하시겠습니까?")) return;
+		var id="${id}";
+		var p_no="${read.p_no}";
+		var p_image="${read.image}";
+		var title="${read.title}";
+		var price="${read.price}";
+		var quantity=$("#quantity").val();
+		   
+		$.ajax({
+			type:"get",
+			url:"/cart/insert",
+			data:{"id":id, "p_no":p_no, "p_image":p_image, "title":title, "price":price, "quantity":quantity},
+			error:function(){
+				alert("xxx");
 			},
-			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			success:function(){
+				alert("장바구니로 이동합니다.");
+				location.href="/cart/list?id="+id;
 			}
 		});
 	});
