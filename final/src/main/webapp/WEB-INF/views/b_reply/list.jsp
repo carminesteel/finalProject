@@ -23,7 +23,6 @@
 </style>	
 </head>
 <body>
-	<h1>댓글수${replyCount}
 	</h1>
 	<form action="/b_reply/insert" method="post" name="rfrm">
 		<input type="hidden" name="b_no" value="${vo.b_no}">
@@ -132,6 +131,7 @@ $(rfrm).submit(function(e){
 			data:{"b_no":b_no,"replyer":replyer,"content":content},
 			success:function(){		
 				R_list();
+				 location.reload();
 				}
 			
 		})
@@ -148,6 +148,7 @@ $("#tbl1").on("click", ".row .rbtnDelete", function(){
 	      data:{"r_no":r_no},
 	      success:function(){
 	    	  R_list();
+	    	  location.reload();
 	      }
 	   });
 	
