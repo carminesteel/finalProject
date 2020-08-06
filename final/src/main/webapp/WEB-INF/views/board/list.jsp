@@ -70,15 +70,5 @@
 		var b_no = $(this).parent().find(".b_no").val();
 		location.href = "read?b_no=" + b_no;
 	});
-	
-	$(window).on("scroll", function() {
-		var scrollHeight = $(document).height();
-		var scrollPosition = $(window).height() + $(window).scrollTop();	
-
-		if (scrollPosition > scrollHeight - 500) {			
-			//todo
-			$("body").append('<div id="content"></div>');
-		}
-	});
 </script>
 </html>
