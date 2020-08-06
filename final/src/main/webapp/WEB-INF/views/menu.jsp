@@ -19,7 +19,7 @@
    <tr>
       <td id=logo style="margin-top:16px;padding-left:65px;width:150px;"><a class=menuA href="/">Artists</a></td>
       <td>
-      	<a class=menuA href="/feed/feed" style="margin-left:380px;">피드</a>&emsp;&emsp;&emsp;
+      	<a class=menuA href="/feed/list" style="margin-left:380px;">피드</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/board/list">탐색</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/product/list">아트굿즈</a>&emsp;&emsp;&emsp;
       	<a class=menuA href="/exh/list">전시</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -31,7 +31,7 @@
       		<c:if test="${position==1}">
       		
       			<td style="width:450px;">
-      			<span style=margin-right:30px;>${id}</span>
+      			<span style=margin-right:30px;>${id}님 환영합니다!</span>
       				<c:if test="${position==1 || position==2}">
       					<a class=menuA href="/login/mypage" style="margin-right:30px">MyPage</a>
       				</c:if>

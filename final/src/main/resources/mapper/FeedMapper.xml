@@ -3,11 +3,11 @@
 <mapper namespace="com.example.mapper.FeedMapper">
      
      <select id="feedView" resultType="com.example.domain.BoardVO">
-    	select a.*
-    	from (select b.*, f.* from board b, follower f where b.id=f.target) a, board b 
-    	where follower=#{id}
-        group by b_no
-    	order by date desc;
+     	select b.*, u.u_image, u.nickname, u.introduce 
+     	from board b, (select target from follower where follower=#{id}) a,users u 
+     	where b.id=a.target and b.id=u.id
+     	order by date desc
+     	limit 0,20
     </select>
 
     

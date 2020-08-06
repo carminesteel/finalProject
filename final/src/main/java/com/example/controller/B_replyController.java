@@ -56,16 +56,23 @@ public void insert(B_replyVO vo) {
 	BoardVO bvo= new BoardVO();
 	bvo.setB_no(vo.getB_no());
 	bvo.setR_cnt(cnt);
-	if(cnt!=0) {
 		bmapper.board_r_cnt_update(bvo);
-	}
+	
 	
 }
 @RequestMapping(value="delete", method=RequestMethod.POST)
 @ResponseBody
 	public void delete(int r_no) {
+	int b_no=mapper.getB_no(r_no);
+	mapper.delete(r_no);
 	
-	mapper.delete(r_no);	
+	int cnt=bmapper.r_cnt(b_no);
+	BoardVO bvo= new BoardVO();
+	bvo.setB_no(b_no);
+	bvo.setR_cnt(cnt);
+		bmapper.board_r_cnt_update(bvo);
+	
+	
 }
 
 }

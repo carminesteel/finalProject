@@ -12,12 +12,26 @@ public class BoardVO {
  private int view;
  private int b_like;
  private int report;
+ private int r_cnt;
  private Date date;
  private String nickname;
  private String u_image;
- //ddff
- private ArrayList<String> images;
- private int r_cnt;
+ private String introduce;
+ 
+ public int getR_cnt() {
+	return r_cnt;
+}
+public void setR_cnt(int r_cnt) {
+	this.r_cnt = r_cnt;
+}
+public String getIntroduce() {
+	return introduce;
+}
+public void setIntroduce(String introduce) {
+	this.introduce = introduce;
+}
+private ArrayList<String> images;
+
 public ArrayList<String> getImages() {
    return images;
 }
@@ -90,12 +104,6 @@ public Date getDate() {
 }
 public void setDate(Date date) {
    this.date = date;
-}
-public int getR_cnt() {
-	return r_cnt;
-}
-public void setR_cnt(int r_cnt) {
-	this.r_cnt = r_cnt;
 }
 
 
