@@ -20,19 +20,15 @@
 <style>
 
 	#tbl1,#tbl0{text-align:center;}
+	#tbl1{
+		width:1073px;
+		margin:auto;		
+	}
 </style>	
 </head>
 <body>
-	</h1>
-	<form action="/b_reply/insert" method="post" name="rfrm">
-		<input type="hidden" name="b_no" value="${vo.b_no}">
-		<input type="hidden" name="replyer" value="${id}">
-		<input type="text" name="content" size=50>
-		<input type="submit" value="입력">
-		
-	</form>
-	
-	<table id=tbl0>
+	<hr>	
+<!-- 	<table id=tbl0>
 		<tr>
 			<td width=100>댓글번호</td>
 			<td width=200>작성자</td>
@@ -40,23 +36,28 @@
 			<td width=200>날짜</td>
 			<td width=50>삭제</td>
 		</tr>
-	</table>
+	</table> -->
+	
 	<table id=tbl1></table>
 	<script id="temp" type="text/x-handlebars-template">	
 		{{#each .}}
 	<tr class="row">
-			<td class="r_no" width=115>{{r_no}}</td>
-			<td class="replyer" width=200>{{replyer}}</td>	
-			<td width=200> <input type="text" class="content" value={{content}}></td>
-			<td width=200>{{date}}</td>
+			<td class="u_image" width=70><img width=65px height=65px; style="border-radius:50%" src="display?fileName={{u_image}}"</td>
+			<td  width=700 style="text-align:left;"><b class="replyer" style="font-size:25px;">{{replyer}}</b><br><b class="content" style="font-weight:300;font-family:Noto Sans Kr;">{{content}}</b></td>	
 			<td width=50>
-				<input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}}">
-		
+				<input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}};float:right">		
 			</td>		
 		</tr>
 		{{/each}}
-	</script>   
-
+	</script> 
+	
+	<form action="/b_reply/insert" method="post" name="rfrm">
+		<input type="hidden" name="b_no" value="${vo.b_no}">
+		<input type="hidden" name="replyer" value="${id}">
+		<input type="text" name="content" size=50>
+		<input type="submit" value="입력">		
+	</form>  
+*
 	<div id="pagination">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
@@ -131,7 +132,6 @@ $(rfrm).submit(function(e){
 			data:{"b_no":b_no,"replyer":replyer,"content":content},
 			success:function(){		
 				R_list();
-				 location.reload();
 				}
 			
 		})
@@ -148,7 +148,6 @@ $("#tbl1").on("click", ".row .rbtnDelete", function(){
 	      data:{"r_no":r_no},
 	      success:function(){
 	    	  R_list();
-	    	  location.reload();
 	      }
 	   });
 	

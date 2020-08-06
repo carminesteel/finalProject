@@ -5,10 +5,10 @@
       select b.*, u.nickname, u.u_image from board b, users u where b.id=u.id;
     </select>
     <select id="read" resultType="com.example.domain.BoardVO">
-		select * from board where b_no=#{b_no}   
+		select b.*,u.nickname,u.introduce,u.u_image from board b, users u where b.id=u.id and b_no=#{b_no};  
     </select>
     <insert id="insert">
-     	insert into board(id,title,content,image,date) 
+     	insert into board(id,title,content,image,date)
      	values(#{id},#{title},#{content},#{image},now())
     </insert>
     <delete id="delete">

@@ -10,6 +10,15 @@ public class B_replyVO extends BoardVO{
  private String content;
  private Date date;
  private int replyCount;
+ private String u_image;
+ 
+ 
+public String getU_image() {
+	return u_image;
+}
+public void setU_image(String u_image) {
+	this.u_image = u_image;
+}
 public int getR_no() {
 	return r_no;
 }

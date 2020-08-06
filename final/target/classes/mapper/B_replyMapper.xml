@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.B_replyMapper">
     <select id="rlist" resultType="com.example.domain.B_replyVO">
-        select * from b_reply where b_no=#{b_no} order by r_no desc limit #{cri.pageStart}, #{cri.perPageNum}
+        select b.*,u.u_image from b_reply b, users u where b_no=#{b_no} and u.id=b.replyer order by r_no desc limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
    <select id="rrlist" resultType="com.example.domain.B_replyVO">
         select * from b_reply where b_no=#{b_no}

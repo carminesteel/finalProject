@@ -12,13 +12,13 @@
 
 <style>
 #bg {
+	margin-top:10px;
 	position: fixed;
-	top: 0;
 	left: 0;
 	position: absolute;
 	z-index: -1; /* Preserve aspet ratio */
-	min-width: 100%;
-	min-height: 100%;
+	width:1920px;
+	height:1018px;
 }
 </style>
 
@@ -34,12 +34,11 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
 	background-size: cover;
 	overflow:hidden;
 }
 
-body::before {
+/* body::before {
 	content: "";
 	position: absolute;
 	z-index: 1;
@@ -48,7 +47,7 @@ body::before {
 	buttom: 0;
 	left: 0;
 }
-
+ */
 #tlqkf {
 	position: relative;
 	z-index: 2;
@@ -59,12 +58,6 @@ body::before {
 	border-radius: 20px;
 }
 
-.login-form h1 {
-	font-size: 50px;
-	color: black;
-	text-align: left;
-	margin-bottom: 80px;
-}
 
 .int-area {
 	width: 315px;
@@ -142,19 +135,23 @@ body::before {
 	color: red;
 	text-decoration: none;
 }
+
+section{
+	height:100%;
+}
 </style>
 </head>
 <body>
-	<img src="../display?fileName=loginback.png" id="bg" alt="">
+	<img src="../display?fileName=loginback.png" id="bg">
 	<!-- <div style="display:inline-block;text-align:right;position:absolute;color:white;font-size:30px;top:900px;left:400px;letter-spacing:-5;font-weight:300;line-height:33px;">
 		당신만을 위한 아트 플랫폼<br>
 		아티스트
 	</div> -->
 	<section class="login-form">
-		<div style="margin-top:140px">
-			<a
-				style="font-family: Helvetica33-ExtendedThin; font-size: 110px; text-align: left; color: #fff;text-decoration:none"
-				href="/">Artists</a>
+		<div>
+			<div style="font-family: Helvetica33-ExtendedThin; font-size: 110px; text-align: left;
+				color: #fff;display:inline-block;margin-top:50px;"
+				>Artists</div>
 		</div>
 		<div id=tlqkf>
 			<span style="font-size:40px;font-weight:500;letter-spacing:-2">Login</span><br>
@@ -224,6 +221,11 @@ body::before {
 
 
 <script>
+	goTop();
+	
+function goTop(){
+	$('html').scrollTop(0);
+
 	let
 	id = $('#id');
 	let

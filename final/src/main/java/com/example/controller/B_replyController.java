@@ -37,7 +37,7 @@ public void list() {
 		cri.setPerPageNum(10);
 		PageMaker pm=new PageMaker();
 		pm.setCri(cri);
-		pm.setTotalCount(mapper.replyCount(b_no));
+		pm.setTotalCount(mapper.replyCount(b_no)-1);
 		model.addAttribute("cri",cri);
 		model.addAttribute("pm",pm);
 		

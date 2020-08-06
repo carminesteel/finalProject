@@ -9,9 +9,117 @@
 	<title>[작품정보]</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<style>
+		html{
+			font-family:Noto Sans Kr;
+		}
+	
+		body{
+			margin:0;
+		}
+	
+		#lightBox{
+			display:inline-block;
+			width:100%;
+			/* height:100%; */
+			background:rgba(0, 0, 0, 0.9);
+			position:absolute;
+/* 			top:50%;
+			left:50%;
+			transform:translate(-50%, -50%); */
+			z-index:899;
+		}
+		#lightContent{
+			background:white;
+			width:1392px;
+			height:100%;
+			margin:auto;
+			padding:0px;
+		
+		}
+		#lightInfo{
+			width:1392px;
+			margin:auto;
+			background:none;	
+			vertical-align:middle;					
+		}
+		
+		#image{
+			width:64px;
+			height:64px;
+			border-radius:50%;
+			position:relative;
+			top:16px;
+		}
+		
+		#artInfo{
+			margin-left:15px;
+			display:inline-block;
+			height:65px;
+			color:white;
+			font-size:17px;
+			padding-bottom:20px;
+		}
+		
+		#lightBottom{
+			width:1130px;
+			margin:auto;
+		}
+	</style>
 </head>
 <body>
-	<jsp:include page="../menu.jsp"></jsp:include>
+	<div id=lightBox>
+		<div id=lightInfo>
+			<img id="image" src="display?fileName=${vo.u_image}"/>
+			<div id=artInfo><b>${vo.title}</b>
+				<br>
+				${vo.nickname}
+			</div>
+		</div>
+		<div id=lightContent>
+			<img src="display?fileName=${vo.image}" width="100%"/>
+			<br><br><br><br>
+			<c:forEach items="${list}" var="image">
+				<img src="display?fileName=${image}" width="100%"/>
+				<br><br><br><br>
+			</c:forEach>
+ 			<div id=lightBottom>
+				<div style="height:100px;width:100%">
+					<span style="display:inline-block;float:left;">
+						<img style="border-radius:50%;" width=90px height=90px src="display?fileName=${vo.u_image}"/>
+					</span>
+					<span style="display:inline-block;float:left;margin-left:18px;margin-top:18px;">
+						<b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;<a style="all:unset;font-size:14px;cursor:pointer;">팔로우</a><br>
+						<b style="all:unset;color:#93a1a2;font-size:15px">${vo.introduce}</b>
+					</span>
+				</div>
+				<div>
+					<b style="font-size:30px;">${vo.title}</b>
+					<br>
+					<b style="all:unset;font-size:20px;">${vo.content}</b>
+					<br>
+					<div style="display:inline-block;float:right;"></div>
+				</div>
+				<jsp:include page="../b_reply/list.jsp"></jsp:include> 
+			</div>
+		<%-- 	<form name="frm" method="post" action="update" enctype="multipart/form-data">
+	 <c:if test="${id==vo.id}">
+		<input type="submit" value="수정">
+		<input type="button" value="삭제" id="btnDelete">
+		</c:if>
+		<input type="button" value="목록" onClick="location.href='list'">
+		<input type="button" value="댓글보기" id="btnReply">
+		<input type="button" value="댓글숨기기" id="btnReply2">
+		<input type="button" value="좋아요/${vo.b_like}" id="LikeBtn">		
+	</form>
+	<hr>--%>
+	
+		</div>	
+	</div>
+
+
+
+<%-- 	<jsp:include page="../menu.jsp"></jsp:include>
 	<h1>[작품정보]</h1>
 	<form name="frm" method="post" action="update" enctype="multipart/form-data">
 		<input type="hidden" name="b_no" value="${vo.b_no}">
@@ -48,10 +156,10 @@
 					<input type="hidden" name="image" value="${ vo.image }">
 				</td>
 				
-				<%--		<td>대표이미지</td>
+						<td>대표이미지</td>
 				<td><img id="image" src="display?fileName=${vo.image}" width=150/>
 				<input type="file" name="file" />
-				</td> --%>
+				</td>
 			</tr>
 			<tr>
 				<th>
@@ -85,7 +193,8 @@
 	<hr>
 	<jsp:include page="../b_reply/list.jsp"></jsp:include>
 	<jsp:include page="../footer.jsp"></jsp:include>
-	
+	 --%>
+	 
 </body>
 <script>
 

@@ -31,7 +31,7 @@
       		<c:if test="${position==1}">
       		
       			<td style="width:450px;">
-      			<span style=margin-right:30px;>${id}님 환영합니다!</span>
+      			<span style=margin-right:30px;>${id}</span>
       				<c:if test="${position==1 || position==2}">
       					<a class=menuA href="/login/mypage" style="margin-right:30px">MyPage</a>
       				</c:if>
