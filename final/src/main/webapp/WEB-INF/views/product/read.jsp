@@ -137,7 +137,7 @@ a:hover{text-decoration:none;color:black;}
 							<span id="totPrice" style="font-family: Noto Sans KR; font-size: 30pt;color:#2e6cb5;font-size:45px;letter-spacing:-4px;margin-right:15px">price</span>
 							</div>
 							<div style="width:523px;height:116px;text-align:center;margin-left:40px;">
-								<div class="pButton" style="width:254px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;line-height:49px">
+								<div class="pButton" id="cart" style="width:254px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;line-height:49px">
 								<t class="pButtons">장바구니</t>
 								</div>
 								<div class="pButton" id="pMessage" style="width:254px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;line-height:49px">
@@ -306,8 +306,7 @@ a:hover{text-decoration:none;color:black;}
 	});
     
 	//장바구니버튼
-	$("#order").on("click",function(){
-		if(!confirm("상품구매를 위해 장바구니로 이동 하시겠습니까?")) return;
+	$("#cart").on("click",function(){
 		var id="${id}";
 		var p_no="${read.p_no}";
 		var p_image="${read.image}";
@@ -323,7 +322,12 @@ a:hover{text-decoration:none;color:black;}
 				alert("xxx");
 			},
 			success:function(){
-				alert("장바구니로 이동합니다.");
+				if(confirm("상품구매를 위해 장바구니로 이동 하시겠습니까?")==true){
+					alert("장바구니로 이동합니다.");
+				}else{
+					alert("상품을 장바구니에 담았습니다.");
+					return;
+				}
 				location.href="/cart/list?id="+id;
 			}
 		});
