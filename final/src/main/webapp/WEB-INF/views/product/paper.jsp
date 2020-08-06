@@ -19,10 +19,10 @@
 			</tr>
 			<tr>
 			<td><b>Title : </b><input type="text" name="title" placeholder="제목을입력하세요"></td>
-			</tr>	
+			</tr>
 			<tr>
 			<td><textarea name="content" rows="10" cols="43" placeholder="내용을입력하세요"></textarea>
-			</tr>		
+			</tr>
 		</table>
 		<input type="submit" value="보내기">
 		<input type="reset" value="취소">
