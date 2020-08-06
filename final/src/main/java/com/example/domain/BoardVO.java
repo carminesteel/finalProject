@@ -1,7 +1,7 @@
 package com.example.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardVO {
  private int b_no;
