@@ -5,29 +5,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#tbl {
-	overflow: hidden;
-}
-
-#tbl .row {
-	float: left;
-	margin: 20px;
-}
-
-#tbl .row img {
-	width: 200px;
-	height: 200px;
-}
-
-
-#tbl .row .view {
-	text-align: right;
-}
-#tbl .row .like{
-	text-align: left;
-}
-</style>
+	<style>
+		#tbl {
+			overflow: hidden;
+		}
+		
+		#tbl .row {
+			float: left;
+			margin: 20px;
+		}
+		
+		#tbl .row img {
+			width: 200px;
+			height: 200px;
+		}
+		
+		
+		#tbl .row .view {
+			text-align: right;
+		}
+		#tbl .row .like{
+			text-align: left;
+		}
+	</style>
 <meta charset="UTF-8">
 <title>[작품]</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -37,7 +37,7 @@
 	<h1>[작품]</h1>
 	<c:if test="${id!=null}">		
 			<a href="/board/insert" class=more><img id=bButton src="/display?fileName=eButton.png" /></a> <br>
-		</c:if>	
+	</c:if>
 	<div border=1 id="tbl">
 
 		<c:forEach items="${list}" var="vo">
@@ -71,5 +71,14 @@
 		location.href = "read?b_no=" + b_no;
 	});
 	
+	$(window).on("scroll", function() {
+		var scrollHeight = $(document).height();
+		var scrollPosition = $(window).height() + $(window).scrollTop();	
+
+		if (scrollPosition > scrollHeight - 500) {			
+			//todo
+			$("body").append('<div id="content"></div>');
+		}
+	});
 </script>
 </html>

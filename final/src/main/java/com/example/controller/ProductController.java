@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.example.domain.BoardVO;
+import com.example.domain.MessageVO;
 import com.example.domain.ProductVO;
+import com.example.mapper.MessageMapper;
 import com.example.mapper.ProductMapper;
 import com.example.mapper.UsersMapper;
 import com.example.service.ProductService;
@@ -35,17 +38,29 @@ public class ProductController {
 	UsersMapper umapper;
 	
 	@Autowired
+	MessageMapper Mmapper;
+	
+	@Autowired
 	ProductService pService;
+	
+	@RequestMapping("/message")
+	public void message() {		
+	}	
+	@RequestMapping("/paper")
+	public void paper() {		
+	}
+	@RequestMapping(value="/paperInsert", method=RequestMethod.POST)
+	@ResponseBody
+	public void paperInsert(MessageVO vo) { 
+		Mmapper.paperInsert(vo);
+		System.out.println(vo);
+	}
 	
 	@RequestMapping("/list")
 	public void list(Model model) {
 		model.addAttribute("users", umapper.list());
-		model.addAttribute("proimage", umapper.proimage());
-	}
-	
-	@RequestMapping("/orders")
-	public void orders() {
 		
+		model.addAttribute("proimage", umapper.proimage());
 	}
 	
 	@RequestMapping("/rest/bestlist")

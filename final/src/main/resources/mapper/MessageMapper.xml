@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MessageMapper">
+    <select id="listSend" resultType="com.example.domain.MessageVO">
+        select m.*,name from message m,users u where sender=#{id} and receiver=u.id and sdel=0 order by m_no desc
+    </select>
+    <select id="listReceive" resultType="com.example.domain.MessageVO">
+        select m.*,name from message m,users u where receiver=#{id} and sender=u.id and rdel=0 order by m_no desc
+    </select>
+    <select id="read" resultType="com.example.domain.MessageVO">
+ 		select * from message where m_no=#{m_no}
+ 	</select>
+ 	<select id="rRead" resultType="com.example.domain.MessageVO">
+ 		select * from message where m_no=#{m_no} and sender=#{sender} and title=#{title}
+ 	</select>
+ 	<update id="updateRead">
+ 		update message set receiveDate=now() where m_no=#{m_no} and sender=#{sender} and title=#{title} and sdel=0
+ 	</update>
+ 	<update id="updateSdel">
+ 		update message set sdel=1 where m_no=#{m_no}
+ 	</update>
+ 	<update id="updatePosition">
+ 		update message set rdel=1 where m_no=#{m_no}
+ 	</update>
+ 	<insert id="paperInsert">
+    	insert into message(receiver,sender,title,content) 
+    	values(#{receiver},#{sender},#{title},#{content})
+    </insert>        	
+</mapper>
