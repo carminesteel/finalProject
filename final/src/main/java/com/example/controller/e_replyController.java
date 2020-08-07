@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.domain.Criteria;
+import com.example.domain.PageMaker;
 import com.example.domain.e_replyVO;
 import com.example.mapper.ExhibitionMapper;
 import com.example.mapper.e_replyMapper;
@@ -23,9 +25,15 @@ public class e_replyController {
 	
 	@RequestMapping("/reply/list")
 	@ResponseBody
-	public HashMap<String,Object> list(int e_no) {
+	public HashMap<String,Object> list(int e_no,Criteria cri) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("list", mapper.list(e_no));
+		cri.setPerPageNum(5);
+		
+		PageMaker pm=new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(eMapper.replyCount(e_no));
+		map.put("pm",pm);
+		map.put("list", mapper.list(cri,e_no));
 		map.put("count", eMapper.replyCount(e_no));
 		System.out.println(map);
 		return map;

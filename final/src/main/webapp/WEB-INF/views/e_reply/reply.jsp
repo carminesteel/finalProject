@@ -43,6 +43,7 @@
 <script>
 	var e_no="${vo.e_no}";
 	var id=$("#id").val();
+	var page=1;
 	getList();
 
 	Handlebars.registerHelper("printStyle",function(replyer){
@@ -64,11 +65,30 @@
 			success:function(data){
 				var temp=Handlebars.compile($("#temp").html());
 				$("#tbl").html(temp(data));
-				
+				var str="";
+				if(data.pm.prev){ 
+					str += "<a href='" + (data.pm.startPage-1) + "'>◀</a>"
+				}
+				for(var i=data.pm.startPage; i<= data.pm.endPage; i++){ 
+					if(page == i){ 
+						str += "[<a href='" + i + "' class='active'>" + i + "</a>]";
+					}else{ 
+						str += "[<a href='" + i + "'>" + i + "</a>]";
+					}
+				}
+				if(data.pm.next){ 
+					str += "<a href='" + (data.pm.endPage+1) + "'>▶</a>" 
+				} 
+				$("#pagination").html(str);
+
 			}
 		});
 	}
-	
+	$("#pagination").on("click", "a", function(e){ 
+		e.preventDefault();
+		page=$(this).attr("href");
+		
+		getList();
 	var re = "${re}";
 	$("#btnInsert").on("click",function(){
 		var content=$("#txtReply").val();
