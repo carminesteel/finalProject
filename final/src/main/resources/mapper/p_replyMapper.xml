@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.p_replyMapper">
+    <select id="list" resultType="com.example.domain.p_replyVO">
+        select * from p_reply where p_no=#{p_no} order by r_no desc limit #{cri.pageStart}, #{cri.perPageNum}
+    </select>
+    <insert id="insert">
+    	insert into p_reply(replyer,content,date,p_no) values(#{replyer},#{content},now(),#{p_no})
+    </insert>
+    <delete id="delete">
+    	delete from p_reply where r_no=#{r_no}
+    </delete>
+</mapper>

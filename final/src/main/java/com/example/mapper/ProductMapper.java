@@ -19,4 +19,5 @@ public interface ProductMapper {
 	public int P_noRead(ProductVO vo);
 	public void attachInsert(@Param("p_no") int p_no, @Param("images") String images);
 	public void updateViewCnt(String id);
+	public int replyCount(int p_no);
 }

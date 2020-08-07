@@ -88,6 +88,7 @@ public class ProductController {
 		model.addAttribute("p_image", pmapper.p_image(p_no));
 		model.addAttribute("readimage", pmapper.readimage(p_no));
 		model.addAttribute("read", pmapper.read(p_no));
+		model.addAttribute("re",pmapper.replyCount(p_no));
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)

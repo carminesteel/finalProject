@@ -164,7 +164,7 @@ a:hover{text-decoration:none;color:black;}
 			<table id=pMenu>
 				<tr style="height:100px;border-top:1px solid #74a4d7;border-bottom:1px solid #74a4d7;text-align:center;font-family:Noto Sans KR;font-size:25px;font-weight:700;">
 					<td class=detailMenu>상세정보</td>
-					<td class=detailMenu>상품리뷰</td>
+					<td class=detailMenu>상품리뷰(<span id="re">${re}</span>)</td>
 					<td class=detailMenu>Q&A</td>
 				</tr>
 				<tr style="text-align:center">
@@ -172,6 +172,9 @@ a:hover{text-decoration:none;color:black;}
 					<c:forEach items="${p_image}" var="p_image">
 						<div class="images"><img src="display?fileName=${p_image.p_images}"></div>
 					</c:forEach>
+					<div id="reply">
+						<h3>리뷰쓰기</h3><jsp:include page="../p_reply/reply.jsp"/>
+					</div>
 					</td>
 				</tr>
 			</table>
@@ -180,6 +183,11 @@ a:hover{text-decoration:none;color:black;}
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+$("#reply").hide();
+$("#pMenu").on("click", function(){
+	$("#reply").show();
+	
+});
 	//쪽지확인해보려고 만든거임
 	$("#message").on("click",function(){
 		location.href="/product/message"

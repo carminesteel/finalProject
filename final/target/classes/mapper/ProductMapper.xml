@@ -42,4 +42,7 @@
 	<update id="updateViewCnt">
 		update product set view = view+1 where id=#{id}
 	</update>
+	<select id="replyCount" resultType="int">
+		select count(*) from p_reply where p_no=#{p_no}
+	</select>
 </mapper>
