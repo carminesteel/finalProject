@@ -128,6 +128,8 @@ public class UsersController {
 																					// currentTimeMillis
 			file.transferTo(new File(path + File.separator + image));
 			vo.setU_image(image);
+		}else{
+			vo.setU_image("im2.jpg");
 		}
 		vo.setPass(passEncoder.encode(vo.getPass()));
 		mapper.insert(vo);

@@ -97,10 +97,12 @@ body{
 			
 			<!--이미지-->
 			<div>
-				<img src="../display?fileName=${u_image}" id="image" width=200 height=200 style="border-radius:50%"/>
+				
+				<img src="../display?fileName=im2.jpg" id="image" width=100 height=100 style="border-radius:50%"/>
 				<input type="file" name="file">
 			</div>
-			
+			<hr>
+			<br>
 			<!--아이디-->
 			<div id=id_row>				
 				<input type="hidden" id=idchk value=-1> 
@@ -219,7 +221,8 @@ body{
 		frm.submit(); */
 	});
 
-	$(frm.email_injeung_btn).on("click",function(){
+	$(frm.email_injeung_btn).on("click",function(e){
+		e.preventDefault();
 		var dice=$("#dice").val();
 		var chkNum=$(frm.email_injeung).val();
 		if(chkNum!=""){
@@ -299,13 +302,15 @@ body{
 		var addr=$(frm.roadAddress).val() + "/" + $(frm.jibunAddress).val();
 		$(frm.addr).val(addr);
 		var idchk=$(frm).find("#id_row #idchk").val();
+		var injeung=$(frm).find("#chkEmail #injeung").val();
 		if (idchk == -1) {
-			alert("중복체크를 해주세요");
 			return;
 		} else if (idchk == 1) {
 			alert("다른 id를 사용해주세요");
 			$(frm.id).focus();
-		} else if (idchk == 0) {
+		} else if (idchk == 0 && injeung == 0) {
+			alert("이메일 인증을 해주세요");
+		} else if (idchk == 0 && injeung == 1) {
 			alert("회원가입 완료!!");
 			frm.submit();
 		}
