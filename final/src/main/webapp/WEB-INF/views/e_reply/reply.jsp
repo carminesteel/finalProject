@@ -19,10 +19,9 @@
 	<input type="hidden" value="${re}" id="re">
 	<div id="tbl"></div>
 	<div id="reviewcnt" style="text-align:center;color:gray;display:none;" >
-		아직 작성 된 리뷰가 없습니다.
-	</div>
-	<script id="temp" type="text/x-handlebars-template">
-			
+				아직 작성 된 리뷰가 없습니다.
+			</div>
+	<script id="temp" type="text/x-handlebars-template">			
 			{{#each list}}
 			<div class="reply1">
 				<div class="replydate">
@@ -102,19 +101,31 @@
 	//작성자 삭제버튼
 	Handlebars.registerHelper("printStyle",function(replyer){
 	var src;
-	if(id!=replyer){
-		src="display:none;";
-	}else if(id==replyer){
-		src="color:red;";
-	}
-	return src;
-});
+		if(id!=replyer){
+			src="display:none;";
+		}else if(id==replyer){
+			src="color:red;";
+		}
+		return src;
+	});
 	
 	
 	var re = "${re}";
-	$("#btnInsert").on("click",function(){
-		var content=$("#txtReply").val();
-		
+	
+	//댓글 입력 엔터,클릭
+	$("#txtReply").keydown(function(key) {
+		if (key.keyCode == 13) {
+			getInsert();
+		}
+	});
+	
+ 	$("#btnInsert").on("click",function(){
+		getInsert();
+	});	
+
+	
+	function getInsert(){
+		var content=$("#txtReply").val();	
 		if(id==""){
 			if(confirm("로그인이 필요합니다.") == true){    //확인눌렀을때
 				location.href="/login/login";
@@ -138,8 +149,11 @@
 						}
 					});				
 				}	
-	});
+		}
 	
+
+	
+	//댓글삭제
 	$("#tbl").on("click",".replydate #btnDel",function(){
 		var r_no=$(this).attr("r_no");
 		if(!confirm("삭제하시겠습니까?")) return;

@@ -63,9 +63,22 @@
 				</c:if>
 			</form>
 			<table style="width:1130px;margin:auto;border-collapse:collapse;">
-			   <tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
+				<tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
+			      <td id="" colspan=3>베스트상품리뷰</td>
+			   </tr>
+			   <c:forEach items="${review}" var="list" varStatus="status" begin="0" end="2">
+				   <tr>
+				   <td></td>
+				   		<td style="border-bottom:none;font-size:17px;letter-spacing:-1px; margin-auto; margin:50px; magin-bottom:5px; padding:20px; width:500px; text-align:left; border-bottom:1px solid black;">	
+				   			<div width=700><b>${list.replyer} : </b>${list.content}</div>
+				   			<br>				   		
+				   		</td>
+				   		<td></td>
+				   </tr>
+			   </c:forEach>
+			   <tr style="padding:10px; margin:10px; height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
 			      <td id="infoMenu">상세정보</td>
-			      <td id="MapMenu">장소/전시장</td>
+			      <td id="MapMenu">장소/전시장 도면</td>
 			      <td id="Menu">리뷰(<span id="re">${re}</span>)</td>
 			   </tr>
 			   <tr>

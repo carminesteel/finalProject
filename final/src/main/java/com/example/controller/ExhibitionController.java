@@ -1,27 +1,22 @@
 package com.example.controller;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.ExhibitionVO;
 import com.example.mapper.ExhibitionMapper;
+import com.example.mapper.e_replyMapper;
 import com.example.service.ExhibitionService;
 
 @Controller
@@ -35,6 +30,9 @@ public class ExhibitionController {
 
 	@Autowired
 	ExhibitionService service;
+	
+	@Autowired
+	e_replyMapper Rmapper;
 	
 	@RequestMapping(value="/exh/delete", method=RequestMethod.POST)
 	public String delete(int e_no) {
@@ -88,6 +86,7 @@ public class ExhibitionController {
 		model.addAttribute("vo", mapper.read(e_no));
 		model.addAttribute("images", mapper.getE_imagelist(e_no));
 		model.addAttribute("re", mapper.replyCount(e_no));
+		model.addAttribute("review", Rmapper.list(e_no));
 		System.out.println(model);
 	}
 
