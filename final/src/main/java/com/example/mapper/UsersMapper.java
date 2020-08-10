@@ -26,6 +26,12 @@ public interface UsersMapper {
 	/*비밀번호 찾기 부분*/
 	public int find_email_cnt(String id);
 	public UsersVO find_email(String email);
-	
+	/*비밀번호 변경 부분*/
 	public void update(UsersVO vo);
+	
+	public void profile_update(UsersVO vo);
+	
+	public void profile_passUpdate(UsersVO vo);
+	
+	public void updatePosition(String id);
 }

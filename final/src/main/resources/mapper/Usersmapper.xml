@@ -52,6 +52,8 @@
 	<select id="find_id" resultType="com.example.domain.UsersVO">
 		select * from users where email	= #{email}
 	</select>
+	
+	
 	<!-- 비번찾기 부분 -->
 	<select id="find_email_cnt" resultType="int">
 		select count(*) from users where id = #{id}
@@ -63,6 +65,22 @@
 	<!-- 비밀번호 변경 -->
 	<update id="update">
     	update users set pass=#{pass} where id=#{id}
+    </update>
+    
+        <!--프로필 업데이트  -->
+	<update id="profile_update">
+    	update users set 
+    	name=#{name},nickname=#{nickname},phone=#{phone},introduce=#{introduce},addr=#{addr},u_image=#{u_image} 
+    	where id=#{id}
+    </update>
+	
+	<!--프로빌변경에서 비밀번호 변경 -->
+	<update id="profile_passUpdate">
+    	update users set pass=#{pass} where id=#{id}
+    </update>
+	
+	<update id="updatePosition">
+    	update users set position=4 where id=#{id}
     </update>
 	
 </mapper>

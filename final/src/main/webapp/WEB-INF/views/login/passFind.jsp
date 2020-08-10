@@ -41,11 +41,11 @@
                <button name="emailPass_injeung_btn">확인</button> <input type="hidden" id="injeung" value=0></td>
          </tr>
          
-         <tr>
+         <tr class="showPass">
 	         <td>새로운 비밀번호:&nbsp;&nbsp;&nbsp;
 	         <input type="password" name="pass" placeholder="PassWord" value="" required></td>
        	 </tr>
-       	 <tr>
+       	 <tr class="showPass">
 	         <td>새로운 비밀번호 확인:
 	         <input type="password" name="pass" placeholder="PassWord" value="" required>
 	         <input type="submit" id="passUpdate" value="비밀번호 변경">
@@ -59,6 +59,9 @@
    <br>
 </body>
 <script>
+$(".showPass").hide();
+
+
    $(frm).on("click", " #btnId", function() {
       var id = $(frm.id).val();
       $.ajax({
@@ -98,6 +101,7 @@
                alert("인증번호를 발송하였습니다.");
                $("#dice").val(data);
                $("#chkEmail").show();
+               
             }
          })
 
@@ -120,7 +124,7 @@
                if (data == 1) {
                   alert("인증이 성공되었습니다.");
                   $("#injeung").val(1);
-                 	                                 
+                  $(".showPass").show();	                                 
                } else {
                   alert("인증이 실패하였습니다.");
                }

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +36,8 @@ public class UsersController {
 	@Autowired 
 	BCryptPasswordEncoder passEncoder;
 	
-	/* �̹������� �������� ��� */
-	@Resource(name = "uploadPath") /* ���� ���ε带 ���� �ʿ� */
+	/* 占싱뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占� */
+	@Resource(name = "uploadPath") /* 占쏙옙占쏙옙 占쏙옙占싸드를 占쏙옙占쏙옙 占십울옙 */
 	private String path;
 
 	@RequestMapping("/login/login")
@@ -47,13 +48,13 @@ public class UsersController {
 	@RequestMapping(value = "/login/login", method = RequestMethod.POST)
 	@ResponseBody
 	public int loginPost(UsersVO vo, HttpSession session) {
-		int result = 0; // ȸ�� �������� ���� ���, ���̵� �������� �ʴ� ���
+		int result = 0; // 회占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�, 占쏙옙占싱듸옙 占쏙옙占쏙옙占쏙옙占쏙옙 占십댐옙 占쏙옙占�
 
 		UsersVO readVO = mapper.read(vo.getId());
 		if (readVO != null) {
-			if (passEncoder.matches(vo.getPass(), readVO.getPass())) { // �α��� ����
+			if (passEncoder.matches(vo.getPass(), readVO.getPass())) { // 占싸깍옙占쏙옙 占쏙옙占쏙옙
 				if (readVO.getPosition() == 1) {
-					result = 1; // �Ϲ� user
+					result = 1; // 占싹뱄옙 user
 					session.setAttribute("id", readVO.getId());
 					session.setAttribute("name", readVO.getNickname());
 					session.setAttribute("position", readVO.getPosition());
@@ -63,18 +64,18 @@ public class UsersController {
 					session.setAttribute("name", readVO.getName());
 					session.setAttribute("position", readVO.getPosition());
 				} else if (readVO.getPosition() == 3){
-					result = 3; // ������
+					result = 3; // 占쏙옙占쏙옙占쏙옙
 				} else {
-					result = 4;//ȸ��Ż��
+					result = 4;//회원탈퇴계정
 				}
 			} else {
-				result = 5; // ��й�ȣ Ʋ���� ���
+				result = 5; // 占쏙옙橘占싫� 틀占쏙옙占쏙옙 占쏙옙占�
 			}
 		}
 		return result;
 	}
 
-	// ���̹� �α��� ���� (���� �ϼ�x)
+	// 占쏙옙占싱뱄옙 占싸깍옙占쏙옙 占쏙옙占쏙옙 (占쏙옙占쏙옙 占싹쇽옙x)
 	@RequestMapping("/login/naverlogin")
 	public String loginNaver() {
 		return "/login/naverlogin";
@@ -89,12 +90,12 @@ public class UsersController {
 		return "redirect:http://localhost:8088/";
 	}
 
-	// ȸ������ ������ �� �ߴ� (���� â)
+	// 회占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌩댐옙 (占쏙옙占쏙옙 창)
 	@RequestMapping("/login/agree")
 	public void agree() {
 	}
 
-	// ���̵� �ߺ��˻�
+	// 占쏙옙占싱듸옙 占쌩븝옙占싯삼옙
 	@RequestMapping("/insert/read")
 	@ResponseBody
 	public Integer Iread(String id) {
@@ -109,7 +110,7 @@ public class UsersController {
 		return cnt;
 	}
 
-	// ȸ������ �������� �̵�
+	// 회占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙
 	@RequestMapping("/login/insert")
 	public void insert() {
 	}
@@ -119,11 +120,11 @@ public class UsersController {
 		MultipartFile file = multi.getFile("file");
 		session.setAttribute("id", vo.getId());
 		session.setAttribute("name", vo.getName());
-		// ���Ͼ��ε�
-		if (!file.isEmpty()) { // ���ε� ������ ������� ������
-			String image = System.currentTimeMillis() + file.getOriginalFilename(); // ���ϸ���
-																					// �ߺ������ʰ�
-																					// �ϱ����ؼ�
+		// 占쏙옙占싹억옙占싸듸옙
+		if (!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙
+			String image = System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙
+																					// 占쌩븝옙占쏙옙占쏙옙占십곤옙
+																					// 占싹깍옙占쏙옙占쌔쇽옙
 																					// currentTimeMillis
 			file.transferTo(new File(path + File.separator + image));
 			vo.setU_image(image);
@@ -175,21 +176,27 @@ public class UsersController {
 	
 	@RequestMapping(value="/login/mypagePassChk", method=RequestMethod.POST)
 	@ResponseBody
-	public int mypagePassChk(UsersVO vo){
-		System.out.println("����");
-		int chk=-1;
+	public int mypagePassChk(UsersVO vo,HttpSession session){
+		
+		int chk;
 			UsersVO readVO = mapper.read(vo.getId());
 			if(passEncoder.matches(vo.getPass(), readVO.getPass())){
 				chk=1;
+				session.setAttribute("passChk", 1);
 			}else{
 				chk=0;
+				session.setAttribute("passChk", 0);
 			}
 		
 		return chk;
 	}
-	@RequestMapping("/login/usersUpdate")
-	public void usersUpdate(){
+	
+	@RequestMapping(value="/login/usersUpdate")
+	public Model usersUpdate(Model model,HttpSession session){
+		String id=(String) session.getAttribute("id");
+		model.addAttribute("vo", mapper.read(id));
 		
+		return model;
 	}
 	
 	@RequestMapping("/user/read")
@@ -252,4 +259,84 @@ public class UsersController {
 		}
 		return followerCnt;
 	}
+	
+	@RequestMapping(value="/login/passFind")
+	public void passFind(){
+
+	}
+	@RequestMapping(value="/login/idFind")
+	public void idFind(){
+
+	}
+	@RequestMapping("/find_id/read")
+	@ResponseBody
+	public int getIdCnt(String email){
+		return mapper.find_id_cnt(email);
+	}
+	@RequestMapping("/find_id/readid")
+	@ResponseBody
+	public UsersVO getId(String email){
+		return mapper.find_id(email);
+	}
+	
+	
+	
+	
+	@RequestMapping("/find_email/read")
+	@ResponseBody
+	public int getCnt(String id){
+		return mapper.find_email_cnt(id);
+	}
+	
+	@RequestMapping("/find_email/readEmail")
+	@ResponseBody
+	public UsersVO getEmail(String id){
+		return mapper.find_email(id);
+	}
+	@RequestMapping(value="/login/passFind/update")
+	@ResponseBody
+	public void passFind(UsersVO vo){
+		vo.setPass(passEncoder.encode(vo.getPass()));
+		mapper.update(vo);
+	}
+	
+	@RequestMapping(value="/login/usersUpdate/profile_update", method = RequestMethod.POST)
+	public String profile_update(UsersVO vo, MultipartHttpServletRequest multi) throws Exception{
+		MultipartFile file = multi.getFile("file");
+		if (!file.isEmpty()) { // 업로드 파일이 비어있지 않으면
+			
+			// 예전이미지가 있으면 삭제
+			String oldImage=vo.getU_image();
+			if(oldImage!=null) {
+				new File(path + File.separator + oldImage).delete();
+			}
+			
+			String image = System.currentTimeMillis() + file.getOriginalFilename(); // 파일명이 중복되지않게 하기위해서 currentTimeMillis
+			file.transferTo(new File(path + File.separator + image));
+			vo.setU_image(image);
+		}
+		
+		mapper.profile_update(vo);
+		
+		return "redirect:/login/usersUpdate";
+	}
+	
+	@RequestMapping(value="/login/usersUpdate/profile_passUpdate")
+	@ResponseBody
+	public void usersUpdate(UsersVO vo,HttpSession session){
+		vo.setPass(passEncoder.encode(vo.getPass()));
+		mapper.update(vo);
+		session.invalidate();
+	}
+	
+	//회원탈퇴
+	@RequestMapping(value="/login/usersUpdate/updatePosition")
+	@ResponseBody
+	public void updatePosition(HttpSession session){
+		String id=(String) session.getAttribute("id");
+		mapper.updatePosition(id);
+		session.invalidate();
+	}
+	
+	
 }

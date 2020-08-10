@@ -22,95 +22,176 @@
 }
 </style>
 
+
+<style>
+@import url('https://fonts.google.com/css?family=Raleway&display=swap');
+
+
+#body{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	height:100vh;
+	background:#166cea;
+	font-family:'Raleway',sans-serif;
+
+
+}
+
+h1 {
+	font-size:2rem;
+	color:#fff;
+	position:relative;
+}
+
+h1::before{
+	content:attr(data-text);
+	color:yellow;
+	position:absolute;
+	left:0; z-index:2;
+	overflow:hidden;
+	width:100%;
+	
+	/* 추가 */
+	animation: loading 2s ease infinite;
+}
+h1::after{
+	content:"";
+	width:100%;
+	height:3px;
+	background:yellow;
+	position:absolute;
+	left:0; bottom: -0px;
+	animation: loadingLine 2s ease infinite;
+	
+}
+
+@keyframes loading{
+	from{width:0%;}
+	to{width:100%;}
+}
+
+@keyframes loadingLine{
+	from{width:0%;}
+	to{width:100%;}
+}
+
+body{
+	margin:auto;
+	text-align:center;
+
+
+}
+
+</style>
 <title>Login Insert</title>
 </head>
 <body>
 
 
 	<form name="frm" action="/login/insert" method="post" id="myForm"	enctype="multipart/form-data">
-	
-		<table width=800 id="signup">
-			<tr id=id_row>
-				<td><input type="hidden" id=idchk value=-1> <input
-					type="text" class="box" placeholder="아이디" name="id" value="" required> 
-					<input type="button" id=chkBtn value="중복체크"></td>
-			</tr>
-
-
-			<tr>
-				<td><input class="form-control" type="password" name="pass" value=""
-					id="pass" placeholder="비밀번호" /> <span id="pwdRegErr"
-					class="help-block">8글자 이상 입력하세요.</span>
-			</tr>
-
-			<tr>
-				<td><input class="form-control" type="password" name="repass" value=""
-					id="repass" placeholder="비밀번호 확인" /> <span id="rePwdErr"
-					class="help-block">비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
-			</tr>
-			<tr>
-				<td><input type="text" class="box" placeholder="이름" name="name" value=""
-					required></td>
-			</tr>
-			<tr>
-				<td><input type="text" class="box" placeholder="닉네임" value=""
-					name="nickname" required></td>
-			</tr>
-
-			<tr>
-				<td><input type="text" class="box" placeholder="TEL" value=""
-					name="phone" required></td>
-			</tr>
-
-			<tr id="email_row">
-				<td><input class="form-control" type="text" name="email" id="email" placeholder="email" value="${emali}"/> 
-					<input type="button" id="sendMessage" value="이메일 인증">
-					<span id="emailErr"	class="help-block">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</span>
-			</tr>
+			<!--로딩-->
+			<div id="body">
+			<h1 data-text="LOADING">LOADING</h1>
+			</div>
 			
-			<tr id="chkEmail" style="display:none">
-				<td>
+			<!--이미지-->
+			<div>
+				<img src="../display?fileName=${u_image}" id="image" width=200 height=200 style="border-radius:50%"/>
+				<input type="file" name="file">
+			</div>
+			
+			<!--아이디-->
+			<div id=id_row>				
+				<input type="hidden" id=idchk value=-1> 
+				<input type="text" class="box" placeholder="ID" name="id" value="" required>				
+				<div id="idOk"	class="idid" style="color:blue;">멋진 아이디네요!</div>
+				<div id="idErr"	class="idid" style="color:red;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>
+			</div>
+			
+			
+			<!--비밀번호-->
+			<div>				
+				<input class="form-control" type="password" name="pass" value="" id="pass" placeholder="PassWord" maxlength="16"/>
+				<div id="pwdRegErr" class="help-block" style="color:red;">8~16자 영문 대 소문자,숫자,특수문자를 사용하세요.</div>
+			</div>
+			<div>				
+				<input class="form-control" type="password" name="repass" value="" id="repass" placeholder="PassWord" maxlength="16"/> 
+				<div id="rePwdErr"	class="help-block" style="color:red;">비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</div>
+			</div>
+			
+			
+			<!--이름-->
+			<div>				
+				<input type="text" class="box" placeholder="Name" name="name" value="" required>
+			</div>
+			
+			<!--닉네임-->
+			<div>				
+				<input type="text" class="box" placeholder="NickName" value=""	name="nickname" required>
+			</div>
+			
+			<!--휴대전화-->
+			<div>
+				<label>휴대전화 ('-' 없이 번호만 입력해주세요)</label>
+				<input type="text" class="box" placeholder="TEL" value=""	name="phone" required>
+			</div>					
+			
+			
+			<!--이메일 인증 -->
+			<div id="email_row">
+					<input class="form-control" type="text" name="email" id="email" placeholder="email" value="${emali}"> 
+					<input type="button" id="sendMessage" value="이메일 인증">
+					<div id="emailErr"	class="help-block" style="color:red;">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</div>
+			</div>		
+			<div id="chkEmail" style="display:none">
+				<div>
 				<input type="hidden" id=dice>
-				인증번호 입력 : <input type="number" name="email_injeung" placeholder="  인증번호를 입력하세요. ">
+				인증번호 입력 : <input type="text" name="email_injeung" placeholder=" 인증번호를 입력하세요. ">
 				<button name="email_injeung_btn">확인</button>
 				<input type="hidden" id="injeung" value=0>
-				</td>
-				
-			</tr>
+				</div>				
+			</div>
+			
+			<!--자기소개-->
+			<div>
+				<div><textarea rows="7" cols="60" name="introduce" value="${introduce}"> 자기를 소개하는 글을 쓰세요 </textarea></div>
+			</div>
+			
+			<!--우편번호 찾기-->
+			<div>
+				<div><input type="button" class="btn-primary box"
+					onclick="openAddress();" value="우편번호 찾기"><br></div>
+			</div>
+			<div>
+				<div><input type="hidden" name="post" class="box"
+					id="users_zipCode" placeholder="우편번호" required></div>
+			</div>
+			<div>
+				<div><input type="text" name="roadAddress" class="box" value="${roadAddress}"
+					id="users_address" placeholder="도로명주소" required></div>
+			</div>
+			<div>
+				<div><input type="text" name="jibunAddress" class="box" value="${jibunAddress}"
+					id="users_addressDetail" placeholder="상세주소" required></div>
+			</div>
+			<div>
+				<div><input type="text" name="addr" class="box" value="${addr}"
+					id="sample4_jibunAddress" placeholder="주소"></div>
+			</div>
 
-			<tr>
-				<td><img id="image" src="http://placehold.it/150x120" width=150 value="${u_image}">
-					<input type="file" name="file"></td>
-			</tr>
-			<tr>
-				<td><textarea rows="7" cols="60" name="introduce" value="${introduce}"> 자기를 소개하는 글을 쓰세요 </textarea></td>
-			</tr>
-			<tr>
-				<td><input type="button" class="btn-primary box"
-					onclick="openAddress();" value="우편번호 찾기"><br></td>
-			</tr>
-			<tr>
-				<td><input type="hidden" name="post" class="box"
-					id="users_zipCode" placeholder="우편번호" required></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="roadAddress" class="box" value="${roadAddress}"
-					id="users_address" placeholder="도로명주소" required></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="jibunAddress" class="box" value="${jibunAddress}"
-					id="users_addressDetail" placeholder="상세주소" required></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="addr" class="box" value="${addr}"
-					id="sample4_jibunAddress" placeholder="주소"></td>
-			</tr>
-		</table>
-		<input type="submit" value="가입"> <input type="reset"
-			value="취소">
+		<input type="submit" value="가입"> <input type="reset" value="취소">
 	</form>
 </body>
 <script>
+	$(".idid").hide();
+	$("#body").hide();
+	$(frm.file).hide();
+	$("#sendMessage").on("click",function(e){
+		e.preventDefault();
+		$("#body").show();
+	})
+
 	//이메일 인증번호 전송 
 	$(frm).on("click", "#email_row #sendMessage", function(e){
 		e.preventDefault();
@@ -124,6 +205,7 @@
 					alert("인증번호를 발송하였습니다.");
 					$("#dice").val(data);
 					$("#chkEmail").show();
+					$("#body").hide();
 				}
 			})
 			
@@ -160,8 +242,9 @@
 		}
 	})
 	
-	//아이디 중복체크
-	$(frm).on("click", "#id_row #chkBtn", function() {
+	//아이디 중복
+	$(frm).keyup("#id_row", function(e){
+		e.preventDefault();
 		var id=$(frm.id).val();
 		$.ajax({
 			type:"get",
@@ -171,14 +254,29 @@
 			success:function(data) {
 				if (data == 0) {
 					$(frm).find("#id_row #idchk").val(data);
-					alert("가입 가능한 아이디 입니다.!");
+					$("#idOk").show();
+					$("#idErr").hide();
 				}else{
 					$(frm).find("#id_row #idchk").val(data);
-					alert("중복된 아이디가 있습니다.");
+					$("#idErr").show();
+					$("#idOk").hide();					
 				}
 			}
-		});
+		});			
 	});
+	
+	$("#pass").keyup(function(){
+        var pass=$(this).val();
+        // 비밀번호 검증할 정규 표현식
+        var reg=/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+        if(reg.test(pass)){//정규표현식을 통과 한다면
+             $("#pwdRegErr").hide();
+             successState("#pass");
+        }else{//정규표현식을 통과하지 못하면
+             $("#pwdRegErr").show();
+             errorState("#pass");
+        }
+    });
 	
 	//비밀번호 정규식
 	$("#repass").keyup(function() {
@@ -193,7 +291,8 @@
 			errorState("#repass");
 		}
 	});
-
+	
+	
 	//회원가입 정규식
 	$(frm).submit(function(e) {
 		e.preventDefault();
@@ -220,19 +319,23 @@
 
 	//이메일 정규식
 	$("#email")
-		.keyup(
-				function() {
-					var email=$(this).val();
-					// 이메일 검증할 정규 표현식
-					var reg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-					if (reg.test(email)) {//정규표현식을 통과 한다면
-						$("#emailErr").hide();
-						successState("#email");
-					} else {//정규표현식을 통과하지 못하면
-						$("#emailErr").show();
-						errorState("#email");
-					}
-				});
+		.keyup(function() {
+		var email=$(this).val();
+		// 이메일 검증할 정규 표현식
+		var reg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if (reg.test(email)) {//정규표현식을 통과 한다면
+			$("#emailErr").hide();
+			successState("#email");
+		} else {//정규표현식을 통과하지 못하면
+			$("#emailErr").show();
+			errorState("#email");
+		}
+	});
+	
+	
+	$("#image").on("click", function(){
+ 		$(frm.file).click();
+ 	});
 </script>
 <script>
 	/*우편번호*/

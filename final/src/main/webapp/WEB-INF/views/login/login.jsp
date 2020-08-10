@@ -38,7 +38,7 @@ body {
 	overflow:hidden;
 }
 
-/* body::before {
+ body::before {
 	content: "";
 	position: absolute;
 	z-index: 1;
@@ -47,7 +47,7 @@ body {
 	buttom: 0;
 	left: 0;
 }
- */
+ 
 #tlqkf {
 	position: relative;
 	z-index: 2;
@@ -218,32 +218,22 @@ section{
 	naver_id_login.setState(state);
 	naver_id_login.init_naver_id_login(); //naver_id_login.setPopup(); 팝업창으로 열린다
 </script>
-
-
 <script>
-	goTop();
 	
-function goTop(){
-	$('html').scrollTop(0);
 
-	let
-	id = $('#id');
-	let
-	pass = $('#pass');
-	let
-	btn = $('#btn');
+	let	id = $('#id');
+	let	pass = $('#pass');
+	let	btn = $('#btn');
 
 	$(btn).on('click', function() {
 		if ($(id).val() == "") {
 			$(id).next('label').addClass('warning');
 			setTimeout(function() {
-				$('label').removeClass("warning");
-			}, 1500);
+				$('label').removeClass("warning");}, 1500);
 		} else if ($(pass).val() == "") {
 			$(pass).next('label').addClass('warning');
 			setTimeout(function() {
-				$('label').removeClass("warning");
-			}, 1500);
+				$('label').removeClass("warning");	}, 1500);
 		}
 	});
 </script>
@@ -258,10 +248,7 @@ var dest="${dest}";
 			type : "post",
 			url : "/login/login",
 			dataType : "json",
-			data : {
-				"id" : id,
-				"pass" : pass
-			},
+			data : {"id" : id,"pass" : pass},
 			success : function(data) {
 				if (data == 1) {
 					alert("로그인 성공");
@@ -295,7 +282,6 @@ var dest="${dest}";
 	//회원가입 버튼을 눌렀을 때
 	$("#userInsert").on("click", function() {
 		window.open("/login/agree", "", "width=600, height=800");
-	})
-	
+	});
 </script>
 </html>
