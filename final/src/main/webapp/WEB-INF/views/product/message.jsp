@@ -181,7 +181,7 @@ html {
 					{{#each .}}
 						<tr class="row">
 							<td width=40 style="border:0.5px solid black; border-left:none; text-align:center;">
-								<input type="checkbox" class="chk" style="cursor:pointer;">
+								<input type="checkbox" class="chk1" style="cursor:pointer;">
 								<input type="hidden" value={{m_no}} class="m_no">
 							</td>
 							<td width=214 style="border:0.5px solid black;">
@@ -342,8 +342,11 @@ html {
 	//전체선택 체크박스 클릭 
  	 $(document).ready( function() {
 	     $("#tbl1").on("click",".chkAll", function() {
-	       $(".chk").prop('checked', this.checked);
+	       $(".chk1").prop('checked', this.checked);
 	     });
+	   });
+	
+ 	 $(document).ready( function() {
 	     $("#tbl").on("click",".chkAll", function() {
 		       $(".chk").prop('checked', this.checked);
 		 });

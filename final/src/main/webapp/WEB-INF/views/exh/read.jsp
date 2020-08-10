@@ -65,7 +65,7 @@
 			<table style="width:1130px;margin:auto;border-collapse:collapse;">
 			   <tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
 			      <td id="infoMenu">상세정보</td>
-			      <td id="MapMenu">장소/전시장 도면</td>
+			      <td id="MapMenu">장소/전시장</td>
 			      <td id="Menu">리뷰(<span id="re">${re}</span>)</td>
 			   </tr>
 			   <tr>

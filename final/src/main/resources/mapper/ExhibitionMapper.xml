@@ -35,4 +35,25 @@
     <select id="test" resultType="com.example.domain.ExhibitionVO">
         select * from exhibition order by date desc limit 5
     </select>
+    
+    	<!-- like 부문 -->
+	<select id="likeTableChk" resultType="int">
+		select count(*) from e_like where id=#{id} and r_no=#{r_no}
+	</select>
+	
+	<insert id="likeinsert">
+		insert into e_like values(#{id},#{r_no})
+	</insert>
+	
+	<delete id="likedelete">
+		delete from e_like where id=#{id} and r_no=#{r_no}
+	</delete>
+	
+	<select id="likeTableCnt" resultType="int">
+		select r.*, count(*) cnt from (select * from e_reply where e_no=#{e_no}) r , e_like e where e.r_no=r.r_no group by r_no;
+	</select>
+	
+	<!-- <update id="E_likeUpdate">
+		update board set e_like=#{like} where r_no=#{r_no} 
+	</update> -->
 </mapper>
