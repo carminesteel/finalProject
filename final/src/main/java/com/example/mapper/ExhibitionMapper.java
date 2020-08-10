@@ -19,4 +19,10 @@ public interface ExhibitionMapper {
 	public List<String> getE_imagelist(int e_no);
 	public void update(ExhibitionVO vo);
 	public List<ExhibitionVO> test();
+	
+	public int likeTableChk(@Param(value = "id") String id,@Param(value = "r_no") int r_no);
+	public void likeinsert(@Param(value = "id") String id,@Param(value = "r_no") int r_no);
+	public void likedelete(@Param(value = "id") String id,@Param(value = "r_no") int r_no);
+	public int likeTableCnt(@Param(value = "r_no") int r_no);
+	public void E_likeUpdate(@Param(value = "r_no") int r_no, @Param(value = "like") int like);
 }

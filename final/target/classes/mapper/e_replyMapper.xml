@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.e_replyMapper">
+    
     <select id="list" resultType="com.example.domain.e_replyVO">
-        select * from e_reply where e_no=#{e_no} order by r_no desc limit #{cri.pageStart},#{cri.perPageNum}
+        select r.*, count(e.r_no) cnt from (select * from e_reply where e_no=#{e_no}) r 
+        left join e_like e on e.r_no=r.r_no 
+		group by r_no;
     </select>
     <insert id="insert">
     	insert into e_reply(replyer,content,date,e_no) values(#{replyer},#{content},now(),#{e_no})
     </insert>
     <delete id="delete">
-    	delete from e_reply where r_no=#{r_no}
+    	delete from e_reply where r_no=#{r_no}   	
     </delete>
+    <delete id="likeDelete">
+    	delete from e_like where r_no=#{r_no}
+    </delete>
+    <select id="likeCnt" resultType="int">
+    	select count(*) from e_like where r_no=#{r_no}
+    </select>
 </mapper>

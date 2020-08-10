@@ -9,6 +9,15 @@ public class e_replyVO {
 	private String content;
 	private Date date;
 	private int e_no;
+	private int cnt;
+
+	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public int getR_no() {
 		return r_no;
 	}
@@ -42,7 +51,6 @@ public class e_replyVO {
 	@Override
 	public String toString() {
 		return "e_replyVO [r_no=" + r_no + ", replyer=" + replyer + ", content=" + content + ", date=" + date
-				+ ", e_no=" + e_no + "]";
+				+ ", e_no=" + e_no + ", cnt=" + cnt + "]";
 	}
-
 }
