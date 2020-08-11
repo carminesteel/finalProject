@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.domain.CartVO;
 import com.example.domain.ProductVO;
+import com.example.domain.PurchaseVO;
+import com.example.domain.UsersVO;
 
 public interface ProductMapper {
    public List<ProductVO> bestList();
