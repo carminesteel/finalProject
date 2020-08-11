@@ -18,17 +18,34 @@
    crossorigin="anonymous">
 
 <style>
+	html{
+		font-family:Noto Sans Kr;
+	}
+	.rbtnDelete:hover{
+		cursor:pointer;
+	}
 
 	#tbl1,#tbl0{text-align:center;}
 	#tbl1{
 		width:1073px;
 		margin:auto;		
 	}
+	
+	#tbl1 {
+  border-collapse: separate;
+  border-spacing: 0 25px;
+}
+	#pagination{
+	text-align:center;
+	display:block;
+	}
+	
 </style>	
 </head>
 <body>
-	<hr>	
-<!-- 	<table id=tbl0>
+	<br>
+	<hr>
+	<!-- 	<table id=tbl0>
 		<tr>
 			<td width=100>댓글번호</td>
 			<td width=200>작성자</td>
@@ -41,26 +58,35 @@
 	<table id=tbl1></table>
 	<script id="temp" type="text/x-handlebars-template">	
 		{{#each .}}
-	<tr class="row">
-			<td class="u_image" width=70><img width=65px height=65px; style="border-radius:50%" src="display?fileName={{u_image}}"</td>
-			<td  width=700 style="text-align:left;"><b class="replyer" style="font-size:25px;">{{replyer}}</b><br><b class="content" style="font-weight:300;font-family:Noto Sans Kr;">{{content}}</b></td>	
+		<tr class=reRow>
+			<td class="u_image" width=70>				
+				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}"				
+			</td>
+			<td  width=700 style="text-align:left;">
+				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>
+				<br>
+				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>
+				<input class=hId type="text" value=${id}>
+				<input class=rId type="text" value={{replyer}}>
+				<input class=r_no type="hidden" value={{r_no}}>
+			</td>	
 			<td width=50>
-				<input type="button" value="삭제" class="rbtnDelete" style="{{printStyle replyer}};float:right">		
-			</td>		
+				<img width=20 height=20 src="display?fileName=xicon.png" class="rbtnDelete">	
+			</td><br><br>
 		</tr>
 		{{/each}}
 	</script> 
-	
+	<br>
 	<form action="/b_reply/insert" method="post" name="rfrm">
+	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="display?fileName=${vo.u_image}"/>
 		<input type="hidden" name="b_no" value="${vo.b_no}">
 		<input type="hidden" name="replyer" value="${id}">
-		<input type="text" name="content" size=50>
-		<input type="submit" value="입력">		
-	</form>  
-*
-	<div id="pagination">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
+		<textarea name="content" style=width:1030px;height:100px;resize:none></textarea>
+		<input style="float:right;width:136px;height:38px;border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;margin-right:18px;" type="submit" value="댓글 남기기">		
+	</form>
+	<br><br><br>
+	<div id="pagination" >		
+			<ul class="pagination" style="margin-left:380px;">
 				<c:if test="${pm.prev}">
 					<li class="page-item"><a class="page-link"
 						href="${pm.startPage-1}" aria-label="Previous"> <span
@@ -77,11 +103,12 @@
 					</a></li>
 				</c:if>
 			</ul>
-		</nav>
+		<br>
 	</div>
-
+	
 </body>
 <script>
+R_list();
 var b_no = "${vo.b_no}";
 var page=1;
 $("#pagination").on("click", ".page-item .page-link", function(e) {
@@ -90,18 +117,18 @@ $("#pagination").on("click", ".page-item .page-link", function(e) {
     R_list();  
  });
 
-$("#tbl1").find(".row .b_no").hide();
+$("#tbl1").find(".reRow .b_no").hide();
 var id="${id}";
-Handlebars.registerHelper("printStyle",function(replyer){
-	var src;
+
+/* var replyer=$("#tbl1 .reRow .replyer").html();
+alert(replyer);
+
 	if(id!=replyer){
-		src="display:none;";
+		$(".rbtnDelete").hide();	
 	}else if(id==replyer){
-		src="color:red;";
-	}
-	return src;
-});
-R_list();
+		$(".rbtnDelete").show();
+	} */
+	
 
 function R_list(){
 $.ajax({
@@ -112,7 +139,6 @@ $.ajax({
 	success:function(data){
 		var temp=Handlebars.compile($("#temp").html());
 		$("#tbl1").html(temp(data));
-		alert(data.pm.prev);
 	}
 });
 }
@@ -132,6 +158,7 @@ $(rfrm).submit(function(e){
 			data:{"b_no":b_no,"replyer":replyer,"content":content},
 			success:function(){		
 				R_list();
+				$(rfrm.content).val("");
 				}
 			
 		})
@@ -139,17 +166,25 @@ $(rfrm).submit(function(e){
 });
 
 
-$("#tbl1").on("click", ".row .rbtnDelete", function(){
-	var r_no=$(this).parent().parent().find(".r_no").html();
-	if(!confirm("삭제하시겠습니까?")) return;
-	$.ajax({
-	      type:"post",
-	      url:"/b_reply/delete",
-	      data:{"r_no":r_no},
-	      success:function(){
-	    	  R_list();
-	      }
-	   });
+$("#tbl1").on("click", ".reRow .rbtnDelete", function(){
+	var r_no=$(this).parent().parent().find(".r_no").val();
+	var hid=$(this).parent().parent().find(".hId").val();
+	var rid=$(this).parent().parent().find(".rId").val();
+	if(hid==rid){
+		alert("oooo"); 
+		alert(r_no);
+		if(!confirm("삭제하시겠습니까?")) return;
+		$.ajax({
+		      type:"post",
+		      url:"/b_reply/delete",
+		      data:{"r_no":r_no},
+		      success:function(){
+		    	  R_list();
+		      }
+		   });
+	 }else if(hid!=rid){
+		alert("본인이 작성한 댓글만 삭제가능합니다.") 
+	}
 	
 });
 

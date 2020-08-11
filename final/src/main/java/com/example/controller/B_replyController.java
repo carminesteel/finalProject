@@ -34,7 +34,7 @@ public void list() {
 @RequestMapping(value="read", method=RequestMethod.POST)
 @ResponseBody
 	public ArrayList<B_replyVO> read(int b_no,Model model,Criteria cri) {
-		cri.setPerPageNum(10);
+		cri.setPerPageNum(3);
 		PageMaker pm=new PageMaker();
 		pm.setCri(cri);
 		pm.setTotalCount(mapper.replyCount(b_no)-1);
@@ -70,7 +70,7 @@ public void insert(B_replyVO vo) {
 	BoardVO bvo= new BoardVO();
 	bvo.setB_no(b_no);
 	bvo.setR_cnt(cnt);
-		bmapper.board_r_cnt_update(bvo);
+	bmapper.board_r_cnt_update(bvo);
 	
 	
 }

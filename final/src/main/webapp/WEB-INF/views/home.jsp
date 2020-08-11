@@ -10,14 +10,19 @@
 <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
    <title>index</title>
    <style>
-   
 html {
-	font-family:Noto Sans KR;
+	font-family: Noto Sans KR;
 }
 
-   
+#lightBox {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
 body {
 	width: 100%;
+	overflow-x:hidden;
 }
 
 .slide {
@@ -159,67 +164,99 @@ li {
 	height: 710px;
 }
 
- .imgDiv{
-	
-	margin-left:0;
-} 
+.imgDiv {
+	margin-left: 0;
+}
 
-.imgContainer{
-	margin-left:15px;
-	width:350px;
-	height:300px;
-	display:inline-block;
+.imgContainer {
+	margin-left: 15px;
+	width: 350px;
+	height: 300px;
+	display: inline-block;
 	border-radius: 5px 5px 5px 5px;
 	background: black;
 }
 
-.imgInfo{
-	width:100%;
-	text-align:left;
-	padding-top:3px;
+.imgInfo {
+	width: 100%;
+	text-align: left;
+	padding-top: 3px;
 }
 
-
-.imgContainer img{
-	width:350px;
-	height:300px;
-	object-fit:cover;
-	object-position:center;
+.imgContainer img {
+	width: 350px;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
 	border-radius: 5px 5px 5px 5px;
 }
 
 .imgContainer img:hover {
-    opacity: 0.3;
+	opacity: 0.3;
+	cursor: pointer;
+}
+
+.imgContainer img:hover+.hoverInfo {
+	display: block;
+}
+
+.hoverInfo {
+	width: 300px;
+	height: 110px;
+	position: absolute;
+	display: none;
+	margin-top: -120px;
+	margin-left: 28px;
+}
+
+.hoverInfo1 {
+	float: left;
+	font-size: 24px;
+	color: white;
+}
+
+.hoverInfo2 {
+	float: left;
+	color: white;
+}
+
+#dialog {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+}
+
+/*       /* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: absolute; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	 /* Full width */
+	 /* Full height */
+	/* overflow: auto; */ /* Enable scroll if needed */
+	height:auto;
+	overflow : scroll;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9);
+
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.lbClose:hover{
 	cursor:pointer;
 }
-.imgContainer img:hover	+ .hoverInfo{
-	display:block;
-}
-
-
-.hoverInfo{
-	
-	width:300px;
-	height:110px;
-	position:absolute;
-	display:none;
-	margin-top:-120px;
-	margin-left:28px;
-}
-
-.hoverInfo1{	
-	float:left;
-	font-size:24px;
-	color:white;
-}
-
-.hoverInfo2{
-	float:left;
-	color:white;	
-}
-
-/* 전시부분 슬라이드 스타일 */
-
 
 </style>
 
@@ -261,7 +298,8 @@ li {
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${list}" var="list" begin="0" end="9">
 			<div class="imgContainer">
-				<img src="display?fileName=${list.image}"/>
+				<input class="idxBno" type="hidden" value="${list.b_no}"/>
+				<img class="idxBimg" src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
 				<span class="hoverInfo1">${list.title}</span><br><br><br>
 				<span class="hoverInfo2">${list.content}</span>
@@ -288,7 +326,7 @@ li {
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${plist}" var="plist" begin="0" end="9">
 			<div class="imgContainer">
-				<img src="display?fileName=${plist.image}"/>
+				<img class="idxpimg" src="display?fileName=${plist.image}"/>
 				<div class="hoverInfo">
 				<span class="hoverInfo1">${plist.title}</span><br><br><br>
 				<span class="hoverInfo2">${plist.price}원</span>
@@ -315,7 +353,7 @@ li {
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${flist}" var="flist" begin="0" end="9">
 			<div class="imgContainer">
-				<img src="display?fileName=${flist.image}"/>
+				<img class="idxFimg" src="display?fileName=${flist.image}"/>
 				<div class="hoverInfo">
 				<span class="hoverInfo1">${flist.title}</span><br><br><br>
 				<span class="hoverInfo2">${flist.content}</span>
@@ -343,8 +381,128 @@ li {
 	<jsp:include page="test.jsp"/>
 	<br><br>
 	<jsp:include page="footer.jsp"/>
+	
+	
+	
+	<%-- <div id=lightBox>
+		<div id=lightInfo>
+			<img id="image" src="display?fileName=${vo.u_image}"/>
+			<div id=artInfo>
+				<b name=title>${vo.title}</b>
+				<br>
+				${vo.nickname}
+			</div>
+		</div>
+		<div id=lightContent>
+		<input type="hidden" name="image" value="${ vo.image }">
+			<img src="display?fileName=${vo.image}"width="100%"/>
+			<br><br><br><br>
+			<c:forEach items="${list}" var="image">
+				<img src="display?fileName=${image}" name="files" width="100%"/>
+				<br><br><br><br>
+			</c:forEach>
+ 			<div id=lightBottom>
+				<div style="height:100px;width:100%">
+					<span style="display:inline-block;float:left;">
+						<img style="border-radius:50%;" width=90px height=90px src="display?fileName=${vo.u_image}"/>
+					</span>
+					<span style="display:inline-block;float:left;margin-left:18px;margin-top:18px;">
+						<b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;<a style="all:unset;font-size:14px;cursor:pointer;">팔로우</a><br>
+						<b style="all:unset;color:#93a1a2;font-size:15px">${vo.introduce}</b>
+					</span>
+				</div>
+				<div>
+					<b style="font-size:30px;">${vo.title}</b>
+					<br>
+					<b style="all:unset;font-size:20px;">${vo.content}</b>
+					<br>
+					<div style="display:inline-block;float:right;"></div>
+				</div>
+				<br>
+				<div style=text-align:left;display:inline-block;float:left;>
+				<form name="frm" method="post" action="update" enctype="multipart/form-data">
+				
+					<input type="hidden" name="b_no" value="${vo.b_no}">
+					<input type="hidden" name="id" value="${vo.id}">
+					<input type="hidden" name="image" value="${vo.image}">
+					<c:if test="${id==vo.id}">
+						<!-- <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="submit" value="수정"> -->		
+						<input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
+					</c:if>
+					<input type="button" value="신고하기" id="report" style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:75px;height:28px;font-size:15px;">
+				</form>
+				</div> --%>
+				
+				
+				<%-- <div style=text-align:right;display:inline-block;float:right;>
+					<img class=icons src="display?fileName=views.png"/> ${vo.view}&nbsp;
+					<img class=icons id="LikeBtn" src="display?fileName=likes.png"/> ${vo.b_like}&nbsp;
+					<img class=icons src="display?fileName=comment.png"/> ${vo.r_cnt}										
+				</div>
+				<jsp:include page="b_reply/list.jsp"></jsp:include> 
+			</div>
+		</div>	
+	</div> --%>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal"> 
+    </div>
+
 </body>
 <script>
+	var b_no;
+/* 	$(".idxBimg").on("click", function(){
+		b_no=$(this).parent().find(".idxBno").val();
+		alert(b_no);
+		$("#dialog").load("/board/read?b_no="+b_no);
+	}) */
+	
+	    // Get the modal
+        var modal = document.getElementById('myModal');
+ 
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];                                          
+ 
+        // When the user clicks on the button, open the modal 
+        $(".idxBimg").on("click", function(){
+        	b_no=$(this).parent().find(".idxBno").val();
+        	$("#myModal").load("../board/read?b_no="+b_no)
+        	$('html').css("overflow", "hidden");        	
+        	$('.modal').css("overflow", "scroll");
+        	$('html').css("overflow-x", "hidden");
+        	$('.modal').css("overflow-x", "hidden");
+            modal.style.display = "block";
+        })
+        
+ 
+	$("#btnReply").hide();
+
+	var id = "${id}";
+	var b_no = "${vo.b_no}";
+
+	$("#report").on(
+			"click",
+			function() {
+				var b_no = "${vo.b_no}";
+				window.open("/board/report?b_no=" + b_no, "",
+						"width=500px, height=400px");
+			});
+
+	$("#LikeBtn").on("click", function() {
+		$.ajax({
+			type : "post",
+			url : "/board/like/update",
+			data : {
+				"id" : id,
+				"b_no" : b_no
+			},
+			dataType : "json",
+			success : function(data) {
+				$("#LikeBtn").val("좋아요/" + data);
+				location.reload()
+			}
+		})
+	})
 
 	/* 홈 첫부분 슬라이드 구현 */
 	var JUI = JUI || {};
@@ -533,6 +691,5 @@ li {
 		})
 		 */
 	});
-
 </script>
 </html>

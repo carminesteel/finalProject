@@ -26,319 +26,319 @@ import com.mysql.fabric.xmlrpc.base.Array;
 
 @Controller
 public class UsersController {
-	@Autowired
-	UsersMapper mapper;
+   @Autowired
+   UsersMapper mapper;
 
-	@Autowired
-	MyPageMapper Mmapper;
-	
-	
-	@Autowired 
-	BCryptPasswordEncoder passEncoder;
-	
-	/* 占싱뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占� */
-	@Resource(name = "uploadPath") /* 占쏙옙占쏙옙 占쏙옙占싸드를 占쏙옙占쏙옙 占십울옙 */
-	private String path;
+   @Autowired
+   MyPageMapper Mmapper;
+   
+   
+   @Autowired 
+   BCryptPasswordEncoder passEncoder;
+   
+   /* 占싱뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占  */
+   @Resource(name = "uploadPath") /* 占쏙옙占쏙옙 占쏙옙占싸드를 占쏙옙占쏙옙 占십울옙 */
+   private String path;
 
-	@RequestMapping("/login/login")
-	public void login() {
+   @RequestMapping("/login/login")
+   public void login() {
 
-	}
+   }
 
-	@RequestMapping(value = "/login/login", method = RequestMethod.POST)
-	@ResponseBody
-	public int loginPost(UsersVO vo, HttpSession session) {
-		int result = 0; // 회占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�, 占쏙옙占싱듸옙 占쏙옙占쏙옙占쏙옙占쏙옙 占십댐옙 占쏙옙占�
+   @RequestMapping(value = "/login/login", method = RequestMethod.POST)
+   @ResponseBody
+   public int loginPost(UsersVO vo, HttpSession session) {
+      int result = 0; // 회占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占 , 占쏙옙占싱듸옙 占쏙옙占쏙옙占쏙옙占쏙옙 占십댐옙 占쏙옙占 
 
-		UsersVO readVO = mapper.read(vo.getId());
-		if (readVO != null) {
-			if (passEncoder.matches(vo.getPass(), readVO.getPass())) { // 占싸깍옙占쏙옙 占쏙옙占쏙옙
-				if (readVO.getPosition() == 1) {
-					result = 1; // 占싹뱄옙 user
-					session.setAttribute("id", readVO.getId());
-					session.setAttribute("name", readVO.getNickname());
-					session.setAttribute("position", readVO.getPosition());
-				} else if (readVO.getPosition() == 2) {
-					result = 2; // admin
-					session.setAttribute("id", readVO.getId());
-					session.setAttribute("name", readVO.getName());
-					session.setAttribute("position", readVO.getPosition());
-				} else if (readVO.getPosition() == 3){
-					result = 3; // 占쏙옙占쏙옙占쏙옙
-				} else {
-					result = 4;//회원탈퇴계정
-				}
-			} else {
-				result = 5; // 占쏙옙橘占싫� 틀占쏙옙占쏙옙 占쏙옙占�
-			}
-		}
-		return result;
-	}
+      UsersVO readVO = mapper.read(vo.getId());
+      if (readVO != null) {
+         if (passEncoder.matches(vo.getPass(), readVO.getPass())) { // 占싸깍옙占쏙옙 占쏙옙占쏙옙
+            if (readVO.getPosition() == 1) {
+               result = 1; // 占싹뱄옙 user
+               session.setAttribute("id", readVO.getId());
+               session.setAttribute("name", readVO.getNickname());
+               session.setAttribute("position", readVO.getPosition());
+            } else if (readVO.getPosition() == 2) {
+               result = 2; // admin
+               session.setAttribute("id", readVO.getId());
+               session.setAttribute("name", readVO.getName());
+               session.setAttribute("position", readVO.getPosition());
+            } else if (readVO.getPosition() == 3){
+               result = 3; // 占쏙옙占쏙옙占쏙옙
+            } else {
+               result = 4;//회원탈퇴계정
+            }
+         } else {
+            result = 5; // 占쏙옙橘占싫  틀占쏙옙占쏙옙 占쏙옙占 
+         }
+      }
+      return result;
+   }
 
-	// 占쏙옙占싱뱄옙 占싸깍옙占쏙옙 占쏙옙占쏙옙 (占쏙옙占쏙옙 占싹쇽옙x)
-	@RequestMapping("/login/naverlogin")
-	public String loginNaver() {
-		return "/login/naverlogin";
+   // 占쏙옙占싱뱄옙 占싸깍옙占쏙옙 占쏙옙占쏙옙 (占쏙옙占쏙옙 占싹쇽옙x)
+   @RequestMapping("/login/naverlogin")
+   public String loginNaver() {
+      return "/login/naverlogin";
 
-	}
+   }
 
-	@RequestMapping("/loginNaverResult")
-	public String loginNaverResult(String email, HttpSession session) {
-		session.setAttribute("id", email);
-		session.setAttribute("position", 1);
-		System.out.println(email);
-		return "redirect:http://localhost:8088/";
-	}
+   @RequestMapping("/loginNaverResult")
+   public String loginNaverResult(String email, HttpSession session) {
+      session.setAttribute("id", email);
+      session.setAttribute("position", 1);
+      System.out.println(email);
+      return "redirect:http://localhost:8088/";
+   }
 
-	// 회占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌩댐옙 (占쏙옙占쏙옙 창)
-	@RequestMapping("/login/agree")
-	public void agree() {
-	}
+   // 회占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌩댐옙 (占쏙옙占쏙옙 창)
+   @RequestMapping("/login/agree")
+   public void agree() {
+   }
 
-	// 占쏙옙占싱듸옙 占쌩븝옙占싯삼옙
-	@RequestMapping("/insert/read")
-	@ResponseBody
-	public Integer Iread(String id) {
-		System.out.println(id);
-		int cnt = -1;
-		UsersVO vo = mapper.read(id);
-		if (vo == null) {
-			cnt = 0;
-		} else {
-			cnt = 1;
-		}
-		return cnt;
-	}
+   // 占쏙옙占싱듸옙 占쌩븝옙占싯삼옙
+   @RequestMapping("/insert/read")
+   @ResponseBody
+   public Integer Iread(String id) {
+      System.out.println(id);
+      int cnt = -1;
+      UsersVO vo = mapper.read(id);
+      if (vo == null) {
+         cnt = 0;
+      } else {
+         cnt = 1;
+      }
+      return cnt;
+   }
 
-	// 회占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙
-	@RequestMapping("/login/insert")
-	public void insert() {
-	}
+   // 회占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙
+   @RequestMapping("/login/insert")
+   public void insert() {
+   }
 
-	@RequestMapping(value = "/login/insert", method = RequestMethod.POST)
-	public String insertPost(UsersVO vo, HttpSession session, MultipartHttpServletRequest multi) throws Exception {
-		MultipartFile file = multi.getFile("file");
-		session.setAttribute("id", vo.getId());
-		session.setAttribute("name", vo.getName());
-		// 占쏙옙占싹억옙占싸듸옙
-		if (!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙
-			String image = System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙
-																					// 占쌩븝옙占쏙옙占쏙옙占십곤옙
-																					// 占싹깍옙占쏙옙占쌔쇽옙
-																					// currentTimeMillis
-			file.transferTo(new File(path + File.separator + image));
-			vo.setU_image(image);
-		}else{
-			vo.setU_image("im2.jpg");
-		}
-		vo.setPass(passEncoder.encode(vo.getPass()));
-		mapper.insert(vo);
-		return "redirect:/login/hello";
-	}
+   @RequestMapping(value = "/login/insert", method = RequestMethod.POST)
+   public String insertPost(UsersVO vo, HttpSession session, MultipartHttpServletRequest multi) throws Exception {
+      MultipartFile file = multi.getFile("file");
+      session.setAttribute("id", vo.getId());
+      session.setAttribute("name", vo.getName());
+      // 占쏙옙占싹억옙占싸듸옙
+      if (!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占  占쏙옙占쏙옙占쏙옙
+         String image = System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙
+                                                               // 占쌩븝옙占쏙옙占쏙옙占십곤옙
+                                                               // 占싹깍옙占쏙옙占쌔쇽옙
+                                                               // currentTimeMillis
+         file.transferTo(new File(path + File.separator + image));
+         vo.setU_image(image);
+      }else{
+         vo.setU_image("im2.jpg");
+      }
+      vo.setPass(passEncoder.encode(vo.getPass()));
+      mapper.insert(vo);
+      return "redirect:/login/hello";
+   }
 
-	@RequestMapping("/login/hello")
-	public void hello() {
-	}
+   @RequestMapping("/login/hello")
+   public void hello() {
+   }
 
-	@RequestMapping("/member/email_injeung")
-	public void email_injeung() {
-	}
+   @RequestMapping("/member/email_injeung")
+   public void email_injeung() {
+   }
 
-	@RequestMapping(value = "/login/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/login/login";
-	}
-		
-	@RequestMapping("/login/mypage")
-	public void mypage(Model model,HttpSession session) {
-		String id=(String) session.getAttribute("id");
-		model.addAttribute("vo", mapper.read(id));
-		model.addAttribute("blist",Mmapper.myBlist(id));
-		model.addAttribute("plist",Mmapper.myPlist(id));
-		
-		List<String> followingList = Mmapper.myFollowing(id);
-		ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
-		if(followingList.size()>0) {
-			for(String following:followingList) {
-				followingInfo.add(Mmapper.UserRead(following));
-			}
-		}
-		model.addAttribute("followingInfo",followingInfo);
+   @RequestMapping(value = "/login/logout")
+   public String logout(HttpSession session) {
+      session.invalidate();
+      return "redirect:/login/login";
+   }
+      
+   @RequestMapping("/login/mypage")
+   public void mypage(Model model,HttpSession session) {
+      String id=(String) session.getAttribute("id");
+      model.addAttribute("vo", mapper.read(id));
+      model.addAttribute("blist",Mmapper.myBlist(id));
+      model.addAttribute("plist",Mmapper.myPlist(id));
+      
+      List<String> followingList = Mmapper.myFollowing(id);
+      ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
+      if(followingList.size()>0) {
+         for(String following:followingList) {
+            followingInfo.add(Mmapper.UserRead(following));
+         }
+      }
+      model.addAttribute("followingInfo",followingInfo);
 
-		List<String> followerList = Mmapper.myFollower(id);
-		ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
-		if(followerList.size()>0) {
-			for(String follower:followerList) {
-				followerInfo.add(Mmapper.UserRead(follower));
-			}
-		}
-		model.addAttribute("followerInfo",followerInfo);
-	}
-	
-	@RequestMapping(value="/login/mypagePassChk", method=RequestMethod.POST)
-	@ResponseBody
-	public int mypagePassChk(UsersVO vo,HttpSession session){
-		
-		int chk;
-			UsersVO readVO = mapper.read(vo.getId());
-			if(passEncoder.matches(vo.getPass(), readVO.getPass())){
-				chk=1;
-				session.setAttribute("passChk", 1);
-			}else{
-				chk=0;
-				session.setAttribute("passChk", 0);
-			}
-		
-		return chk;
-	}
-	
-	@RequestMapping(value="/login/usersUpdate")
-	public Model usersUpdate(Model model,HttpSession session){
-		String id=(String) session.getAttribute("id");
-		model.addAttribute("vo", mapper.read(id));
-		
-		return model;
-	}
-	
-	@RequestMapping("/user/read")
-	public void userRead(Model model,String id) {
-		model.addAttribute("vo", mapper.read(id));
-		
-		model.addAttribute("blist",Mmapper.myBlist(id));
-		model.addAttribute("plist",Mmapper.myPlist(id));
-		
-		List<String> followingList = Mmapper.myFollowing(id);
-		System.out.println(followingList.toString());
-		ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
-		if(followingList.size()>0) {
-			for(String following:followingList) {
-				followingInfo.add(Mmapper.UserRead(following));
-			}
-		}
-		model.addAttribute("followingInfo",followingInfo);
+      List<String> followerList = Mmapper.myFollower(id);
+      ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
+      if(followerList.size()>0) {
+         for(String follower:followerList) {
+            followerInfo.add(Mmapper.UserRead(follower));
+         }
+      }
+      model.addAttribute("followerInfo",followerInfo);
+   }
+   
+   @RequestMapping(value="/login/mypagePassChk", method=RequestMethod.POST)
+   @ResponseBody
+   public int mypagePassChk(UsersVO vo,HttpSession session){
+      
+      int chk;
+         UsersVO readVO = mapper.read(vo.getId());
+         if(passEncoder.matches(vo.getPass(), readVO.getPass())){
+            chk=1;
+            session.setAttribute("passChk", 1);
+         }else{
+            chk=0;
+            session.setAttribute("passChk", 0);
+         }
+      
+      return chk;
+   }
+   
+   @RequestMapping(value="/login/usersUpdate")
+   public Model usersUpdate(Model model,HttpSession session){
+      String id=(String) session.getAttribute("id");
+      model.addAttribute("vo", mapper.read(id));
+      
+      return model;
+   }
+   
+   @RequestMapping("/user/read")
+   public void userRead(Model model,String id) {
+      model.addAttribute("vo", mapper.read(id));
+      
+      model.addAttribute("blist",Mmapper.myBlist(id));
+      model.addAttribute("plist",Mmapper.myPlist(id));
+      
+      List<String> followingList = Mmapper.myFollowing(id);
+      System.out.println(followingList.toString());
+      ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
+      if(followingList.size()>0) {
+         for(String following:followingList) {
+            followingInfo.add(Mmapper.UserRead(following));
+         }
+      }
+      model.addAttribute("followingInfo",followingInfo);
 
-		List<String> followerList = Mmapper.myFollower(id);
-		System.out.println(followerList.toString());
-		ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
-		if(followerList.size()>0) {
-			for(String follower:followerList) {
-				followerInfo.add(Mmapper.UserRead(follower));
-			}
-		}
-		model.addAttribute("followerInfo",followerInfo);
-	}
-	
-	
-	
-	@RequestMapping("/user/followChk")
-	@ResponseBody
-	public int followChk(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
-		int chk=mapper.followChk(follower, target);
-		
-		System.out.println(chk);
-		return chk;
-	}
-	
-	@RequestMapping("/user/followUpdate")
-	@ResponseBody
-	public int followUpdate(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
-		int chk=mapper.followChk(follower, target);
-		int followerCnt;
-		int followingCnt;
-		if(chk==0) {
-			mapper.followInsert(follower, target);
-			followerCnt=mapper.followerCnt(target);
-			followingCnt=mapper.followingCnt(follower);
-			mapper.followerUpdate(followerCnt, target);
-			mapper.followUpdate(followingCnt, follower);
-		}else {
-			mapper.followDelete(follower, target);
-			followerCnt=mapper.followerCnt(target);
-			followingCnt=mapper.followingCnt(follower);
-			mapper.followerUpdate(followerCnt, target);
-			mapper.followUpdate(followingCnt, follower);
-		}
-		return followerCnt;
-	}
-	
-	@RequestMapping(value="/login/passFind")
-	public void passFind(){
+      List<String> followerList = Mmapper.myFollower(id);
+      System.out.println(followerList.toString());
+      ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
+      if(followerList.size()>0) {
+         for(String follower:followerList) {
+            followerInfo.add(Mmapper.UserRead(follower));
+         }
+      }
+      model.addAttribute("followerInfo",followerInfo);
+   }
+   
+   
+   
+   @RequestMapping("/user/followChk")
+   @ResponseBody
+   public int followChk(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
+      int chk=mapper.followChk(follower, target);
+      
+      System.out.println(chk);
+      return chk;
+   }
+   
+   @RequestMapping("/user/followUpdate")
+   @ResponseBody
+   public int followUpdate(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
+      int chk=mapper.followChk(follower, target);
+      int followerCnt;
+      int followingCnt;
+      if(chk==0) {
+         mapper.followInsert(follower, target);
+         followerCnt=mapper.followerCnt(target);
+         followingCnt=mapper.followingCnt(follower);
+         mapper.followerUpdate(followerCnt, target);
+         mapper.followUpdate(followingCnt, follower);
+      }else {
+         mapper.followDelete(follower, target);
+         followerCnt=mapper.followerCnt(target);
+         followingCnt=mapper.followingCnt(follower);
+         mapper.followerUpdate(followerCnt, target);
+         mapper.followUpdate(followingCnt, follower);
+      }
+      return followerCnt;
+   }
+   
+   @RequestMapping(value="/login/passFind")
+   public void passFind(){
 
-	}
-	@RequestMapping(value="/login/idFind")
-	public void idFind(){
+   }
+   @RequestMapping(value="/login/idFind")
+   public void idFind(){
 
-	}
-	@RequestMapping("/find_id/read")
-	@ResponseBody
-	public int getIdCnt(String email){
-		return mapper.find_id_cnt(email);
-	}
-	@RequestMapping("/find_id/readid")
-	@ResponseBody
-	public UsersVO getId(String email){
-		return mapper.find_id(email);
-	}
-	
-	
-	
-	
-	@RequestMapping("/find_email/read")
-	@ResponseBody
-	public int getCnt(String id){
-		return mapper.find_email_cnt(id);
-	}
-	
-	@RequestMapping("/find_email/readEmail")
-	@ResponseBody
-	public UsersVO getEmail(String id){
-		return mapper.find_email(id);
-	}
-	@RequestMapping(value="/login/passFind/update")
-	@ResponseBody
-	public void passFind(UsersVO vo){
-		vo.setPass(passEncoder.encode(vo.getPass()));
-		mapper.update(vo);
-	}
-	
-	@RequestMapping(value="/login/usersUpdate/profile_update", method = RequestMethod.POST)
-	public String profile_update(UsersVO vo, MultipartHttpServletRequest multi) throws Exception{
-		MultipartFile file = multi.getFile("file");
-		if (!file.isEmpty()) { // 업로드 파일이 비어있지 않으면
-			
-			// 예전이미지가 있으면 삭제
-			String oldImage=vo.getU_image();
-			if(oldImage!=null) {
-				new File(path + File.separator + oldImage).delete();
-			}
-			
-			String image = System.currentTimeMillis() + file.getOriginalFilename(); // 파일명이 중복되지않게 하기위해서 currentTimeMillis
-			file.transferTo(new File(path + File.separator + image));
-			vo.setU_image(image);
-		}
-		
-		mapper.profile_update(vo);
-		
-		return "redirect:/login/usersUpdate";
-	}
-	
-	@RequestMapping(value="/login/usersUpdate/profile_passUpdate")
-	@ResponseBody
-	public void usersUpdate(UsersVO vo,HttpSession session){
-		vo.setPass(passEncoder.encode(vo.getPass()));
-		mapper.update(vo);
-		session.invalidate();
-	}
-	
-	//회원탈퇴
-	@RequestMapping(value="/login/usersUpdate/updatePosition")
-	@ResponseBody
-	public void updatePosition(HttpSession session){
-		String id=(String) session.getAttribute("id");
-		mapper.updatePosition(id);
-		session.invalidate();
-	}
-	
-	
+   }
+   @RequestMapping("/find_id/read")
+   @ResponseBody
+   public int getIdCnt(String email){
+      return mapper.find_id_cnt(email);
+   }
+   @RequestMapping("/find_id/readid")
+   @ResponseBody
+   public UsersVO getId(String email){
+      return mapper.find_id(email);
+   }
+   
+   
+   
+   
+   @RequestMapping("/find_email/read")
+   @ResponseBody
+   public int getCnt(String id){
+      return mapper.find_email_cnt(id);
+   }
+   
+   @RequestMapping("/find_email/readEmail")
+   @ResponseBody
+   public UsersVO getEmail(String id){
+      return mapper.find_email(id);
+   }
+   @RequestMapping(value="/login/passFind/update")
+   @ResponseBody
+   public void passFind(UsersVO vo){
+      vo.setPass(passEncoder.encode(vo.getPass()));
+      mapper.update(vo);
+   }
+   
+   @RequestMapping(value="/login/usersUpdate/profile_update", method = RequestMethod.POST)
+   public String profile_update(UsersVO vo, MultipartHttpServletRequest multi) throws Exception{
+      MultipartFile file = multi.getFile("file");
+      if (!file.isEmpty()) { // 업로드 파일이 비어있지 않으면
+         
+         // 예전이미지가 있으면 삭제
+         String oldImage=vo.getU_image();
+         if(oldImage!=null) {
+            new File(path + File.separator + oldImage).delete();
+         }
+         
+         String image = System.currentTimeMillis() + file.getOriginalFilename(); // 파일명이 중복되지않게 하기위해서 currentTimeMillis
+         file.transferTo(new File(path + File.separator + image));
+         vo.setU_image(image);
+      }
+      
+      mapper.profile_update(vo);
+      
+      return "redirect:/login/usersUpdate";
+   }
+   
+   @RequestMapping(value="/login/usersUpdate/profile_passUpdate")
+   @ResponseBody
+   public void usersUpdate(UsersVO vo,HttpSession session){
+      vo.setPass(passEncoder.encode(vo.getPass()));
+      mapper.update(vo);
+      session.invalidate();
+   }
+   
+   //회원탈퇴
+   @RequestMapping(value="/login/usersUpdate/updatePosition")
+   @ResponseBody
+   public void updatePosition(HttpSession session){
+      String id=(String) session.getAttribute("id");
+      mapper.updatePosition(id);
+      session.invalidate();
+   }
+   
+   
 }
