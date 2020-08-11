@@ -40,173 +40,180 @@ public class BoardController {
 	@Autowired
 	B_replyMapper rmapper;
 
-@Autowired
-BoardService service;
-
-@RequestMapping("list")
-public void list(Model model) {
-	model.addAttribute("list",mapper.list());
-
-}
-@RequestMapping(value="infiniteScrollDown", method=RequestMethod.POST)
-public @ResponseBody List<BoardVO> infiniteScrollDownPOST(@RequestBody BoardVO bvo){
-	Integer bnoToStart=bvo.getB_no()-1;
-	return mapper.infiniteScrollDown(bnoToStart);
-}
-@RequestMapping("insert")
-public void insert() {
-}
-@RequestMapping("report")
-public void report() {
-}
-@RequestMapping(value="reportCnt", method=RequestMethod.POST)
-@ResponseBody
-public int reportCnt(@RequestParam(value="id") String id,@RequestParam(value="b_no") int b_no) { 
-	int cnt=-1;
-	cnt=mapper.reportCnt(id, b_no);
+	@Autowired
+	BoardService service;
 	
-	return cnt;
-}
-@RequestMapping(value="reportInsert", method=RequestMethod.POST)
-@ResponseBody
-public void reportInsert(BoardVO vo) { 
-	mapper.reportInsert(vo);
-	vo.setReport(mapper.BoardReportCnt(vo.getB_no()));
-	mapper.updateReport(vo);
-}
-
-@RequestMapping(value="/like/update", method = RequestMethod.POST)
-@ResponseBody
-public int LikeUpdate(@RequestParam(value ="id") String id,@RequestParam(value ="b_no") int b_no) {
-	int like=0;
-	int chk=mapper.likeTableChk(id, b_no);
 	
-	if(chk==0) {
-		mapper.likeinsert(id, b_no);
-		like=mapper.likeTableCnt(b_no);
-		mapper.B_likeUpdate(b_no, like);
-		System.out.println(like);
-	}else {
-		mapper.likedelete(id, b_no);
-		like=mapper.likeTableCnt(b_no);
-		mapper.B_likeUpdate(b_no, like);
-		System.out.println(like);
+	@RequestMapping("list")
+	public void list(Model model) {
+		model.addAttribute("list",mapper.list());
 	}
 	
-	return like;
-}
-
-@RequestMapping("read")
-public void read(Model model, int b_no,Criteria cri) {
-	cri.setPerPageNum(3);
-	PageMaker pm=new PageMaker();
-	pm.setCri(cri);
-	pm.setTotalCount(rmapper.replyCount(b_no));
-	model.addAttribute("cri",cri);
-	model.addAttribute("pm",pm);
-	model.addAttribute("vo",mapper.read(b_no));
-	model.addAttribute("list", mapper.getB_imagelist(b_no));
-	model.addAttribute("vo",service.read(b_no));
-	model.addAttribute("replyCount",rmapper.replyCount(b_no));
-	
-}
-@RequestMapping(value="insert", method=RequestMethod.POST)
-public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //å ì™ì˜™å ì‹¸ë“¸ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™
-	MultipartFile file=multi.getFile("file");
-	
-	//å ì™ì˜™å ì‹¹ì–µì˜™å ì‹¸ë“¸ì˜™
-	if(!file.isEmpty()) { // å ì™ì˜™å ì‹¸ë“¸ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™ 
-		String image=System.currentTimeMillis() + file.getOriginalFilename(); // å ì™ì˜™å ì‹¹ëªŒì˜™å ì™ì˜™ å ìŒ©ë¸ì˜™å ì™ì˜™å ì™ì˜™å ì‹­ê³¤ì˜™ å ì‹¹ê¹ì˜™å ì™ì˜™å ìŒ”ì‡½ì˜™ currentTimeMillis
-		file.transferTo(new File(path + File.separator + image));
-		vo.setImage(image);
+	@RequestMapping("rest/list")
+	@ResponseBody
+	public List<BoardVO> list(){
+		return mapper.list();
 	}
-	//ì²¨å ì™ì˜™å ì™ì˜™å ì‹¹ì–µì˜™å ì‹¸ë“¸ì˜™
-		List<MultipartFile> files = multi.getFiles("files");
-		ArrayList<String> images=new ArrayList<String>();
-		for(MultipartFile addFile:files) {
-			if(!addFile.isEmpty()) {
-				String image=System.currentTimeMillis()+addFile.getOriginalFilename();
-				addFile.transferTo(new File(path + File.separator + image));
-				images.add(image);
-			}
+
+	
+	@RequestMapping(value="infiniteScrollDown", method=RequestMethod.POST)
+	public @ResponseBody List<BoardVO> infiniteScrollDownPOST(@RequestBody BoardVO bvo){
+		Integer bnoToStart=bvo.getB_no()-1;
+		return mapper.infiniteScrollDown(bnoToStart);
+	}
+	
+	@RequestMapping("insert")
+	public void insert() {
+	}
+	@RequestMapping("report")
+	public void report() {
+	}
+	@RequestMapping(value="reportCnt", method=RequestMethod.POST)
+	@ResponseBody
+	public int reportCnt(@RequestParam(value="id") String id,@RequestParam(value="b_no") int b_no) { 
+		int cnt=-1;
+		cnt=mapper.reportCnt(id, b_no);
+		
+		return cnt;
+	}
+	@RequestMapping(value="reportInsert", method=RequestMethod.POST)
+	@ResponseBody
+	public void reportInsert(BoardVO vo) { 
+		mapper.reportInsert(vo);
+		vo.setReport(mapper.BoardReportCnt(vo.getB_no()));
+		mapper.updateReport(vo);
+	}
+	
+	@RequestMapping(value="/like/update", method = RequestMethod.POST)
+	@ResponseBody
+	public int LikeUpdate(@RequestParam(value ="id") String id,@RequestParam(value ="b_no") int b_no) {
+		int like=0;
+		int chk=mapper.likeTableChk(id, b_no);
+		
+		if(chk==0) {
+			mapper.likeinsert(id, b_no);
+			like=mapper.likeTableCnt(b_no);
+			mapper.B_likeUpdate(b_no, like);
+			System.out.println(like);
+		}else {
+			mapper.likedelete(id, b_no);
+			like=mapper.likeTableCnt(b_no);
+			mapper.B_likeUpdate(b_no, like);
+			System.out.println(like);
 		}
-			
-			vo.setImages(images);
-			System.out.println(vo.toString());
-	service.insert(vo);
-	return "redirect:list";
-}
-@RequestMapping(value="update" , method=RequestMethod.POST)
-public String updatePost(BoardVO vo, MultipartHttpServletRequest multi)throws Exception {
-	MultipartFile file = multi.getFile("file");
+		
+		return like;
+	}
 	
-	// å ì™ì˜™å ì‹¹ì–µì˜™å ì‹¸ë“¸ì˜™
-			if (!file.isEmpty()) { // å ì™ì˜™å ì‹¸ë“¸ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™
-				
-				// å ì™ì˜™å ì™ì˜™å ì‹±ë±„ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
-				String oldImage=vo.getImage();
-				if(!oldImage.equals("")) {
-					new File(path + File.separator + oldImage).delete();
-				}
-				
-				String image = System.currentTimeMillis() + file.getOriginalFilename(); // å ì™ì˜™å ì‹¹ëªŒì˜™å ì™ì˜™ å ìŒ©ë¸ì˜™å ì™ì˜™å ì™ì˜™å ì‹­ê³¤ì˜™ å ì‹¹ê¹ì˜™å ì™ì˜™å ìŒ”ì‡½ì˜™ currentTimeMillis
-				file.transferTo(new File(path + File.separator + image));
-				vo.setImage(image);
-			}
-			//ì²¨å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì‹¸ë“¸ì˜™
-			List<MultipartFile> files =multi.getFiles("files");
+	@RequestMapping("read")
+	public void read(Model model, int b_no,Criteria cri) {
+		cri.setPerPageNum(10);
+		PageMaker pm=new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(rmapper.replyCount(b_no));
+		model.addAttribute("cri",cri);
+		model.addAttribute("pm",pm);
+		model.addAttribute("vo",mapper.read(b_no));
+		model.addAttribute("list", mapper.getB_imagelist(b_no));
+		model.addAttribute("vo",service.read(b_no));
+		model.addAttribute("replyCount",rmapper.replyCount(b_no));
+		
+	}
+	@RequestMapping(value="insert", method=RequestMethod.POST)
+	public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //¾÷·ÎµåÇÒ ÆÄÀÏÀ» ¹ŞÀ»¶§
+		MultipartFile file=multi.getFile("file");
+		
+		//ÆÄÀÏ¾÷·Îµå
+		if(!file.isEmpty()) { // ¾÷·Îµå ÆÄÀÏÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é 
+			String image=System.currentTimeMillis() + file.getOriginalFilename(); // ÆÄÀÏ¸íÀÌ Áßº¹µÇÁö¾Ê°Ô ÇÏ±âÀ§ÇØ¼­ currentTimeMillis
+			file.transferTo(new File(path + File.separator + image));
+			vo.setImage(image);
+		}
+		//Ã·ºÎÆÄÀÏ¾÷·Îµå
+			List<MultipartFile> files = multi.getFiles("files");
 			ArrayList<String> images=new ArrayList<String>();
-			for(MultipartFile attFile:files) {
-				if(!attFile.isEmpty()) {
-					if(images.size()==0) {
-						List<String> oldImages=mapper.getB_imagelist(vo.getB_no());
-						for(String oldImage:oldImages) {
-							new File(path + File.separator + oldImage).delete();
-						}
-					}
-					String image=System.currentTimeMillis() + attFile.getOriginalFilename();
-					attFile.transferTo(new File(path + File.separator + image));
+			for(MultipartFile addFile:files) {
+				if(!addFile.isEmpty()) {
+					String image=System.currentTimeMillis()+addFile.getOriginalFilename();
+					addFile.transferTo(new File(path + File.separator + image));
 					images.add(image);
 				}
 			}
-		vo.setImages(images);
-	service.update(vo);
-	System.out.println(vo.toString());
-	return "redirect:list";
-}
-@RequestMapping(value="delete" , method=RequestMethod.POST)
-public String deletePost(BoardVO vo)throws Exception{
-	System.out.println(vo.toString());
-	System.out.println(vo.getB_no());
-	System.out.println(vo.getImage());
-	String oldImage=vo.getImage();
-	if(!oldImage.equals("")){
-		new File(path + File.separator + oldImage).delete();
+				
+				vo.setImages(images);
+				System.out.println(vo.toString());
+		service.insert(vo);
+		return "redirect:list";
 	}
-	List<String> images=mapper.getB_imagelist(vo.getB_no());
-	for(String image: images) {
-		if(!image.equals("")) {
-			new File(path + File.separator + image).delete();
+	@RequestMapping(value="update" , method=RequestMethod.POST)
+	public String updatePost(BoardVO vo, MultipartHttpServletRequest multi)throws Exception {
+		MultipartFile file = multi.getFile("file");
+		
+		// ÆÄÀÏ¾÷·Îµå
+				if (!file.isEmpty()) { // ¾÷·Îµå ÆÄÀÏÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é
+					
+					// ¿¹ÀüÀÌ¹ÌÁö°¡ ÀÖÀ¸¸é »èÁ¦
+					String oldImage=vo.getImage();
+					if(!oldImage.equals("")) {
+						new File(path + File.separator + oldImage).delete();
+					}
+					
+					String image = System.currentTimeMillis() + file.getOriginalFilename(); // ÆÄÀÏ¸íÀÌ Áßº¹µÇÁö¾Ê°Ô ÇÏ±âÀ§ÇØ¼­ currentTimeMillis
+					file.transferTo(new File(path + File.separator + image));
+					vo.setImage(image);
+				}
+				//Ã·ºÎÆÄÀÏ ¾÷·Îµå
+				List<MultipartFile> files =multi.getFiles("files");
+				ArrayList<String> images=new ArrayList<String>();
+				for(MultipartFile attFile:files) {
+					if(!attFile.isEmpty()) {
+						if(images.size()==0) {
+							List<String> oldImages=mapper.getB_imagelist(vo.getB_no());
+							for(String oldImage:oldImages) {
+								new File(path + File.separator + oldImage).delete();
+							}
+						}
+						String image=System.currentTimeMillis() + attFile.getOriginalFilename();
+						attFile.transferTo(new File(path + File.separator + image));
+						images.add(image);
+					}
+				}
+			vo.setImages(images);
+		service.update(vo);
+		System.out.println(vo.toString());
+		return "redirect:list";
+	}
+	@RequestMapping(value="delete" , method=RequestMethod.POST)
+	public String deletePost(BoardVO vo)throws Exception{
+		System.out.println(vo.toString());
+		String oldImage=vo.getImage();
+		if(!oldImage.equals("")){
+			new File(path + File.separator + oldImage).delete();
 		}
+		List<String> images=mapper.getB_imagelist(vo.getB_no());
+		for(String image: images) {
+			if(!image.equals("")) {
+				new File(path + File.separator + image).delete();
+			}
+		}
+		
+		service.delete(vo.getB_no());
+		return "redirect:list";
 	}
 	
-	service.delete(vo.getB_no());
-	return "redirect:list";
-}
-
-//å ì‹±ë±„ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½
-	@RequestMapping("/display")
-	@ResponseBody
-	public ResponseEntity<byte[]> display(String fileName) throws Exception {
-		ResponseEntity<byte[]> result = null;
-		// display fileNameå ì™ì˜™ å ìŒëŒì˜™ å ì™ì˜™å ï¿½
-		if (!fileName.equals("")) {
-			File file = new File(path + File.separator + fileName);
-			HttpHeaders header = new HttpHeaders();
-			header.add("Content-Type", Files.probeContentType(file.toPath()));
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+	//ÀÌ¹ÌÁöÆÄÀÏ ºê¶ó¿ìÀú¿¡ Ãâ·Â
+		@RequestMapping("/display")
+		@ResponseBody
+		public ResponseEntity<byte[]> display(String fileName) throws Exception {
+			ResponseEntity<byte[]> result = null;
+			// display fileNameÀÌ ÀÖ´Â °æ¿ì
+			if (!fileName.equals("")) {
+				File file = new File(path + File.separator + fileName);
+				HttpHeaders header = new HttpHeaders();
+				header.add("Content-Type", Files.probeContentType(file.toPath()));
+				result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			}
+			return result;
 		}
-		return result;
+		
 	}
-	
-}

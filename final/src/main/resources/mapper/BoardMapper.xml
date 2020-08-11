@@ -12,24 +12,25 @@
 			select * from board where b_no<=#{b_no} and b_no>#{b_no}-10 order by b_no desc
 		]]>
 	</select>
-    <select id="read" resultType="com.example.domain.BoardVO">
+	
+	<select id="read" resultType="com.example.domain.BoardVO">
 		select b.*,u.nickname,u.introduce,u.u_image from board b, users u where b.id=u.id and b_no=#{b_no};  
-    </select>
-    <insert id="insert">
-     	insert into board(id,title,content,image,date)
-     	values(#{id},#{title},#{content},#{image},now())
-    </insert>
-    <delete id="delete">
-    	delete from board where b_no=#{b_no}
-    </delete>
-    <update id="update">
-    	update board set title=#{title},content=#{content},image=#{image} where b_no=#{b_no}
-    </update>
-    
-    <select id="BnoRead" resultType="int">
+	</select>
+	<insert id="insert">
+		insert into board(id,title,content,image,date)
+		values(#{id},#{title},#{content},#{image},now())
+	</insert>
+	<delete id="delete">
+		delete from board where b_no=#{b_no}
+	</delete>
+	<update id="update">
+		update board set title=#{title},content=#{content},image=#{image} where b_no=#{b_no}
+	</update>
+	  
+	<select id="BnoRead" resultType="int">
 		select * from board where id=#{id} and title=#{title} and content=#{content}
 		and image=#{image}
-    </select>
+	</select>
 	<insert id="addB_imagelist">
 		insert into b_imagelist(images,b_no) values(#{images},#{b_no})
 	</insert>
@@ -87,13 +88,4 @@
 	<update id="board_r_cnt_update">
 		update board set r_cnt=#{r_cnt} where b_no=#{b_no}
 	</update>
-	
-	<!-- foreign key 무시 -->
-	<insert id="finit">
-		SET foreign_key_checks = 0
-	</insert>
-	
-	<insert id="fover">
-		SET foreign_key_checks = 1
-	</insert>
 </mapper>
