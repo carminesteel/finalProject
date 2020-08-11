@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +47,11 @@ BoardService service;
 public void list(Model model) {
 	model.addAttribute("list",mapper.list());
 
+}
+@RequestMapping(value="infiniteScrollDown", method=RequestMethod.POST)
+public @ResponseBody List<BoardVO> infiniteScrollDownPOST(@RequestBody BoardVO bvo){
+	Integer bnoToStart=bvo.getB_no()-1;
+	return mapper.infiniteScrollDown(bnoToStart);
 }
 @RequestMapping("insert")
 public void insert() {
@@ -105,16 +111,16 @@ public void read(Model model, int b_no,Criteria cri) {
 	
 }
 @RequestMapping(value="insert", method=RequestMethod.POST)
-public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //���ε��� ������ ������
+public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //占쏙옙占싸듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 	MultipartFile file=multi.getFile("file");
 	
-	//���Ͼ��ε�
-	if(!file.isEmpty()) { // ���ε� ������ ������� ������ 
-		String image=System.currentTimeMillis() + file.getOriginalFilename(); // ���ϸ��� �ߺ������ʰ� �ϱ����ؼ� currentTimeMillis
+	//占쏙옙占싹억옙占싸듸옙
+	if(!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 
+		String image=System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙 占쌩븝옙占쏙옙占쏙옙占십곤옙 占싹깍옙占쏙옙占쌔쇽옙 currentTimeMillis
 		file.transferTo(new File(path + File.separator + image));
 		vo.setImage(image);
 	}
-	//÷�����Ͼ��ε�
+	//첨占쏙옙占쏙옙占싹억옙占싸듸옙
 		List<MultipartFile> files = multi.getFiles("files");
 		ArrayList<String> images=new ArrayList<String>();
 		for(MultipartFile addFile:files) {
@@ -134,20 +140,20 @@ public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws E
 public String updatePost(BoardVO vo, MultipartHttpServletRequest multi)throws Exception {
 	MultipartFile file = multi.getFile("file");
 	
-	// ���Ͼ��ε�
-			if (!file.isEmpty()) { // ���ε� ������ ������� ������
+	// 占쏙옙占싹억옙占싸듸옙
+			if (!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙
 				
-				// �����̹����� ������ ����
+				// 占쏙옙占쏙옙占싱뱄옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 				String oldImage=vo.getImage();
 				if(!oldImage.equals("")) {
 					new File(path + File.separator + oldImage).delete();
 				}
 				
-				String image = System.currentTimeMillis() + file.getOriginalFilename(); // ���ϸ��� �ߺ������ʰ� �ϱ����ؼ� currentTimeMillis
+				String image = System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙 占쌩븝옙占쏙옙占쏙옙占십곤옙 占싹깍옙占쏙옙占쌔쇽옙 currentTimeMillis
 				file.transferTo(new File(path + File.separator + image));
 				vo.setImage(image);
 			}
-			//÷������ ���ε�
+			//첨占쏙옙占쏙옙占쏙옙 占쏙옙占싸듸옙
 			List<MultipartFile> files =multi.getFiles("files");
 			ArrayList<String> images=new ArrayList<String>();
 			for(MultipartFile attFile:files) {
@@ -188,12 +194,12 @@ public String deletePost(BoardVO vo)throws Exception{
 	return "redirect:list";
 }
 
-//�̹������� �������� ���
+//占싱뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占�
 	@RequestMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> display(String fileName) throws Exception {
 		ResponseEntity<byte[]> result = null;
-		// display fileName�� �ִ� ���
+		// display fileName占쏙옙 占쌍댐옙 占쏙옙占�
 		if (!fileName.equals("")) {
 			File file = new File(path + File.separator + fileName);
 			HttpHeaders header = new HttpHeaders();

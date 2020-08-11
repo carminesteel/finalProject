@@ -217,7 +217,7 @@ li {
 <meta charset="UTF-8">
 <title>[작품]</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 </head>
 <body style=padding-top:81px;>
 	<jsp:include page="../menu.jsp"></jsp:include>
@@ -233,25 +233,83 @@ li {
 		<c:forEach items="${list}" var="vo">
 			<div class="imgContainer">
 				<img src="display?fileName=${vo.image}">
-				<input type="hidden" class="b_no" value="${vo.b_no}">
+				<input type="hidden" class="b_no" data-bno="${vo.b_no}" value="${vo.b_no}">
 				<div class="imgInfo">
 					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
 							<span>${vo.view}</span>&emsp;
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+					<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
 							<span>${vo.r_cnt}</span>&emsp;		
 					<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
 							<span>${vo.b_like}</span>	
 				</div>		
 				<div class="hoverInfo">
 					<div class="title">${vo.title}</div>
-					<div class="content">${vo.content}</div>				
-				</div>		
+					<div class="content">${vo.content}</div>
+				</div>
 			</div>
 		</c:forEach>
+		<div class="scrollLocation"></div>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+
+	var lastScrollTop=0;
+
+
+	$(window).scroll(function(){
+		var windowScrollTop=$(window).scrollTop();
+		if(windowScrollTop - lastScrollTop > 0){
+			if ($(window).scrollTop() >= ($(document).height() - $(window).height())){
+				var lastbno=$(".b_no:last").attr("data-bno");
+				
+				$.ajax({
+					type:"post",
+					url:"infiniteScrollDown",
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST",
+					},
+					dataType:"json",
+					data:JSON.stringify({
+						b_no:lastbno
+					}),
+					error:function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					},
+					success:function(data){
+						var str="";
+						
+						if(data!=""){
+							$(data).each(function(){
+								str += "<div class="+"'imgContainer'"+">"
+									+		"<img src='display?fileName="+this.image+"'>"
+									+		"<input type='hidden' class='b_no' data-bno='"+this.b_no+"' value='"+this.b_no+"'>"
+									+		"<div class='imgInfo'>"
+									+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
+									+				"<span>"+this.view+"</span>"
+									+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
+									+				"<span>"+this.r_cnt+"</span>"
+									+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
+									+				"<span>"+this.b_like+"</span>"
+									+		"</div>"
+									+		"<div class='hoverInfo'>"
+									+			"<div class='title' '"+this.title+"'></div>"
+									+			"<div class='content' '"+this.content+"'></div>"
+									+		"</div>"
+									+	"</div>"
+							});
+							$(".scrollLocation").append(str);
+						}else{
+							alert("더 불러올 데이터가 없습니다.");
+						}
+					}
+				});
+				$("html, body").stop().animate({scrollTop:lastScrollTop}, 0);
+			}
+			lastScrollTop=windowScrollTop;
+		}
+	});
 
 	$(".imgDiv").on("click",".imgContainer img", function() {
 		var b_no = $(this).parent().find(".b_no").val();

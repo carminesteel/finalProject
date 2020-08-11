@@ -10,6 +10,7 @@ import com.example.domain.BoardVO;
 public interface BoardMapper {
 public ArrayList<BoardVO> list();
 public BoardVO read(int b_no);
+public ArrayList<BoardVO> infiniteScrollDown(int b_no);
 public void insert(BoardVO vo);
 public void delete(int b_no);
 public void update(BoardVO vo);
