@@ -22,7 +22,7 @@ public interface ProductMapper {
    public void attachInsert(@Param("p_no") int p_no, @Param("images") String images);
    public void updateViewCnt(String id);
    public int replyCount(int p_no);
-   
+   public int qnaCount(int p_no);
 	public int orderGetCnt(String id);
 	public List<UsersVO> addrList(String id);
 	public List<CartVO> buyCart(CartVO vo);
