@@ -95,7 +95,7 @@ a:hover{text-decoration:none;color:black;}
 				</div>
 				
 				<div id="pInfo"><br>
-					<h1 id=pTitle>${read.title}</h1><input type="button" value="문자" id="message">
+					<h1 id=pTitle>${read.title}</h1>
 					<p>
 					<h1 id="pPrice">${read.price}원</h1>
 					<br>

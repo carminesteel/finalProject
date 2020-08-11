@@ -184,7 +184,6 @@ public class ProductController {
 		}
 		return model;
 	}
-	
 	@RequestMapping("/order2")
 	public Model order2(String id,int tot,@RequestParam List<String> p_images,Model model) {
 		System.out.println(p_images);
@@ -243,6 +242,7 @@ public class ProductController {
 		uvo.setId(id);
 		uvo.setPoint(point);
 		vo.setOrders_id(id);
+		vo.setProduct_no(vo.getP_no());
 		if(cnt==0) {
 			pmapper.InsertOrders(id);
 			pmapper.InsertPurchase(vo);
@@ -251,8 +251,6 @@ public class ProductController {
 			pmapper.InsertPurchase(vo);
 			pmapper.UpdatePoint(uvo);
 		}
-		
-		
 	}
 	
 	@RequestMapping("/payment/finish2")
