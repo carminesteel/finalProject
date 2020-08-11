@@ -95,7 +95,7 @@ a:hover{text-decoration:none;color:black;}
 				</div>
 				
 				<div id="pInfo"><br>
-					<h1 id=pTitle>${read.title}</h1><input type="button" value="문자" id="message">
+					
 					<p>
 					<h1 id="pPrice">${read.price}원</h1>
 					<br>
@@ -339,6 +339,14 @@ $("#pMenu").on("click", function(){
 				location.href="/cart/list?id="+id;
 			}
 		});
+	});
+	
+	$("#order").on("click",function(){
+		var p_no = getParameterByName('p_no');
+		var id="${id}";
+		quantity = $("#quantity").val(); 
+		var tot= $("#totPrice").html();
+		location.href="/product/order?id="+id+"&p_no="+p_no+"&quantity="+quantity+"&tot="+tot;
 	});
 </script>
 </html>
