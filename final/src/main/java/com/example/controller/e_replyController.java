@@ -30,7 +30,7 @@ public class e_replyController {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("list", mapper.list(e_no));
 		map.put("count", eMapper.replyCount(e_no));
-		System.out.println("listÃâ·Â"+map);
+		System.out.println("list"+map);
 		return map;
 	}
 	

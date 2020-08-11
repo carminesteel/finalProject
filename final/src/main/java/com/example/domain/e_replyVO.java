@@ -2,7 +2,7 @@ package com.example.domain;
 
 import java.sql.Date;
 
-public class e_replyVO {
+public class e_replyVO extends UsersVO{
 
 	private int r_no;
 	private String replyer;

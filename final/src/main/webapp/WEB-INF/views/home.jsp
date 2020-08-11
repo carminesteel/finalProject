@@ -258,6 +258,9 @@ li {
 	cursor:pointer;
 }
 
+.latest:hover, .trending:hover, .views:hover {
+	cursor:pointer;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -292,7 +295,7 @@ li {
    <div id=explore>
       <div id=exTitle>Explore</div>
       <div id=exContent>최고의 작품들을 소개합니다.</div>
-      <div id=keyword>최신순&emsp;&emsp;&nbsp;인기순&emsp;&emsp;&nbsp;조회순</div>
+      <div id=keyword><span class="latest">최신순</span>&emsp;&emsp;&nbsp;<span class="trending">인기순</span>&emsp;&emsp;&nbsp;<span class="views">조회순</span></div>
       <a href="" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">

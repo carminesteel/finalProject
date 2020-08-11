@@ -9,7 +9,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
-	.reply1{margin:5px; padding:10px; width:1120px;}
+	.reply1{margin:5px; padding:10px; width:650px;}
 	.replydate #btnDel{float:right;}
 	.replydate #btnlike{float:right;}
 	</style>
@@ -17,22 +17,28 @@
 <body>
 	<input type="hidden" value="${id}" id="id">
 	<input type="hidden" value="${re}" id="re">
-	<div id="tbl"></div>
 	<div id="reviewcnt" style="text-align:center;color:gray;display:none;" >
 				아직 작성 된 리뷰가 없습니다.
 			</div>
+	<table id="tbl"></table>	
 	<script id="temp" type="text/x-handlebars-template">			
-			{{#each list}}
-			<div class="reply1">
-				<div class="replydate">
-					<b>{{replyer}}</b>
-					<a>{{date}}</a>
-					<button r_no={{r_no}} id="btnDel" style="{{printStyle replyer}}">삭제</button>
-					<button r_no={{r_no}} id="btnlike" style="{{BtnStyle e_like}}">좋아요</button>
-					<a>좋아요:{{cnt}}</a>
-				</div>
-				<div class="content">{{content}}</div>
-			</div>			
+		{{#each list}}
+			<tr class=reRow>
+			<td class="u_image" width=70>				
+				<img width=65px height=65px; style="border-radius:50%;" src="../display?fileName={{u_image}}">
+			</td>
+			<td  width=700 style="text-align:left;">
+				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>
+				<br>
+				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>
+				<input class=hId type="hidden" value=${id}>
+				<input class=rId type="hidden" value={{replyer}}>
+				<input class=r_no type="hidden" value={{r_no}}>
+			</td>	
+			<td width=50>
+				<img width=20 height=20 src="../display?fileName=xicon.png" class="rbtnDelete">	
+			</td><br><br>
+		</tr>
 		{{/each}}
 	</script>
 	<br><br>

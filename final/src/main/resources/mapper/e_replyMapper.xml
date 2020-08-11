@@ -3,10 +3,10 @@
 <mapper namespace="com.example.mapper.e_replyMapper">
     
     <select id="list" resultType="com.example.domain.e_replyVO">
-        select r.*, count(e.r_no) cnt from (select * from e_reply where e_no=#{e_no}) r 
+        select r.*, count(e.r_no) cnt from (select e.*,u.u_image from e_reply e, users u where e_no=#{e_no} and e.replyer=u.id) r 
         left join e_like e on e.r_no=r.r_no 
 		group by r_no
-		order by cnt desc;
+		order by cnt desc
     </select>
     <insert id="insert">
     	insert into e_reply(replyer,content,date,e_no) values(#{replyer},#{content},now(),#{e_no})
