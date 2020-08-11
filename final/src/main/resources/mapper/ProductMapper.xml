@@ -46,13 +46,9 @@
 		select count(*) from p_reply where p_no=#{p_no}
 	</select>
 	
-	<select id="orderGetCnt" resultType="int">
+			<select id="orderGetCnt" resultType="int">
 	select count(*) from orders where id=#{id}
 	</select>
-	
-	<update id="updateViewCnt">
-		update product set view = view+1 where id=#{id}
-	</update>
 	
 	<select id="addrList" resultType="com.example.domain.UsersVO">
 		select * from address where id=#{id}
@@ -76,4 +72,5 @@
 	<update id="UpdatePoint">
 		update users set point=#{point} where id=#{id}
 	</update>
+
 </mapper>
