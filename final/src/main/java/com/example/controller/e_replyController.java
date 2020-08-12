@@ -1,6 +1,9 @@
 package com.example.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +33,7 @@ public class e_replyController {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("list", mapper.list(e_no));
 		map.put("count", eMapper.replyCount(e_no));
-		System.out.println("list"+map);
+		System.out.println(map);
 		return map;
 	}
 	

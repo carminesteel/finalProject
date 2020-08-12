@@ -9,18 +9,22 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
+	html{font-family:Noto Sans Kr}
 	.reply1{margin:5px; padding:10px; width:650px;}
 	.replydate #btnDel{float:right;}
 	.replydate #btnlike{float:right;}
+	.rbtnDelete:hover{
+		cursor:pointer;
+	}
 	</style>
 </head>
 <body>
 	<input type="hidden" value="${id}" id="id">
 	<input type="hidden" value="${re}" id="re">
-	<div id="reviewcnt" style="text-align:center;color:gray;display:none;" >
+	<div id="reviewcnt" style="text-align:center;color:gray;display:none;">
 				아직 작성 된 리뷰가 없습니다.
 			</div>
-	<table id="tbl"></table>	
+	<table id="tbl" width=500px;></table>	
 	<script id="temp" type="text/x-handlebars-template">			
 		{{#each list}}
 			<tr class=reRow>
@@ -37,25 +41,26 @@
 			</td>	
 			<td width=50>
 				<img width=20 height=20 src="../display?fileName=xicon.png" class="rbtnDelete">	
-			</td><br><br>
+			</td><br>
 		</tr>
 		{{/each}}
 	</script>
-	<br><br>
-	<div>
-		<br><br>
-		<input type="text" id="txtReply" size=100>&nbsp;&nbsp;
-		<button id="btnInsert">입력</button>
+	<br>
+	<div style=display:inline-block;>
+	<span style="display:inline-block;float:left;margin-bottom:8px;letter-spacing:-1px;font-size:14px;">리뷰 작성</span>
+		<textarea style="width:495px;height:60px;resize:none;padding:0" id="txtReply" ></textarea>
 	</div>
+	<button id="btnInsert" style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;margin-left:15px;">입력</button>
+	
 	<br>
 </body>
 <script>
 
 	var e_no="${vo.e_no}";
-	var id=$("#id").val();	
+	var id=$("#id").val();		
 	getList();
 	getCnt();
-	
+
 	//댓글이없을때
  	function getCnt(){
 		if($("#re").html()==0){
@@ -73,10 +78,11 @@
 			url:"/reply/list",
 			data:{"e_no":e_no},
 			dataType:"json",
-			success:function(data){
+			success:function(data){			
 					var temp=Handlebars.compile($("#temp").html());
 					$("#tbl").html(temp(data));
-					getCnt(); 
+					getCnt();
+				
 			}
 		});		
 	}
@@ -158,7 +164,7 @@
 		}
 	
 
-	
+/* 	
 	//댓글삭제
 	$("#tbl").on("click",".replydate #btnDel",function(){
 		var r_no=$(this).attr("r_no");
@@ -173,6 +179,28 @@
 				getList();
 			}
 		});
+	}); */
+	
+	$("#tbl").on("click", ".reRow .rbtnDelete", function(){
+		var r_no=$(this).parent().parent().find(".r_no").val();
+		var hid=$(this).parent().parent().find(".hId").val();
+		var rid=$(this).parent().parent().find(".rId").val();
+		if(hid==rid){
+			if(!confirm("삭제하시겠습니까?")) return;
+			$.ajax({
+				type:"post",
+				url:"/reply/delete",
+				data:{"r_no":r_no},
+				success:function(){
+					alert("댓글이 삭제되었습니다");				
+					$("#re").html(--re);
+					getList();
+		      }
+		   });
+		 }else if(hid!=rid){
+			alert("본인이 작성한 댓글만 삭제가능합니다.") 
+		}
+		
 	});
 </script>
 </html>
