@@ -13,4 +13,5 @@ public interface CartMapper {
    public void plus(CartVO cvo);
    public CartVO read(String id);
    public void delete(CartVO cvo);
+   public CartVO clist(CartVO vo);
 }

@@ -9,8 +9,12 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
-	.image {margin:auto; padding:50px;}
-	#infoMenu,#MapMenu,#Menu {width:376px;}
+	
+	body{
+		overflow-x:hidden;
+	}
+	.image {margin:auto; padding:15px;text-align:center;}
+	#infoMenu,#MapMenu,#Menu {width:240px;font-size:18px;}
 
 	#infoMenu:hover,#MapMenu:hover,#Menu:hover {
          background-color: #373e46;
@@ -30,7 +34,7 @@
 	}  
 	</style>
 </head>
-<body>
+<body style="margin:0">
 	<jsp:include page="../menu.jsp"/>
 	<div id=exBody>
 		<div id=exCenter>
@@ -38,22 +42,20 @@
 			<form action="delete" name="frm" method="post">
 				<input type="hidden" name="e_no" value="${vo.e_no}">
 				<input type="hidden" value="${id}" name="id">
-				<table id="tbl2" style="width:1130px;margin:auto;border-collapse:collapse;">
+				<table id="tbl2" style="width:1035px;height:352px;margin:auto;border-collapse:collapse;border:1px solid black;margin-top:80px;">
 					<tr>
-						<td class="image"><img src="/display?fileName=${vo.image}" width=300 height=500></td>	
-						<td width=500>
-							<h3>${vo.title}</h3>
-							<br>
-							<br>
-							<br>
-							<h4>기간&nbsp;&nbsp;${vo.date}</h4>
-							<h4>연락처&nbsp;&nbsp;${vo.tel}</h4>
-							<h4>장소&nbsp;&nbsp;${vo.addr_detail}&nbsp;&nbsp;<a href="">전시장소</a></h4>							
-							<br><br><br><br><br><br>
-							<div style="float:right;"><input type="button" value="목록으로" onClick="location.href='list'"></div>
-						</td>		
+						<td class="image" width=268px style="padding:15px;"><img src="/display?fileName=${vo.image}" style="object-fit:contain;max-width:268px"></td>	
+						<td style="padding:0;border-left:1px solid black">
+							<div style="display:block;color:#373e45;font-size:31px;font-weight:700;letter-spacing:-1px;text-align:center;margin-bottom:50px;margin-top:0px;">${vo.title}</div>
+							<div style="width:610px;margin:auto;vertical-align:middle;font-size:20px;font-weight:300;color:#373e45">							
+							<span style="display:inline-block;font-weight:bold">기간<br><br>연락처<br><br>장소<!-- <a href="">전시장소</a> --></span>
+							<span style="display:inline-block;padding-left:30px;">${vo.date}<br><br>${vo.tel}<br><br>${vo.addr_detail}</span>						
+							</div>
+							<!-- <div style="float:right;"><input type="button" value="목록으로" onClick="location.href='list'"></div> -->
+						</td>
 					</tr>
 				</table>
+				<br><br><br>
 				<c:if test="${id==vo.id}">
 					<div id="Allbtn" style="float:right;margin-right:6%; margin-bottom:10px;">
 						<input type="button" value="수정" id="eUpdate">
@@ -62,9 +64,9 @@
 					</div>
 				</c:if>
 			</form>
-			<table style="width:1130px;margin:auto;border-collapse:collapse;">
-				<tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
-			      <td id="" colspan=3>베스트상품리뷰</td>
+			<table style="width:850px;margin:auto;border-collapse:collapse;">
+				<%-- <tr style="height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
+			      <td id="" colspan=3>베스트 리뷰</td>
 			   </tr>
 			   <c:forEach items="${review}" var="list" varStatus="status" begin="0" end="2">
 				   <tr>
@@ -75,33 +77,63 @@
 				   		</td>
 				   		<td></td>
 				   </tr>
-			   </c:forEach>
+			   </c:forEach> --%>
 			   <tr style="padding:10px; margin:10px; height:100px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;font-family:Noto Sans KR;font-size:25px">
 			      <td id="infoMenu">상세정보</td>
 			      <td id="MapMenu">장소/전시장 도면</td>
 			      <td id="Menu">리뷰(<span id="re">${re}</span>)</td>
 			   </tr>
-			   <tr>
-			   		<td colspan=3>
+				<tr>
+					<td colspan=3>
 						<div id="info">
-							<h3>상세정보</h3>
-							<div><pre><c:out value="${vo.content}"/></pre></div>
-							<div class="image" width=400>						
+							<br>
+							<h3 style="text-align: center;">상세정보</h3>
+							<div
+								style="text-align: none; width: 600px; margin: auto; border: 1px solid gray; padding: 20px; white-space: pre-line;">
+								<c:out value="${vo.content}" />
+							</div>
+							<br>
+							<div class="image" width=100%>
 								<c:forEach items="${images}" var="image">
-									<img src="/display?fileName=${image}">
+									<img style="max-width: 65%; object-fit: contain; margin: auto;"
+										src="/display?fileName=${image}">
 								</c:forEach>
 							</div>
+						</div> <br>
+						<div id="mapPage">
+							<h3 style="text-align: center;">전시장 주소</h3>
+							<h5 style="font-size:17px;text-align:center;">${vo.addr},${vo.addr_detail}</h5>
+							<div id="map" style="width: 850px; margin: auto;"><jsp:include
+									page="map.jsp" /></div>
 						</div>
-						<br>						
-						<div id="mapPage">			
-							<h3>전시장 주소</h3><h5> ${vo.addr},${vo.addr_detail}</h5>
-							<div id="map" style="width: 1100px; margin: auto;"><jsp:include page="map.jsp"/></div>								
+								
+						
+						<div id="reply" width=650px>
+						<div
+							style="height: 67px; border-top: 1px solid black; border-bottom: 1px solid black; text-align: center; font-family: Noto Sans KR; font-size: 25px;line-height:67px;">
+							베스트 리뷰
+					   </div>
+					   <c:forEach items="${review}" var="list" varStatus="status"
+							begin="0" end="2">
+						   <div>
+						   <div></div>
+						   		<div
+									style="border-bottom:none;font-size:17px;letter-spacing:-1px;margin:auto;magin-bottom:5px; padding:20px; width:500px; text-align:left; border-bottom:1px solid black;">	
+						   			<div width=700>
+										<b>${list.replyer} : </b>${list.content}</div>
+						   			<br>				   		
+						   		</div>
+						   		<div></div>
+						   </div>
+					   </c:forEach>
+							<h3 style="text-align: center;">리뷰쓰기</h3>
+							
+							<div style="text-align:center;"><jsp:include page="../e_reply/reply.jsp" /></div>
+						
 						</div>
-						<div id="reply">
-							<h3>리뷰쓰기</h3><jsp:include page="../e_reply/reply.jsp"/>
-						</div>
-			   		</td>
-			   </tr>
+					</td>
+				</tr>
+				
 			</table>
 			<br>
 		</div>

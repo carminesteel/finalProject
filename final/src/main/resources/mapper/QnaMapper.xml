@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.QnaMapper">
+    <select id="list" resultType="com.example.domain.QnaVO">
+        select * from qna where p_no=#{p_no} order by q_no desc limit #{cri.pageStart}, #{cri.perPageNum}
+    </select>
+    <insert id="insert">
+    	insert into qna(p_no,id,title,content,date) values(#{p_no},#{id},#{title},#{content},now())
+    </insert>
+    <delete id="delete">
+    	delete from qna where q_no=#{q_no}
+    </delete>
+</mapper>

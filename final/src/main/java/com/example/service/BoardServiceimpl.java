@@ -49,8 +49,10 @@ public class BoardServiceimpl implements BoardService{
 	@Transactional
 	@Override
 	public void delete(int b_no) {
+		mapper.finit();
 		mapper.delB_imagelist(b_no);
 		mapper.delete(b_no);
+		mapper.fover();
 	}
 	@Transactional
 	@Override

@@ -155,6 +155,22 @@
       alert("삭제 되었습니다.");
    });
    
+	$(".pButtons").on("click", function(){
+ 		alert("!");
+		var id="${id}";
+		var p_images = new Array();
+		var tot=$("#ttotSum").val();
+		if(!confirm("구매페이지로 이동하시겠습니까?")) return;
+		var i =0;
+		$("#cart .row .check:checked").each(function(){
+			
+			p_images[i]=$(this).parent().parent().find(".p_image").html();
+			i++;
+		});
+		
+		location.href = "/product/order2?id="+id+"&tot="+tot+"&p_images="+p_images;
+	}); 
+   
    function getList(){
       var id="${id}";
       $.ajax({

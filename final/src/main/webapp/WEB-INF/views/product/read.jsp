@@ -50,14 +50,26 @@ html {font-family:Noto Sans KR}
 	margin: auto;
 	z-index: 2;
 }
+.information {width:376px;}
 
-.detailMenu {width:376px;}
-
-.detailMenu:hover {
+.information:hover {
+			background-color: #373e46;
+		    color: white;
+		    cursor: pointer;		    
+		}
+.review {width:376px;}
+.qa {width:376px;}
+.review:hover {
+			background-color: #373e46;
+		    color: white;
+		    cursor: pointer;		    
+		}
+.qa:hover {
 			background-color: #373e46;
 		    color: white;
 		    cursor: pointer;		    
 		}		
+
 .pButton{cursor: pointer;}
 .pButton:hover{background-color:#74a4d7; color:white; border-color:#74a4d7;}
 a:hover{text-decoration:none;color:black;}
@@ -95,7 +107,7 @@ a:hover{text-decoration:none;color:black;}
 				</div>
 				
 				<div id="pInfo"><br>
-					<h1 id=pTitle>${read.title}</h1><input type="button" value="문자" id="message">
+					<h1 id=pTitle>${read.title}</h1>
 					<p>
 					<h1 id="pPrice">${read.price}원</h1>
 					<br>
@@ -163,17 +175,21 @@ a:hover{text-decoration:none;color:black;}
 			
 			<table id=pMenu>
 				<tr style="height:100px;border-top:1px solid #74a4d7;border-bottom:1px solid #74a4d7;text-align:center;font-family:Noto Sans KR;font-size:25px;font-weight:700;">
-					<td class=detailMenu>상세정보</td>
-					<td class=detailMenu>상품리뷰(<span id="re">${re}</span>)</td>
-					<td class=detailMenu>Q&A</td>
+					<td class=information>상세정보</td>
+					<td class=review>상품리뷰(<span id="re">${re}</span>)</td>
+					<td class=qa>Q&A(<span id="qe">${qe}</span>)</td>
 				</tr>
 				<tr style="text-align:center">
 					<td colspan=3>
 					<c:forEach items="${p_image}" var="p_image">
 						<div class="images"><img src="display?fileName=${p_image.p_images}"></div>
 					</c:forEach>
-					<div id="reply">
+					<div id="reply2">
 						<h3>리뷰쓰기</h3><jsp:include page="../p_reply/reply.jsp"/>
+					</div>
+					<div id="qna1">
+						<h4>Q&A</h4>
+						<jsp:include page="../qna/qna.jsp"></jsp:include>					
 					</div>
 					</td>
 				</tr>
@@ -183,10 +199,18 @@ a:hover{text-decoration:none;color:black;}
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
-$("#reply").hide();
-$("#pMenu").on("click", function(){
-	$("#reply").show();
+$("#reply2").hide();	
+$("#qna1").hide();
+$(".qa").on("click", function(){
+	$("#qna1").show();
+	$("#reply2").hide();
 	
+});
+
+
+$(".review").on("click", function(){
+	$("#reply2").show();
+	$("#qna1").hide();
 });
 	//쪽지확인해보려고 만든거임
 	$("#message").on("click",function(){
@@ -339,6 +363,14 @@ $("#pMenu").on("click", function(){
 				location.href="/cart/list?id="+id;
 			}
 		});
+	});
+	
+	$("#order").on("click",function(){
+		var p_no = getParameterByName('p_no');
+		var id="${id}";
+		quantity = $("#quantity").val(); 
+		var tot= $("#totPrice").html();
+		location.href="/product/order?id="+id+"&p_no="+p_no+"&quantity="+quantity+"&tot="+tot;
 	});
 </script>
 </html>

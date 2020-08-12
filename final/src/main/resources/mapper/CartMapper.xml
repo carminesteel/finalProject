@@ -33,4 +33,8 @@
 	<delete id="delete">
 		delete from cart where id=#{id} and p_image=#{p_image}
 	</delete>
+	
+	<select id="clist" resultType="com.example.domain.CartVO">
+		select * from cart where id=#{id} and p_no=#{p_no}
+	</select>
 </mapper>

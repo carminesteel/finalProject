@@ -7,31 +7,31 @@ import org.apache.ibatis.annotations.Param;
 import com.example.domain.UsersVO;
 
 public interface UsersMapper {
-	public List<UsersVO> list();
-	public List<UsersVO> proimage();
-	public int login(UsersVO vo);
-	public UsersVO read(String id);
-	public void insert(UsersVO vo);
-	
-	public int followChk(@Param(value="follower")String follower,@Param(value="target")String target);
-	public void followInsert(@Param(value="follower")String follower,@Param(value="target")String target);
-	public void followDelete(@Param(value="follower")String follower,@Param(value="target")String target);
-	public int followerCnt(String target);
-	public int followingCnt(String follower);
-	public void followerUpdate(@Param(value="follower") int followerCnt, @Param(value="id") String target);
-	public void followUpdate(@Param(value="follow") int followingCnt, @Param(value="id") String follower);
-	/*æ∆¿Ãµ √£±‚*/
-	public int find_id_cnt(String email);
-	public UsersVO find_id(String email);
-	/*∫Òπ–π¯»£ √£±‚ ∫Œ∫–*/
-	public int find_email_cnt(String id);
-	public UsersVO find_email(String email);
-	/*∫Òπ–π¯»£ ∫Ø∞Ê ∫Œ∫–*/
-	public void update(UsersVO vo);
-	
-	public void profile_update(UsersVO vo);
-	
-	public void profile_passUpdate(UsersVO vo);
-	
-	public void updatePosition(String id);
+   public List<UsersVO> list();
+   public List<UsersVO> proimage();
+   public int login(UsersVO vo);
+   public UsersVO read(String id);
+   public void insert(UsersVO vo);
+   
+   public int followChk(@Param(value="follower")String follower,@Param(value="target")String target);
+   public void followInsert(@Param(value="follower")String follower,@Param(value="target")String target);
+   public void followDelete(@Param(value="follower")String follower,@Param(value="target")String target);
+   public int followerCnt(String target);
+   public int followingCnt(String follower);
+   public void followerUpdate(@Param(value="follower") int followerCnt, @Param(value="id") String target);
+   public void followUpdate(@Param(value="follow") int followingCnt, @Param(value="id") String follower);
+   /*ÏïÑÏù¥Îîî Ï∞æÍ∏∞*/
+   public int find_id_cnt(String email);
+   public UsersVO find_id(String email);
+   /*ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞ Î∂ÄÎ∂Ñ*/
+   public int find_email_cnt(String id);
+   public UsersVO find_email(String email);
+   /*ÎπÑÎ∞ÄÎ≤àÌò∏ Î≥ÄÍ≤Ω Î∂ÄÎ∂Ñ*/
+   public void update(UsersVO vo);
+   
+   public void profile_update(UsersVO vo);
+   
+   public void profile_passUpdate(UsersVO vo);
+   
+   public void updatePosition(String id);
 }

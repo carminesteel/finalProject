@@ -14,8 +14,15 @@ public class UsersVO extends ProductVO{
 	private int follow;
 	private int follower;
 	private int position;
+	private int point;
 	private int cnt;
 	
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	public String getU_id() {
 		return u_id;
 	}
