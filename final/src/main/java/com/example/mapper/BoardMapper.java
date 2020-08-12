@@ -35,4 +35,8 @@
 		
 		//view
 		public void updateView(int b_no);
+		
+		//foreign key 해제 및 설정
+		public void finit();
+		public void fover();
 	}

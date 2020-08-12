@@ -266,7 +266,6 @@ li {
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-
 </head>
 <body style=padding-top:81px;>
    <jsp:include page="chat.jsp"/>
@@ -362,12 +361,12 @@ li {
 				<span class="hoverInfo2">${flist.content}</span>
 				</div>
 				<div class="imgInfo">
-					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${flist.u_image}"/> 
+					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="/display?fileName=${flist.u_image}"/> 
 					
 								  ${flist.nickname}</span>&emsp;
-						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+						<img style="width:15px;height:15px;" src="/display?fileName=views.png"/>
 							<span>${flist.view}</span>&emsp;
-						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+						<img style="width:15px;height:15px;" src="/display?fileName=likes.png"/>
 							<span>${flist.b_like}</span>
 				</div>
 				<br>
