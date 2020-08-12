@@ -162,6 +162,22 @@ nav a {
 .title{font-size:18px;font-weight:700;margin-top:5px;}
 .title, .price, .content{padding-left:10px;padding-right:10px;}
 
+#eTitle {
+	letter-spacing: -4;
+	font-family: Noto Sans KR;
+	font-size: 87px;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 60px;
+}
+
+#eContent {
+	font-family: Noto Sans KR;
+	text-align: center;
+	font-weight: light;
+	font-size: 30px;
+	margin-top: 20px;
+}
 </style>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
@@ -170,7 +186,9 @@ nav a {
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;">
    <jsp:include page="../menu.jsp"></jsp:include>
 
-   <table id=productMenu>
+   <div id=eTitle>Art Goods</div>
+   <div id=eContent>현재 판매중인 상품이에요</div>
+   <table id=productMenu>   
       <tr>
          <td><nav>
                <a class=menuS id="bestmenu">Best</a>&emsp;&emsp;&emsp; <a

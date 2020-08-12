@@ -84,7 +84,8 @@ html {
 			<div id=eContent>현재 진행중인 전시에요</div>
 				
 				<c:if test="${id!=null}">		
-					<a style="position:absolute;left:340px;top:210px;" href="/exh/insert" class=more><img id=eButton src="/display?fileName=eButton.png" /></a>
+					<a style="position:absolute;left:340px;top:210px;" href="/exh/insert" class=more>
+					<img id=eButton src="/display?fileName=eButton.png" /></a>
 				</c:if>
 					
 				<br>

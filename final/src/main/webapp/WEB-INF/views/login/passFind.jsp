@@ -176,9 +176,30 @@ section {height: 100%;}
 	outline: none;
 	height:38px;
 }
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 1px;
+  height: 1px;
+  animation: spin 2s linear infinite;
+  position:fixed;
+  top:43.5%;
+  left:45%;
+  z-index: 999;
+  
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 </style>
 </head>
 <body>
+	<div class="loader"></div>
 	<img src="../display?fileName=loginback.png" id="bg">
 	<section class="login-form" id="myForm">
 	<div>
@@ -244,7 +265,7 @@ section {height: 100%;}
 	</section>
 </body>
 <script>
-
+$(".loader").hide();
 $("#allShowPass").hide();
 $(".emailPass_injeung_btn").hide();
 
@@ -306,7 +327,8 @@ $(frm).on("click", "#btn-id #btnId", function() {
 
 //이메일 인증번호 전송 
 $(frm).on("click", "#btn-email #sendMessage", function(e) {
-   e.preventDefault();
+	$(".loader").show();	
+	e.preventDefault();
    var email = $(frm.email).val();
    if (email != "") {
       $.ajax({
@@ -318,7 +340,7 @@ $(frm).on("click", "#btn-email #sendMessage", function(e) {
             $("#dice").val(data);
             $(".btn-chkEmail").show();
             $(".emailPass_injeung_btn").show();
-            
+            $(".loader").hide();
          }
       })
 
