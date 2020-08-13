@@ -92,7 +92,7 @@
 							<br>
 							<h3 style="text-align: center;">상세정보</h3><br>
 							<div
-								style="text-align: none; width: 480px; margin: auto;letter-spacing:-1px;font-size:15px; border: 1px solid gray; padding: 50px; white-space: pre-line;">
+								style="text-align: none; width: 510px; margin: auto;letter-spacing:-1px;font-size:15px; border: 1px solid gray; padding: 50px; white-space: pre-line;">
 								<c:out value="${vo.content}" />
 							</div>
 							<br>
@@ -106,7 +106,7 @@
 						<div id="mapPage">
 							<h3 style="text-align: center;">전시장 주소</h3>
 							<h5 style="font-size:17px;text-align:center;font-weight:300">${vo.addr},${vo.addr_detail}</h5>
-							<div id="map" style="width: 550px; margin: auto;"><jsp:include
+							<div id="map" style="width: 840px; margin: auto;"><jsp:include
 									page="map.jsp" /></div>
 						</div>
 								
