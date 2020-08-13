@@ -47,6 +47,8 @@ public class BoardController {
 	@RequestMapping("list")
 	public void list(Model model) {
 		model.addAttribute("list",mapper.list());
+		model.addAttribute("listA",mapper.listA());
+		model.addAttribute("listB",mapper.listB());
 	}
 	
 	@RequestMapping("rest/list")
@@ -58,8 +60,20 @@ public class BoardController {
 	
 	@RequestMapping(value="infiniteScrollDown", method=RequestMethod.POST)
 	public @ResponseBody List<BoardVO> infiniteScrollDownPOST(@RequestBody BoardVO bvo){
-		Integer bnoToStart=bvo.getB_no()-1;
-		return mapper.infiniteScrollDown(bnoToStart);
+		Integer rToStart=bvo.getR()+1;
+		return mapper.infiniteScrollDown(rToStart);
+	}
+	
+	@RequestMapping(value="AinfiniteScrollDown", method=RequestMethod.POST)
+	public @ResponseBody List<BoardVO> AinfiniteScrollDownPOST(@RequestBody BoardVO bvo){
+		Integer rToStart=bvo.getR()+1;
+		return mapper.AinfiniteScrollDown(rToStart);
+	}
+	
+	@RequestMapping(value="BinfiniteScrollDown", method=RequestMethod.POST)
+	public @ResponseBody List<BoardVO> BinfiniteScrollDownPOST(@RequestBody BoardVO bvo){
+		Integer rToStart=bvo.getR()+1;
+		return mapper.BinfiniteScrollDown(rToStart);
 	}
 	
 	@RequestMapping("insert")

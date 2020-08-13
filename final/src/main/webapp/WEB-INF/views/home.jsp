@@ -167,6 +167,9 @@ li {
 .imgDiv {
 	margin-left: 0;
 }
+.menuA{margin-left:0;}
+.menuB{margin-left:0;} 
+.menuC{margin-left:0;} 
 
 .imgContainer {
 	margin-left: 15px;
@@ -261,6 +264,33 @@ li {
 .latest:hover, .trending:hover, .views:hover {
 	cursor:pointer;
 }
+
+.menuA {
+   text-decoration: none;
+   color: black;
+}
+
+.menuA:hover {
+   cursor: pointer;
+   border-bottom: 2px solid black
+}
+
+.menuB {
+   text-decoration: none;
+   color: black;
+}
+.menuB:hover {
+   cursor: pointer;
+   border-bottom: 2px solid black
+}
+.menuC {
+   text-decoration: none;
+   color: black;
+}
+.menuC:hover {
+   cursor: pointer;
+   border-bottom: 2px solid black
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -294,10 +324,14 @@ li {
    <div id=explore>
       <div id=exTitle>Explore</div>
       <div id=exContent>최고의 작품들을 소개합니다.</div>
-      <div id=keyword><span class="latest">최신순</span>&emsp;&emsp;&nbsp;<span class="trending">인기순</span>&emsp;&emsp;&nbsp;<span class="views">조회순</span></div>
-      <a href="" class=more><img src="/display?fileName=more.png"/></a>
+      <div id=keyword>
+		<a class="menuA" id="NewMenu">최신순</a>&emsp;&emsp;&emsp; 
+		<a class="menuB" id="BestMenu">인기순</a>&emsp;&emsp;&emsp; 
+		<a class="menuC" id="ViewMenu">조회순</a>
+	  </div>
+      <a href="/board/list" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
-   <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
+   <div class="NewMenu" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${list}" var="list" begin="0" end="9">
 			<div class="imgContainer">
 				<input class="idxBno" type="hidden" value="${list.b_no}"/>
@@ -315,8 +349,49 @@ li {
 							<span>${list.b_like}</span>
 				</div>
 				<br>
-			</div>
-			
+			</div>			
+		</c:forEach>
+	</div>
+	<div class="BestMenu" style="width:1855px;height:666px;margin:auto;">
+		<c:forEach items="${listA}" var="list" begin="0" end="9">
+			<div class="imgContainer">
+				<input class="idxBno" type="hidden" value="${list.b_no}"/>
+				<img class="idxBimg" src="display?fileName=${list.image}"/>
+				<div class="hoverInfo">
+				<span class="hoverInfo1">${list.title}</span><br><br><br>
+				<span class="hoverInfo2">${list.content}</span>
+				</div>
+				<div class="imgInfo">
+					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
+								  ${list.nickname}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${list.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${list.b_like}</span>
+				</div>
+				<br>
+			</div>			
+		</c:forEach>
+	</div>
+	<div class="ViewMenu" style="width:1855px;height:666px;margin:auto;">
+		<c:forEach items="${listB}" var="list" begin="0" end="9">
+			<div class="imgContainer">
+				<input class="idxBno" type="hidden" value="${list.b_no}"/>
+				<img class="idxBimg" src="display?fileName=${list.image}"/>
+				<div class="hoverInfo">
+				<span class="hoverInfo1">${list.title}</span><br><br><br>
+				<span class="hoverInfo2">${list.content}</span>
+				</div>
+				<div class="imgInfo">
+					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
+								  ${list.nickname}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${list.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${list.b_like}</span>
+				</div>
+				<br>
+			</div>			
 		</c:forEach>
 	</div>
    
@@ -458,6 +533,28 @@ li {
 		alert(b_no);
 		$("#dialog").load("/board/read?b_no="+b_no);
 	}) */
+	
+	//게시물 순서 
+	$(".BestMenu").hide();
+	$(".ViewMenu").hide();
+	
+	$("#BestMenu").on("click",function(){
+		$(".NewMenu").hide();
+		$(".BestMenu").show();
+		$(".ViewMenu").hide();
+	});
+	
+	$("#ViewMenu").on("click",function(){
+		$(".NewMenu").hide();
+		$(".BestMenu").hide();
+		$(".ViewMenu").show();
+	});
+	
+	$("#NewMenu").on("click",function(){
+		$(".NewMenu").show();
+		$(".BestMenu").hide();
+		$(".ViewMenu").hide();
+	});
 	
 	    // Get the modal
         var modal = document.getElementById('myModal');

@@ -211,6 +211,32 @@
 			float:left;
 			color:white;	
 		}
+	.menuA {
+	   text-decoration: none;
+	   color: black;
+	}
+	
+	.menuA:hover {
+	   cursor: pointer;
+	   border-bottom: 2px solid black
+	}
+	
+	.menuB {
+	   text-decoration: none;
+	   color: black;
+	}
+	.menuB:hover {
+	   cursor: pointer;
+	   border-bottom: 2px solid black
+	}
+	.menuC {
+	   text-decoration: none;
+	   color: black;
+	}
+	.menuC:hover {
+	   cursor: pointer;
+	   border-bottom: 2px solid black
+	}		
 
 	</style>
 <meta charset="UTF-8">
@@ -223,97 +249,299 @@
 	<div id=explore>
 		<div id=exTitle>Explore</div>
 		<div id=exContent>최고의 작품들을 소개합니다.</div>
-		<div id=keyword>최신순&emsp;&emsp;&nbsp;인기순&emsp;&emsp;&nbsp;조회순</div>
+		<div id=keyword>
+			<a class="menuA" id="NewMenu">최신순</a>&emsp;&emsp;&emsp; 
+			<a class="menuB" id="BestMenu">인기순</a>&emsp;&emsp;&emsp; 
+			<a class="menuC" id="ViewMenu">조회순</a>
+		</div>
 		<c:if test="${id!=null}">		
 			<a href="/board/insert" class=more><img id=bButton src="/display?fileName=eButton.png" /></a> <br>
 		</c:if>
    	</div><br><br>
-	<div class="imgDiv" style="width:1855px;margin:auto;">
+	<div class="NewMenu" style="width:1855px;margin:auto;display:block;">
 		<c:forEach items="${list}" var="vo">
 			<div class="imgContainer">
 				<img class="image" src="display?fileName=${vo.image}">
-				<input type="hidden" class="b_no" data-bno="${vo.b_no}" value="${vo.b_no}">
+				<input type="hidden" class="b_no" value="${vo.b_no}">
+				<input type="hidden" class="r" data-r="${vo.r}" value="${vo.r}">
 				<div class="imgInfo">
 					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
 							<span>${vo.view}</span>&emsp;
-					<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
+					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
 							<span>${vo.r_cnt}</span>&emsp;		
 					<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
 							<span>${vo.b_like}</span>	
 				</div>		
 				<div class="hoverInfo">
 					<div class="title">${vo.title}</div>
-					<div class="content">${vo.content}</div>
-				</div>
+					<div class="content">${vo.content}</div>				
+				</div>		
 			</div>
 		</c:forEach>
 	</div>
-		<div class="scrollLocation" style="margin-left:19px;"></div>
+ 	<div class="scrollLocation" style="margin-left:19px;"></div>
+	
+ 	<div class="BestMenu" style="width:1855px;margin:auto;display:none;">
+		<c:forEach items="${listA}" var="Avo">
+			<div class="imgContainer">
+				<img  class="image" src="display?fileName=${Avo.image}">
+				<input type="hidden" class="b_no" value="${Avo.b_no}">
+				<input type="hidden" class="Ar" data-r="${Avo.r}" value="${Avo.r}">
+				<div class="imgInfo">
+					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${Avo.view}</span>&emsp;
+					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${Avo.r_cnt}</span>&emsp;		
+					<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${Avo.b_like}</span>	
+				</div>		
+				<div class="hoverInfo">
+					<div class="title">${Avo.title}</div>
+					<div class="content">${Avo.content}</div>				
+				</div>		
+			</div>
+		</c:forEach>
+	</div>
+ 	<div class="AscrollLocation" style="margin-left:19px;"></div>
+	
+	<div class="ViewMenu" style="width:1855px;margin:auto;display:none;">
+		<c:forEach items="${listB}" var="Zvo">
+			<div class="imgContainer">
+				<img class="image" src="display?fileName=${Zvo.image}">
+				<input type="hidden" class="b_no" value="${Zvo.b_no}">
+				<input type="hidden" class="Br" data-r="${Zvo.r}" value="${Zvo.r}">
+				<div class="imgInfo">
+					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${Zvo.view}</span>&emsp;
+					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${Zvo.r_cnt}</span>&emsp;		
+					<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${Zvo.b_like}</span>	
+				</div>		
+				<div class="hoverInfo">
+					<div class="title">${Zvo.title}</div>
+					<div class="content">${Zvo.content}</div>				
+				</div>		
+			</div>
+		</c:forEach>
+	</div>
+	<div class="BscrollLocation" style="margin-left:19px;"></div>
+	
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
-
 	var lastScrollTop=0;
+	
+	$("#NewMenu").on("click",function(){
+		$(".BestMenu").css("display","none");
+		$(".NewMenu").css("display","block");
+		$(".ViewMenu").css("display","none");
+		$(".scrollLocation").empty();
+		$(".scrollLocation").show();
+		$(".AscrollLocation").hide();
+		$(".BscrollLocation").hide();
+		lastScrollTop=0;
 
+	});
+		
+	$("#BestMenu").on("click",function(){
+		$(".BestMenu").css("display","block");
+		$(".NewMenu").css("display","none");
+		$(".ViewMenu").css("display","none");
+		$(".AscrollLocation").empty();
+		$(".AscrollLocation").show();
+		$(".scrollLocation").hide();
+		$(".BscrollLocation").hide();
+		lastScrollTop=0;
+
+	});
+	
+	$("#ViewMenu").on("click",function(){
+		$(".BestMenu").css("display","none");
+		$(".NewMenu").css("display","none");
+		$(".ViewMenu").css("display","block");
+		$(".BscrollLocation").empty();
+		$(".BscrollLocation").show();
+		$(".scrollLocation").hide();
+		$(".AscrollLocation").hide();
+		lastScrollTop=0;
+
+	});
+	
+	$(".BestMenu").on("click",".imgContainer img", function() {
+		var b_no = $(this).parent().find(".b_no").val();
+		location.href = "read?b_no=" + b_no;
+	});
+	$(".ViewMenu").on("click",".imgContainer img", function() {
+		var b_no = $(this).parent().find(".b_no").val();
+		location.href = "read?b_no=" + b_no;
+	});
+	$(".NewMenu").on("click",".imgContainer img", function() {
+		var b_no = $(this).parent().find(".b_no").val();
+		location.href = "read?b_no=" + b_no;
+	});
 
 	$(window).scroll(function(){
 		var windowScrollTop=$(window).scrollTop();
 		if(windowScrollTop - lastScrollTop > 0){
 			if ($(window).scrollTop() >= ($(document).height() - $(window).height())){
-				var lastbno=$(".b_no:last").attr("data-bno");
-				
-				$.ajax({
-					type:"post",
-					url:"infiniteScrollDown",
-					headers:{
-						"Content-Type":"application/json",
-						"X-HTTP-Method-Override":"POST",
-					},
-					dataType:"json",
-					data:JSON.stringify({
-						b_no:lastbno
-					}),
-					error:function(request,status,error){
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					},
-					success:function(data){
-						var str="";
-						
-						if(data!=""){
-							$(data).each(function(){
-								str += "<div class='imgContainer' style='margin-left:19px'>"
-									+		"<img class='image' src='display?fileName="+this.image+"'>"
-									+		"<input type='hidden' class='b_no' data-bno='"+this.b_no+"' value='"+this.b_no+"'>"
-									+		"<div class='imgInfo'>"
-									+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
-									+				"<span>"+this.view+"</span>&emsp;"
-									+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
-									+				"<span>"+this.r_cnt+"</span>&emsp;"
-									+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
-									+				"<span>"+this.b_like+"</span>"
-									+		"</div>"
-									+		"<div class='hoverInfo'>"
-									+			"<div class='title' '"+this.title+"'></div>"
-									+			"<div class='content' '"+this.content+"'></div>"
-									+		"</div>"
-									+	"</div>"
-							});
-							$(".scrollLocation").append(str);
-						}else{
-							alert("더 불러올 데이터가 없습니다.");
+				if($('.NewMenu').is(":visible")){
+					var lastr=$(".r:last").attr("data-r");
+					$.ajax({
+						type:"post",
+						url:"infiniteScrollDown",
+						headers:{
+							"Content-Type":"application/json",
+							"X-HTTP-Method-Override":"POST",
+						},
+						dataType:"json",
+						data:JSON.stringify({
+							r:lastr
+						}),
+						error:function(request,status,error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						},
+						success:function(data){
+							var str="";
+							
+							if(data!=""){
+								$(data).each(function(){
+									str += "<div class='imgContainer' style='margin-left:19px'>"
+										+		"<img class='image' src='display?fileName="+this.image+"'>"
+										+       "<input type='hidden' class='b_no' value='"+this.b_no+"'>"
+										+		"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
+										+		"<div class='imgInfo'>"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
+										+				"<span>"+this.view+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
+										+				"<span>"+this.r_cnt+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
+										+				"<span>"+this.b_like+"</span>"
+										+		"</div>"
+										+		"<div class='hoverInfo'>"
+										+			"<div class='title' '"+this.title+"'></div>"
+										+			"<div class='content' '"+this.content+"'></div>"
+										+		"</div>"
+										+	"</div>"
+								});
+								$(".scrollLocation").append(str);
+			 					$(".BestMenu").css("display","none");
+								$(".NewMenu").css("display","block");
+								$(".ViewMenu").css("display","none");
+							}else{
+								alert("더 불러올 데이터가 없습니다.");
+							}
 						}
-					}
-				});
-				$("html, body").stop().animate({scrollTop:lastScrollTop}, 0);
+					});
+					$("html, body").stop().animate({scrollTop:lastScrollTop}, 0);
+				} else if($(".BestMenu").is(":visible")){
+ 					$(".BestMenu").css("display","block");
+					$(".NewMenu").css("display","none");
+					$(".ViewMenu").css("display","none");
+					var lastr=$(".Ar:last").attr("data-r");
+					 $.ajax({
+						type:"post",
+						url:"AinfiniteScrollDown",
+						headers:{
+							"Content-Type":"application/json",
+							"X-HTTP-Method-Override":"POST",
+						},
+						dataType:"json",
+						data:JSON.stringify({
+							r:lastr
+						}),
+						error:function(request,status,error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						},
+						success:function(data){
+							var str="";
+							
+							if(data!=""){
+								$(data).each(function(){
+									str += "<div class='imgContainer' style='margin-left:19px'>"
+										+		"<img class='image' src='display?fileName="+this.image+"'>"
+										+       "<input type='hidden' class='b_no' value='"+this.b_no+"'>"
+										+		"<input type='hidden' class='Ar' data-r='"+this.r+"' value='"+this.r+"'>"
+										+		"<div class='imgInfo'>"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
+										+				"<span>"+this.view+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
+										+				"<span>"+this.r_cnt+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
+										+				"<span>"+this.b_like+"</span>"
+										+		"</div>"
+										+		"<div class='hoverInfo'>"
+										+			"<div class='title' '"+this.title+"'></div>"
+										+			"<div class='content' '"+this.content+"'></div>"
+										+		"</div>"
+										+	"</div>"
+								});
+								$(".AscrollLocation").append(str);
+							}else{
+								alert("더 불러올 데이터가 없습니다.");
+							}
+						}
+					});
+					 $("html, body").stop().animate({scrollTop:lastScrollTop}, 0);
+				}else if($('.ViewMenu').is(":visible")){
+					$(".BestMenu").css("display","none");
+					$(".NewMenu").css("display","none");
+					$(".ViewMenu").css("display","block");
+					var lastr=$(".Br:last").attr("data-r");
+					$.ajax({
+						type:"post",
+						url:"BinfiniteScrollDown",
+						headers:{
+							"Content-Type":"application/json",
+							"X-HTTP-Method-Override":"POST",
+						},
+						dataType:"json",
+						data:JSON.stringify({
+							r:lastr
+						}),
+						error:function(request,status,error){
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						},
+						success:function(data){
+							var str="";
+							
+							if(data!=""){
+								$(data).each(function(){
+									str += "<div class='imgContainer' style='margin-left:19px'>"
+										+		"<img class='image' src='display?fileName="+this.image+"'>"
+										+       "<input type='hidden' class='b_no' value='"+this.b_no+"'>"
+										+		"<input type='hidden' class='Br' data-r='"+this.r+"' value='"+this.r+"'>"
+										+		"<div class='imgInfo'>"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
+										+				"<span>"+this.view+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
+										+				"<span>"+this.r_cnt+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
+										+				"<span>"+this.b_like+"</span>"
+										+		"</div>"
+										+		"<div class='hoverInfo'>"
+										+			"<div class='title' '"+this.title+"'></div>"
+										+			"<div class='content' '"+this.content+"'></div>"
+										+		"</div>"
+										+	"</div>"
+								});
+								$(".BscrollLocation").append(str);
+							}else{
+								alert("더 불러올 데이터가 없습니다.");
+							}
+						}
+					});
+					$("html, body").stop().animate({scrollTop:lastScrollTop}, 0);
+				}
 			}
 			lastScrollTop=windowScrollTop;
 		}
 	});
 
-	$(".imgDiv").on("click",".imgContainer img", function() {
+/* 	$(".imgDiv").on("click",".imgContainer img", function() {
 		var b_no = $(this).parent().find(".b_no").val();
 		location.href = "read?b_no=" + b_no;
-	});
+	}); */
 
 	$(".scrollLocation").on("click",".imgContainer img", function() {
 		var b_no = $(this).parent().find(".b_no").val();

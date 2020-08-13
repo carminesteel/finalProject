@@ -9,7 +9,11 @@
 	
 	public interface BoardMapper {
 		public ArrayList<BoardVO> list();
-		public ArrayList<BoardVO> infiniteScrollDown(int b_no);
+		public ArrayList<BoardVO> listA();
+		public ArrayList<BoardVO> listB();
+		public ArrayList<BoardVO> infiniteScrollDown(int r);
+		public ArrayList<BoardVO> AinfiniteScrollDown(int r);
+		public ArrayList<BoardVO> BinfiniteScrollDown(int r);
 		public BoardVO read(int b_no);
 		public void insert(BoardVO vo);
 		public void delete(int b_no);
@@ -36,7 +40,7 @@
 		//view
 		public void updateView(int b_no);
 		
-		//foreign key 해제 및 설정
+		//foreign key �빐�젣 諛� �꽕�젙
 		public void finit();
 		public void fover();
 	}

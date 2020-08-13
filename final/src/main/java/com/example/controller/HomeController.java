@@ -62,6 +62,8 @@ public class HomeController {
 		
 		model.addAttribute("elist",emapper.list());
 		model.addAttribute("list",bMapper.list());
+		model.addAttribute("listA",bMapper.listA());
+		model.addAttribute("listB",bMapper.listB());
 		model.addAttribute("plist",pMapper.artgoods());
 		model.addAttribute("flist",fMapper.feedList(id, targetCnt));
 		
@@ -92,6 +94,8 @@ public class HomeController {
 	@RequestMapping("/home")
 	public void home(Model model) {	
 		model.addAttribute("list",bMapper.list());
+		model.addAttribute("listA",bMapper.listA());
+		model.addAttribute("listB",bMapper.listB());
 		System.out.println(bMapper.list());
 	}
 	

@@ -100,7 +100,7 @@ body {
 		</div>
 		<div id=lightContent>
 		<input type="hidden" name="image" value="${ vo.image }">
-			<img src="display?fileName=${vo.image}"width="100%"/>
+			<%-- <img src="display?fileName=${vo.image}"width="100%"/> --%>
 			<br><br><br><br>
 			<c:forEach items="${list}" var="image">
 				<img src="display?fileName=${image}" name="files" width="100%"/>

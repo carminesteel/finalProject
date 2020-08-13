@@ -17,8 +17,17 @@ public class BoardVO {
  private String nickname;
  private String u_image;
  private String introduce;
+ private int r;
  
- public int getR_cnt() {
+ 
+ 
+ public int getR() {
+	return r;
+}
+public void setR(int r) {
+	this.r = r;
+}
+public int getR_cnt() {
    return r_cnt;
 }
 public void setR_cnt(int r_cnt) {
