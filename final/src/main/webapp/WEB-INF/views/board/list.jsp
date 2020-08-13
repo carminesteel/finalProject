@@ -6,239 +6,247 @@
 <html>
 <head>
 		<style>
-		html {
-			font-family:Noto Sans KR;
-		}
-		
-		body {
-			width: 100%;
-		}
-	
-		.slide {
-			height: 270px;
-		}
+html {
+	font-family: Noto Sans KR;
+}
 
-		#exTitle, #gTitle, #fTitle, #eTitle {
-			letter-spacing: -3;
-			font-family: Noto Sans KR;
-			font-size: 87px;
-			text-align: center;
-			font-weight: bold;
-			margin-top: 60px;
-		}
-		
-		#exContent, #gContent, #fContent, #eContent {
-			font-family: Noto Sans KR;
-			text-align: center;
-			font-weight: light;
-			font-size: 30px;
-			margin-top: 20px;
-		}
-		
-		#keyword {
-			text-align: center;
-			margin-top: 50px;
-			font-size: 20px
-		}
-		
-		.more {
-			font-family: Noto Sans KR;
-			float: right;
-			margin-right: 55px;
-		}
-		
-		* {
-			margin: 0;
-			padding: 0;
-			text-decoration: none
-		}
-		
-		li {
-			list-style: none
-		}
-		
-		.gallery-wrapper {
-			width: 100%;
-			top: 100px;
-			margin: 0 auto;
-		}
-		
-		.gallery-wrapper .gallery-list {
-			position: relative;
-			width: 100%;
-			height: 270px;
-		}
-		
-		.gallery-wrapper .gallery-list li {
-			position: absolute;
-			left: 0;
-			display: none
-		}
-		
-		.gallery-wrapper .gallery-list li:first-child {
-			display: block;
-		}
-		
-		.gallery-wrapper .gallery-list li.active {
-			display: block;
-		}
-		
-		.gallery-wrapper .gallery-list li a {
-			display: block;
-			text-align: center
-		}
-		
-		.gallery-wrapper .gallery-list li a img {
-			display: block;
-		}
-		
-		.gallery-wrapper .btn-prev, .gallery-wrapper .btn-next {
-			position: absolute;
-			top: 190px;
-			font-size: 26px;
-		}
-		
-		.gallery-wrapper .btn-prev {
-			left: 20px;
-		}
-		
-		.gallery-wrapper .btn-next {
-			right: 20px;
-		}
-		
-		.ctrl-box {
-			position: relative;
-			top: -30px;
-			text-align: center;
-			right: 12px;
-		}
-		
-		.ctrl-box a {
-			
-		}
-		
-		.ctrl-box a .bullet {
-			margin-left: 3px;
-			margin-right: 3px;
-			display: inline-block;
-			width: 6px;
-			height: 6px;
-			border: 1px solid #cfd2d7;
-			border-radius: 100%;
-			background: #dfe2e7;
-			text-indent: -9999em;
-			font-size: 0;
-			vertical-align: middle
-		}
-		
-		.ctrl-box a.active .bullet {
-			border: 1px solid #d43a3a;
-			background: #fd4b4b;
-		}
-		
-		.btn-ctrl {
-			margin-left: 10px;
-			padding: 0 4px;
-			border: 1px solid #b6b6b6;
-			border-radius: 4px;
-			background-color: #dadada;
-			line-height: 20px;
-		}
-		
-		.slide {
-			width: 1920px;
-		}
-		
-		#eDiv {
-			height: 710px;
-		}
-		
-		 .imgDiv{
-			
-			margin-left:0;
-		}
-		
-		.imgContainer{
-			margin-left:15px;
-			width:350px;
-			height:300px;
-			display:inline-block;
-			border-radius: 5px 5px 5px 5px;
-			background: black;
-		}
-		
-		.imgInfo{
-			width:100%;
-			text-align:left;
-			padding-top:3px;
-		}
-		
-		
-		.imgContainer .image{
-			width:350px;
-			height:300px;
-			object-fit:cover;
-			object-position:center;
-			border-radius: 5px 5px 5px 5px;
-		}
-		
-		.imgContainer .image:hover {
-		    opacity: 0.3;
-			cursor:pointer;
-		}
-		.imgContainer .image:hover	+ .hoverInfo{
-			display:block;
-		}
-		
-		
-		.hoverInfo{
-			
-			width:300px;
-			height:110px;
-			position:absolute;
-			display:none;
-			margin-top:-120px;
-			margin-left:28px;
-		}
-		
-		.hoverInfo1{	
-			float:left;
-			font-size:24px;
-			color:white;
-		}
-		
-		.hoverInfo2{
-			float:left;
-			color:white;	
-		}
-	.menuA {
-	   text-decoration: none;
-	   color: black;
-	}
-	
-	.menuA:hover {
-	   cursor: pointer;
-	   border-bottom: 2px solid black
-	}
-	
-	.menuB {
-	   text-decoration: none;
-	   color: black;
-	}
-	.menuB:hover {
-	   cursor: pointer;
-	   border-bottom: 2px solid black
-	}
-	.menuC {
-	   text-decoration: none;
-	   color: black;
-	}
-	.menuC:hover {
-	   cursor: pointer;
-	   border-bottom: 2px solid black
-	}		
+body {
+	width: 100%;
+}
 
-	</style>
+.slide {
+	height: 270px;
+}
+
+#exTitle, #gTitle, #fTitle, #eTitle {
+	letter-spacing: -3;
+	font-family: Noto Sans KR;
+	font-size: 87px;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 60px;
+}
+
+#exContent, #gContent, #fContent, #eContent {
+	font-family: Noto Sans KR;
+	text-align: center;
+	font-weight: light;
+	font-size: 30px;
+	margin-top: 20px;
+}
+
+#keyword {
+	text-align: center;
+	margin-top: 50px;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.more {
+	font-family: Noto Sans KR;
+	float: right;
+	text-align: center;
+	margin-right: 55px;
+	background: #2b4163;
+	color: white;
+	border: 1px solid black;
+	border-radius: 20px 20px 20px 20px;
+	width: 100px;
+	height: 30px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none
+}
+
+li {
+	list-style: none
+}
+
+.gallery-wrapper {
+	width: 100%;
+	top: 100px;
+	margin: 0 auto;
+}
+
+.gallery-wrapper .gallery-list {
+	position: relative;
+	width: 100%;
+	height: 270px;
+}
+
+.gallery-wrapper .gallery-list li {
+	position: absolute;
+	left: 0;
+	display: none
+}
+
+.gallery-wrapper .gallery-list li:first-child {
+	display: block;
+}
+
+.gallery-wrapper .gallery-list li.active {
+	display: block;
+}
+
+.gallery-wrapper .gallery-list li a {
+	display: block;
+	text-align: center
+}
+
+.gallery-wrapper .gallery-list li a img {
+	display: block;
+}
+
+.gallery-wrapper .btn-prev, .gallery-wrapper .btn-next {
+	position: absolute;
+	top: 190px;
+	font-size: 26px;
+}
+
+.gallery-wrapper .btn-prev {
+	left: 20px;
+}
+
+.gallery-wrapper .btn-next {
+	right: 20px;
+}
+
+.ctrl-box {
+	position: relative;
+	top: -30px;
+	text-align: center;
+	right: 12px;
+}
+
+.ctrl-box a {
+	
+}
+
+.ctrl-box a .bullet {
+	margin-left: 3px;
+	margin-right: 3px;
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border: 1px solid #cfd2d7;
+	border-radius: 100%;
+	background: #dfe2e7;
+	text-indent: -9999em;
+	font-size: 0;
+	vertical-align: middle
+}
+
+.ctrl-box a.active .bullet {
+	border: 1px solid #d43a3a;
+	background: #fd4b4b;
+}
+
+.btn-ctrl {
+	margin-left: 10px;
+	padding: 0 4px;
+	border: 1px solid #b6b6b6;
+	border-radius: 4px;
+	background-color: #dadada;
+	line-height: 20px;
+}
+
+.slide {
+	width: 1920px;
+}
+
+#eDiv {
+	height: 710px;
+}
+
+.imgDiv {
+	margin-left: 0;
+}
+
+.imgContainer {
+	margin-left: 15px;
+	width: 350px;
+	height: 300px;
+	display: inline-block;
+	border-radius: 5px 5px 5px 5px;
+	background: black;
+}
+
+.imgInfo {
+	width: 100%;
+	text-align: left;
+	padding-top: 3px;
+}
+
+.imgContainer .image {
+	width: 350px;
+	height: 300px;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.imgContainer .image:hover {
+	opacity: 0.3;
+	cursor: pointer;
+}
+
+.imgContainer .image:hover+.hoverInfo {
+	display: block;
+}
+
+.hoverInfo {
+	width: 300px;
+	height: 110px;
+	position: absolute;
+	display: none;
+	margin-top: -120px;
+	margin-left: 28px;
+}
+
+.hoverInfo1 {
+	float: left;
+	font-size: 24px;
+	color: white;
+}
+
+.hoverInfo2 {
+	float: left;
+	color: white;
+}
+
+.menuA {
+	text-decoration: none;
+	color: black;
+}
+
+.menuA:hover {
+	cursor: pointer;
+	border-bottom: 2px solid black
+}
+
+.menuB {
+	text-decoration: none;
+	color: black;
+}
+
+.menuB:hover {
+	cursor: pointer;
+	border-bottom: 2px solid black
+}
+
+.menuC {
+	text-decoration: none;
+	color: black;
+}
+
+.menuC:hover {
+	cursor: pointer;
+	border-bottom: 2px solid black
+}
+</style>
 <meta charset="UTF-8">
 <title>[작품]</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -255,9 +263,9 @@
 			<a class="menuC" id="ViewMenu">조회순</a>
 		</div>
 		<c:if test="${id!=null}">		
-			<a href="/board/insert" class=more><img id=bButton src="/display?fileName=eButton.png" /></a> <br>
+			<a href="/board/insert" class=more id=bButton>작품 올리기</a> <br>
 		</c:if>
-   	</div><br><br>
+   	</div><br>
 	<div class="NewMenu" style="width:1855px;margin:auto;display:block;">
 		<c:forEach items="${list}" var="vo">
 			<div class="imgContainer">

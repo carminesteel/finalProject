@@ -60,7 +60,7 @@
 		{{#each .}}
 		<tr class=reRow>
 			<td class="u_image" width=70>				
-				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}"				
+				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}">				
 			</td>
 			<td  width=700 style="text-align:left;">
 				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>

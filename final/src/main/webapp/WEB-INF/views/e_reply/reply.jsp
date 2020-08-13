@@ -13,6 +13,9 @@
 	.reply1{margin:5px; padding:10px; width:650px;}
 	.replydate #btnDel{float:right;}
 	.replydate #btnlike{float:right;}
+	.btnLike:hover{
+		cursor:pointer;
+	}
 	.rbtnDelete:hover{
 		cursor:pointer;
 	}
@@ -23,7 +26,7 @@
 	<input type="hidden" value="${re}" id="re">
 	<div id="reviewcnt" style="text-align:center;color:gray;display:none;">
 				아직 작성 된 리뷰가 없습니다.
-			</div>
+	</div>
 	<table id="tbl" width=500px;></table>	
 	<script id="temp" type="text/x-handlebars-template">			
 		{{#each list}}
@@ -34,11 +37,12 @@
 			<td  width=700 style="text-align:left;">
 				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>
 				<br>
-				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>
+				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>				
 				<input class=hId type="hidden" value=${id}>
 				<input class=rId type="hidden" value={{replyer}}>
 				<input class=r_no type="hidden" value={{r_no}}>
-			</td>	
+				<span style="display:inline-block;float:right;"><img class="btnLike" style="width:13px;height:13px;" src=../display?fileName=likes.png/> {{cnt}}<span>
+			</td>
 			<td width=50>
 				<img width=20 height=20 {{printaaa replyer}} class="rbtnDelete">	
 			</td><br>
@@ -99,14 +103,16 @@
 	}
 	
 	//좋아요
-	$("#tbl").on("click",".replydate #btnlike",function(){
-		var r_no=$(this).attr("r_no");
+	$("#tbl").on("click",".reRow .btnLike",function(){
+		var r_no=$(this).parent().parent().find(".r_no").val();
+		alert(r_no);
 		$.ajax({
 			type:"post",
 			url:"/like/update",
 			data:{"id":id,"r_no":r_no},
 			success:function(){
 				getList();
+				alert("좋아요성공")
 			}
 		})
 	});

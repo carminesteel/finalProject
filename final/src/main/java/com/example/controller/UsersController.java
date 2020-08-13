@@ -58,11 +58,13 @@ public class UsersController {
                session.setAttribute("id", readVO.getId());
                session.setAttribute("name", readVO.getNickname());
                session.setAttribute("position", readVO.getPosition());
+               session.setAttribute("u_image", readVO.getU_image());
             } else if (readVO.getPosition() == 2) {
                result = 2; // admin
                session.setAttribute("id", readVO.getId());
                session.setAttribute("name", readVO.getName());
                session.setAttribute("position", readVO.getPosition());
+               session.setAttribute("u_image", readVO.getU_image());
             } else if (readVO.getPosition() == 3){
                result = 3; // 占쏙옙占쏙옙占쏙옙
             } else {
@@ -120,6 +122,7 @@ public class UsersController {
       MultipartFile file = multi.getFile("file");
       session.setAttribute("id", vo.getId());
       session.setAttribute("name", vo.getName());
+
       // 占쏙옙占싹억옙占싸듸옙
       if (!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占  占쏙옙占쏙옙占쏙옙
          String image = System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙

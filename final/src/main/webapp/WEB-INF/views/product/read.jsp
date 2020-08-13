@@ -80,7 +80,7 @@ a:hover{text-decoration:none;color:black;}
 #thumbImg{text-align:center;margin-left:35px;margin-top:-50px;}
 .thumbs{background-color: white;border:1px solid #b3c6e6; display: inline-block; height: 81px; width: 81px; margin-top: 105px;}
 #pInfo{width: 611px; height: 920px; display: inline-block; float: left;}
-#pTitle{font-size: 40pt; font-family: Noto Sans KR; font-weight: 500; margin-top: 80px; margin-bottom: 0px;margin-left:35px;}
+#pTitle{font-size: 40pt; font-family: Noto Sans KR; font-weight: 500; margin-top: 80px; margin-bottom: 0px;margin-left:35px;letter-spacing:-1.5px;}
 #pPrice, #totPrice{font-size:43px; font-family: Noto Sans KR; font-weight: 700; float: right; margin: 0px;margin-bottom:20px;margin-right:55px;color:#2e6cb5;letter-spacing:-4px}
 #pointArea{width: 523px; height: 230px; border: 1px solid #2e6cb5; display: inline-block; float: left;margin-left:32px;padding:20px}
 #pMenu{width:1130px;margin:auto;border-collapse:collapse;}

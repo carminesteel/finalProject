@@ -7,10 +7,19 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <meta charset="UTF-8">
-<title>Exhibition List</title>
+<title>Feed List</title>
 <style>
-#tbl{overflow:hidden;width:1200px; margin:auto;}
-	#tbl .row{}
+
+.ftbl{
+	width:1166px;height:714px; margin:auto;text-align:center;border:1px solid #eeeeee;margin-bottom:27px
+}
+
+.icons{
+	width:17px;height:17px;
+}
+
+	
+#tbl .row{}
 
 html {
 	font-family: Noto Sans KR
@@ -24,7 +33,7 @@ html {
 
 #exCenter {
 	background-color: white;
-	width: 1186px;
+	width: 1280px;
 	margin: auto;
 	z-index: 2;
 	padding: 45px;
@@ -47,12 +56,25 @@ html {
 	font-weight: 300;
 	width: 600px;
 	color:#373e45;
+	margin-bottom:20px;
+	letter-spacing:-1px;
 	
 }
 
 .tbl{
 	margin-top:10px;
 }	
+
+#lightBottom{
+	width:1166px;
+	margin:auto;
+}
+
+.btnInsert:hover{
+	cursor:pointer;
+}
+
+
 </style>
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;">
@@ -60,29 +82,100 @@ html {
 	<div id=exBody>
 		<div id=exCenter>
 			<div id=eTitle>Feed</div>
-  			<div id=eContent>팔로우중인  Artist의 작품이에요 </div>
-  			
-			<div id=tbl>
-			<c:forEach items="${Flist}" var="fvo">	
-				<table class=ftbl>
-					<tr>
-						<td colspan=4><img src="../display?fileName=${fvo.image}" width=1180 height=500></td>
-					</tr>
-					<tr>
-						<td width=45><img src="../display?fileName=${fvo.u_image}" width=40 height=40 style="border-radius: 50%;"></td>
-						<td>${fvo.nickname}<br>${fvo.introduce}</td>
-					<tr>
-					<tr>
-						<td colspan=2>${fvo.title}</td>
-					</tr>
-					<tr>
-						<td colspan=2>${fvo.content}</td>
-					</tr>
-					<tr>
-						<td colspan=2 style="text-align:right;">뷰=${fvo.view} /좋아요=${fvo.b_like} /댓글수=${fvo.r_cnt}</td>
-					</tr>
-					</table>
-			<!-- 댓글 입력 하는곳  -->
+			<div id=eContent>팔로우 중인 작가들의 소식입니다.</div>
+
+			<div id=lTbl>
+				<c:forEach items="${Flist}" var="fvo">
+					<div class=ftbl>
+						<img class=fimg style="height: 100%; object-fit: contain;"
+							src="../display?fileName=${fvo.image}">
+					</div>
+					<div style="width: 1130px; margin: auto;">
+						<span style="display: inline-block; float: left;"> <img
+							style="border-radius: 50%;" width=90px height=90px
+							src="../display?fileName=${fvo.u_image}" />
+						</span> <span
+							style="display: inline-block; float: left; margin-left: 18px; margin-top: 18px;">
+							<b style="font-size: 20px">${fvo.nickname}</b>&nbsp;&nbsp;<a
+							style="all: unset; font-size: 14px; cursor: pointer;">팔로우</a><br>
+							<b style="all: unset; color: #93a1a2; font-size: 15px;">${fvo.introduce}</b>
+						</span><br>
+						<br>
+						<br>
+						<br>
+						<div style="display: inline-block; width: 825px;font-size:33px;margin-bottom:12px">${fvo.title}</div>
+						<div style="display: inline-block; width: 100%;font-size:20px;">${fvo.content}</div>
+					</div>
+
+					<div id=lightBottom>
+						<br>
+						<div style="text-align: left; display: inline-block; float: left;">
+							<form name="frm" method="post" action="update"
+								enctype="multipart/form-data">
+
+								<c:if test="${id==vo.id}">
+									<!-- <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="submit" value="수정"> -->
+									<input
+										style="border: none; background: #2b4163; border-radius: 5px 5px 5px 5px; color: white; width: 55px; height: 28px; font-size: 15px;"
+										type="button" value="삭제" id="btnDelete">
+								</c:if>
+								<input type="button" value="신고하기" id="report"
+									style="border: none; background: #2b4163; border-radius: 5px 5px 5px 5px; color: white; width: 75px; height: 28px; font-size: 15px;margin-left:25px;">
+							</form>
+						</div>
+
+
+						<div
+							style="text-align: right; display: inline-block; float: right;margin-right:25px;margin-bottom:30px;font-size:18px;">
+							<img class=icons src="../display?fileName=views.png" />${fvo.view}&nbsp;
+							<img class=icons id="LikeBtn" src="../display?fileName=likes.png" /> ${fvo.b_like}&nbsp;
+							<img class=icons src="../display?fileName=comment.png" /> ${fvo.r_cnt}
+						</div>
+
+						<hr style="width: 1127px;border:solid 1px #b3c6e6;">
+
+						<!-- 댓글 출력 하는곳  -->
+						<table class=tbl1 style="margin-top:30px;margin-left:60px;">
+							<c:forEach items="${Rlist}" var="rvo">
+								<c:if test="${fvo.b_no==rvo.b_no}">
+									<tr class="row" style="height:100px;">
+										<td><img src="../display?fileName=${rvo.u_image}" style="width:65px;height:65px;border-radius:50%"></td>
+										<td class="replyer">${rvo.replyer}</td>
+										<td class="content">${rvo.content}</td>
+										
+										<c:if test="${id eq rvo.replyer}">
+											<td><button class="rbtnDelete">삭제</button></td>
+										</c:if>
+										
+									</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+						<br>
+						<!-- 댓글 입력 하는곳  -->
+						<table class=rtbl>
+							<tr class=Rrow>
+								<td>
+								<img width=70 height=70 style="border-radius:50%;float:left;margin-left:20px;" src="../display?fileName=${u_image}"/>
+								<input type="hidden" class="b_no" value="${fvo.b_no}">
+									<input type="hidden" class="replyer" value="${id}"> 
+									<textarea name="content" id=content style=width:1010px;height:80px;resize:none;margin-left:16px;padding:10px; onfocus="this.value='';">댓글을 입력하세요.</textarea>
+									<input style="float:right;width:136px;height:38px;border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;margin-right:18px;" type="button" class="btnInsert" value="댓글 남기기"></td>
+							</tr>
+						</table>
+
+						<br><br>
+					</div>
+				</c:forEach>
+				
+			</div>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br>
+		</div>
+	</div>
+	<jsp:include page="../footer.jsp" />
+
+	<%-- <!-- 댓글 입력 하는곳  -->
 					<table class=rtbl>
 					<tr class=Rrow>
 						<td>
@@ -115,18 +208,10 @@ html {
 								<c:if test="${id eq rvo.replyer}">
 								<td><button class="rbtnDelete">삭제</button></td>
 								</c:if>	
-							</tr>							
+							</tr>
 						</c:if>
 					</c:forEach>
-					</table>
-				
-			</c:forEach>
-			</div>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br>
-		</div>
-	</div>
-	<jsp:include page="../footer.jsp" />
+					</table> --%>
 </body>
 <script>
 	var id="${id}";
@@ -135,8 +220,8 @@ html {
 		var row=$(this).parent().parent();
 		var b_no=row.find(".b_no").val();
 		var replyer=row.find(".replyer").val();
-		var content=row.find(".content").val();
-		
+		var content=row.find("#content").val();
+		alert(b_no + replyer + content)
 		if(content==""){
 			alert("내용을 입력해주세요");
 		}else{
