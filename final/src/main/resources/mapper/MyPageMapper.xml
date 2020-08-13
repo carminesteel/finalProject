@@ -5,7 +5,7 @@
         select * from board where id=#{id} order by date desc limit 0,8
     </select>
     
-    <select id="myPlist" resultType="com.example.domain.BoardVO">
+    <select id="myPlist" resultType="com.example.domain.ProductVO">
         select * from product where id=#{id} order by date desc  limit 0,8
     </select>
     <select id="myFollowing" resultType="string">

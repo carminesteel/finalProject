@@ -259,11 +259,11 @@ input[type="password"] {
 						</c:if>
 						<c:if test="${not empty blist}">
 						<div class="imgList">
-								<img src="../display?fileName=addWork.jpg">
+								<img src="../display?fileName=addWork.jpg" onClick="location.href='/board/insert'">
 							</div>
 							<c:forEach items="${blist}" var="bvo">
 								<div style="display:inline-block;float:left;margin:17px;">
-									<img class="myImgs" src="../display?fileName=${bvo.image}">
+									<img class="myImgs" src="../display?fileName=${bvo.image}" onClick="location.href='../board/read?b_no=${bvo.b_no}'">
 								</div>
 							</c:forEach>
 						</c:if>
@@ -274,14 +274,14 @@ input[type="password"] {
 							<h1>등록한 상품이 없습니다</h1>
 						</c:if>
 						<c:if test="${not empty plist}">
-						<div class = imgList>
-								<img src="../display?fileName=addWork.jpg">
+							<div class = imgList>
+								<img src="../display?fileName=addWork.jpg" onClick="location.href='/product/insert'">
 							</div>
-						<c:forEach items="${plist}" var="pvo">
-							<div style="display:inline-block;float:left;margin:17px;">
-								<img class="myImgs" src="../display?fileName=${pvo.image}">
-							</div>
-						</c:forEach>
+							<c:forEach items="${plist}" var="pvo">					
+								<div style="display:inline-block;float:left;margin:17px;">
+									<img class="myImgs" src="../display?fileName=${pvo.image}" onClick="location.href='../product/read?p_no=${pvo.p_no}'">
+								</div>
+							</c:forEach>
 						</c:if>
 					</div>		
 					<div id=followingList>
@@ -290,7 +290,7 @@ input[type="password"] {
 						</c:if>
 						<c:if test="${not empty followingInfo}">
 						<c:forEach items="${followingInfo}" var="followingList">
-							<table class="creatertab">
+							<table class="creatertab" onClick="location.href='../user/read?id=${followingList.id}'">
 								<tr>
 									 <td id="creater" style="width:126px;text-align:center;">				                   
 				                        <img src="../display?fileName=${followingList.u_image}"   style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
@@ -300,26 +300,24 @@ input[type="password"] {
 										<div style="display:inline-block;color:#acacac">${followingList.introduce}</div>
 				                     </td>
 				                     <td width=114px>
-				                     	<button style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
+				                     	<button id="BtnUnfollow" style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
 				                     </td>
 								</tr>
 							</table>
 						</c:forEach>
 						</c:if>
 					</div>
-	
-	
-					
+
 					<div id=followerList>
 						<c:if test="${empty followerInfo}">
 							<h1>당신을 팔로우한 사람이 없습니다.</h1>
 						</c:if>
 						<c:if test="${not empty followerInfo}">
 						<c:forEach items="${followerInfo}" var="followerList">
-							<table class="creatertab">
+							<table class="creatertab" onClick="location.href='../user/read?id=${followerList.id}'">
 								<tr>
 									 <td id="creater" style="width:126px;text-align:center;">
-				                        <img src="../display?fileName=${followerList.u_image}"   style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
+				                        <img src="../display?fileName=${followerList.u_image}" style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
 				                     </td>
 				                     <td style="text-align:left;">
 				                        <div style="font-size:20px;display:inline-block">${followerList.nickname}</div><br>		                       
@@ -417,6 +415,7 @@ input[type="password"] {
 			success:function(){
 			}
 		}) 
- 	} */
+ 	} */ 		
+
 </script>
 </html>
