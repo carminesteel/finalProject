@@ -127,7 +127,7 @@ input[type="password"] {
 		<form name="frm" action="/login/usersUpdate/profile_update" method="post" enctype="multipart/form-data">
 		<c:if test="${passChk==1}">
 		<div id="userRead" style="background:#fff; border-radius: 20px;">
-			<table>
+			<table style="text-align:center;">
 			<tr>
 			<td><input type="hidden" name=id value="${vo.id}"></td>	
 			<td><input type="hidden" name="u_image" value="${ vo.u_image }"></td>
@@ -225,30 +225,39 @@ $(frm2).hide();
 $(frm.file).hide();
 
 
+function click(){
+	var pass = $("#passChk").find("#chkPass").val();
+	if (pass != "") {
+		$.ajax({
+			type:"post",
+			url:"/login/mypagePassChk",
+			data:{"id":id,"pass":pass},
+			dataType:"json",
+			success:function(data) {
+				if (data==0) {
+					alert("비밀번호가 일치하지 않습니다.");
+				} else {
+					alert("확인되었습니다.");
+					location.href="/login/usersUpdate";
+					
+				}
+			}
+		})
+	} else {
+		alert("비밀번호를 입력해주세요");
+		$("#passChk").find("#chkPass").focus();
+	}
+}
 	
  	$("#passChk").on("click", "#confirm", function() {
-		var pass = $("#passChk").find("#chkPass").val();
-		if (pass != "") {
-			$.ajax({
-				type:"post",
-				url:"/login/mypagePassChk",
-				data:{"id":id,"pass":pass},
-				dataType:"json",
-				success:function(data) {
-					if (data==0) {
-						alert("비밀번호가 일치하지 않습니다.");
-					} else {
-						alert("확인되었습니다.");
-						location.href="/login/usersUpdate";
-						
-					}
-				}
-			})
-		} else {
-			alert("비밀번호를 입력해주세요");
-			$("#passChk").find("#chkPass").focus();
-		}
+ 		click();
 	}) 
+	$("#chkPass").keydown(function(key){
+		if(key.keyCode==13){
+			click();
+		}
+	})
+	
 	
 	//프로필 정보 수정
 	$(frm).submit(function(e){

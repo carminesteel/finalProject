@@ -66,7 +66,7 @@ public class HomeController {
 		model.addAttribute("listB",bMapper.listB());
 		model.addAttribute("plist",pMapper.artgoods());
 		model.addAttribute("flist",fMapper.feedList(id, targetCnt));
-		
+		System.out.println("섹스"+fMapper.feedList(id, targetCnt));
 		return "home";
 	}
 

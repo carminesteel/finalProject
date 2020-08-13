@@ -403,8 +403,10 @@ li {
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${plist}" var="plist" begin="0" end="9">
 			<div class="imgContainer">
-				<img class="idxpimg" src="display?fileName=${plist.image}"/>
+				<img class="idxpimg" src="display?fileName=${plist.image}"/>							
 				<div class="hoverInfo">
+				<input type="hidden" class=p_no value="${plist.p_no}">
+				<input type="hidden" class=id value="${plist.id}">
 				<span class="hoverInfo1">${plist.title}</span><br><br><br>
 				<span class="hoverInfo2">${plist.price}원</span>
 				</div>
@@ -430,6 +432,7 @@ li {
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${flist}" var="flist" begin="0" end="9">
 			<div class="imgContainer">
+				<input class="fdBno" type="hidden" value="${flist.b_no}"/>
 				<img class="idxFimg" src="display?fileName=${flist.image}"/>
 				<div class="hoverInfo">
 				<span class="hoverInfo1">${flist.title}</span><br><br><br>
@@ -524,6 +527,8 @@ li {
     <!-- The Modal -->
     <div id="myModal" class="modal"> 
     </div>
+    
+    
 
 </body>
 <script>
@@ -565,6 +570,7 @@ li {
         // When the user clicks on the button, open the modal 
         $(".idxBimg").on("click", function(){
         	b_no=$(this).parent().find(".idxBno").val();
+        	alert(b_no);
         	$("#myModal").load("../board/read?b_no="+b_no)
         	$('html').css("overflow", "hidden");        	
         	$('.modal').css("overflow", "scroll");
@@ -573,7 +579,50 @@ li {
             modal.style.display = "block";
         })
         
+        $(".idxFimg").on("click", function(){
+        	b_no=$(this).parent().find(".fdBno").val();
+        	alert(b_no);
+        	$("#myModal").load("../board/read?b_no="+b_no)
+        	$('html').css("overflow", "hidden");        	
+        	$('.modal').css("overflow", "scroll");
+        	$('html').css("overflow-x", "hidden");
+        	$('.modal').css("overflow-x", "hidden");
+            modal.style.display = "block";
+        })
+
+		
+         // Get the modal
+        var modal = document.getElementById('myModal');
  
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];                                          
+ 
+        // When the user clicks on the button, open the modal 
+        $(".idxBimg").on("click", function(){
+        	b_no=$(this).parent().find(".idxBno").val();
+        	$("#myModal").load("../board/read?b_no="+b_no)
+        	$('html').css("overflow", "hidden");        	
+        	$('.modal').css("overflow", "scroll");
+        	$('html').css("overflow-x", "hidden");
+        	$('.modal').css("overflow-x", "hidden");
+            modal.style.display = "block";
+        })
+ 	
+         $(".idxBimg").on("click", function(){
+        	b_no=$(this).parent().find(".idxBno").val();
+        	$("#myModal").load("../board/read?b_no="+b_no)
+        	$('html').css("overflow", "hidden");        	
+        	$('.modal').css("overflow", "scroll");
+        	$('html').css("overflow-x", "hidden");
+        	$('.modal').css("overflow-x", "hidden");
+            modal.style.display = "block";
+        })
+        
+        
+        
+        
+        
+        
 	$("#btnReply").hide();
 
 	var id = "${id}";
@@ -790,5 +839,12 @@ li {
 		})
 		 */
 	});
+	
+	//GOODS 클릭하면 read로 가는거
+	 $(".imgDiv").on("click", ".imgContainer .idxpimg", function() {
+	      var p_no = $(this).parent().find(".p_no").val();
+	      var id = $(this).parent().find(".id").val();
+	      location.href = "/product/read?p_no=" + p_no + "&id=" + id;
+	   });
 </script>
 </html>
