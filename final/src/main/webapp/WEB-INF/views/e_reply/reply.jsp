@@ -40,7 +40,7 @@
 				<input class=r_no type="hidden" value={{r_no}}>
 			</td>	
 			<td width=50>
-				<img width=20 height=20 src="../display?fileName=xicon.png" class="rbtnDelete">	
+				<img width=20 height=20 {{printaaa replyer}} class="rbtnDelete">	
 			</td><br>
 		</tr>
 		{{/each}}
@@ -61,6 +61,17 @@
 	getList();
 	getCnt();
 
+	Handlebars.registerHelper("printaaa",function(replyer){
+		var src;
+		if(id!=replyer){
+			src="style=display:none";
+		}else{
+			src="src=../display?fileName=xicon.png";
+		}
+		return src;
+	});
+	
+	
 	//댓글이없을때
  	function getCnt(){
 		if($("#re").html()==0){
