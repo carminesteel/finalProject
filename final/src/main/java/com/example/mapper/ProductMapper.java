@@ -31,4 +31,8 @@ public interface ProductMapper {
 	public void InsertOrders(String id);
 	public void InsertPurchase(PurchaseVO vo);
 	public void UpdatePoint(UsersVO vo);
+	
+	public int chkAddr(UsersVO vo);
+	public int chkAddrList(UsersVO vo);
+	public void InsertAddressList(UsersVO vo);
 }

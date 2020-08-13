@@ -57,7 +57,7 @@
 	</select>
 	
 	<select id="buyCart" resultType="com.example.domain.CartVO">
-		select * from cart where id=#{id} and p_image=#{p_image}
+		select c.*,nickname from cart c,product p,users u where c.p_no=p.p_no and u.id=p.id and c.id=#{id} and p_image=#{p_image}
 	</select>
 	
 	<select id="getOrders" resultType="int">
@@ -74,5 +74,17 @@
 	<update id="UpdatePoint">
 		update users set point=#{point} where id=#{id}
 	</update>
+	
+	<select id="chkAddr" resultType="int">
+		select count(*) from users where id=#{id} and addr=#{addr}
+	</select>
+	
+		<select id="chkAddrList" resultType="int">
+		select count(*) from address where id=#{id} and addr=#{addr}
+	</select>
+	
+	<insert id="InsertAddressList">
+		insert into address values(#{id},#{addr})
+	</insert>
 
 </mapper>

@@ -15,108 +15,136 @@
 </head>
 <body>
 
-<div>
-	<h1>주문/결제</h1>
-		<div>
+<div style="width:1250px;height:1000px;border:1px solid black;margin:auto;">
+	<h1 style="text-align:center;">주문/결제</h1>
+	<hr>
+		<div >
 		
 			<div>
-				<div>상품정보</div>
-				<div>판매자</div>
-				<div>가격</div>
-				<div>배송비</div>
-				<div>수량</div>
-				<div>할인</div>
-				<div>주문금액</div>
+				<table style="text-align:center;">
+					<tr>
+						<td width=300 colspan=2>상품정보</td>
+						<td width=200>판매자</td>
+						<td width=200>가격</td>
+						<td width=200>배송비</td>
+						<td width=100>수량</td>
+						<td width=100>할인</td>
+						<td width=100>주문금액</td>
+					</tr>
+				</table>
 			</div>
-			
+			<hr>
 			<br>
 			
 			<div>
-				<div><img src="../display?fileName=${pvo.image}" width=100 height=100>${pvo.title}</div>
-				<div>${pvo.id}</div>
-				<div>${pvo.price}</div>
-				<div>${shipping_fee}</div>
-				<div>${quan}</div>
-				<div>${discount}</div>
-				<div>${tot}</div>
+				<table style="text-align:center;">
+					<tr>
+						<td width=150><img src="../display?fileName=${pvo.image}" width=150 height=150 ></td>
+						<td width=150>${pvo.title}</td>
+						<td width=200>${pvo.id}</td>
+						<td width=200>${pvo.price}</td>
+						<td width=200>${shipping_fee}</td>
+						<td width=100>${quan}</td>
+						<td width=100>${discount}</td>
+						<td width=100>${tot}</td>
+					</tr>
+				</table>
 			</div>
 			
 		</div>
 		
 		<hr>
 		
-		<div border=1>
-		
-			<h3>배송지정보</h3>
-		
-		
-			배송지 선택
+		<div style="display:inline-block;float:left;width:800px;margin:30px;">
 			
-			<input type="radio" name=gender value=1 checked>기본배송지
-			<input type="radio" name=gender value=2>신규배송지
-			
-		<br>
-		
-		<br>
-
-		${uvo.nickname} (${uvo.name})
-		<br><br>
-		${uvo.phone}
-		<br><br>
-		<div id=userAddr>
-			<c:if test="${not empty addrList}">
-			<c:forEach items="${addrList}" var="addr">
-				<select id=addrList>
-					<option>${addrList.addr}</option>
-				</select>
-			</c:forEach>
-			</c:if>
-			<c:if test="${empty addrList}">
-				<span>${uvo.addr}</span>
-			</c:if>
-		</div>
-			<div id=addrApi style="display:none;">
-			<div>
-            <input type="button" class="btn-primary box"
-               onclick="openAddress();" value="우편번호 찾기"><br>
-         </div>
-         <div>
-            <input type="hidden" name="post" class="box"
-               id="users_zipCode" placeholder="우편번호" required>
-         </div>
-         <div>
-            <input type="text" name="roadAddress" class="box" value="${roadAddress}"
-               id="users_address" placeholder="도로명주소" required>
-         </div>
-         <div>
-            <input type="text" name="jibunAddress" class="box" value="${jibunAddress}"
-               id="users_addressDetail" placeholder="상세주소" required>
-         </div>
-         
-         </div>
+				<h3>배송지정보</h3>
 			
 			
-		<br><br>
-		${pvo.title}
-		<br><br>
-		
-		<select id=selbox style="width:300px;height:30px;">
-			<option selected disabled=true>요청사항을 선택해 주세요</option>
-			<option disabled=true>----------------------------------------------------------</option>
-			<option  value=direct >요청사항을 직접입력 해주세요</option>
-			<option>부재시 경비실에 맡겨주세요</option>
-			<option>오시기 전에 연락바랍니다</option>
-			<option>문 앞에 두고 가주세요</option>
-		</select>
-		
-		<br>
-			<input type="text" id="selboxDirect"
-			 name="selboxDirect" size=60
-			 placeholder="요청사항을 입력바랍니다." height=100>
-		</div>
+				배송지 선택
+				
+				<input type="radio" name=gender value=1 checked>기본배송지
+				<input type="radio" name=gender value=2>신규배송지
+				<hr>
+			<br>
+			
+			<br>
 	
+			${uvo.nickname} (${uvo.name})
+			<br><br>
+			${uvo.phone}
+			<br><br>
+			<div id=userAddr>
+				<c:if test="${not empty addrList}">
+				<select id=addrList style="height:28px">
+				<c:forEach items="${addrList}" var="addr">
+					
+						<option>${addr.addr}</option>
+					
+				</c:forEach>
+				</select>
+				</c:if>
+				<c:if test="${empty addrList}">
+					<span id=addr>${uvo.addr}</span>
+				</c:if>
 			
-		<div>
+			</div>
+		
+				<div id=addrApi style="display:none;">
+				<div>
+	            <input type="button" class="btn-primary box"
+	               onclick="openAddress();" value="우편번호 찾기"><br>
+	         </div>
+	         <div>
+	            <input type="hidden" name="post" class="box"
+	               id="users_zipCode" placeholder="우편번호" required>
+	         </div>
+	         <div>
+	            <input type="text" name="roadAddress" class="box" value="${roadAddress}"
+	               id="users_address" placeholder="도로명주소" required>
+	         </div>
+	         <div>
+	            <input type="text" name="jibunAddress" class="box" value="${jibunAddress}"
+	               id="users_addressDetail" placeholder="상세주소" required>
+	         </div>
+	         
+	         </div>
+					<hr>
+				
+			<br><br>
+			${pvo.title}
+			<br><br>
+			
+			<select id=selbox style="width:300px;height:30px;">
+				<option selected disabled=true>요청사항을 선택해 주세요</option>
+				<option disabled=true>----------------------------------------------------------</option>
+				<option  value=direct >요청사항을 직접입력 해주세요</option>
+				<option>부재시 경비실에 맡겨주세요</option>
+				<option>오시기 전에 연락바랍니다</option>
+				<option>문 앞에 두고 가주세요</option>
+			</select>
+			
+			<br>
+				<input type="text" id="selboxDirect"
+				 name="selboxDirect" size=60
+				 placeholder="요청사항을 입력바랍니다." height=100>
+			<hr>
+			<h3> 포인트 사용</h3>
+			<br>
+			<div>
+				사용가능 포인트  /  <span id=point>${uvo.point}Point</span> 
+				  <c:if test="${uvo.point<1000}">
+				  	<h6>1000point 부터 사용이 가능합니다.</h6>
+				  </c:if>
+				  <c:if test="${uvo.point>=1000}">
+				  	<h3></h3>
+				  </c:if>
+				사용 포인트      /  <span id=usePoint>0</span>원 <input type="button" id=use value="전액사용"><input type="button" id=cancle value=취소>
+			</div>
+		<hr>
+
+		</div>
+			
+		<div style="height:300px;margin:30px;">
 			<h4>주문자 정보</h4>
 			<br><br>
 			${uvo.name}
@@ -124,40 +152,36 @@
 			${uvo.phone}
 			<br><br>
 			${uvo.email}
+			
 		</div>
-		
-		
-		<div>
-			<h3> 포인트 사용</h3>
-			<br>
-			<div>적립포인트 사용</div>
-			<div>
-				적립포인트 잔액  /  <span id=point>${uvo.point}Point</span> /  1000point 부터 사용이 가능합니다.<br>
-				사용 포인트      /  <span id=usePoint>0</span><input type="button" id=cancle value=x>원 <input type="button" id=use value="전액사용">
-			</div>
+		<div style="height:300px">
+			<h2>결제 금액</h2>
+			<h4><span id=tot>${tot}</span>원</h4>
+			<h5>적립 Point // <span id=savePoint>0 </span> Point</h5>
+					<c:if test="${cnt==0}">
+				<h5>할인가 : 배송비를 제외한 금액의 50% 할인!</h5>
+			</c:if>
+			<c:if test="${cnt==1}">
+				<h5>할인가 : 배송비 할인! 그리고 금액의 50% 할인!</h5>
+			</c:if>
+			<c:if test="${cnt==2}">
+				<h5>할인가 : 0원</h5>
+			</c:if>
+			<c:if test="${cnt==3}">
+				<h5>할인가 : 배송비 할인!</h5>
+			</c:if>
+			
+			<jsp:include page="kakaoPay.jsp"></jsp:include>
 		</div>
-		<h2>총 토탈 금액 <span id=tot>${tot}</span></h2>
-		<h5>적립 Point // <span id=savePoint>0 </span> Point</h5>
-				<c:if test="${cnt==0}">
-			할인가 : 배송비를 제외한 금액의 50% 할인!
-		</c:if>
-		<c:if test="${cnt==1}">
-			할인가 : 배송비 할인! 그리고 금액의 50% 할인!
-		</c:if>
-		<c:if test="${cnt==2}">
-			할인가 : 할인 없음
-		</c:if>
-		<c:if test="${cnt==3}">
-			할인가 : 배송비 할인!
-		</c:if>
-		
-		<jsp:include page="kakaoPay.jsp"></jsp:include>
 	</div>
 </body>
 <script>
 var p_no="${pvo.p_no}";
 var quan="${quan}";
 var requirement="";
+var users_address="";
+var users_addressDetail="";
+var addr="";
 SavePoint();
 $(function(){
 
@@ -195,6 +219,10 @@ $("#use").on("click",function(){
 	
 })
 
+$("#users_addressDetail").keyup(function(){
+	users_addressDetail=$("#users_addressDetail").val();
+})
+
 $("#cancle").on("click",function(){
 	$("#usePoint").html(0);
 	$("#tot").html(tot);
@@ -224,6 +252,7 @@ function openAddress() {
          $("#users_zipCode").val(data.zonecode);
          $("#users_address").val(data.address);
          $("#users_addressDetail").focus();
+         users_address=data.address;
       }
    }).open();
 }

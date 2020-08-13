@@ -13,14 +13,26 @@
 <body>
 <br>
    <button id="check_module" type="button">결제하기</button>
-<input type="text" id=successPayment>
+<input type="hidden" id=successPayment>
 
 
    <script>
    
    
 $("#check_module").click(function () {
-
+	if($('input[name="gender"]:checked').val() == 2) {
+		addr=users_address+"/"+users_addressDetail;
+	}
+	else{
+		if($("#addrList option:selected").val()!=""){
+			
+			addr=$("#addrList option:selected").val();
+		}
+		else{
+			addr=$("#addr").html();
+		}
+	}
+	
 	var totPay=$("#tot").html();
 	var P_email="${uvo_email}";
 	var IMP = window.IMP; // 생략가능
@@ -106,8 +118,11 @@ function success(){
 		p_nos[i]=$(this).parent().find(".p_nos").val();
 		i++;
 	});
-	location.href = "/product/payment/finish2?point="+pointU+"&requirement="+requirement+"&p_nos="+p_nos;
-
+	
+	
+	if(a==1){
+	location.href = "/product/payment/finish2?point="+pointU+"&requirement="+requirement+"&p_nos="+p_nos+"&addr="+addr;
+	}
 	}
 		
 		

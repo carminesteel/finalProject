@@ -156,7 +156,6 @@
    });
    
 	$(".pButtons").on("click", function(){
- 		alert("!");
 		var id="${id}";
 		var p_images = new Array();
 		var tot=$("#ttotSum").val();
@@ -261,6 +260,7 @@
    });
    
    $("#cart").on("click", ".row .plus", function(){
+	  var row=$(this).parent().parent();
       var id=$(this).parent().parent().find(".id").html();
       var p_no=$(this).parent().parent().find(".p_no").html();
       var quantity=$(this).parent().find(".quantity").val();
@@ -270,7 +270,7 @@
          url:"/cart/plus",
          data:{"id":id, "p_no":p_no},
          success:function(){
-            getList();
+        	 getList();
          }
       });
    });

@@ -15,9 +15,18 @@ public class CartVO {
    private int price;
    private int quantity;
    private int sum;
+   private String nickname;
    
    
-   public int getSum() {
+   
+
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+public int getSum() {
 	return sum;
 }
 public void setSum(int price, int quantity) {

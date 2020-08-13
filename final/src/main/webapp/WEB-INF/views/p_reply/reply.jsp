@@ -24,7 +24,8 @@
 			<div class="replydate">
 				<b>{{replyer}}</b>
 				<a>{{date}}</a>
-				<button r_no={{r_no}} style="{{printStyle replyer}}">삭제</button>
+				<button class="listBtn" >좋아요</button>
+				<button r_no={{r_no}} class="delBtn" style="{{printStyle replyer}}">삭제</button>
 			</div>
 			<div class="content">{{content}}</div>
 		</div>
@@ -107,12 +108,12 @@
 			success:function(){
 				alert("띠용");
 				$("#re").html(++re);
-				getList();
+				location.reload();
 			
 			}
 		});
 	});
-	$("#tbl").on("click",".replydate button",function(){
+	$("#tbl").on("click",".replydate .delBtn",function(){
 		var r_no=$(this).attr("r_no");
 		if(!confirm("삭제 기기?")) return;
 		$.ajax({
@@ -122,7 +123,7 @@
 			success:function(){
 				alert("댓글이 삭제되었당!");
 				$("#re").html(--re);
-				getList();
+				location.reload();
 			}
 		});
 	});

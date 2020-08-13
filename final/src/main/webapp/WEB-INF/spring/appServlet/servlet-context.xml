@@ -33,6 +33,7 @@
 			<mapping path="/board/insert" />
 			<mapping path="/board/read" />
 			<mapping path="/e_reply/reply" />
+			<mapping path="/product/read" />
 			<beans:bean id="AuthInterceptor"
 				class="com.example.interceptor.AuthInterceptor" />
 		</interceptor>

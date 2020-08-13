@@ -236,12 +236,21 @@ public class ProductController {
 	}
 	@RequestMapping("/payment/finish")
 	@ResponseBody
-	public void finish(HttpSession session, PurchaseVO vo, int point) {
+	public void finish(HttpSession session, PurchaseVO vo, int point,String addr) {
 		String id=(String) session.getAttribute("id");
 		int cnt=pmapper.getOrders(id);
 		UsersVO uvo=new UsersVO();
 		uvo.setId(id);
 		uvo.setPoint(point);
+		uvo.setAddr(addr);
+		int addrcnt=pmapper.chkAddr(uvo);
+		int addrListcnt=pmapper.chkAddrList(uvo);
+		
+		if(addrcnt==0) {
+			if(addrListcnt==0) {
+				pmapper.InsertAddressList(uvo);
+			}
+		}
 		vo.setOrders_id(id);
 		vo.setProduct_no(vo.getP_no());
 		if(cnt==0) {
@@ -255,13 +264,23 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/payment/finish2")
-	public String finish2(HttpSession session,@RequestParam(value="p_nos") List<Integer> p_nos, int point,String requirement) {
+	public String finish2(HttpSession session,@RequestParam(value="p_nos") List<Integer> p_nos, int point,String requirement,String addr) {
 		System.out.println(p_nos);
 		String id=(String) session.getAttribute("id");
 		int cnt=pmapper.getOrders(id);
 		UsersVO uvo=new UsersVO();
 		uvo.setId(id);
 		uvo.setPoint(point);
+		uvo.setAddr(addr);
+		int addrcnt=pmapper.chkAddr(uvo);
+		int addrListcnt=pmapper.chkAddrList(uvo);
+		
+		if(addrcnt==0) {
+			if(addrListcnt==0) {
+				pmapper.InsertAddressList(uvo);
+			}
+		}
+		
 		CartVO cvo=new CartVO();
 		
 		cvo.setId(id);

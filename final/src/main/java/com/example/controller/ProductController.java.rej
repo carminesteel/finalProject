@@ -1,0 +1,11 @@
+diff a/final/src/main/java/com/example/controller/ProductController.java b/final/src/main/java/com/example/controller/ProductController.java	(rejected hunks)
+@@ -49,6 +49,9 @@
+ 	@Autowired
+ 	ProductService pService;
+ 	
++	@Autowired
++	CartMapper cmapper;
++	
+ 	@RequestMapping("/message")
+ 	public void message() {		
+ 	}	
