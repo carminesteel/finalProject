@@ -290,20 +290,22 @@ input[type="password"] {
 						</c:if>
 						<c:if test="${not empty followingInfo}">
 						<c:forEach items="${followingInfo}" var="followingList">
-							<table class="creatertab" onClick="location.href='../user/read?id=${followingList.id}'">
+						<div>
+							<table class="creatertab" >
 								<tr>
-									 <td id="creater" style="width:126px;text-align:center;">				                   
+									 <td class="creater" style="width:126px;text-align:center;" onClick="location.href='../user/read?id=${followingList.id}'">				                   
 				                        <img src="../display?fileName=${followingList.u_image}"   style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
 				                     </td>
-				                     <td style="text-align:left;">
+				                     <td style="text-align:left;" onClick="location.href='../user/read?id=${followingList.id}'">
 				                        <div style="font-size:20px;display:inline-block">${followingList.nickname}</div><br>		                       
 										<div style="display:inline-block;color:#acacac">${followingList.introduce}</div>
 				                     </td>
 				                     <td width=114px>
-				                     	<button id="BtnUnfollow" style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
+				                     	<button class="BtnUnfollow" style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
 				                     </td>
 								</tr>
 							</table>
+							</div>
 						</c:forEach>
 						</c:if>
 					</div>
@@ -322,9 +324,6 @@ input[type="password"] {
 				                     <td style="text-align:left;">
 				                        <div style="font-size:20px;display:inline-block">${followerList.nickname}</div><br>		                       
 										<div style="display:inline-block;color:#acacac">${followerList.introduce}</div>
-				                     </td>
-				                     <td width=114px>
-				                     	<button style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
 				                     </td>
 								</tr>
 							</table>
@@ -416,6 +415,21 @@ input[type="password"] {
 			}
 		}) 
  	} */ 		
-
+	$("#followingList").on("click",".BtnUnfollow",function(){
+ 		var target=$(this).parent().find(".unFolTarget").val();
+ 		var div=$(this).parent().parent().parent().parent();
+ 		if(!confirm("팔로우를 취소하시겠습니까?")) return;
+ 		
+ 		$.ajax({
+ 			type:"post",
+ 			url:"/mypage/unfollow",
+ 			data:{"follower":id,"target":target},
+ 			success:function(){
+ 				alert("취소되었습니다.");
+ 				div.prop("style","display:none");
+ 			}
+ 		})
+ 	
+ 	})
 </script>
 </html>
