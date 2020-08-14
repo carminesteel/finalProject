@@ -189,7 +189,7 @@ a:hover{text-decoration:none;color:black;}
 					</div>
 					<div id="qna1">
 						<h4>Q&A</h4>
-						<jsp:include page="../qna/qna.jsp"></jsp:include>					
+						<jsp:include page="../qna/list.jsp"></jsp:include>					
 					</div>
 					</td>
 				</tr>

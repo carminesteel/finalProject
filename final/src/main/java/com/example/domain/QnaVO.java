@@ -9,6 +9,7 @@ private String title;
 private String content;
 private Date date;
 private int q_no;
+private int cnt;
 public int getP_no() {
 	return p_no;
 }
@@ -48,13 +49,21 @@ public String getId() {
 public void setId(String id) {
 	this.id = id;
 }
+public int getCnt() {
+	return cnt;
+}
+public void setCnt(int cnt) {
+	this.cnt = cnt;
+}
 @Override
 public String toString() {
 	return "QnaVO [p_no=" + p_no + ", id=" + id + ", title=" + title + ", content=" + content + ", date=" + date
-			+ ", q_no=" + q_no + ", getP_no()=" + getP_no() + ", getTitle()=" + getTitle() + ", getContent()="
-			+ getContent() + ", getDate()=" + getDate() + ", getQ_no()=" + getQ_no() + ", getId()=" + getId()
-			+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+			+ ", q_no=" + q_no + ", cnt=" + cnt + ", getP_no()=" + getP_no() + ", getTitle()=" + getTitle()
+			+ ", getContent()=" + getContent() + ", getDate()=" + getDate() + ", getQ_no()=" + getQ_no() + ", getId()="
+			+ getId() + ", getCnt()=" + getCnt() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+			+ ", toString()=" + super.toString() + "]";
 }
+
 
 
 
