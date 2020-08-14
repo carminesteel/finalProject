@@ -248,7 +248,8 @@ input[type="password"] {
 					<div class="mypageItems" id="follower">
 						팔로워
 					</div>
-					<div class="mypageItems" id="statistics">
+					<div class="mypageItems" id="orderList">
+						구매내역
 					</div>
 				</div>
 				
@@ -332,7 +333,38 @@ input[type="password"] {
 							
 						</c:forEach>
 						</c:if>
-					</div>			
+					</div>	
+					<div id=buyList>
+						구매내역은 최근 구매상품 5개 까지만 나옵니다.
+						<br><br>
+						<c:if test="${empty buyList}">
+							<h1>당신의 주문내역이 없습니다.</h1>
+						</c:if>
+						<c:if test="${not empty buyList}">
+						<table class="creatertab" style="width:1100px;">
+							<tr>
+								<td>상품 이미지</td>
+								<td>상품 명</td>
+								<td>수량</td>
+								<td>총 금액</td>
+								<td>결제 일시</td>
+							<tr>
+						</tr>
+						<c:forEach items="${buyList}" var="buy">
+						
+								<tr onClick="location.href='../product/read?p_no=${buy.product_no}'">
+				                     <td><img src="../display?fileName=${buy.image}" style="margin-left:10px;border-radius: 50%;" width=80 height=80 /></td>
+				                     <td>${buy.title}</td>	                       
+									 <td>${buy.quantity}</td>
+									 <td>${buy.quantity*buy.price}</td>		                       
+									 <td>${buy.buyDate}</td>
+									
+								</tr>
+						
+						</c:forEach>
+						</table>
+						</c:if>
+					</div>		
 				</div>
 			</div>
 		</div>
@@ -349,6 +381,7 @@ input[type="password"] {
 	$("#Plist").hide();
 	$("#followingList").hide();
 	$("#followerList").hide(); 
+	$("#buyList").hide();
 	$("#passChk").hide();
 	
 	
@@ -357,24 +390,36 @@ input[type="password"] {
 		$("#Plist").hide();
 		$("#followingList").hide();
 		$("#followerList").hide();
+		$("#buyList").hide();
 	})
 	$("#goods").click(function(){
 		$("#Blist").hide();
 		$("#Plist").show();
 		$("#followingList").hide();
 		$("#followerList").hide();
+		$("#buyList").hide();
 	})
 	$("#following").click(function(){
 		$("#Blist").hide();
 		$("#Plist").hide();
 		$("#followingList").show();
 		$("#followerList").hide();
+		$("#buyList").hide();
 	})
 	$("#follower").click(function(){
 		$("#Blist").hide();
 		$("#Plist").hide();
 		$("#followingList").hide();
 		$("#followerList").show();
+		$("#buyList").hide();
+	})
+	
+	$("#orderList").click(function(){
+		$("#Blist").hide();
+		$("#Plist").hide();
+		$("#followingList").hide();
+		$("#followerList").hide();
+		$("#buyList").show();
 	})
 	
 	

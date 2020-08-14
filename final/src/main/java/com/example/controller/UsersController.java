@@ -159,6 +159,7 @@ public class UsersController {
       model.addAttribute("vo", mapper.read(id));
       model.addAttribute("blist",Mmapper.myBlist(id));
       model.addAttribute("plist",Mmapper.myPlist(id));
+      model.addAttribute("buyList",Mmapper.myBuyList(id));
       
       List<String> followingList = Mmapper.myFollowing(id);
       ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();

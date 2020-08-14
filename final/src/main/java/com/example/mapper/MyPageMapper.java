@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.domain.BoardVO;
 import com.example.domain.ProductVO;
+import com.example.domain.PurchaseVO;
 import com.example.domain.UsersVO;
 
 public interface MyPageMapper {
@@ -16,4 +17,6 @@ public interface MyPageMapper {
 	public List<String> myFollower(String id);
 	
 	public UsersVO UserRead(String id);
+	
+	public List<PurchaseVO> myBuyList(String id);
 }

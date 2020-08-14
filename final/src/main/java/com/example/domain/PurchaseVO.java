@@ -2,7 +2,7 @@ package com.example.domain;
 
 import java.sql.Date;
 
-public class PurchaseVO {
+public class PurchaseVO extends ProductVO{
 	private int p_no;
 	private String orders_id;
 	private Date buyDate;
