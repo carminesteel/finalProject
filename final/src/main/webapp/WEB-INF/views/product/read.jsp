@@ -101,7 +101,7 @@ a:hover{text-decoration:none;color:black;}
 					<div id=thumbImg>
 							<div class=thumbs><img src="/display?fileName=${read.image}" width=81 height=81></div>
 						<c:forEach items="${readimage}" var="readimage">
-							<div class=thumbs><img src="/display?fileName=${readimage.detail_images}" width=81 height=81></div>
+							<div class=thumbs><img src="/display?fileName=${readimage.p_images}" width=81 height=81></div>
 						</c:forEach>
 					</div>
 				</div>
