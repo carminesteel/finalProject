@@ -15,8 +15,8 @@
 <body>
 	<input type="text" value="${id}" id="id">
 	<input type="text" value="${param.p_no}" id="p_no">
-<div id="tbl"></div>
-	<script id="temp" type="text/x-handlebars-template">
+<div id="tbl1"></div>
+	<script id="temp1" type="text/x-handlebars-template">
 		{{#each list}}
 		<div class="qna1">
 			<div class="replydate">
@@ -65,8 +65,8 @@ $("#btnInsert").on("click", function(){
 			data:{"p_no":p_no,"page":page},
 			dataType:"json",
 			success:function(data){
-				var temp=Handlebars.compile($("#temp").html());
-				$("#tbl").html(temp(data));
+				var temp=Handlebars.compile($("#temp1").html());
+				$("#tbl1").html(temp(data));
 				var str="";
 				if(data.pm.prev){ 
 					str += "<a href='" + (data.pm.startPage-1) + "'>◀</a>"
