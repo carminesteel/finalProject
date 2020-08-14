@@ -343,6 +343,4 @@ public class UsersController {
       mapper.updatePosition(id);
       session.invalidate();
    }
-   
-   
 }
