@@ -33,7 +33,7 @@
       			<td style="width:450px;">
       			<span style=margin-right:30px;>${id}</span>
       				<c:if test="${position==1 || position==2}">
-      					<a class=menuA href="/login/mypage" style="margin-right:30px">MyPage</a>
+      					<a class=menuA href="/login/mypage" id=myPage style="margin-right:30px">MyPage</a>
       				</c:if>
       				<a class=menuA href="/login/logout">로그아웃</a>
       			</td>
