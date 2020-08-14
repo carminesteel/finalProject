@@ -236,6 +236,7 @@ nav a {
 
          <div id="creater">
             <c:forEach items="${users}" var="creater">
+            	<c:if test="${creater.position!=3 || creater.position!=4}">
                <table class="creatertab" style="margin: 10px; padding: 25px; border-radius: 5px 5px 5px 5px;">
                   <tr class="creater">
                      <td id="creater" width=149 colspan=3 style="padding-bottom: 25px;">
@@ -263,6 +264,7 @@ nav a {
                      </c:forEach>
                   </tr>
                </table>
+               </c:if>
             </c:forEach>
          </div>
       

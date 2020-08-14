@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.example.domain.Criteria;
 import com.example.domain.UsersVO;
 
 public interface UsersMapper {
@@ -20,13 +21,13 @@ public interface UsersMapper {
    public int followingCnt(String follower);
    public void followerUpdate(@Param(value="follower") int followerCnt, @Param(value="id") String target);
    public void followUpdate(@Param(value="follow") int followingCnt, @Param(value="id") String follower);
-   /*아이디 찾기*/
+   /*�븘�씠�뵒 李얘린*/
    public int find_id_cnt(String email);
    public UsersVO find_id(String email);
-   /*비밀번호 찾기 부분*/
+   /*鍮꾨�踰덊샇 李얘린 遺�遺�*/
    public int find_email_cnt(String id);
    public UsersVO find_email(String email);
-   /*비밀번호 변경 부분*/
+   /*鍮꾨�踰덊샇 蹂�寃� 遺�遺�*/
    public void update(UsersVO vo);
    
    public void profile_update(UsersVO vo);
@@ -34,4 +35,9 @@ public interface UsersMapper {
    public void profile_passUpdate(UsersVO vo);
    
    public void updatePosition(String id);
+   
+   //admin 유저관리
+   public List<UsersVO> userList(Criteria cri);
+   public int usercnt();
+   public void positionChange(UsersVO vo);
 }

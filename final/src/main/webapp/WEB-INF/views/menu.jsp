@@ -39,8 +39,12 @@
       			</td>
       		</c:if>
       		<c:if test="${position==2}">
-      		
-      			<td style=float:right;padding-right:65px;>관리자님&nbsp;&nbsp;<a class=menuA href="/login/logout">로그아웃</a></td>
+      			
+      			<td style=float:right;padding-right:65px;>
+      			<a class=menuA href="/admin/usersAdmin?page=1" id=administration style="margin-right:30px">유저관리</a>
+      			관리자님&nbsp;&nbsp;
+      			<a class=menuA href="/login/logout">로그아웃</a>
+      			</td>
       		</c:if>
       </c:if>
    </tr>

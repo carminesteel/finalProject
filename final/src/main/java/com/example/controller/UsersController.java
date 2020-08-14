@@ -8,9 +8,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.example.domain.B_replyVO;
+import com.example.domain.Criteria;
+import com.example.domain.PageMaker;
 import com.example.domain.UsersVO;
 import com.example.mapper.MyPageMapper;
 import com.example.mapper.UsersMapper;
@@ -343,4 +348,34 @@ public class UsersController {
       mapper.updatePosition(id);
       session.invalidate();
    }
+   
+   //Admin 회원 관리
+   
+   @RequestMapping("/admin/usersAdmin")
+   public void UsersAdmin(Model model,Criteria cri,int page) {
+	   cri.setPage(page);
+	   cri.setPerPageNum(10);
+	   
+	   PageMaker pm=new PageMaker();
+	   
+	   pm.setCri(cri);
+	   pm.setTotalCount(mapper.usercnt());
+	   
+	   model.addAttribute("cri",cri);
+	   model.addAttribute("pm",pm);
+	   model.addAttribute("user",mapper.userList(cri));
+   }
+   
+   
+   
+   @RequestMapping("/admin/positionChange")
+   @ResponseBody
+   public void positionChange(UsersVO vo){
+      mapper.positionChange(vo);
+   }
+   
+   
+
+
+   
 }

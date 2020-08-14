@@ -82,5 +82,16 @@
 	<update id="updatePosition">
     	update users set position=4 where id=#{id}
     </update>
+    
+    <select id="userList" resultType="com.example.domain.UsersVO">
+    	select * from users limit #{pageStart}, #{perPageNum}
+    </select>
+    <select id="usercnt" resultType="int">
+    	select count(*) from users
+    </select>
+    
+    <update id="positionChange">
+    	update users set position=#{position} where id=#{id}
+    </update>
 	
 </mapper>
