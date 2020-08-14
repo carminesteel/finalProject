@@ -16,10 +16,17 @@ public class ExhibitionVO {
 	private String tel;
 	private String id;
 	private int replyCount;
+	private int r;
 	
 	
 	
 	
+	public int getR() {
+		return r;
+	}
+	public void setR(int r) {
+		this.r = r;
+	}
 	public ArrayList<String> getImages() {
 		return images;
 	}

@@ -2,8 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ExhibitionMapper">
     <select id="list" resultType="com.example.domain.ExhibitionVO">
-        select * from exhibition
+    <![CDATA[
+        select e.*,@rownum := @rownum+1 AS r from exhibition e, (SELECT @rownum :=0) AS R where e_no>0 order by e_no desc limit 0,8
+    ]]>
     </select>
+	
+	<select id="infiniteScrollDown" resultType="com.example.domain.ExhibitionVO">
+		<![CDATA[
+			select r.* from (select e.*,@rownum := @rownum+1 AS r from exhibition e, (SELECT @rownum :=0) AS R where e_no>0 order by e_no desc) r
+			where r>=#{r} and r<#{r}+8
+		]]>
+	</select>
+	
 	<select id="read" resultType="com.example.domain.ExhibitionVO">
 		select * from exhibition where e_no=#{e_no}
 	</select>

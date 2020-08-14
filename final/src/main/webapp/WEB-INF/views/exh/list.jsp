@@ -58,7 +58,6 @@ html {
 	margin:0px;
 	padding:0px;
 	display: inline-block;
-	
 }
 
 .image {
@@ -91,9 +90,9 @@ html {
 				<br>
 				<c:forEach items="${list}" var="vo">
 					<div class=eTable>
-						<div class="box">				
-							
+						<div class="box">
 								<input type="hidden" value="${vo.e_no}" class="e_no">	
+								<input type="hidden" class="r" data-r="${vo.r}" value="${vo.r}">
 								<img class="image" src="/display?fileName=${vo.image}">
 								<div style="all:unset;display:inline-block;width:210px;text-align:left;">
 								<span style="font-size:18px;"><b>${vo.title}</b></span><br>
@@ -103,17 +102,62 @@ html {
 						</div>
 					</div>
 				</c:forEach>
-				
-			
-			<br> <br> <br> <br> <br> <br> <br>
-			<br>
+			<div class="scrollLocation"></div>
 		</div>
 	</div>
 	<jsp:include page="../footer.jsp" />
 </body>
 <script>
 	var e_no;
+	var lastScrollTop=0;
+		$(window).scroll(function(){
+		var windowScrollTop=$(window).scrollTop();
+		if(windowScrollTop - lastScrollTop > 0){
+			if ($(window).scrollTop() >= ($(document).height() - $(window).height())){
+				var lastr=$(".r:last").attr("data-r");
+
+				$.ajax({
+					type:"post",
+					url:"/exh/infiniteScrollDown",
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST",
+					},
+					dataType:"json",
+					data:JSON.stringify({
+						r:lastr
+					}),
+					error:function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					},
+					success:function(data){
+						var str="";
 	
+						if(data!=""){
+							$(data).each(function(){
+								str +=		"<div class='eTable'>"
+									+			"<div class='box'>"
+									+				"<input type='hidden' value='"+this.e_no+"' class='e_no'>"
+									+				"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
+									+				"<img class='image' src='/display?fileName="+this.image+"'>"
+									+				"<div style='all:unset;display:inline-block;width:210px;text-align:left;'>"
+									+				"<span style='font-size:18px;'><b>"+this.title+"</b></span><br>"
+									+				"<span style='color:#9da2a8;font-size:12px'>"+this.date+"</span><br>"
+									+				"<span>"+this.addr_detail+"</span>"
+									+			"</div>"
+									+		"</div>"
+							});
+							$(".scrollLocation").append(str);
+						}else{
+							alert("더 불러올 데이터가 없습니다.");
+						}
+					}
+				});
+			$("html, body").stop().animate({scrollTop:lastScrollTop}, 0);
+			}
+		lastScrollTop=windowScrollTop;
+		}
+	});
 	mouseExh();
 	
 	function mouseExh(){

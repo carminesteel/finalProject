@@ -52,13 +52,8 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request) {		
 		HttpSession session = request.getSession();
-		
-		System.out.println(session.getAttribute("id"));
 		String id = (String) session.getAttribute("id");
 		int targetCnt = fMapper.getFollowing(id);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println("리밋 수"+targetCnt);
-		System.out.println("!");
 		
 		model.addAttribute("elist",emapper.list());
 		model.addAttribute("list",bMapper.list());
@@ -66,7 +61,6 @@ public class HomeController {
 		model.addAttribute("listB",bMapper.listB());
 		model.addAttribute("plist",pMapper.artgoods());
 		model.addAttribute("flist",fMapper.feedList(id, targetCnt));
-		System.out.println("섹스"+fMapper.feedList(id, targetCnt));
 		return "home";
 	}
 
@@ -96,7 +90,6 @@ public class HomeController {
 		model.addAttribute("list",bMapper.list());
 		model.addAttribute("listA",bMapper.listA());
 		model.addAttribute("listB",bMapper.listB());
-		System.out.println(bMapper.list());
 	}
 	
 	   /*�씠誘몄��뙆�씪 釉뚮씪�슦���뿉 異쒕젰*/ 
