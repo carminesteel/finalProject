@@ -70,7 +70,7 @@
         <!--프로필 업데이트  -->
 	<update id="profile_update">
     	update users set 
-    	name=#{name},nickname=#{nickname},phone=#{phone},introduce=#{introduce},addr=#{addr},u_image=#{u_image} 
+    	name=#{name},nickname=#{nickname},phone=#{phone},introduce=#{introduce},addr=#{addr},u_image=#{u_image},email=#{email}
     	where id=#{id}
     </update>
 	
