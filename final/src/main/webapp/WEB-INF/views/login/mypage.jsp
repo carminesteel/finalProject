@@ -302,9 +302,11 @@ input[type="password"] {
 				                     </td>
 				                     <td width=114px>
 				                     	<button class="BtnUnfollow" style="all:unset;background:#2e6cb5;color:white;width:74px;height:25px;font-size:13px;border-radius:20px 20px 20px 20px;margin-bottom:60px;">언팔로우</button>
+				                     	<input type=hidden value="${followingList.id}" class=unFolTarget>
 				                     </td>
 								</tr>
 							</table>
+							
 							</div>
 						</c:forEach>
 						</c:if>
@@ -327,6 +329,7 @@ input[type="password"] {
 				                     </td>
 								</tr>
 							</table>
+							
 						</c:forEach>
 						</c:if>
 					</div>			
