@@ -217,32 +217,32 @@ li {
 	color: white;
 }
 
-.menuA {
+.MenuNew {
 	text-decoration: none;
 	color: black;
 }
 
-.menuA:hover {
+.MenuNew:hover {
 	cursor: pointer;
 	border-bottom: 2px solid black
 }
 
-.menuB {
+.MenuBest {
 	text-decoration: none;
 	color: black;
 }
 
-.menuB:hover {
+.MenuBest:hover {
 	cursor: pointer;
 	border-bottom: 2px solid black
 }
 
-.menuC {
+.MenuView {
 	text-decoration: none;
 	color: black;
 }
 
-.menuC:hover {
+.MenuView:hover {
 	cursor: pointer;
 	border-bottom: 2px solid black
 }
@@ -258,9 +258,9 @@ li {
 		<div id=exTitle>Explore</div>
 		<div id=exContent>최고의 작품들을 소개합니다.</div>
 		<div id=keyword>
-			<a class="menuA" id="NewMenu">최신순</a>&emsp;&emsp;&emsp; 
-			<a class="menuB" id="BestMenu">인기순</a>&emsp;&emsp;&emsp; 
-			<a class="menuC" id="ViewMenu">조회순</a>
+			<a class="MenuNew" id="NewMenu">최신순</a>&emsp;&emsp;&emsp; 
+			<a class="MenuBest" id="BestMenu">인기순</a>&emsp;&emsp;&emsp; 
+			<a class="MenuView" id="ViewMenu">조회순</a>
 		</div>
 		<c:if test="${id!=null}">		
 			<a href="/board/insert" class=more id=bButton>작품 올리기</a> <br>
