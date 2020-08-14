@@ -1,14 +1,15 @@
 package com.example.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
 import com.example.domain.ExhibitionVO;
 
 public interface ExhibitionMapper {
     
 	public List<ExhibitionVO> list();
+	public ArrayList<ExhibitionVO> infiniteScrollDown(int r);
 	public ExhibitionVO read(int e_no);
 	public void insert(ExhibitionVO vo);
     public void delete(int e_no);
