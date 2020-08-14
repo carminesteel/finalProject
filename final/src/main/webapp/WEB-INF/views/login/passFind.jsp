@@ -213,7 +213,7 @@ section {height: 100%;}
 				<div class="int-area">
 					<h5 style="text-align: left; margin-left: 8px; margin-bottom:6px;">아이디</h5>
 					<input type="hidden" id=idChk value=-1>
-					<input type="text" name="id" value="" autocomplete="off" required>
+					<input type="text" name="id" value="" autocomplete="off" required >
 					<h5 style="margin-left: 40px; margin-top:4px; color:red;">회원가입 당시 입력했던 아이디를 입력해주세요.</h5>		
 				</div>
 				<div id="btn-id" style="text-align: center;"><br>
@@ -223,7 +223,7 @@ section {height: 100%;}
 				<div class="email_row">									
 					<input type="hidden" id=idChk value=-1>
 					<h5 style="text-align: left; margin-left: 8px; margin-bottom:6px;">이메일</h5>
-					<input type="text" name="email" id="email" id="getEmail" value="" autocomplete="off" required>
+					<input type="text" name="email" id="email" id="getEmail" value="" readonly autocomplete="off" required>
 					<h5 style="margin-left: 88px; margin-top:6px; color:blue;">회원가입 당시 입력했던 이메일 입니다.</h5>																		
 				</div>
 				

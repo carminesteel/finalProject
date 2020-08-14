@@ -132,7 +132,7 @@ section {
 				<br>
 				<br>
 				<div class="int-area">
-					<input type="text" name="id" id="getId" autocomplete="off"	required>
+					<input type="text" name="id" id="getId" autocomplete="off"	required readonly>
 					<h5 style="margin-left: 88px; margin-top:4px; color:blue;">회원가입 당시 입력했던  아이디 입니다.</h5>					
 				</div>																		
 			</form>
@@ -165,10 +165,8 @@ section {
 					})
 				} else {
 					alert("존재하지 않는 이메일 입니다.");
-
 				}
 			}
-
 		});
 	});
 </script>
