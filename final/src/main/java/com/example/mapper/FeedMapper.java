@@ -10,4 +10,5 @@ public interface FeedMapper {
 	public List<BoardVO> feedView(String id);
 	public int getFollowing(String id);
 	public List<BoardVO> feedList(@Param(value="id") String id, @Param(value="targetCnt") int targetCnt);
+	public List<BoardVO> infiniteScrollDown(@Param(value="id") String id, @Param(value="r") int r);
 }

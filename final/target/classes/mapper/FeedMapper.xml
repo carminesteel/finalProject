@@ -3,16 +3,20 @@
 <mapper namespace="com.example.mapper.FeedMapper">
      
      <select id="feedView" resultType="com.example.domain.BoardVO">
-     	select b.*, u.u_image, u.nickname, u.introduce 
-     	from board b, (select target from follower where follower=#{id}) a,users u 
-     	where b.id=a.target and b.id=u.id
-     	order by date desc
-     	limit 0,20
+		select b.*, u.u_image, u.nickname, u.introduce, @rownum := @rownum+1 AS r from board b, (SELECT @rownum :=0) AS R, (select target from follower where follower=#{id}) a,users u 
+		where b.id=a.target and b.id=u.id order by b_no desc limit 0,5
     </select>
-
-    
+	
+	<select id="infiniteScrollDown" resultType="com.example.domain.BoardVO">
+		<![CDATA[
+			select r.* from (select b.*, u.u_image, u.nickname, u.introduce, @rownum := @rownum+1 AS r from board b,
+			(SELECT @rownum :=0) AS R, (select target from follower where follower=#{id}) a,users u 
+			where b.id=a.target and b.id=u.id) r where r<=#{r} and r>#{r}-5 order by b_no desc
+		]]>
+	</select>
+	
     <select id="getFollowing" resultType="int">
-    select count(*) from follower where follower=#{id};
+   	 select count(*) from follower where follower=#{id};
     </select>
        
     <select id="feedList" resultType="com.example.domain.BoardVO">

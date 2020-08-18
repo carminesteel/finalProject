@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,13 +44,19 @@ public class FeedController {
 		model.addAttribute("Rlist",array);
 		return "/feed/list";
 	}
+
+	@RequestMapping(value="/feed/infiniteScrollDown", method=RequestMethod.POST)
+	public @ResponseBody List<BoardVO> infiniteScrollDownPOST(@RequestBody BoardVO bvo, HttpSession session){
+		Integer rToStart=bvo.getR()-1;
+		String id = (String)session.getAttribute("id");
+		return mapper.infiniteScrollDown(id, rToStart);
+	}
 	
 	@RequestMapping(value="read", method=RequestMethod.POST)
 	@ResponseBody
 		public ArrayList<B_replyVO> read(int b_no) {
 			ArrayList<B_replyVO> array = new ArrayList<B_replyVO>();
 			array.addAll(Rmapper.rrlist(b_no));
-			System.out.println(array.toString());
 			return array;
 	}
 	
