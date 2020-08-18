@@ -11,9 +11,18 @@ html {
 	font-family: Noto Sans Kr
 }
 
+.details{
+	width:1100px;
+}
+
+#image:hover, #images:hover{
+	cursor:pointer;
+}
+
 body {
 	overflow-x: hidden;
 	float: left;
+	
 	padding: 0px;
 	width: 100%;
 	margin: 0px;
@@ -41,7 +50,8 @@ body {
 	font-size: 30px;
 	font-weight: 300;
 	width: 600px;
-	color:black
+	color:black;
+	margin-bottom:30px;
 }
 
 #exCenter {
@@ -59,13 +69,34 @@ body {
 }
 </style>
 </head>
-<body>
+<body style="padding-top: 73px; margin-left: 0px; width: 100%;">
 	<jsp:include page="../menu.jsp"></jsp:include>
 	<div id=exBody>
 		<div id=exCenter>
 		<div id=eTitle>Upload</div>
-			<div id=eContent>작품 업로드</div>
 			<form name="frm" method="post" action="insert"  enctype="multipart/form-data">
+				<div id=eContent>작품 업로드</div>
+				<input type="hidden" name="id" value="${id}">
+				<div style="width:1101px;height:1210px;margin:auto;padding:0px;">
+					<input type="text" placeholder="작품명을 입력해주세요." name="title" style="margin-bottom:15px;display:inline-block;width:1040px;height:47px;border:1px solid black;font-size:30px;padding:30px;">
+					<div style="display:inline-block;padding:0px;margin:auto;text-align:center;width:1101px;height:792px;overflow:auto;overflow-x:hidden;margin-bottom:15px; border:1px dashed black;">
+						<input type="file" name="file">
+						<img id="image" style="display:block;margin:auto;margin-top:30px;margin-bottom:30px;"  src="/display?fileName=mainIMG.png">						
+						<input type="file" name="files" accept="image/*" multiple>
+						<img id="images" src="/display?fileName=detailIMG.png">
+								<div id="listFile" style="width:1100px"></div>
+					</div>
+					<textarea placeholder="작품에 대해 설명해주세요." name="content" style="resize:none;display:inline-block;padding:0px;margin:auto;width:1051px;height:230px;border:1px solid black;font-size:15px;padding:25px;"></textarea>									
+				</div>
+				<div style="float:right;margin-right:6%; margin-top:10px;">
+					<input type="submit" value="저장">
+					<input type="reset" value="취소">
+					<input type="button" value="목록" onClick="location.href='list'">
+				</div>
+			</form>
+		</div>
+	</div>		
+			<%-- <form name="frm" method="post" action="insert"  enctype="multipart/form-data">
 				<table style="width:1130px;margin:auto;border-collapse:collapse;">
 					<tr>
 						<th>제목</th>
@@ -99,15 +130,20 @@ body {
 					<input type="reset" value="취소">
 					<input type="button" value="목록" onClick="location.href='list'">
 				</div>
-			</form>
-		</div>
-	</div>
+			</form> --%>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+$(frm.file).hide();
+$(frm.files).hide();
+
 //이미지를 클릭했을때
 $("#image").on("click", function(){
 	$(frm.file).click();
+});
+
+$("#images").on("click", function(){
+	$(frm.files).click();
 });
 $("#btnImage").on("click", function(){
 	$(frm.files).click();
@@ -119,11 +155,12 @@ $(frm.files).on("change", function(){
 	var html="";
 	
 	$.each(files, function(index, files){
-		html += "<img src='" + URL.createObjectURL(files) + "'>";
+		$("#images").hide();
+		html += "<img class='details' src='" + URL.createObjectURL(files) + "'>";
 		$("#listFile").html(html);
-	});
-	
+	});	
 });
+
 $(frm.file).on("change", function(){
 	var file=$(frm.file)[0].files[0];
 	$("#image").attr("src", URL.createObjectURL(file));

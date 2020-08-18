@@ -315,7 +315,7 @@ li {
 			<a class="MenuView" id="ViewMenu">조회순</a>
 		</div>
 		<c:if test="${id!=null}">
-			<a href="/board/insert" class=more id=bButton>작품 올리기</a> <br>
+			<a href="/product/insert" class=more id=bButton>작품 올리기</a> <br>
 		</c:if>
    	</div><br>
 	<div class="NewMenu" style="width:1855px;margin:auto;display:block;">

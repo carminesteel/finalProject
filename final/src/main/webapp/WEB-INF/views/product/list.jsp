@@ -179,6 +179,20 @@ nav a {
 	font-size: 30px;
 	margin-top: 20px;
 }
+
+.more {
+	font-family: Noto Sans KR;
+	float: right;
+	text-align: center;
+	margin-right: 55px;
+	background: #2b4163;
+	color: white;
+	border: 1px solid black;
+	border-radius: 20px 20px 20px 20px;
+	width: 100px;
+	height: 30px;
+	text-decoration:none;
+}
 </style>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
@@ -199,9 +213,10 @@ nav a {
             </nav></td>
       </tr>
    </table>
-
    <div id=exBody style="padding-top:0px;">
-      
+      <c:if test="${id!=null}">
+		<a href="/board/insert" class=more id=bButton>작품 올리기</a> <br>
+	  </c:if>
 
          <div id="best">
             <div id="besttab"></div>

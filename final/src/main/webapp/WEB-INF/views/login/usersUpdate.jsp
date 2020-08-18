@@ -157,11 +157,9 @@ input[type="password"] {
 			</tr>
 			<tr>
 				<td colspan=2>
-				<img src="../display?fileName=${vo.u_image}" id="image" width=200 height=200 style="border-radius:50%"/></td>
-				<td><input type="file" name="file"></td>
-				
+				<img src="../display?fileName=${vo.u_image}" id="image" style="width:150px; height:150px;border-radius:50%;object-fit:contain"/></td>
+				<td><input type="file" name="file"></td>			
 			</tr>
-
 			<tr>
 				<td width=150>아이디</td>
 				<td >${vo.id}</td>				
