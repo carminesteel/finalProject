@@ -56,10 +56,10 @@ input[type="password"] {
 	line-height: 2.0;
 }
 
-#btn {
+#follow {
 	all: unset;
 	background: #2e6cb5;
-	width: 200px;
+	width: 160px;
 	height: 35px;
 	color: white;
 	border-radius: 20px 20px 20px 20px;
@@ -133,14 +133,6 @@ input[type="password"] {
 	height: 40px
 }
 
-/* .creatertab {
-   background: white;
-   width: 300px;
-   height: 100px;
-   float: left;
-   margin: auto;
-} */
-
 #pTitle {
 	font-weight: bold;
 	font-size: 70px;
@@ -195,46 +187,43 @@ input[type="password"] {
 <title>마이페이지</title>
 
 </head>
-<body style="padding-top: 73px; margin-left: 0px; width: 100%;height:1080px;">
+<body style="padding-top: 50px; margin-left: 0px; width: 100%;">
 	<jsp:include page="../menu.jsp" />
 	<div style="background:#2b4163;height:1200px;padding:80px;padding-top:0px;padding-left:120px;">		
 		<div id=pDiv style="height:220px;padding-left:15px;"><br><br>
 			<div id=pTitle>ArtistPage</div>
 			<div id=pContent>${vo.nickname} 님의 프로필입니다.</div>
 		</div>
-		<div style="width:1700px;height:1100px;text-align:center;">
+		<div style="width:1700px;text-align:center;">
 			<div id="userRead">
-				<table>
-				<tr>
-					<td colspan=2><img src="../display?fileName=${vo.u_image}" width=200 height=200 style="border-radius:50%"/></td>
-				</tr>
-				<tr>
-					<td width=150>ID</td>
-					<td id="id" c_id="${vo.id}">${vo.id}</td>				
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td>${vo.name}</td>				
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td>${vo.nickname}</td>				
-				</tr>
-				<tr>
-					<td>자기소개</td>		
-					<td>${vo.introduce}</td>				
-				</tr>
-				<tr>
-					<td>이메일</td>		
-					<td>${vo.email}</td>				
-				</tr>
-				<tr>
-					<td id=follower>팔로워: ${vo.follower}</td>
-					<td>팔로잉: ${vo.follow}</td>
-				</tr>
-				<tr>
-					<td colspan=2><button id=follow value=""></button></td>
-				</table>				
+				<div style="width: 193px; height: 213px;margin: auto; display: inline-block">
+					<img src="../display?fileName=${vo.u_image}" width=113px
+						height=113px style="border-radius: 50%" /><br>
+					<div style="font-size: 26px; font-weight: bold">${vo.nickname}</div>
+					<br>
+					<div style="font-size: 13px;">${vo.introduce}</div>
+				</div>
+				<br>
+				<br>
+				<button id="follow">팔로우</button>
+				
+				<br>
+				<br>
+				<div
+					style="width: 250px; height: 153px;display: inline-block; margin: auto">
+					<div class="infoC">
+						<span class=left>팔로우</span> <span class=right>${vo.follow}</span>
+					</div>
+					<div>
+						<span class=left>팔로워</span> <span class=right>${vo.follower}</span>
+					</div>
+					<div>
+						<span class=left>총 작품</span> <span class=right>3</span>
+					</div>				
+				</div>
+				<div style="font-size:15px">
+					${vo.email}
+				</div>
 			</div>
 			<div id="mypageList" style="background:white;display:inline-block;float:left;margin-left:10px;width:1200px;height:950px;padding:30px;border-radius:6px 6px 6px 6px" >
 				<div style="width:1100px;font-weight:300">
@@ -250,9 +239,7 @@ input[type="password"] {
 					<div class="mypageItems" id="follower2">
 						팔로워
 					</div>
-					<div class="mypageItems" id="statistics">
-						통계
-					</div>
+					
 				</div>	
 				<div style="display:inline-block;float:center;margin:10px;width:1135px;height:870px;" >										
 					<div id=Blist>
@@ -262,7 +249,7 @@ input[type="password"] {
 						<c:if test="${not empty blist}">
 							<c:forEach items="${blist}" var="bvo">
 								<div style="display:inline-block;float:left;margin:17px;">
-									<img src="../display?fileName=${bvo.image}">
+									<img class="myImgs" src="../display?fileName=${bvo.image}">
 								</div>
 							</c:forEach>
 						</c:if>
@@ -274,7 +261,7 @@ input[type="password"] {
 						<c:if test="${not empty plist}">
 						<c:forEach items="${plist}" var="pvo">
 							<div style="display:inline-block;float:left;margin:17px;">
-								<img src="../display?fileName=${pvo.image}">
+								<img class="myImgs" src="../display?fileName=${pvo.image}">
 							</div>
 						</c:forEach>
 						</c:if>
@@ -285,12 +272,12 @@ input[type="password"] {
 						</c:if>
 						<c:if test="${not empty followingInfo}">
 						<c:forEach items="${followingInfo}" var="followingList">
-							<table class="creatertab">
+							<table class="creatertab" onClick="location.href='../user/read?id=${followingList.id}'">
 								<tr>
-									 <td id="creater" style="width:126px;text-align:center;">				                        
-				                        <img src="../display?fileName=${followingList.u_image}"   style="float: left; border-radius: 50%;" width=75 height=75 />
+									 <td class="creater" style="width:126px;text-align:center;" onClick="location.href='../user/read?id=${followingList.id}'">				                        
+				                        <img src="../display?fileName=${followingList.u_image}"   style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
 				                     </td>
-				                     <td style="text-align:left;">
+				                     <td style="text-align:left;" onClick="location.href='../user/read?id=${followingList.id}'">
 				                        <div style="font-size:20px;display:inline-block">${followingList.nickname}</div><br>		                       
 										<div style="display:inline-block;color:#acacac">${followingList.introduce}</div>
 				                     </td>
@@ -308,7 +295,7 @@ input[type="password"] {
 						</c:if>
 						<c:if test="${not empty followerInfo}">
 						<c:forEach items="${followerInfo}" var="followerList">
-							<table class="creatertab">
+							<table class="creatertab" onClick="location.href='../user/read?id=${followerList.id}'">
 								<tr>
 									 <td id="creater" style="width:126px;text-align:center;">
 				                        <img src="../display?fileName=${followerList.u_image}" style="margin-left:10px;border-radius: 50%;" width=80 height=80 />
@@ -327,9 +314,7 @@ input[type="password"] {
 			</div>
 		</div>	
 	</div>
-	<br>
-	<br>
-	<br>
+
 	<jsp:include page="../footer.jsp" />
 </body>
 <script>
@@ -377,9 +362,9 @@ $.ajax({
 	data:{"follower":follower,"target":target},
 	success:function(data){
 		if(data==1){
-			$("#follow").html("unfollow");
+			$("#follow").html("언팔로우");
 		}else{
-			$("#follow").html("follow");
+			$("#follow").html("팔로우");
 		}
 	}
 })

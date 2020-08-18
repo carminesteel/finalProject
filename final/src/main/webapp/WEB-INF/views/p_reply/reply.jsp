@@ -10,7 +10,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
-	.reply1{margin:5px; padding:10px; width:450px;}
+	.reply1{vertical-align:middle;border-bottom:none;font-size:17px;letter-spacing:-1px;margin:auto;magin-bottom:5px;padding:15px;padding-bottom:0px; padding-top:15px; width:500px; text-align:left; border-bottom:1px solid black;}
 	</style>
 </head>
 <body>
@@ -21,7 +21,7 @@
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each list}}
 		<div class="reply1">
-			<div class="replydate">
+			<div class="replydate">Re
 				<b>{{replyer}}</b>
 				<a>{{date}}</a>
 				<button class="listBtn" >좋아요</button>
@@ -34,8 +34,15 @@
 	<br><br>
 	<div>
 		<br><br>
-		<input type="text" id="txtReply" size=100>&nbsp;&nbsp;
-		<button id="btnInsert">입력</button>
+		
+	
+		<span style="display:inline-block;float:left;margin-bottom:8px;letter-spacing:-1px;font-size:14px;">리뷰 작성</span>
+		<textarea style="width:495px;height:60px;resize:none;padding:0" id="txtReply" ></textarea>
+		<button id="btnInsert" 
+		style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;">입력
+		</button>
+		
+		
 	</div>
 	<div id="pagination"></div>
 	<br>

@@ -51,7 +51,15 @@ input[type="password"] {
 #btn {
 	all: unset;
 	background: #2e6cb5;
-	width: 200px;
+	width: 160px;
+	height: 35px;
+	color: white;
+	border-radius: 20px 20px 20px 20px;
+}
+#btnMessage{
+	all: unset;
+	background: #2e6cb5;
+	width: 80px;
 	height: 35px;
 	color: white;
 	border-radius: 20px 20px 20px 20px;
@@ -225,9 +233,6 @@ input[type="password"] {
 					<div>
 						<span class=left>총 작품</span> <span class=right>3</span>
 					</div>
-					<div>
-						<span class=left>총 수익</span> <span class=right>4</span>
-					</div>
 				</div>
 				<div style="font-size:15px">
 					${vo.email}
@@ -256,7 +261,10 @@ input[type="password"] {
 				<div style="display:inline-block;float:center;margin:10px;width:1135px;height:870px;" >		
 					<div id=Blist>
 						<c:if test="${empty blist}">
-							<h1>등록한 게시물이 없습니다</h1>
+							<div class = imgList>
+								<img src="../display?fileName=addWork.jpg" onClick="location.href='/product/insert'">
+							</div>
+							<!-- <h1>등록한 게시물이 없습니다</h1> -->
 						</c:if>
 						<c:if test="${not empty blist}">
 						<div class="imgList">
@@ -272,7 +280,10 @@ input[type="password"] {
 				
 					<div id=Plist>
 						<c:if test="${empty plist}">
-							<h1>등록한 상품이 없습니다</h1>
+							<div class = imgList>
+								<img src="../display?fileName=addWork.jpg" onClick="location.href='/product/insert'">
+							</div>
+							<!-- <h1>등록한 상품이 없습니다</h1>	 -->						
 						</c:if>
 						<c:if test="${not empty plist}">
 							<div class = imgList>
@@ -292,7 +303,7 @@ input[type="password"] {
 						<c:if test="${not empty followingInfo}">
 						<c:forEach items="${followingInfo}" var="followingList">
 						<div>
-							<table class="creatertab" >
+							<table class="creatertab">
 								<tr>
 									 <td class="creater" style="width:126px;text-align:center;" onClick="location.href='../user/read?id=${followingList.id}'">				                   
 				                        <img src="../display?fileName=${followingList.u_image}"   style="margin-left:10px;border-radius: 50%;" width=80 height=80 />

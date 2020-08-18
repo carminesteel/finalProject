@@ -6,28 +6,65 @@
 	<meta charset="UTF-8">
 	<title>[게시판 등록]</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-			<style>
-		.image {margin:auto; padding:50px;}
-		#exBody {
-		background-color: #e9ecef;
-		z-index: 1;
-		
-		}
-		
-		#exCenter {
-			padding-top:150px;
-			background-color: white;
-			width: 1276px;
-			margin: auto;
-			z-index: 2;
-			padding-bottom:150px
-		}  
-		</style>
+	<style>
+html {
+	font-family: Noto Sans Kr
+}
+
+body {
+	overflow-x: hidden;
+	float: left;
+	padding: 0px;
+	width: 100%;
+	margin: 0px;
+}
+
+.image {
+	margin: auto;
+	padding: 50px;
+}
+
+#exBody {
+	background-color: #e9ecef;
+	z-index: 1;
+}
+
+#eTitle {
+	font-family: Noto Sans KR;
+	font-weight: bold;
+	font-size: 70px;
+	height: 90px;
+	color: black;
+}
+
+#eContent {
+	font-size: 30px;
+	font-weight: 300;
+	width: 600px;
+	color:black
+}
+
+#exCenter {
+	/* padding-top: 150px;
+	background-color: white;
+	width: 1276px;
+	margin: auto;
+	z-index: 2;
+	padding-bottom: 150px */
+	background-color: white;
+	width: 1186px;
+	margin: auto;
+	z-index: 2;
+	padding: 45px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../menu.jsp"></jsp:include>
 	<div id=exBody>
 		<div id=exCenter>
+		<div id=eTitle>Upload</div>
+			<div id=eContent>작품 업로드</div>
 			<form name="frm" method="post" action="insert"  enctype="multipart/form-data">
 				<table style="width:1130px;margin:auto;border-collapse:collapse;">
 					<tr>
