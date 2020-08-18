@@ -11,9 +11,11 @@
 <title>Insert title here</title>
 <style>
 	#selbox{text-align:center;}
+	body{padding-top:73px;}
 </style>
 </head>
 <body>
+	<jsp:include page="../menu.jsp"></jsp:include>
 <%-- 
 <div>
 	<h1>주문/결제</h1>
@@ -318,6 +320,7 @@
 			<jsp:include page="kakaoPay2.jsp"></jsp:include>
 		</div>
 	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
 $("#cartList").find(".check").hide();

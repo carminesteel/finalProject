@@ -11,10 +11,12 @@
 <title>Insert title here</title>
 <style>
 	#selbox{text-align:center;}
+	body{padding-top:73px;}
 </style>
 </head>
 <body>
 
+	<jsp:include page="../menu.jsp"></jsp:include>
 <div style="width:1250px;height:1000px;border:1px solid black;margin:auto;">
 	<h1 style="text-align:center;">주문/결제</h1>
 	<hr>
@@ -174,6 +176,7 @@
 			<jsp:include page="kakaoPay.jsp"></jsp:include>
 		</div>
 	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
 var p_no="${pvo.p_no}";
