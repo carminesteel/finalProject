@@ -53,6 +53,7 @@ var b_no="${param.b_no}";
 						url:"reportInsert",
 						data:{"id":id,"b_no":b_no,"content":content},
 						success:function(){
+							alert("신고되었습니다.");
 							window.close();
 							location.href="/board/list";
 						}
