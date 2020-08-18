@@ -131,19 +131,18 @@ public class BoardController {
 		model.addAttribute("list", mapper.getB_imagelist(b_no));
 		model.addAttribute("vo",service.read(b_no));
 		model.addAttribute("replyCount",rmapper.replyCount(b_no));
-		
 	}
 	@RequestMapping(value="insert", method=RequestMethod.POST)
-	public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //¾÷·ÎµåÇÒ ÆÄÀÏÀ» ¹ÞÀ»¶§
+	public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		MultipartFile file=multi.getFile("file");
 		
-		//ÆÄÀÏ¾÷·Îµå
-		if(!file.isEmpty()) { // ¾÷·Îµå ÆÄÀÏÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é 
-			String image=System.currentTimeMillis() + file.getOriginalFilename(); // ÆÄÀÏ¸íÀÌ Áßº¹µÇÁö¾Ê°Ô ÇÏ±âÀ§ÇØ¼­ currentTimeMillis
+		//ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Îµï¿½
+		if(!file.isEmpty()) { // ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+			String image=System.currentTimeMillis() + file.getOriginalFilename(); // ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê°ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ currentTimeMillis
 			file.transferTo(new File(path + File.separator + image));
 			vo.setImage(image);
 		}
-		//Ã·ºÎÆÄÀÏ¾÷·Îµå
+		//Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Îµï¿½
 			List<MultipartFile> files = multi.getFiles("files");
 			ArrayList<String> images=new ArrayList<String>();
 			for(MultipartFile addFile:files) {
@@ -163,20 +162,20 @@ public class BoardController {
 	public String updatePost(BoardVO vo, MultipartHttpServletRequest multi)throws Exception {
 		MultipartFile file = multi.getFile("file");
 		
-		// ÆÄÀÏ¾÷·Îµå
-				if (!file.isEmpty()) { // ¾÷·Îµå ÆÄÀÏÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é
+		// ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Îµï¿½
+				if (!file.isEmpty()) { // ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					
-					// ¿¹ÀüÀÌ¹ÌÁö°¡ ÀÖÀ¸¸é »èÁ¦
+					// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					String oldImage=vo.getImage();
 					if(!oldImage.equals("")) {
 						new File(path + File.separator + oldImage).delete();
 					}
 					
-					String image = System.currentTimeMillis() + file.getOriginalFilename(); // ÆÄÀÏ¸íÀÌ Áßº¹µÇÁö¾Ê°Ô ÇÏ±âÀ§ÇØ¼­ currentTimeMillis
+					String image = System.currentTimeMillis() + file.getOriginalFilename(); // ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê°ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ currentTimeMillis
 					file.transferTo(new File(path + File.separator + image));
 					vo.setImage(image);
 				}
-				//Ã·ºÎÆÄÀÏ ¾÷·Îµå
+				//Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
 				List<MultipartFile> files =multi.getFiles("files");
 				ArrayList<String> images=new ArrayList<String>();
 				for(MultipartFile attFile:files) {
@@ -215,12 +214,12 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
-	//ÀÌ¹ÌÁöÆÄÀÏ ºê¶ó¿ìÀú¿¡ Ãâ·Â
+	//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		@RequestMapping("/display")
 		@ResponseBody
 		public ResponseEntity<byte[]> display(String fileName) throws Exception {
 			ResponseEntity<byte[]> result = null;
-			// display fileNameÀÌ ÀÖ´Â °æ¿ì
+			// display fileNameï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 			if (!fileName.equals("")) {
 				File file = new File(path + File.separator + fileName);
 				HttpHeaders header = new HttpHeaders();

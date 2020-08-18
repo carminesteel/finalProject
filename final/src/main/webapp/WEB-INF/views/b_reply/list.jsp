@@ -55,6 +55,13 @@
 		</tr>
 	</table> -->
 	
+	<div id="divStatus" style=text-align:right;display:inline-block;float:right;></div>
+	<script id="readStatus" type="text/x-handlebars-template">
+		<img class=icons src="display?fileName=views.png"/> {{view}}&nbsp;
+		<img class=icons id="LikeBtn" src="display?fileName=likes.png"/> {{b_like}}&nbsp;
+		<img class=icons src="display?fileName=comment.png"/> {{r_cnt}}
+	</script>
+	
 	<table id=tbl1></table>
 	<script id="temp" type="text/x-handlebars-template">	
 		{{#each .}}
@@ -66,8 +73,8 @@
 				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>
 				<br>
 				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>
-				<input class=hId type="text" value=${id}>
-				<input class=rId type="text" value={{replyer}}>
+				<input class=hId type="hidden" value=${id}>
+				<input class=rId type="hidden" value={{replyer}}>
 				<input class=r_no type="hidden" value={{r_no}}>
 			</td>	
 			<td width=50>
@@ -75,7 +82,7 @@
 			</td><br><br>
 		</tr>
 		{{/each}}
-	</script> 
+	</script>
 	<br>
 	<form action="/b_reply/insert" method="post" name="rfrm">
 	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="display?fileName=${vo.u_image}"/>
@@ -108,9 +115,13 @@
 	
 </body>
 <script>
-R_list();
-var b_no = "${vo.b_no}";
 var page=1;
+$( document ).ready(function() {
+	R_list();
+	update();
+});
+var b_no = "${vo.b_no}";
+
 $("#pagination").on("click", ".page-item .page-link", function(e) {
     e.preventDefault();
     page = $(this).attr("href");
@@ -129,41 +140,54 @@ alert(replyer);
 		$(".rbtnDelete").show();
 	} */
 	
-
-function R_list(){
-$.ajax({
-	type:"post",
-	url:"/b_reply/read",
-	data:{"b_no":b_no,"page":page},
-	dataType:"json",
-	success:function(data){
-		var temp=Handlebars.compile($("#temp").html());
-		$("#tbl1").html(temp(data));
+	function update(){
+		$.ajax({
+			type:"get",
+			url:"/board/read",
+			data:{"b_no":b_no}, 
+			dataType:"json",
+			success:function(data){
+				alert("DD")
+				var temp=Handlebars.compile($("#readStatus").html());
+				$("#divStatus").html(temp(data));
+			}
+		});
 	}
-});
-}
 
-$(rfrm).submit(function(e){
-	e.preventDefault();
-	if($(rfrm.content).val()==""){
-		alert("내용을 입력해주세요");
-	}else{
-		if(!confirm("입력하시겠습니까?")) return;
-		var b_no=$(rfrm.b_no).val();
-		var replyer=$(rfrm.replyer).val();
-		var content=$(rfrm.content).val();
+	function R_list(){
 		$.ajax({
 			type:"post",
-			url:"/b_reply/insert",
-			data:{"b_no":b_no,"replyer":replyer,"content":content},
-			success:function(){		
-				R_list();
-				$(rfrm.content).val("");
-				}
-			
-		})
-	 }
-});
+			url:"/b_reply/read",
+			data:{"b_no":b_no,"page":page},
+			dataType:"json",
+			success:function(data){
+				var temp=Handlebars.compile($("#temp").html());
+				$("#tbl1").html(temp(data));
+			}
+		});
+	}
+
+	$(rfrm).submit(function(e){
+		e.preventDefault();
+		if($(rfrm.content).val()==""){
+			alert("내용을 입력해주세요");
+		}else{
+			if(!confirm("입력하시겠습니까?")) return;
+			var b_no=$(rfrm.b_no).val();
+			var replyer=$(rfrm.replyer).val();
+			var content=$(rfrm.content).val();
+			$.ajax({
+				type:"post",
+				url:"/b_reply/insert",
+				data:{"b_no":b_no,"replyer":replyer,"content":content},
+				success:function(){		
+					R_list();
+					$(rfrm.content).val("");
+					}
+				
+			})
+		 }
+	});
 
 
 $("#tbl1").on("click", ".reRow .rbtnDelete", function(){

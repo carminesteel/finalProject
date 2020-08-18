@@ -13,7 +13,7 @@ public interface B_replyMapper {
   public void insert(B_replyVO vo);
   public int replyCount(int b_no);
   public void delete(int r_no);
-  
+  public int getCnt(int b_no);
   public int getB_no(int r_no);
 
 }

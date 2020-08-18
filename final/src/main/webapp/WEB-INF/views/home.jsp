@@ -199,28 +199,41 @@ li {
 	cursor: pointer;
 }
 
+.imgInfo:hover{
+	pointer-events: none;
+	opacity: 1;
+}
+
 .imgContainer img:hover+.hoverInfo {
-	display: block;
+	visibility:visible;
+	pointer-events: none
 }
 
 .hoverInfo {
 	width: 300px;
-	height: 110px;
+	height: 240px;
 	position: absolute;
-	display: none;
-	margin-top: -120px;
+	visibility:hidden;
+	margin-top: -270px;
 	margin-left: 28px;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
 
 .hoverInfo1 {
+	display:inline-block;
 	float: left;
 	font-size: 24px;
 	color: white;
+	height:30px;
 }
 
 .hoverInfo2 {
+	display:inline-block;
 	float: left;
 	color: white;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
 
 #dialog {
@@ -245,7 +258,6 @@ li {
 	overflow : scroll;
 	background-color: rgb(0, 0, 0); /* Fallback color */
 	background-color: rgba(0, 0, 0, 0.9);
-
 }
 
 /* Modal Content/Box */
@@ -337,8 +349,8 @@ li {
 				<input class="idxBno" type="hidden" value="${list.b_no}"/>
 				<img class="idxBimg" src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
-				<span class="hoverInfo1">${list.title}</span><br><br><br>
-				<span class="hoverInfo2">${list.content}</span>
+				<div class="hoverInfo1">${list.title}</div><br><br><br>
+				<div class="hoverInfo2">${list.content}</div>
 				</div>
 				<div class="imgInfo">
 					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
@@ -358,8 +370,8 @@ li {
 				<input class="idxBno" type="hidden" value="${list.b_no}"/>
 				<img class="idxBimg" src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
-				<span class="hoverInfo1">${list.title}</span><br><br><br>
-				<span class="hoverInfo2">${list.content}</span>
+				<div class="hoverInfo1">${list.title}</div><br><br><br>
+				<div class="hoverInfo2">${list.content}</div>
 				</div>
 				<div class="imgInfo">
 					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
@@ -379,8 +391,8 @@ li {
 				<input class="idxBno" type="hidden" value="${list.b_no}"/>
 				<img class="idxBimg" src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
-				<span class="hoverInfo1">${list.title}</span><br><br><br>
-				<span class="hoverInfo2">${list.content}</span>
+				<div class="hoverInfo1">${list.title}</div><br><br><br>
+				<div class="hoverInfo2">${list.content}</div>
 				</div>
 				<div class="imgInfo">
 					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${list.u_image}"/> 
@@ -407,8 +419,8 @@ li {
 				<div class="hoverInfo">
 				<input type="hidden" class=p_no value="${plist.p_no}">
 				<input type="hidden" class=id value="${plist.id}">
-				<span class="hoverInfo1">${plist.title}</span><br><br><br>
-				<span class="hoverInfo2">${plist.price}¿ø</span>
+				<div class="hoverInfo1">${plist.title}</div><br><br><br>
+				<div class="hoverInfo2">${plist.price}¿ø</div>
 				</div>
 				<div class="imgInfo">
 					<span><%-- <img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="display?fileName=${plist.u_image}"/> --%> 
@@ -435,8 +447,8 @@ li {
 				<input class="fdBno" type="hidden" value="${flist.b_no}"/>
 				<img class="idxFimg" src="display?fileName=${flist.image}"/>
 				<div class="hoverInfo">
-				<span class="hoverInfo1">${flist.title}</span><br><br><br>
-				<span class="hoverInfo2">${flist.content}</span>
+				<div class="hoverInfo1">${flist.title}</div><br><br><br>
+				<div class="hoverInfo2">${flist.content}</div>
 				</div>
 				<div class="imgInfo">
 					<span><img style="width:18px;height:18px;border-radius:10px 10px 10px 10px" src="/display?fileName=${flist.u_image}"/> 

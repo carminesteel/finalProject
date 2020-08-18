@@ -159,11 +159,12 @@ nav a {
 }
 
 .price{font-size:24px;float:right;padding-bottom:0px;}
-.title{font-size:18px;font-weight:700;margin-top:5px;}
+.title{font-size:17px;font-weight:700;margin-top:5px;}
+.content{font-size:15px}
 .title, .price, .content{padding-left:10px;padding-right:10px;}
 
 #eTitle {
-	letter-spacing: -4;
+	letter-spacing: -2px;
 	font-family: Noto Sans KR;
 	font-size: 87px;
 	text-align: center;
@@ -209,8 +210,8 @@ nav a {
             <div class="box">
                <input type="hidden" value="{{p_no}}" class="p_no">
                <div class="image"><img src="/display?fileName={{image}}"/></div>
-               <div class="title">{{title}}</div>               
-               <div class="content">{{content}}</div>
+               <div class="title" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{title}}</div>               
+               <div class="content" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{content}}</div>
                <div class="price">{{price}}원</div>
                <div class="id" style="display:none">{{id}}</div>
             </div>
@@ -225,8 +226,8 @@ nav a {
             <div class="box">
                <input type="hidden" value="{{p_no}}" class="p_no">
                <div class="image"><img src="/display?fileName={{image}}"/></div>
-               <div class="title">{{title}}</div>
-               <div class="content">{{content}}</div>
+               <div class="title" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{title}}</div>
+               <div class="content" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{content}}</div>
                <div class="price">{{price}}원</div>
                <div class="id" style="display:none">{{id}}</div>
             </div>
@@ -244,7 +245,7 @@ nav a {
                         <img src="/display?fileName=${creater.u_image}"   style="float: left; border-radius: 50%;" width=75 height=75 />
                         <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
                               <p class="createrid" style="font-weight: bold; font-size: 24px; margin: 0;">${creater.nickname}</p>
-                              <p style="font-size: 15px; margin: 0;">${creater.introduce}</p>
+                              <p style="font-size:15px;margin:0;white-space:nowrap;text-overflow:ellipsis">${creater.introduce}</p>
                         </span>
 						<span id="total" style="float: right; background: #e9e9e9; position: relative;
 							top: 15px; padding: 5px; border-radius: 20px 20px 20px 20px; font-size: 13px;

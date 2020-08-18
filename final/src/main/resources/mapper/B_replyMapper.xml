@@ -22,4 +22,8 @@
 		select b_no from b_reply where r_no=#{r_no}
 	</select>
 	
+	<select id="getCnt" resultType="int">
+		select count(*) from b_reply where b_no=#{b_no};
+	</select>
+	
 </mapper>

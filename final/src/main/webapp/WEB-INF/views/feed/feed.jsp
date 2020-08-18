@@ -33,7 +33,7 @@ html {
 
 #exCenter {
 	background-color: white;
-	width: 1280px;
+	width: 1186px;
 	margin: auto;
 	z-index: 2;
 	padding: 45px;
@@ -45,7 +45,7 @@ html {
 	font-weight: bold;
 	font-size: 70px;
 	height: 80px;
-	color:#373e45;
+	color:black;
 	/* margin-top:5px; */
 	margin-left:-2px; 
 	letter-spacing:-1.5px
@@ -55,7 +55,7 @@ html {
 	font-size: 30px;
 	font-weight: 300;
 	width: 600px;
-	color:#373e45;
+	color:black;
 	margin-bottom:20px;
 	letter-spacing:-1px;
 	

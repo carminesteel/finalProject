@@ -99,7 +99,7 @@ body {
 			</div>
 		</div>
 		<div id=lightContent>
-		<input type="hidden" name="image" value="${ vo.image }">
+		<input type="hidden" name="image" value="${vo.image}">
 			<%-- <img src="display?fileName=${vo.image}"width="100%"/> --%>
 			<br><br><br><br>
 			<c:forEach items="${list}" var="image">
@@ -139,11 +139,11 @@ body {
 				</div>
 				
 				
-				<div style=text-align:right;display:inline-block;float:right;>
+				<%-- <div style=text-align:right;display:inline-block;float:right;>
 					<img class=icons src="display?fileName=views.png"/> ${vo.view}&nbsp;
 					<img class=icons id="LikeBtn" src="display?fileName=likes.png"/> ${vo.b_like}&nbsp;
 					<img class=icons src="display?fileName=comment.png"/> ${vo.r_cnt}										
-				</div>
+				</div> --%>
 
 				<jsp:include page="../b_reply/list.jsp"/> 
 			</div> 

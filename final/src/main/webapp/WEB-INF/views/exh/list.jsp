@@ -31,7 +31,7 @@ html {
 	font-weight: bold;
 	font-size: 70px;
 	height: 80px;
-	color:#373e45;
+	color:black;
 }
 
 #eButton {
@@ -71,7 +71,7 @@ html {
 	font-size: 30px;
 	font-weight: 300;
 	width: 600px;
-	color:#373e45
+	color:black
 }
 </style>
 </head>

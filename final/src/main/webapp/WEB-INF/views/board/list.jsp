@@ -180,7 +180,7 @@ li {
 	padding-top: 3px;
 }
 
-.imgContainer .image {
+.imgContainer img {
 	width: 350px;
 	height: 300px;
 	object-fit: cover;
@@ -188,34 +188,86 @@ li {
 	border-radius: 5px 5px 5px 5px;
 }
 
-.imgContainer .image:hover {
+.imgContainer img:hover {
 	opacity: 0.3;
 	cursor: pointer;
 }
 
-.imgContainer .image:hover+.hoverInfo {
-	display: block;
+.imgInfo:hover{
+	pointer-events: none;
+	opacity: 1;
+}
+
+.imgContainer img:hover+.hoverInfo {
+	visibility:visible;
+	pointer-events: none
 }
 
 .hoverInfo {
 	width: 300px;
-	height: 110px;
+	height: 240px;
 	position: absolute;
-	display: none;
-	margin-top: -120px;
+	visibility:hidden;
+	margin-top: -270px;
 	margin-left: 28px;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
 
 .hoverInfo1 {
+	display:inline-block;
 	float: left;
 	font-size: 24px;
 	color: white;
+	height:30px;
 }
 
 .hoverInfo2 {
+	display:inline-block;
 	float: left;
 	color: white;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
+
+#dialog {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+}
+
+/*       /* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: absolute; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	 /* Full width */
+	 /* Full height */
+	/* overflow: auto; */ /* Enable scroll if needed */
+	height:auto;
+	overflow : scroll;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9);
+
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.lbClose:hover{
+	cursor:pointer;
+}
+
 
 .MenuNew {
 	text-decoration: none;
@@ -269,22 +321,24 @@ li {
 	<div class="NewMenu" style="width:1855px;margin:auto;display:block;">
 		<c:forEach items="${list}" var="vo">
 			<div class="imgContainer">
-				<img class="image" src="display?fileName=${vo.image}">
-				<input type="hidden" class="b_no" value="${vo.b_no}">
+				<input class="idxBno" type="hidden" value="${vo.b_no}"/>
 				<input type="hidden" class="r" data-r="${vo.r}" value="${vo.r}">
-				<div class="imgInfo">
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
-							<span>${vo.view}</span>&emsp;
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
-							<span>${vo.r_cnt}</span>&emsp;		
-					<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
-							<span>${vo.b_like}</span>	
-				</div>		
+				<img class="idxBimg" src="display?fileName=${vo.image}"/>
 				<div class="hoverInfo">
-					<div class="title">${vo.title}</div>
-					<div class="content">${vo.content}</div>				
-				</div>		
-			</div>
+				<div class="hoverInfo1">${vo.title}</div><br><br><br>
+				<div class="hoverInfo2">${vo.content}</div>
+				</div>
+				<div class="imgInfo">
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${vo.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${vo.b_like}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
+							<span>${vo.r_cnt}</span>
+							
+				</div>
+				<br>
+			</div>		
 		</c:forEach>
 	</div>
  	<div class="scrollLocation" style="margin-left:19px;"></div>
@@ -292,22 +346,23 @@ li {
  	<div class="BestMenu" style="width:1855px;margin:auto;display:none;">
 		<c:forEach items="${listA}" var="Avo">
 			<div class="imgContainer">
-				<img  class="image" src="display?fileName=${Avo.image}">
-				<input type="hidden" class="b_no" value="${Avo.b_no}">
+				<input class="idxBno" type="hidden" value="${Avo.b_no}"/>
 				<input type="hidden" class="Ar" data-r="${Avo.r}" value="${Avo.r}">
-				<div class="imgInfo">
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
-							<span>${Avo.view}</span>&emsp;
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
-							<span>${Avo.r_cnt}</span>&emsp;		
-					<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
-							<span>${Avo.b_like}</span>	
-				</div>		
+				<img class="idxBimg" src="display?fileName=${Avo.image}"/>
 				<div class="hoverInfo">
-					<div class="title">${Avo.title}</div>
-					<div class="content">${Avo.content}</div>				
-				</div>		
-			</div>
+				<div class="hoverInfo1">${Avo.title}</div><br><br><br>
+				<div class="hoverInfo2">${Avo.content}</div>
+				</div>
+				<div class="imgInfo">
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${Avo.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${Avo.b_like}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
+							<span>${Avo.r_cnt}</span>
+				</div>
+				<br>
+			</div>		
 		</c:forEach>
 	</div>
  	<div class="AscrollLocation" style="margin-left:19px;"></div>
@@ -315,29 +370,59 @@ li {
 	<div class="ViewMenu" style="width:1855px;margin:auto;display:none;">
 		<c:forEach items="${listB}" var="Zvo">
 			<div class="imgContainer">
-				<img class="image" src="display?fileName=${Zvo.image}">
-				<input type="hidden" class="b_no" value="${Zvo.b_no}">
+				<input class="idxBno" type="hidden" value="${Zvo.b_no}"/>
 				<input type="hidden" class="Br" data-r="${Zvo.r}" value="${Zvo.r}">
-				<div class="imgInfo">
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
-							<span>${Zvo.view}</span>&emsp;
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
-							<span>${Zvo.r_cnt}</span>&emsp;		
-					<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
-							<span>${Zvo.b_like}</span>	
-				</div>		
+				<img class="idxBimg" src="display?fileName=${Zvo.image}"/>
 				<div class="hoverInfo">
-					<div class="title">${Zvo.title}</div>
-					<div class="content">${Zvo.content}</div>				
-				</div>		
-			</div>
+				<div class="hoverInfo1">${Zvo.title}</div><br><br><br>
+				<div class="hoverInfo2">${Zvo.content}</div>
+				</div>
+				<div class="imgInfo">
+						<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+							<span>${Zvo.view}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+							<span>${Zvo.b_like}</span>&emsp;
+						<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
+							<span>${Zvo.r_cnt}</span>
+				</div>
+				<br>
+			</div>		
 		</c:forEach>
 	</div>
 	<div class="BscrollLocation" style="margin-left:19px;"></div>
 	
 	<jsp:include page="../footer.jsp"></jsp:include>
+	
+	<!-- The Modal -->
+    <div id="myModal" class="modal"> 
+    </div>
 </body>
 <script>
+	 	// Get the modal
+		var modal = document.getElementById('myModal');
+		
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];                                          
+		
+/* 		// When the user clicks on the button, open the modal 
+		$(".idxBimg").on("click", function(){
+			b_no=$(this).parent().find(".idxBno").val();
+			alert(b_no);
+			$("#myModal").load("../board/read?b_no="+b_no)
+			$('html').css("overflow", "hidden");        	
+			$('.modal').css("overflow", "scroll");
+			$('html').css("overflow-x", "hidden");
+			$('.modal').css("overflow-x", "hidden");
+		    modal.style.display = "block";
+		}) 
+ */
+
+
+
+
+
+
+
 	var lastScrollTop=0;
 	
 	$("#NewMenu").on("click",function(){
@@ -377,16 +462,34 @@ li {
 	});
 	
 	$(".BestMenu").on("click",".imgContainer img", function() {
-		var b_no = $(this).parent().find(".b_no").val();
-		location.href = "read?b_no=" + b_no;
+		var b_no = $(this).parent().find(".idxBno").val();
+		$("#myModal").load(window.location.href + "#myModal")
+		$("#myModal").load("../board/read?b_no="+b_no)
+		$('html').css("overflow", "hidden");        	
+		$('.modal').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+		$('.modal').css("overflow-x", "hidden");
+	    modal.style.display = "block";
 	});
 	$(".ViewMenu").on("click",".imgContainer img", function() {
-		var b_no = $(this).parent().find(".b_no").val();
-		location.href = "read?b_no=" + b_no;
+		$("#myModal").load(window.location.href + "#myModal")
+		var b_no = $(this).parent().find(".idxBno").val();
+		$("#myModal").load("../board/read?b_no="+b_no)
+		$('html').css("overflow", "hidden");        	
+		$('.modal').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+		$('.modal').css("overflow-x", "hidden");
+	    modal.style.display = "block";
 	});
 	$(".NewMenu").on("click",".imgContainer img", function() {
-		var b_no = $(this).parent().find(".b_no").val();
-		location.href = "read?b_no=" + b_no;
+		$("#myModal").load(window.location.href + "#myModal")
+		var b_no = $(this).parent().find(".idxBno").val();
+		$("#myModal").load("../board/read?b_no="+b_no)
+		$('html').css("overflow", "hidden");	
+		$('.modal').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+		$('.modal').css("overflow-x", "hidden");
+	    modal.style.display = "block";
 	});
 
 	$(window).scroll(function(){
@@ -414,23 +517,25 @@ li {
 							
 							if(data!=""){
 								$(data).each(function(){
-									str += "<div class='imgContainer' style='margin-left:19px'>"
-										+		"<img class='image' src='display?fileName="+this.image+"'>"
-										+       "<input type='hidden' class='b_no' value='"+this.b_no+"'>"
+									str += "<div class='imgContainer'>"
+										+		"<input class='idxBno' type='hidden' value='"+this.b_no+"'/>"
 										+		"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
-										+		"<div class='imgInfo'>"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
-										+				"<span>"+this.view+"</span>&emsp;"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
-										+				"<span>"+this.r_cnt+"</span>&emsp;"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
-										+				"<span>"+this.b_like+"</span>"
-										+		"</div>"
+										+		"<img class='idxBimg' src='display?fileName="+this.image+"'/>"
 										+		"<div class='hoverInfo'>"
-										+			"<div class='title' '"+this.title+"'></div>"
-										+			"<div class='content' '"+this.content+"'></div>"
+										+			"<div class='hoverInfo1'>"+this.title+"</div><br><br><br>"
+										+			"<div class='hoverInfo2'>"+this.content+"</div>"
 										+		"</div>"
+										+		"<div class='imgInfo'>"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'/>"
+										+				"<span>"+this.view+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'/>"
+										+				"<span>"+this.b_like+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'/>"
+										+				"<span>"+this.r_cnt+"</span>&emsp;"
+										+		"</div>"
+										+		"<br>"
 										+	"</div>"
+										
 								});
 								$(".scrollLocation").append(str);
 			 					$(".BestMenu").css("display","none");
@@ -466,22 +571,23 @@ li {
 							
 							if(data!=""){
 								$(data).each(function(){
-									str += "<div class='imgContainer' style='margin-left:19px'>"
-										+		"<img class='image' src='display?fileName="+this.image+"'>"
-										+       "<input type='hidden' class='b_no' value='"+this.b_no+"'>"
+									str += "<div class='imgContainer'>"
+										+		"<input class='idxBno' type='hidden' value='"+this.b_no+"'/>"
 										+		"<input type='hidden' class='Ar' data-r='"+this.r+"' value='"+this.r+"'>"
-										+		"<div class='imgInfo'>"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
-										+				"<span>"+this.view+"</span>&emsp;"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
-										+				"<span>"+this.r_cnt+"</span>&emsp;"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
-										+				"<span>"+this.b_like+"</span>"
-										+		"</div>"
+										+		"<img class='idxBimg' src='display?fileName="+this.image+"'/>"
 										+		"<div class='hoverInfo'>"
-										+			"<div class='title' '"+this.title+"'></div>"
-										+			"<div class='content' '"+this.content+"'></div>"
+										+			"<div class='hoverInfo1'>"+this.title+"</div><br><br><br>"
+										+			"<div class='hoverInfo2'>"+this.content+"</div>"
 										+		"</div>"
+										+		"<div class='imgInfo'>"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'/>"
+										+				"<span>"+this.view+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'/>"
+										+				"<span>"+this.b_like+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'/>"
+										+				"<span>"+this.r_cnt+"</span>&emsp;"
+										+		"</div>"
+										+		"<br>"
 										+	"</div>"
 								});
 								$(".AscrollLocation").append(str);
@@ -515,22 +621,23 @@ li {
 							
 							if(data!=""){
 								$(data).each(function(){
-									str += "<div class='imgContainer' style='margin-left:19px'>"
-										+		"<img class='image' src='display?fileName="+this.image+"'>"
-										+       "<input type='hidden' class='b_no' value='"+this.b_no+"'>"
+									str += "<div class='imgContainer'>"
+										+		"<input class='idxBno' type='hidden' value='"+this.b_no+"'/>"
 										+		"<input type='hidden' class='Br' data-r='"+this.r+"' value='"+this.r+"'>"
-										+		"<div class='imgInfo'>"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'>"
-										+				"<span>"+this.view+"</span>&emsp;"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'>"
-										+				"<span>"+this.r_cnt+"</span>&emsp;"
-										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'>"
-										+				"<span>"+this.b_like+"</span>"
-										+		"</div>"
+										+		"<img class='idxBimg' src='display?fileName="+this.image+"'/>"
 										+		"<div class='hoverInfo'>"
-										+			"<div class='title' '"+this.title+"'></div>"
-										+			"<div class='content' '"+this.content+"'></div>"
+										+			"<div class='hoverInfo1'>"+this.title+"</div><br><br><br>"
+										+			"<div class='hoverInfo2'>"+this.content+"</div>"
 										+		"</div>"
+										+		"<div class='imgInfo'>"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=views.png'/>"
+										+				"<span>"+this.view+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=likes.png'/>"
+										+				"<span>"+this.b_like+"</span>&emsp;"
+										+			"<img style='width:15px;height:15px;' src='display?fileName=comment.png'/>"
+										+				"<span>"+this.r_cnt+"</span>&emsp;"
+										+		"</div>"
+										+		"<br>"
 										+	"</div>"
 								});
 								$(".BscrollLocation").append(str);
@@ -552,8 +659,14 @@ li {
 	}); */
 
 	$(".scrollLocation").on("click",".imgContainer img", function() {
-		var b_no = $(this).parent().find(".b_no").val();
-		location.href = "read?b_no=" + b_no;
+		$("#myModal").load(window.location.href + "#myModal")
+		b_no=$(this).parent().find(".idxBno").val();
+		$("#myModal").load("../board/read?b_no="+b_no)
+		$('html').css("overflow", "hidden");        	
+		$('.modal').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+		$('.modal').css("overflow-x", "hidden");
+	    modal.style.display = "block";
 	});
 </script>
 </html>

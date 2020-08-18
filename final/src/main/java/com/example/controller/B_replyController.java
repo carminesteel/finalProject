@@ -75,4 +75,15 @@ public void insert(B_replyVO vo) {
 	
 }
 
+@RequestMapping(value="count")
+@ResponseBody
+	public int getCnt(int b_no) {
+	int cnt=mapper.getCnt(b_no);
+	System.out.println(cnt);
+
+	return cnt;
+	
+	
+}
+
 }
