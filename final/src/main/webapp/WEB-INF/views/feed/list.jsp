@@ -82,19 +82,20 @@ html {
 			<div id=eTitle>Feed</div>
 			<div id=eContent>팔로우 중인 작가들의 소식입니다.</div>
 
-			<div id=lTbl>
+			<div class=lTbl>
 				<c:forEach items="${Flist}" var="fvo">
 					<div class=ftbl>
 						<img class=fimg style="height: 100%; object-fit: contain;" src="../display?fileName=${fvo.image}">
 					</div>
 					<div style="width: 1130px; margin: auto;">
-						<span style="display: inline-block; float: left;">
-							<img style="border-radius: 50%;" width=90px height=90px	src="../display?fileName=${fvo.u_image}" />
+						<span style="display: inline-block; float: left;"> <img
+							style="border-radius: 50%;" width=90px height=90px
+							src="../display?fileName=${fvo.u_image}" />
 						</span> 
 						<span style="display: inline-block; float: left; margin-left: 18px; margin-top: 18px;">
-							<input type="hidden" class="r" data-r="${fvo.r}" value="${fvo.r}">
+							<input type=hidden value="${fvo.id}" class=unFolTarget>
 							<b style="font-size: 20px">${fvo.nickname}</b>&nbsp;&nbsp;
-							<a style="all: unset; font-size: 14px; cursor: pointer;">팔로우</a><br>
+							<a style="all: unset; font-size: 14px; cursor: pointer;" class="unfollow">언팔로우</a><br>
 							<b style="all: unset; color: #93a1a2; font-size: 15px;">${fvo.introduce}</b>
 						</span><br>
 						<br>
@@ -201,5 +202,21 @@ html {
 			lastScrollTop=windowScrollTop;
 		}
 	});
+	
+	$(".unfollow").on("click",function(){
+ 		var target=$(this).parent().find(".unFolTarget").val();
+ 		var follower="${id}";
+ 		if(!confirm("팔로우를 취소하시겠습니까?")) return; 		
+  		$.ajax({
+ 			type:"post",
+ 			url:"/user/followUpdate",
+ 			data:{"follower":follower,"target":target},
+ 			success:function(){
+ 				alert("취소되었습니다.");
+ 				location.reload();
+ 			}
+ 		});
+ 	});
+	
 </script>
 </html>

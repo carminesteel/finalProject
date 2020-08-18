@@ -112,7 +112,7 @@ body {
 						<img style="border-radius:50%;" width=90px height=90px src="display?fileName=${vo.u_image}"/>
 					</span>
 					<span style="display:inline-block;float:left;margin-left:18px;margin-top:18px;">
-						<b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;<a style="all:unset;font-size:14px;cursor:pointer;">팔로우</a><br>
+						<b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;<a style="all:unset;font-size:14px;cursor:pointer;" id="follow">팔로우</a><br>
 						<b style="all:unset;color:#93a1a2;font-size:15px">${vo.introduce}</b>
 					</span>
 				</div>
@@ -244,7 +244,9 @@ body {
 	 
 </body>
 <script>
-
+getFollow();
+var follower="${id}";
+var target="${vo.id}";
 
 $("#btnReply").hide();
 
@@ -255,6 +257,18 @@ $("#report").on("click", function(){
 	var b_no="${vo.b_no}";
 	window.open("/board/report?b_no="+b_no,"","width=500px, height=400px");
 });
+
+	$("#follow").on("click",function(){
+		$.ajax({
+			type:"post",
+			url:"/user/followUpdate",
+			data:{"follower":follower,"target":target},
+			success:function(data){
+				$("#follower").html("팔로워: "+data);
+				getFollow(); 
+ 			}
+		})
+	});
 
 $("#LikeBtn").on("click",function(){
 	$.ajax({
@@ -321,6 +335,20 @@ $("#btnDelete").on("click", function(){
 	frm.submit();
 });
 
+function getFollow(){
+$.ajax({
+	type:"post",
+	url:"/user/followChk",
+	data:{"follower":follower,"target":target},
+	success:function(data){
+		if(data==1){
+			$("#follow").html("언팔로우");
+		}else{
+			$("#follow").html("팔로우");
+		}
+	}
+})
+}
 
 </script>
 
