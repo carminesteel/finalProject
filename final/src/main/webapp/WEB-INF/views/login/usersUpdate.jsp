@@ -18,7 +18,8 @@
 }
 
 #userRead {
-	border: 2px solid black; width:420px;
+	
+	width:420px;
 	margin-left:10px;
 	text-align: center;
 	overflow:hidden;
@@ -91,6 +92,28 @@ input[type="password"] {
 #u_list {display:inline-block;}
 
 .mypageItems:hover{cursor:pointer;}
+
+
+
+#userRead{
+	text-align:center;
+	margin-left:750px;
+	margin-top:-15px;
+}
+
+#passPass{	
+	width:420px;
+	margin-left:10px;
+	height:600px;
+	text-align: center;
+	overflow:hidden;
+	display:inline-block;	
+	border-radius:10px;
+	margin-left:750px;
+	margin-top:-10px;
+}
+
+
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
@@ -126,8 +149,8 @@ input[type="password"] {
 		
 		<form name="frm" action="/login/usersUpdate/profile_update" method="post" enctype="multipart/form-data">
 		<c:if test="${passChk==1}">
-		<div id="userRead" style="background:#fff; border-radius: 20px;">
-			<table style="text-align:center;">
+		<div id="userRead" style="background:#fff; border-radius:10px;">
+			<table>
 			<tr>
 			<td><input type="hidden" name=id value="${vo.id}"></td>	
 			<td><input type="hidden" name="u_image" value="${ vo.u_image }"></td>
@@ -186,14 +209,16 @@ input[type="password"] {
 		</form>
 	<!-- ////////////////////////////////userRead를 눌르면 비밀번호 병경이 켜진다/////////////////////////////// -->	
 		<form name="frm2" method="post" action="/login/usersUpdate/profile_passUpdate">
-		<div style="background:#fff;">
+		<div id="passPass" style="background:#fff;">
+			<br><br>
 			안전한 비밀번호로 내 정보를 보호하세요.<br><br>
 			<div style="color:red;">다른 아이디/사이트에서 사용한 적 없는 비밀번호</div><br>
 			<div style="color:red;">이전에 사용한 적 없는 비밀번호가 안전합니다.</div>
 			<br><br>
 			<div>
 				새 비밀번호:&nbsp;&nbsp;&nbsp;
-         		<input type="password" name="newPass" id="pwd1" placeholder="PassWord"   required>
+         		<input type="password" name="newPass" id="pwd1" placeholder="PassWord"  maxlength="16" autocomplete="off" required>
+         		<div id="pwdRegErr" style="background:#F2DEDE; color:#B94A48; width:420px; height:38px; line-height:40px;">8~16자 영문 대 소문자,숫자,특수문자를 사용하세요.</div>
 			</div>
 			<br>
 			<div>
@@ -202,6 +227,8 @@ input[type="password"] {
 			</div>
 			<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다</div>
 			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+			
+			<br><br><br><br>
 			<div class="btn-area">
 				<div style="text-align:center; "colspan=2>
 					 <button id="upassUpdate">확인</button><br>
@@ -295,12 +322,28 @@ function click(){
  	});
 	
  	
+ 	
+ 	$("#pwd1").keyup(function() {
+ 		var pwd1=$(this).val();
+ 		// 비밀번호 검증할 정규 표현식
+ 		var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+ 		if (reg.test(pwd1)) {//정규표현식을 통과 한다면
+ 			$("#pwdRegErr").hide();
+ 			successState("#pwd1");
+ 		} else {//정규표현식을 통과하지 못하면
+ 			$("#pwdRegErr").show();
+ 			errorState("#pwd1");
+ 		}
+ 	});
+ 	
+ 	
  	$(function(){
 		$("#alert-success").hide();
 		$("#alert-danger").hide();
 		$("input").keyup(function(){
 			var pwd1=$("#pwd1").val();
 			var pwd2=$("#pwd2").val();
+			var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
 			if(pwd1 !="" || pwd2 !=""){
 				if(pwd1 == pwd2){
 					$("#alert-success").show();
@@ -317,6 +360,8 @@ function click(){
 			}
 		});
 	});
+ 	
+ 	
  	
  	$("#upassUpdate").click(function(e){
  		e.preventDefault();
