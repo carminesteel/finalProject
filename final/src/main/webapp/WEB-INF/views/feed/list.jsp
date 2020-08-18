@@ -93,7 +93,8 @@ html {
 							src="../display?fileName=${fvo.u_image}" />
 						</span> 
 						<span style="display: inline-block; float: left; margin-left: 18px; margin-top: 18px;">
-							<input type=hidden value="${fvo.id}" class=unFolTarget>
+							<input type="hidden" value="${fvo.id}" class=unFolTarget>
+							<input type="hidden" class='r' data-r="${fvo.r}" value="${fvo.r}">
 							<b style="font-size: 20px">${fvo.nickname}</b>&nbsp;&nbsp;
 							<a style="all: unset; font-size: 14px; cursor: pointer;" class="unfollow">언팔로우</a><br>
 							<b style="all: unset; color: #93a1a2; font-size: 15px;">${fvo.introduce}</b>
