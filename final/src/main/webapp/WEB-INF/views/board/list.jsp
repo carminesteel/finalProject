@@ -402,26 +402,7 @@ li {
 		var modal = document.getElementById('myModal');
 		
 		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];                                          
-		
-/* 		// When the user clicks on the button, open the modal 
-		$(".idxBimg").on("click", function(){
-			b_no=$(this).parent().find(".idxBno").val();
-			alert(b_no);
-			$("#myModal").load("../board/read?b_no="+b_no)
-			$('html').css("overflow", "hidden");        	
-			$('.modal').css("overflow", "scroll");
-			$('html').css("overflow-x", "hidden");
-			$('.modal').css("overflow-x", "hidden");
-		    modal.style.display = "block";
-		}) 
- */
-
-
-
-
-
-
+		var span = document.getElementsByClassName("close")[0];
 
 	var lastScrollTop=0;
 	
@@ -652,11 +633,6 @@ li {
 			lastScrollTop=windowScrollTop;
 		}
 	});
-
-/* 	$(".imgDiv").on("click",".imgContainer img", function() {
-		var b_no = $(this).parent().find(".b_no").val();
-		location.href = "read?b_no=" + b_no;
-	}); */
 
 	$(".scrollLocation").on("click",".imgContainer img", function() {
 		$("#myModal").load(window.location.href + "#myModal")
