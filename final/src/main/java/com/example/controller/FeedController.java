@@ -26,12 +26,6 @@ public class FeedController {
 	
 	@Autowired
 	B_replyMapper Rmapper;
-
-	
-	@RequestMapping("/feed/feed")
-	public void feed() {
-		
-	}
 	
 	@RequestMapping("/feed/list")
 	public String list(HttpSession session,Model model) {
@@ -48,7 +42,7 @@ public class FeedController {
 		}
 		model.addAttribute("Flist",mapper.feedView(id));
 		model.addAttribute("Rlist",array);
-		return "/feed/feed";
+		return "/feed/list";
 	}
 	
 	@RequestMapping(value="read", method=RequestMethod.POST)
