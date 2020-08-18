@@ -59,5 +59,4 @@ public class FeedController {
 			array.addAll(Rmapper.rrlist(b_no));
 			return array;
 	}
-	
 }

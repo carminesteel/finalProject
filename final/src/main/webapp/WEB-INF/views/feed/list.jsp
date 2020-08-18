@@ -84,6 +84,9 @@ html {
 
 			<div id=lTbl>
 				<c:forEach items="${Flist}" var="fvo">
+					<div class=ftbl>
+						<img class=fimg style="height: 100%; object-fit: contain;" src="../display?fileName=${fvo.image}">
+					</div>
 					<div style="width: 1130px; margin: auto;">
 						<span style="display: inline-block; float: left;">
 							<img style="border-radius: 50%;" width=90px height=90px	src="../display?fileName=${fvo.u_image}" />
@@ -118,11 +121,8 @@ html {
 						</div>
 
 						<hr style="width: 1127px;border:solid 1px #b3c6e6;">
-					<div class=ftbl>
-						<img class=fimg style="height: 100%; object-fit: contain;" src="../display?fileName=${fvo.image}">
 					</div>
-					</div>
-					<br><br>
+					<br><br><br>
 				</c:forEach>
 			</div>
 		</div>
