@@ -109,6 +109,7 @@ html {
 						<br>
 						<div style="text-align: left; display: inline-block; float: left;">
 							<form name="frm" method="post" action="update" enctype="multipart/form-data">
+								<input type="hidden" value="${fvo.b_no}" class="b_no">
 								<input type="button" value="신고하기" class="report"
 									style="border: none; background: #2b4163; border-radius: 5px 5px 5px 5px;
 									color: white; width: 75px; height: 28px; font-size: 15px;margin-left:25px;">
@@ -207,7 +208,7 @@ html {
 	$(".unfollow").on("click",function(){
  		var target=$(this).parent().find(".unFolTarget").val();
  		var follower="${id}";
- 		if(!confirm("팔로우를 취소하시겠습니까?")) return; 		
+ 		if(!confirm("팔로우를 취소하시겠습니까?")) return;
   		$.ajax({
  			type:"post",
  			url:"/user/followUpdate",
@@ -218,6 +219,10 @@ html {
  			}
  		});
  	});
-	
+
+	$(".report").on("click", function(){
+		var b_no=$(this).parent().find(".b_no").val();
+		window.open("/board/report?b_no="+b_no,"","width=500px, height=400px");
+	});
 </script>
 </html>

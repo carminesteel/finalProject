@@ -18,7 +18,6 @@
 	
 	<form name="frm" method="post" action="updateReport">
 	<input type="hidden" name="b_no" value="${param.b_no}">
-	<%-- <input type="hidden" name="id" value="${id}"> --%>
 	<input type="hidden" name="id" value="${id}">
 	<table>
 		
@@ -31,8 +30,8 @@
 	<input type="button" value="취소">
 	<input type="submit" value="신고하기">
 	</form>
-
 </body>
+
 <script>
 var b_no="${param.b_no}";
  $(frm).submit(function(e){
