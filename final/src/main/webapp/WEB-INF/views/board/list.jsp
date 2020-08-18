@@ -314,7 +314,7 @@ li {
 			<a class="MenuBest" id="BestMenu">인기순</a>&emsp;&emsp;&emsp; 
 			<a class="MenuView" id="ViewMenu">조회순</a>
 		</div>
-		<c:if test="${id!=null}">		
+		<c:if test="${id!=null}">
 			<a href="/board/insert" class=more id=bButton>작품 올리기</a> <br>
 		</c:if>
    	</div><br>
@@ -335,10 +335,9 @@ li {
 							<span>${vo.b_like}</span>&emsp;
 						<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
 							<span>${vo.r_cnt}</span>
-							
 				</div>
 				<br>
-			</div>		
+			</div>
 		</c:forEach>
 	</div>
  	<div class="scrollLocation" style="margin-left:19px;"></div>
