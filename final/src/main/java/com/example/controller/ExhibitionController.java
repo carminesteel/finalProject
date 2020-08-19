@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.example.domain.Criteria;
 import com.example.domain.ExhibitionVO;
 import com.example.mapper.ExhibitionMapper;
 import com.example.mapper.e_replyMapper;
@@ -89,11 +91,11 @@ public class ExhibitionController {
 	}
 	
 	@RequestMapping("exh/read")
-	public void read(Model model,int e_no) {
+	public void read(Model model,int e_no,Criteria cri) {
 		model.addAttribute("vo", mapper.read(e_no));
 		model.addAttribute("images", mapper.getE_imagelist(e_no));
 		model.addAttribute("re", mapper.replyCount(e_no));
-		model.addAttribute("review", Rmapper.list(e_no));
+		model.addAttribute("review", Rmapper.list(cri,e_no));
 		System.out.println(model);
 	}
 

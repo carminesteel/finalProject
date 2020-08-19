@@ -58,11 +58,13 @@
 	<button id="btnInsert" style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;margin-left:15px;">입력</button>
 	
 	<br>
+	<div id="pagination"></div>
 </body>
 <script>
 
 	var e_no="${vo.e_no}";
-	var id=$("#id").val();		
+	var id=$("#id").val();
+	var page=1;
 	getList();
 	getCnt();
 
@@ -92,16 +94,39 @@
 		$.ajax({
 			type:"get",
 			url:"/reply/list",
-			data:{"e_no":e_no},
+			data:{"e_no":e_no,"page":page},
 			dataType:"json",
 			success:function(data){			
 					var temp=Handlebars.compile($("#temp").html());
 					$("#tbl").html(temp(data));
 					getCnt();
+					var str="";
+					if(data.pm.prev){ 
+						str += "<a href='" + (data.pm.startPage-1) + "'>◀</a>"
+					}
+					for(var i=data.pm.startPage; i<= data.pm.endPage; i++){ 
+						if(page == i){ 
+							str += "[<a href='" + i + "' class='active'>" + i + "</a>]";
+						}else{ 
+							str += "[<a href='" + i + "'>" + i + "</a>]";
+						}
+					}
+					if(data.pm.next){ 
+						str += "<a href='" + (data.pm.endPage+1) + "'>▶</a>" 
+					} 
+					$("#pagination").html(str);
 				
 			}
 		});		
 	}
+	
+	
+	$("#pagination").on("click", "a", function(e){ 
+		e.preventDefault();
+		page=$(this).attr("href");
+		
+		getList();
+	});
 	
 	//좋아요
 	$("#tbl").on("click",".reRow .btnLike",function(){

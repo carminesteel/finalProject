@@ -3,7 +3,8 @@
 <mapper namespace="com.example.mapper.e_replyMapper">
     
     <select id="list" resultType="com.example.domain.e_replyVO">
-	select r.*, count(e.r_no) cnt from (select e.*,u.u_image from e_reply e, users u where e_no=#{e_no} group by r_no) r left join e_like e on e.r_no=r.r_no group by r_no order by cnt desc
+	select r.*, count(e.r_no) cnt from (select e.*,u.u_image from e_reply e, users u where e_no=#{e_no} group by r_no) r left join e_like e on e.r_no=r.r_no group by r_no 
+	order by cnt desc limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
     <insert id="insert">
     	insert into e_reply(replyer,content,date,e_no) values(#{replyer},#{content},now(),#{e_no})
