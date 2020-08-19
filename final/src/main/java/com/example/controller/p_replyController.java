@@ -4,8 +4,10 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.domain.Criteria;
@@ -57,5 +59,18 @@ public class p_replyController {
 	@RequestMapping("reply")
 	public void reply() { 
 
+	}
+	
+	@RequestMapping(value="/like/update", method = RequestMethod.POST)
+	@ResponseBody
+	public void LikeUpdate(Model model,@RequestParam(value ="id") String id,@RequestParam(value ="r_no") int r_no) {
+		int chk=mapper.likeTableChk(id, r_no);
+		
+		if(chk==0) {
+			mapper.likeinsert(id, r_no);
+		}else {
+			mapper.likedelete(id, r_no);
+
+		}
 	}
 }

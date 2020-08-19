@@ -41,7 +41,8 @@
 				<input class=hId type="hidden" value=${id}>
 				<input class=rId type="hidden" value={{replyer}}>
 				<input class=r_no type="hidden" value={{r_no}}>
-				<span style="display:inline-block;float:right;"><img class="btnLike" style="width:13px;height:13px;" src=../display?fileName=likes.png/> {{cnt}}<span>
+				<span style="display:inline-block;float:right;">
+				<img class="btnLike" style="width:13px;height:13px;" src=../display?fileName=likes.png/> {{cnt}}<span>
 			</td>
 			<td width=50>
 				<img width=20 height=20 {{printaaa replyer}} class="rbtnDelete">	

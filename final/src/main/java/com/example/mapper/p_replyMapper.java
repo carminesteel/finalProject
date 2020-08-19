@@ -12,5 +12,8 @@ public interface p_replyMapper {
 	public List<p_replyVO> list(@Param("cri")Criteria cri, @Param("p_no")int p_no);;
 	public void insert(p_replyVO vo);
 	public void delete(int r_no);
+	public int likeTableChk(@Param("id")String id,@Param("r_no") int r_no);
+	public void likeinsert(String id, int r_no);
+	public void likedelete(String id, int r_no);
 	
 }

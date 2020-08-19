@@ -7,7 +7,14 @@
     <insert id="insert">
     	insert into p_reply(replyer,content,date,p_no) values(#{replyer},#{content},now(),#{p_no})
     </insert>
+    
     <delete id="delete">
     	delete from p_reply where r_no=#{r_no}
     </delete>
+    <delete id="likeDelete">
+    	delete from p_like where r_no=#{r_no}
+    </delete>
+    <select id="likeTableChk" resultType="int">
+    	select count(*) from p_like where r_no=#{r_no}
+    </select>
 </mapper>
