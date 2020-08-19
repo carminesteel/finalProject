@@ -8,29 +8,81 @@
    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
    <style>
-      #cart{
-         margin: auto;
-         text-align: center;
-         overflow: hidden;
-         border-collapse:collapse;
-      }
-      
-      .pButton{cursor: pointer; text-align:center; margin:auto;}
-      .pButton:hover{background-color:#74a4d7; color:white; border-color:#74a4d7;}
-      .pButtons{font-size:20px;font-weight:300; text-align:center; margin:auto;}
-      
-      #divFinal {
-         text-align: center;
-         padding-left: 185px;
-         margin-top: 20px;
-         height: 200px;
-      }
-   </style>
+   html{
+   	font-family:Noto Sans Kr
+   }
+   
+#cart {
+	margin: auto;
+	text-align: center;
+	overflow: hidden;
+	border-collapse: collapse;
+}
+
+.pButton {
+	cursor: pointer;
+	text-align: center;
+	margin: auto;
+}
+
+.pButton:hover {
+	background-color: #74a4d7;
+	color: white;
+	border-color: #74a4d7;
+}
+
+.pButtons {
+	font-size: 20px;
+	font-weight: 300;
+	text-align: center;
+	margin: auto;
+}
+
+#divFinal {
+	text-align: center;
+	padding-left: 185px;
+	margin-top: 20px;
+	height: 200px;
+}
+
+#exBody {
+	background-color: #e9ecef;
+	z-index: 1;
+}
+
+#exCenter {
+	background-color: white;
+	width: 1186px;
+	margin: auto;
+	z-index: 2;
+	padding: 45px;
+}
+
+#eContent {
+	font-size: 30px;
+	font-weight: 300;
+	width: 600px;
+	color:black;
+	margin-left:115px;
+	margin-bottom:35px;
+}
+
+#eTitle {
+	font-family: Noto Sans KR;
+	font-weight: bold;
+	font-size: 70px;
+	height: 80px;
+	color:black;
+	margin-left:115px;
+}
+</style>
 </head>
-<body>
+<body style="padding-top: 73px; margin-left: 0px; width: 100%;">
    <jsp:include page="../menu.jsp"></jsp:include>
-   <br><br><br><br><br><br><br><br>
    <div id="exBody">
+   	<div id=exCenter>
+   		<div id=eTitle>Cart</div>
+			<div id=eContent>장바구니</div>
 <%--    <table id="cart" border=1>
          <tr>
             <td><input type="checkbox" id="checkAll" checked></td>
@@ -58,37 +110,39 @@
          </c:forEach>
       </table> --%>
       
-      <table id="cart" border=1></table>
+      <table id="cart"></table>
       <script id="temp" type="text/x-handlebars-template">
-         <tr>
+         <tr style="height:50px;background:#2b4163;color:white;">
             <td><input type="checkbox" id="checkAll" checked></td>
-            <td>상품정보</td>
+            <td>상품이미지</td>
+			<td>상품정보</td>
             <td>상품금액</td>
             <td>수량</td>
             <td>총액</td>
          </tr>
 
          {{#each .}}
-            <tr class="row">
-               <td width=70><input type="checkbox" class="check" checked></td>
-               <td width=488>
+            <tr class="row" height=125px style="border-bottom:1px solid #b3c6e6;">
+               <td width=30px><input type="checkbox" class="check" checked></td>
+               <td width=90px;>
                   <div class="id" style="display:none;">{{id}}</div>
                   <div class="buydate" style="display:none;">{{buydate}}</div>
                   <div class="p_no" style="display:none;">{{p_no}}</div>
                   <div class="p_image" style="display:none;">{{p_image}}</div>
-                  <img src="/display?fileName={{p_image}}" width=150 height=150>
+                  <img src="/display?fileName={{p_image}}" height=90px style="object-fit:contain;">
                </td>
-               <td width=233 class="price">{{price}}</td>
-               <td width=344>
-                  <input type="button" value="-" class="minus">
-                  <input type="text" value="{{quantity}}" size=2 style="text-align:center;" class="quantity">
-                  <input type="button" value="+" class="plus">
+				<td width=385px; style="font-weight:500">{{title}}</td>
+               <td width=233 class="price">{{price}}원</td>
+               <td width=120px>
+                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;height:22px;width:22px;" type="button" value="-" class="minus">
+                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;text-align:center;" type="text" value="{{quantity}}" size=2 style="text-align:center;" class="quantity">
+                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;height:22px;width:22px;" type="button" value="+" class="plus">
                </td>
-               <td width=235 class="total">{{sum}}</td>
+               <td width=70px class="total">{{sum}}원</td>
             </tr>
          {{/each}}
       </script>
-      <input type="button" value="선택삭제" id="cartdelete">
+      <input style="float:right;padding-bottom:5px;margin-right:100px;margin-top:15px;background:#2b4163;border:none;width:100px;height:28px;font-weight:600;color:white;border-radius:5px 5px 5px 5px;" type="button" value="선택삭제" id="cartdelete">
       
       <div id="divFinal">
          <div id="divSum">
@@ -117,10 +171,12 @@
          </div>
       </div>
       <br>
+       <div class="pButton" id="order" style="width:513px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;margin-top:5px;line-height:49px">
+   <t class="pButtons" style="font-size:25px">구매하기</t>
+   </div>
    </div>
    
-   <div class="pButton" id="order" style="width:513px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;margin-top:5px;line-height:49px">
-   <t class="pButtons" style="font-size:25px">구매하기</t>
+  
    </div>
    <jsp:include page="../footer.jsp"></jsp:include>
 </body>
