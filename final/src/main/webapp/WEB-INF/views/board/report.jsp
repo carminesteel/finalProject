@@ -55,11 +55,11 @@ var b_no="${param.b_no}";
 						success:function(){
 							alert("신고되었습니다.");
 							window.close();
-							location.href="/board/list";
 						}
 					})
 				}else{
 					alert("이미 신고한 게시물 입니다.");
+					window.close();
 				}
 			}
 		});

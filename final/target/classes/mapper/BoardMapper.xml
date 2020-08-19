@@ -11,37 +11,37 @@
 
 	<select id="list" resultType="com.example.domain.BoardVO">
 		<![CDATA[
-			select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b_no>0 and b.id=u.id order by b_no desc limit 0,10
+			select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b_no>0 and b.id=u.id and report<10 order by b_no desc limit 0,10
 		]]>
 	</select>
 	<select id="listA" resultType="com.example.domain.BoardVO">
 		<![CDATA[
-    		 select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b.id=u.id order by b_like desc limit 0,10
+    		 select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b.id=u.id and report<10 order by b_like desc limit 0,10
     	]]>
     </select>
     <select id="listB" resultType="com.example.domain.BoardVO">
     	<![CDATA[
-      		select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b.id=u.id order by view desc limit 0,10
+      		select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b.id=u.id and report<10 order by view desc limit 0,10
        	]]>
     </select>
 	
 	<select id="infiniteScrollDown" resultType="com.example.domain.BoardVO">
 		<![CDATA[
-			select r.* from (select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b_no>0 and b.id=u.id order by b_no desc) r
+			select r.* from (select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b_no>0 and b.id=u.id and report<10 order by b_no desc) r
 			where r>=#{r} and r<#{r}+10
 		]]>
 	</select>
 	
 	<select id="AinfiniteScrollDown" resultType="com.example.domain.BoardVO">
 		<![CDATA[
-			select r.* from (select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b.id=u.id order by b_like desc) r
+			select r.* from (select b.*, u.nickname, u.u_image, @rownum := @rownum+1 AS r from board b, users u,(SELECT @rownum :=0) AS R where b.id=u.id and report<10 order by b_like desc) r
 			where r>=#{r} and r<#{r}+10;
 		]]>
 	</select>
 	
 	<select id="BinfiniteScrollDown" resultType="com.example.domain.BoardVO">
 		<![CDATA[
-			select r.* from (select b.*, u.nickname, u.u_image, @rownum := @rownum+1 r from board b, users u,(SELECT @rownum :=0) R where b.id=u.id order by view desc) r
+			select r.* from (select b.*, u.nickname, u.u_image, @rownum := @rownum+1 r from board b, users u,(SELECT @rownum :=0) R where b.id=u.id and report<10 order by view desc) r
 			where r>=#{r} and r<#{r}+10;
 		]]>
 	</select>
