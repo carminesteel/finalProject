@@ -147,7 +147,6 @@ alert(replyer);
 			data:{"b_no":b_no}, 
 			dataType:"json",
 			success:function(data){
-				alert("DD")
 				var temp=Handlebars.compile($("#readStatus").html());
 				$("#divStatus").html(temp(data));
 			}
@@ -163,6 +162,7 @@ alert(replyer);
 			success:function(data){
 				var temp=Handlebars.compile($("#temp").html());
 				$("#tbl1").html(temp(data));
+				
 			}
 		});
 	}
@@ -181,7 +181,9 @@ alert(replyer);
 				url:"/b_reply/insert",
 				data:{"b_no":b_no,"replyer":replyer,"content":content},
 				success:function(){		
-					R_list();
+					$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
+					$("#myModal").scrollTop($("#myModal")[0].scrollHeight);
+					alert("입력되었습니다.");
 					$(rfrm.content).val("");
 					}
 				
@@ -195,15 +197,15 @@ $("#tbl1").on("click", ".reRow .rbtnDelete", function(){
 	var hid=$(this).parent().parent().find(".hId").val();
 	var rid=$(this).parent().parent().find(".rId").val();
 	if(hid==rid){
-		alert("oooo"); 
-		alert(r_no);
 		if(!confirm("삭제하시겠습니까?")) return;
 		$.ajax({
 		      type:"post",
 		      url:"/b_reply/delete",
 		      data:{"r_no":r_no},
 		      success:function(){
-		    	  R_list();
+		    	$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
+				$("#myModal").scrollTop($("#myModal")[0].scrollHeight);
+				alert("삭제되었습니다.");
 		      }
 		   });
 	 }else if(hid!=rid){

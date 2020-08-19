@@ -142,6 +142,8 @@ body {
    </div>
 </body>
 <script>   
+var b_no="${vo.b_no}";
+var view="${vo.view}";
 
    getFollow();
    var follower="${id}";
