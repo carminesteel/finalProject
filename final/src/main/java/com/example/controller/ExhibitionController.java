@@ -84,7 +84,6 @@ public class ExhibitionController {
 				}
 			}
 			vo.setImages(images);
-			/* System.out.println(vo.toString()); */
 			service.update(vo);
 			return "redirect:list";  
 
@@ -96,7 +95,6 @@ public class ExhibitionController {
 		model.addAttribute("images", mapper.getE_imagelist(e_no));
 		model.addAttribute("re", mapper.replyCount(e_no));
 		model.addAttribute("review", Rmapper.list(cri,e_no));
-		System.out.println(model);
 	}
 
 	@RequestMapping("exh/list")
@@ -131,7 +129,6 @@ public class ExhibitionController {
 			}
 		}
 		vo.setImages(images);
-		/* System.out.println(vo.toString()); */
 		service.insert(vo);
 		return "redirect:list";
 	}

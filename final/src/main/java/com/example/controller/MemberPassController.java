@@ -48,7 +48,6 @@ public class MemberPassController {
    public int mailSending(HttpServletRequest request,String email,Model model,String e_mail, HttpServletResponse response_email)throws IOException {
       Random r = new Random();
       int dice = r.nextInt(4589362) + 49311; // 이메일로 받는 인증코드 부분 (난수)
-      System.out.println(dice);
       String setfrom = "sdasdadasdas@gamil.com";
       String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
       String title = "고객님의  본인 인증 번호 입니다."; // 제목
@@ -102,9 +101,6 @@ public class MemberPassController {
    @ResponseBody
    public Integer join_injeung(String emailPass_injeung,Model model,String dice,UsersVO vo,HttpServletResponse response_equals) throws IOException {
       int chk=-1;
-      System.out.println("마지막 : emailPass_injeung : " + emailPass_injeung);
-
-      System.out.println("마지막 : dice : " + dice);
 
       if (emailPass_injeung.equals(dice)) {
          chk=1;

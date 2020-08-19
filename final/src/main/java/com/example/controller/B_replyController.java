@@ -44,7 +44,6 @@ public ArrayList<B_replyVO> read(int b_no,Model model,Criteria cri) {
 	ArrayList<B_replyVO> array = new ArrayList<B_replyVO>();
 	array.addAll(mapper.rlist(b_no,cri));
 	model.addAttribute("replyCount",bmapper.r_cnt(b_no));
-	System.out.println(array.toString());
 	return array;
 }
 
@@ -79,7 +78,6 @@ public void insert(B_replyVO vo) {
 @ResponseBody
 	public int getCnt(int b_no) {
 	int cnt=mapper.getCnt(b_no);
-	System.out.println(cnt);
 
 	return cnt;
 	

@@ -41,7 +41,6 @@ public class e_replyController {
 		map.put("pm",pm);
 		map.put("list", mapper.list(cri,e_no));
 		map.put("count", eMapper.replyCount(e_no));
-		System.out.println(map);
 		return map;
 	}
 	

@@ -529,9 +529,9 @@ li {
 				<%-- <div style=text-align:right;display:inline-block;float:right;>
 					<img class=icons src="display?fileName=views.png"/> ${vo.view}&nbsp;
 					<img class=icons id="LikeBtn" src="display?fileName=likes.png"/> ${vo.b_like}&nbsp;
-					<img class=icons src="display?fileName=comment.png"/> ${vo.r_cnt}										
+					<img class=icons src="display?fileName=comment.png"/> ${vo.r_cnt}
 				</div>
-				<jsp:include page="b_reply/list.jsp"></jsp:include> 
+				<jsp:include page="b_reply/list.jsp"></jsp:include>
 			</div>
 		</div>	
 	</div> --%>

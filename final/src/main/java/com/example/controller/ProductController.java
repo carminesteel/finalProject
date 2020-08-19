@@ -61,7 +61,6 @@ public class ProductController {
 	@ResponseBody
 	public void paperInsert(MessageVO vo) { 
 		Mmapper.paperInsert(vo);
-		System.out.println(vo);
 	}
 	
 	@RequestMapping("/list")
@@ -127,7 +126,6 @@ public class ProductController {
 	         }
 	      }
 	      vo.setImages(images);
-	      System.out.println(vo.toString());
 	      pService.insert(vo);
 	      return "redirect:list";
 	   }
@@ -187,7 +185,6 @@ public class ProductController {
 	}
 	@RequestMapping("/order2")
 	public Model order2(String id,int tot,@RequestParam List<String> p_images,Model model) {
-		System.out.println(p_images);
 		model.addAttribute("uvo",umapper.read(id));
 		model.addAttribute("addrList",pmapper.addrList(id));
 		CartVO cvo=new CartVO();
@@ -265,7 +262,6 @@ public class ProductController {
 	
 	@RequestMapping("/payment/finish2")
 	public String finish2(HttpSession session,@RequestParam(value="p_nos") List<Integer> p_nos, int point,String requirement,String addr) {
-		System.out.println(p_nos);
 		String id=(String) session.getAttribute("id");
 		int cnt=pmapper.getOrders(id);
 		UsersVO uvo=new UsersVO();

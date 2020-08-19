@@ -54,11 +54,9 @@ public class MessageController {
 	@RequestMapping("/message/rRead")
 	public MessageVO rRead(MessageVO mvo) {
 		MessageVO vo=mapper.rRead(mvo);
-		System.out.println(vo);
 		if(vo.getReceiveDate()==null) {
 			mapper.updateRead(mvo);			
 		}
-		System.out.println(vo);
 		return mapper.rRead(mvo);
 	}
 }

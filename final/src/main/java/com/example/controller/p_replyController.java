@@ -42,7 +42,6 @@ public class p_replyController {
 		map.put("pm",pm);
 		map.put("list", mapper.list(cri,p_no));
 		map.put("count", pMapper.replyCount(p_no));
-		System.out.println(map);
 		return map;
 	}
 	@RequestMapping(value="insert",method=RequestMethod.POST)

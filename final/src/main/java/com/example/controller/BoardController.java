@@ -108,12 +108,10 @@ public class BoardController {
 			mapper.likeinsert(id, b_no);
 			like=mapper.likeTableCnt(b_no);
 			mapper.B_likeUpdate(b_no, like);
-			System.out.println(like);
 		}else {
 			mapper.likedelete(id, b_no);
 			like=mapper.likeTableCnt(b_no);
 			mapper.B_likeUpdate(b_no, like);
-			System.out.println(like);
 		}
 		
 		return like;
@@ -136,16 +134,16 @@ public class BoardController {
 		model.addAttribute("replyCount",rmapper.replyCount(b_no));
 	}
 	@RequestMapping(value="insert", method=RequestMethod.POST)
-	public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //占쏙옙占싸듸옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //�뜝�룞�삕�뜝�떥�벝�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 		MultipartFile file=multi.getFile("file");
 		
-		//占쏙옙占싹억옙占싸듸옙
-		if(!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 
-			String image=System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙 占쌩븝옙占쏙옙占쏙옙占십곤옙 占싹깍옙占쏙옙占쌔쇽옙 currentTimeMillis
+		//�뜝�룞�삕�뜝�떦�뼲�삕�뜝�떥�벝�삕
+		if(!file.isEmpty()) { // �뜝�룞�삕�뜝�떥�벝�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 
+			String image=System.currentTimeMillis() + file.getOriginalFilename(); // �뜝�룞�삕�뜝�떦紐뚯삕�뜝�룞�삕 �뜝�뙥釉앹삕�뜝�룞�삕�뜝�룞�삕�뜝�떗怨ㅼ삕 �뜝�떦源띿삕�뜝�룞�삕�뜝�뙏�눦�삕 currentTimeMillis
 			file.transferTo(new File(path + File.separator + image));
 			vo.setImage(image);
 		}
-		//첨占쏙옙占쏙옙占싹억옙占싸듸옙
+		//泥ⓨ뜝�룞�삕�뜝�룞�삕�뜝�떦�뼲�삕�뜝�떥�벝�삕
 			List<MultipartFile> files = multi.getFiles("files");
 			ArrayList<String> images=new ArrayList<String>();
 			for(MultipartFile addFile:files) {
@@ -157,7 +155,6 @@ public class BoardController {
 			}
 				
 				vo.setImages(images);
-				System.out.println(vo.toString());
 		service.insert(vo);
 		return "redirect:list";
 	}
@@ -165,20 +162,20 @@ public class BoardController {
 	public String updatePost(BoardVO vo, MultipartHttpServletRequest multi)throws Exception {
 		MultipartFile file = multi.getFile("file");
 		
-		// 占쏙옙占싹억옙占싸듸옙
-				if (!file.isEmpty()) { // 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙
+		// �뜝�룞�삕�뜝�떦�뼲�삕�뜝�떥�벝�삕
+				if (!file.isEmpty()) { // �뜝�룞�삕�뜝�떥�벝�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 					
-					// 占쏙옙占쏙옙占싱뱄옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+					// �뜝�룞�삕�뜝�룞�삕�뜝�떛諭꾩삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 					String oldImage=vo.getImage();
 					if(!oldImage.equals("")) {
 						new File(path + File.separator + oldImage).delete();
 					}
 					
-					String image = System.currentTimeMillis() + file.getOriginalFilename(); // 占쏙옙占싹몌옙占쏙옙 占쌩븝옙占쏙옙占쏙옙占십곤옙 占싹깍옙占쏙옙占쌔쇽옙 currentTimeMillis
+					String image = System.currentTimeMillis() + file.getOriginalFilename(); // �뜝�룞�삕�뜝�떦紐뚯삕�뜝�룞�삕 �뜝�뙥釉앹삕�뜝�룞�삕�뜝�룞�삕�뜝�떗怨ㅼ삕 �뜝�떦源띿삕�뜝�룞�삕�뜝�뙏�눦�삕 currentTimeMillis
 					file.transferTo(new File(path + File.separator + image));
 					vo.setImage(image);
 				}
-				//첨占쏙옙占쏙옙占쏙옙 占쏙옙占싸듸옙
+				//泥ⓨ뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떥�벝�삕
 				List<MultipartFile> files =multi.getFiles("files");
 				ArrayList<String> images=new ArrayList<String>();
 				for(MultipartFile attFile:files) {
@@ -196,12 +193,10 @@ public class BoardController {
 				}
 			vo.setImages(images);
 		service.update(vo);
-		System.out.println(vo.toString());
 		return "redirect:list";
 	}
 	@RequestMapping(value="delete" , method=RequestMethod.POST)
 	public String deletePost(BoardVO vo)throws Exception{
-		System.out.println(vo.toString());
 		String oldImage=vo.getImage();
 		if(!oldImage.equals("")){
 			new File(path + File.separator + oldImage).delete();
@@ -217,12 +212,12 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
-	//占싱뱄옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占�
+	//�뜝�떛諭꾩삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占�
 		@RequestMapping("/display")
 		@ResponseBody
 		public ResponseEntity<byte[]> display(String fileName) throws Exception {
 			ResponseEntity<byte[]> result = null;
-			// display fileName占쏙옙 占쌍댐옙 占쏙옙占�
+			// display fileName�뜝�룞�삕 �뜝�뙇�뙋�삕 �뜝�룞�삕�뜝占�
 			if (!fileName.equals("")) {
 				File file = new File(path + File.separator + fileName);
 				HttpHeaders header = new HttpHeaders();

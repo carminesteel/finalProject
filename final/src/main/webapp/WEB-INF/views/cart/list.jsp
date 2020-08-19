@@ -135,7 +135,7 @@
                <td width=233 class="price">{{price}}원</td>
                <td width=120px>
                   <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;height:22px;width:22px;" type="button" value="-" class="minus">
-                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;text-align:center;" type="text" value="{{quantity}}" size=2 style="text-align:center;" class="quantity">
+                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;text-align:center;" type="text" value="{{quantity}}" size=2 style="text-align:center;" class="quantity" readonly>
                   <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;height:22px;width:22px;" type="button" value="+" class="plus">
                </td>
                <td width=70px class="total">{{sum}}원</td>

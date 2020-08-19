@@ -45,7 +45,6 @@ public class QnaController {
 		map.put("list", mapper.list(p_no,cri));
 		
 		map.put("count",pMapper.qnaCount(p_no));
-		System.out.println(map);
 		return map;
 	}
 	
@@ -72,7 +71,6 @@ public class QnaController {
 	@RequestMapping(value="insert2",method=RequestMethod.POST)
 	@ResponseBody
 	public void insert2(Qna_replyVO vo) {
-		System.out.println(mapper.toString());
 		mapper.insert2(vo);
 		
 	}

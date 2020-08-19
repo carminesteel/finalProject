@@ -93,7 +93,6 @@ public class UsersController {
    public String loginNaverResult(String email, HttpSession session) {
       session.setAttribute("id", email);
       session.setAttribute("position", 1);
-      System.out.println(email);
       return "redirect:http://localhost:8088/";
    }
 
@@ -106,7 +105,6 @@ public class UsersController {
    @RequestMapping("/insert/read")
    @ResponseBody
    public Integer Iread(String id) {
-      System.out.println(id);
       int cnt = -1;
       UsersVO vo = mapper.read(id);
       if (vo == null) {
@@ -218,7 +216,6 @@ public class UsersController {
       model.addAttribute("plist",Mmapper.myPlist(id));
       
       List<String> followingList = Mmapper.myFollowing(id);
-      System.out.println(followingList.toString());
       ArrayList<UsersVO> followingInfo = new ArrayList<UsersVO>();
       if(followingList.size()>0) {
          for(String following:followingList) {
@@ -228,7 +225,6 @@ public class UsersController {
       model.addAttribute("followingInfo",followingInfo);
 
       List<String> followerList = Mmapper.myFollower(id);
-      System.out.println(followerList.toString());
       ArrayList<UsersVO> followerInfo = new ArrayList<UsersVO>();
       if(followerList.size()>0) {
          for(String follower:followerList) {
@@ -244,8 +240,6 @@ public class UsersController {
    @ResponseBody
    public int followChk(@RequestParam(value="follower") String follower,@RequestParam(value="target")String target) {
       int chk=mapper.followChk(follower, target);
-      
-      System.out.println(chk);
       return chk;
    }
    

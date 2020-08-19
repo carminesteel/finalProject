@@ -45,9 +45,6 @@ public class MemberController {
 			model.addAttribute("u_image",vo.getU_image());
 			model.addAttribute("introduce",vo.getIntroduce());
 			model.addAttribute("email",vo.getEmail());
-			
-			System.out.println("!");
-
 		}
 
 	
@@ -59,7 +56,6 @@ public class MemberController {
 
 		Random r = new Random();
 		int dice = r.nextInt(4589362) + 49311; // 이메일로 받는 인증코드 부분 (난수)
-		System.out.println("ㅆㅆㅆㅆㅆㅆㅆㅆㅆㅆㅆㅆㅃㅃㅃㅃㅃㅃㅃㅃㅃ"+dice);
 		String setfrom = "jungjaejae4885@gamil.com";
 		String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
 		String title = "회원가입 인증 이메일 입니다."; // 제목
@@ -125,9 +121,6 @@ public class MemberController {
 	@ResponseBody
 	public Integer join_injeung(String email_injeung,Model model,String dice,UsersVO vo,HttpServletResponse response_equals) throws IOException {
 		int chk=-1;
-		System.out.println("마지막 : email_injeung : " + email_injeung);
-
-		System.out.println("마지막 : dice : " + dice);
 
 		if (email_injeung.equals(dice)) {
 			chk=1;
