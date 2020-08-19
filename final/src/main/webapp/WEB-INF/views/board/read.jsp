@@ -5,247 +5,209 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>[작품정보]</title>
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-	<style>
+   <meta charset="UTF-8">
+   <title>[작품정보]</title>
+   <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+   <style>
 html {
-	font-family: Noto Sans Kr;
+   font-family: Noto Sans Kr;
 }
 
 
 
 #LikeBtn:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .icons {
-	width: 20px;
-	height: 20px;
+   width: 20px;
+   height: 20px;
 }
 
 body {
-	margin: 0;
+   margin: 0;
 }
 
 #lightBox {
-	display: inline-block;
-	width: 100%;
-	height:100%;
-	position: absolute;
-	/* 			top:50%;
-			left:50%;
-			transform:translate(-50%, -50%); */
-	z-index: 899;
+   display: inline-block;
+   width: 100%;
+   height:100%;
+   position: absolute;
+   /*          top:50%;
+         left:50%;
+         transform:translate(-50%, -50%); */
+   z-index: 899;
 }
 
 #lightContent {
-	background: white;
-	width: 1392px;
-	margin: auto;
-	padding: 0px;
+   background: white;
+   width: 1392px;
+   margin: auto;
+   padding: 0px;
 }
 
 #lightInfo {
-	width: 1392px;
-	margin: auto;
-	background: none;
-	vertical-align: middle;
+   width: 1392px;
+   margin: auto;
+   background: none;
+   vertical-align: middle;
 }
 
 #image {
-	width: 64px;
-	height: 64px;
-	border-radius: 50%;
-	display: inline-block;
-	margin-bottom: 20px;
+   width: 64px;
+   height: 64px;
+   border-radius: 50%;
+   display: inline-block;
+   margin-bottom: 20px;
 }
 
 #artInfo {
-	margin-top: 20px;
-	margin-left: 15px;
-	display: inline-block;
-	height: 65px;
-	color: white;
-	font-size: 17px;
+   margin-top: 20px;
+   margin-left: 15px;
+   display: inline-block;
+   height: 65px;
+   color: white;
+   font-size: 17px;
 }
 
 #lightBottom {
-	width: 1130px;
-	margin: auto;
+   width: 1130px;
+   margin: auto;
 }
 .lbClose{
-	width:35px;
-	height:35px;
-	position:fixed;
-	right:50px;
-	top:20px;
-	
+   width:35px;
+   height:35px;
+   position:fixed;
+   right:50px;
+   top:20px;
+   
 }
 </style>
 </head>
 <body>
    
-	<div id=lightBox>	
-	
-		<div id=lightInfo>	
-			<img class=lbClose src="display?fileName=xiconWhite.png"/>
-			<img id="image" src="display?fileName=${vo.u_image}"/>
-			<div id=artInfo>
-				<b name=title>${vo.title}</b>
-				<br>
-				${vo.nickname}
-			</div>
-		</div>
-		<div id=lightContent>
-		<input type="hidden" name="image" value="${vo.image}">
-			<br><br><br><br>
-			<c:forEach items="${list}" var="image">
-				<img src="display?fileName=${image}" name="files" width="100%"/>
-				<br><br><br><br>
-			</c:forEach>
- 			<div id=lightBottom>
-				<div style="height:100px;width:100%">
-					<span style="display:inline-block;float:left;">
-						<img style="border-radius:50%;" width=90px height=90px src="display?fileName=${vo.u_image}"/>
-					</span>
-					<span style="display:inline-block;float:left;margin-left:18px;margin-top:18px;">
-						<b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;<a style="all:unset;font-size:14px;cursor:pointer;" id="follow">팔로우</a><br>
-						<b style="all:unset;color:#93a1a2;font-size:15px">${vo.introduce}</b>
-					</span>
-				</div>
-				<div>
-					<b style="font-size:30px;">${vo.title}</b>
-					<br>
-					<b style="all:unset;font-size:20px;">${vo.content}</b>
-					<br>
-					<div style="display:inline-block;float:right;"></div>
-				</div>
-				<br>
-				<div style=text-align:left;display:inline-block;float:left;>
-				<form name="frm" method="post" action="update" enctype="multipart/form-data">
-				
-					<input type="hidden" name="b_no" value="${vo.b_no}">
-					<input type="hidden" name="id" value="${vo.id}">
-					<input type="hidden" name="image" value="${vo.image}">
-					<c:if test="${id==vo.id}">
-						<!-- <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="submit" value="수정"> -->		
-						<input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
-					</c:if>
-					<input type="button" value="신고하기" id="report" style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:75px;height:28px;font-size:15px;">
-				</form>
-				</div>
-				<jsp:include page="../b_reply/list.jsp"/> 
-			</div> 
-		</div>	
-	</div>
+   <div id=lightBox>   
+   
+      <div id=lightInfo>   
+         <img class=lbClose src="display?fileName=xiconWhite.png"/>
+         <img id="image" src="display?fileName=${vo.u_image}"/>
+         <div id=artInfo>
+            <b name=title>${vo.title}</b>
+            <br>
+            ${vo.nickname}
+         </div>
+      </div>
+      <div id=lightContent>
+      <input type="hidden" name="image" value="${vo.image}">
+         <br><br><br><br>
+         <c:forEach items="${list}" var="image">
+            <img src="display?fileName=${image}" name="files" width="100%"/>
+            <br><br><br><br>
+         </c:forEach>
+          <div id=lightBottom>
+            <div style="height:100px;width:100%">
+               <span style="display:inline-block;float:left;">
+                  <img style="border-radius:50%;" width=90px height=90px src="display?fileName=${vo.u_image}"/>
+               </span>
+               <span style="display:inline-block;float:left;margin-left:18px;margin-top:18px;">
+                  <b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;<a style="all:unset;font-size:14px;cursor:pointer;" id="follow">팔로우</a><br>
+                  <b style="all:unset;color:#93a1a2;font-size:15px">${vo.introduce}</b>
+               </span>
+            </div>
+            <div>
+               <b style="font-size:30px;">${vo.title}</b>
+               <br>
+               <b style="all:unset;font-size:20px;">${vo.content}</b>
+               <br>
+               <div style="display:inline-block;float:right;"></div>
+            </div>
+            <br>
+            <div style=text-align:left;display:inline-block;float:left;>
+            <form name="frm" method="post" action="update" enctype="multipart/form-data">
+            
+               <input type="hidden" name="b_no" value="${vo.b_no}">
+               <input type="hidden" name="id" value="${vo.id}">
+               <input type="hidden" name="image" value="${vo.image}">
+               <c:if test="${id==vo.id}">
+                  <!-- <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="submit" value="수정"> -->      
+                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
+               </c:if>
+               <input type="button" value="신고하기" id="report" style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:75px;height:28px;font-size:15px;">
+            </form>
+            </div>
+            <jsp:include page="../b_reply/list.jsp"/> 
+         </div> 
+      </div>   
+   </div>
 </body>
-<script>
-	getFollow();
-	var follower="${id}";
-	var target="${vo.id}";
-	
-	$("#btnReply").hide();
-	
-	var id="${id}";
-	var b_no="${vo.b_no}";
+<script>   
 
-	$("#report").on("click", function(){
-		var b_no="${vo.b_no}";
-		window.open("/board/report?b_no="+b_no,"","width=500px, height=400px");
-	});
+   getFollow();
+   var follower="${id}";
+   var target="${vo.id}";
+   
+   $("#btnReply").hide();
+   
+   var id="${id}";
+   var b_no="${vo.b_no}";
 
-	$("#follow").on("click",function(){
-		$.ajax({
-			type:"post",
-			url:"/user/followUpdate",
-			data:{"follower":follower,"target":target},
-			success:function(data){
-				$("#follower").html("팔로워: "+data);
-				getFollow(); 
- 			}
-		})
-	});
+   $("#report").on("click", function(){
+      var b_no="${vo.b_no}";
+      window.open("/board/report?b_no="+b_no,"","width=600px, height=800px");
+   });
+
+   $("#follow").on("click",function(){
+      $.ajax({
+         type:"post",
+         url:"/user/followUpdate",
+         data:{"follower":follower,"target":target},
+         success:function(data){
+            $("#follower").html("팔로워: "+data);
+            getFollow(); 
+          }
+      })
+   });
 
 $("#LikeBtn").on("click",function(){
-	$.ajax({
-		type:"post",
-		url:"/board/like/update",
-		data:{"id":id,"b_no":b_no},
-		dataType:"json",
-		success:function(data){
-			$("#LikeBtn").val("좋아요/"+data);
-			location.reload()
-		}
-	})
+   $.ajax({
+      type:"post",
+      url:"/board/like/update",
+      data:{"id":id,"b_no":b_no},
+      dataType:"json",
+      success:function(data){
+         $("#LikeBtn").val("좋아요/"+data);
+         location.reload()
+      }
+   })
 })
 
  $(".lbClose").on("click", function(){
-        	modal.style.display = "none";
-        	$('html').css("overflow", "scroll");
-        	$('html').css("overflow-x", "hidden");
+           modal.style.display = "none";
+           $('html').css("overflow", "scroll");
+           $('html').css("overflow-x", "hidden");          
           })
 
-/* $("#btnReply").on("click",function(){
-	$(rfrm).show();
-	$(rfrm1).show();
-	$("#btnReply").hide();
-	$("#btnReply2").show();
-})
-$("#btnReply2").on("click",function(){
-	$(rfrm).hide();
-	$(rfrm1).hide();
-	$("#btnReply").show();
-	$("#btnReply2").hide();
-}) */
 
-/* $(frm).submit(function(e){
-	e.preventDefault();
-	if(!confirm("수정하실래요?")) return;
-	frm.submit();
-	
-}); */
-$("#image").on("click", function(){
-	$(frm.file).click();
-});
-
-$("#btnImage").on("click", function(){
-	$(frm.files).click();
-});
-
-$(frm.files).on("change", function(){
-	var files=$(frm.files)[0].files;
-	var html="";
-	$.each(files, function(index, files){
-		html+="<img src='"+URL.createObjectURL(files)+"'>";
-		$("#listFile").html(html);
-	});
-});
-
-$(frm.file).on("change", function(){
-	var file=$(frm.file)[0].files[0];
-	$("#image").attr("src", URL.createObjectURL(file));
-});
 $("#btnDelete").on("click", function(){
-	if(!confirm("삭제하실래요?")) return;
-	frm.action="delete";
-	frm.submit();
+   if(!confirm("삭제하실래요?")) return;
+   frm.action="delete";
+   frm.submit();
 });
 
 function getFollow(){
-	$.ajax({
-		type:"post",
-		url:"/user/followChk",
-		data:{"follower":follower,"target":target},
-		success:function(data){
-			if(data==1){
-				$("#follow").html("언팔로우");
-			}else{
-				$("#follow").html("팔로우");
-			}
-		}
-	});
+   $.ajax({
+      type:"post",
+      url:"/user/followChk",
+      data:{"follower":follower,"target":target},
+      success:function(data){
+         if(data==1){
+            $("#follow").html("언팔로우");
+         }else{
+            $("#follow").html("팔로우");
+         }
+      }
+   });
 }
 
 </script>
