@@ -167,11 +167,18 @@ a:hover{text-decoration:none;color:black;}
 				</div>
 			</div>
 			<div style="border-bottom:1px solid #74a4d7;border-top:1px solid #74a4d7;height:100px;width:1130px;margin:auto;font-family:Noto Sans KR;font-size:25px;font-weight:700;text-align:center;line-height:100px;">베스트 상품리뷰</div>
-			<table style="height:475px;width:575px;margin:auto;border-collapse:collapse;">
-				<tr><td class=reviews><div class=rContent>[rating]<br>asdofk*** : 아 존나이뻐 미칠거같애여아 존나이뻐 미칠거같애여 아 존나이뻐 미칠거같애여아 존나이뻐 미칠거같애여아 존나이뻐 </div></td></tr>
-				<tr><td class=reviews><div class=rContent>[rating]<br>asdofk*** : 만족합니다 두번째 구매해요 사랑해요 작가님 건강하세요 사랑ㄷ해요</div></td></tr>
-				<tr><td style="border-bottom:none;font-size:17px;letter-spacing:-1px;"><div class=rContent>[rating]<br>asdofk*** : 너무 맘에 들어서 세번째 구매해요</div></td></tr>
-			</table>
+		         <table style="height:475px;width:575px;margin:auto;border-collapse:collapse;">
+            <c:forEach items="${review}" var="list" varStatus="status" begin="0" end="2">
+               <tr>
+               <td></td>
+                     <td style="border-bottom:none;font-size:17px;letter-spacing:-1px; margin-auto; margin:50px; magin-bottom:5px; padding:20px; width:500px; text-align:left; border-bottom:1px solid #74a4d7;">   
+                        <div width=700><b>${list.replyer} : <br><br></b>${list.content}</div>
+                        <br>                     
+                     </td>
+                     <td></td>
+               </tr>
+            </c:forEach>
+         </table>
 			
 			<table id=pMenu>
 				<tr style="height:100px;border-top:1px solid #74a4d7;border-bottom:1px solid #74a4d7;text-align:center;font-family:Noto Sans KR;font-size:25px;font-weight:700;">

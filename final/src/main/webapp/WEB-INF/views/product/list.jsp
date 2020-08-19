@@ -43,6 +43,7 @@ html {
    padding-left: 20px;
    background: white;
    border-radius: 5px 5px 5px 5px;
+   margin-bottom:35px;
 }
 
 .menuB {
@@ -181,17 +182,20 @@ nav a {
 }
 
 .more {
+	margin-left:1550px;
 	font-family: Noto Sans KR;
-	float: right;
 	text-align: center;
 	margin-right: 55px;
 	background: #2b4163;
 	color: white;
 	border: 1px solid black;
 	border-radius: 20px 20px 20px 20px;
-	width: 100px;
+	width: 160px;
 	height: 30px;
 	text-decoration:none;
+	padding-left:15px;
+	padding-right:15px;
+	padding-bottom:5px;
 }
 </style>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -213,11 +217,11 @@ nav a {
             </nav></td>
       </tr>
    </table>
-   <div id=exBody style="padding-top:0px;">
-      <c:if test="${id!=null}">
-		<a href="/board/insert" class=more id=bButton>작품 올리기</a> <br>
-	  </c:if>
-
+    <c:if test="${id!=null}">
+		<a href="/board/insert" class=more id=bButton style="margin-bottom:35px;">Upload</a>
+	</c:if>
+	<br><br>
+   <div id=exBody style="padding-top:0px;">    
          <div id="best">
             <div id="besttab"></div>
             <script id="besttemp" type="text/x-handlebars-template">
