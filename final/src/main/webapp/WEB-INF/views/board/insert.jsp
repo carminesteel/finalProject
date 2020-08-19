@@ -44,6 +44,7 @@ body {
 	font-size: 70px;
 	height: 90px;
 	color: black;
+	margin-left:40px;
 }
 
 #eContent {
@@ -52,6 +53,7 @@ body {
 	width: 600px;
 	color:black;
 	margin-bottom:30px;
+	margin-left:40px;
 }
 
 #exCenter {
@@ -77,7 +79,7 @@ body {
 			<form name="frm" method="post" action="insert"  enctype="multipart/form-data">
 				<div id=eContent>작품 업로드</div>
 				<input type="hidden" name="id" value="${id}">
-				<div style="width:1101px;height:1210px;margin:auto;padding:0px;">
+				<div style="width:1101px;height:1210px;margin:auto;padding:0px;margin-bottom:20px;">
 					<input type="text" placeholder="작품명을 입력해주세요." name="title" style="margin-bottom:15px;display:inline-block;width:1040px;height:47px;border:1px solid black;font-size:30px;padding:30px;">
 					<div style="display:inline-block;padding:0px;margin:auto;text-align:center;width:1101px;height:792px;overflow:auto;overflow-x:hidden;margin-bottom:15px; border:1px dashed black;">
 						<input type="file" name="file">
@@ -88,11 +90,17 @@ body {
 					</div>
 					<textarea placeholder="작품에 대해 설명해주세요." name="content" style="resize:none;display:inline-block;padding:0px;margin:auto;width:1051px;height:230px;border:1px solid black;font-size:15px;padding:25px;"></textarea>									
 				</div>
-				<div style="float:right;margin-right:6%; margin-top:10px;">
-					<input type="submit" value="저장">
-					<input type="reset" value="취소">
-					<input type="button" value="목록" onClick="location.href='list'">
-				</div>
+
+					<input
+						style="all: unset;float:right;margin-right:40px; background: #2e6cb5; width: 100px; height: 30px; color: white; border-radius: 5px 5px 5px 5px;text-align:center;"
+						type="submit" value="저장"> 
+					<input
+						style="all: unset; background: #2e6cb5; width: 70px; height: 30px;margin-left:40px; color: white; border-radius: 5px 5px 5px 5px;text-align:center;"
+						 type="reset" value="취소">
+					<input
+						style="all: unset; background: #2e6cb5; width: 70px; height: 30px; color: white; border-radius: 5px 5px 5px 5px;text-align:center;"
+					 type="button" value="목록" onClick="location.href='list'">
+
 			</form>
 		</div>
 	</div>		
