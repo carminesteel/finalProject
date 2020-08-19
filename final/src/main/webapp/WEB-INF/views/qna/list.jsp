@@ -67,7 +67,7 @@
 	<button id="btnInsert3">문의하기</button>
 	<br><br>
 	
-	<div id="pagination"></div>
+	<div id="pagination2"></div>
 </body>
 <script>
 
@@ -79,7 +79,7 @@ var qe="${qe}";
 $(".btnInsert2").hide();
 $(".txtReply").hide();
 
-getList();
+getList2();
 
 
 Handlebars.registerHelper("printStyle",function(id){
@@ -142,7 +142,7 @@ $("#tbl1").on("click",".replydate .btnReply", function(){
 		
 	});
 	/*댓글목록띄우기*/
-	function getList(){
+	function getList2(){
 		$.ajax({
 			type:"get",
 			url:"/qna/list",
@@ -165,13 +165,13 @@ $("#tbl1").on("click",".replydate .btnReply", function(){
 				if(data.pm.next){ 
 					str += "<a href='" + (data.pm.endPage+1) + "'>▶</a>" 
 				} 
-				$("#pagination").html(str);
+				$("#pagination2").html(str);
 
 			}
 		});
 	}
 	
-	$("#pagination").on("click", "a", function(e){ 
+	$("#pagination2").on("click", "a", function(e){ 
 		e.preventDefault();
 		page=$(this).attr("href");
 		
@@ -189,7 +189,7 @@ $("#tbl1").on("click",".replydate .btnReply", function(){
 			success:function(){
 				alert("댓글이 삭제되었당!");
 				$("#qe").html(--qe);
-				getList();
+				getList2();
 			}
 		});
 	});
