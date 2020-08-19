@@ -347,6 +347,7 @@ li {
 		<c:forEach items="${list}" var="list" begin="0" end="9">
 			<div class="imgContainer">
 				<input class="idxBno" type="hidden" value="${list.b_no}"/>
+				<input class="idxView" type="hidden" value="${list.view}"/>
 				<img class="idxBimg" src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
 				<div class="hoverInfo1">${list.title}</div><br><br><br>
@@ -445,6 +446,7 @@ li {
 		<c:forEach items="${flist}" var="flist" begin="0" end="9">
 			<div class="imgContainer">
 				<input class="fdBno" type="hidden" value="${flist.b_no}"/>
+				<input class="idxView" type="hidden" value="${flist.view}"/>
 				<img class="idxFimg" src="display?fileName=${flist.image}"/>
 				<div class="hoverInfo">
 				<div class="hoverInfo1">${flist.title}</div><br><br><br>
@@ -582,8 +584,8 @@ li {
         // When the user clicks on the button, open the modal 
         $(".idxBimg").on("click", function(){
         	b_no=$(this).parent().find(".idxBno").val();
-        	alert(b_no);
-        	$("#myModal").load("../board/read?b_no="+b_no)
+    		var view = $(this).parent().find(".idxView").val();
+    		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
         	$('html').css("overflow", "hidden");        	
         	$('.modal').css("overflow", "scroll");
         	$('html').css("overflow-x", "hidden");
@@ -593,8 +595,8 @@ li {
         
         $(".idxFimg").on("click", function(){
         	b_no=$(this).parent().find(".fdBno").val();
-        	alert(b_no);
-        	$("#myModal").load("../board/read?b_no="+b_no)
+    		var view = $(this).parent().find(".idxView").val();
+    		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
         	$('html').css("overflow", "hidden");        	
         	$('.modal').css("overflow", "scroll");
         	$('html').css("overflow-x", "hidden");
@@ -610,26 +612,6 @@ li {
         var span = document.getElementsByClassName("close")[0];                                          
  
         // When the user clicks on the button, open the modal 
-        $(".idxBimg").on("click", function(){
-        	b_no=$(this).parent().find(".idxBno").val();
-        	$("#myModal").load("../board/read?b_no="+b_no)
-        	$('html').css("overflow", "hidden");        	
-        	$('.modal').css("overflow", "scroll");
-        	$('html').css("overflow-x", "hidden");
-        	$('.modal').css("overflow-x", "hidden");
-            modal.style.display = "block";
-        })
- 	
-         $(".idxBimg").on("click", function(){
-        	b_no=$(this).parent().find(".idxBno").val();
-        	$("#myModal").load("../board/read?b_no="+b_no)
-        	$('html').css("overflow", "hidden");        	
-        	$('.modal').css("overflow", "scroll");
-        	$('html').css("overflow-x", "hidden");
-        	$('.modal').css("overflow-x", "hidden");
-            modal.style.display = "block";
-        })
-        
         
         
         

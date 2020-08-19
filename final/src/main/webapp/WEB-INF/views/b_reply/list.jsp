@@ -180,7 +180,8 @@ alert(replyer);
 				type:"post",
 				url:"/b_reply/insert",
 				data:{"b_no":b_no,"replyer":replyer,"content":content},
-				success:function(){		
+				success:function(){
+					view=parseInt(view)-1;
 					$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 					$("#myModal").scrollTop($("#myModal")[0].scrollHeight);
 					alert("입력되었습니다.");
@@ -203,6 +204,7 @@ $("#tbl1").on("click", ".reRow .rbtnDelete", function(){
 		      url:"/b_reply/delete",
 		      data:{"r_no":r_no},
 		      success:function(){
+		    	view=parseInt(view)-1;
 		    	$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 				$("#myModal").scrollTop($("#myModal")[0].scrollHeight);
 				alert("삭제되었습니다.");
