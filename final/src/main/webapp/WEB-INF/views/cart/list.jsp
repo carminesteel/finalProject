@@ -144,7 +144,22 @@
       </script>
       <input style="float:right;padding-bottom:5px;margin-right:100px;margin-top:15px;background:#2b4163;border:none;width:100px;height:28px;font-weight:600;color:white;border-radius:5px 5px 5px 5px;" type="button" value="선택삭제" id="cartdelete">
       
-      <div id="divFinal">
+      <table id=divFinal>
+      	<tr>
+      		<td>상품금액</td>
+      		<td>총 배송비</td>
+      		<td>총 할인금액</td>
+      		<td>결제예정금액</td>
+      	</tr>
+      	<tr>
+      		<td><input type="text" id="totSum" readonly> 원</td>
+      		<td><input type="text" value="2500" readonly id="delivery"> 원</td>
+      		<td></td>
+      		<td><input type="text" id="ttotSum" readonly> 원 <br></td>
+      	</tr>
+      </table>
+      
+     <!--  <div id="divFinal">
          <div id="divSum">
             <div>
                <h5>상품금액</h5>
@@ -169,7 +184,7 @@
             <input type="text" id="ttotSum" readonly> 원 <br>
             </div>
          </div>
-      </div>
+      </div> -->
       <br>
        <div class="pButton" id="order" style="width:513px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;margin-top:5px;line-height:49px">
    <t class="pButtons" style="font-size:25px">구매하기</t>
@@ -249,7 +264,7 @@
                var row=$(this).parent().parent();
                price=row.find(".price").html();
                quantity=row.find(".quantity").val();
-               sum=price*quantity;
+               sum=parseInt(price)*parseInt(quantity);
                total=total+sum;
             });
             
@@ -278,7 +293,7 @@
          var row=$(this).parent().parent();
          price=row.find(".price").html();
          quantity=row.find(".quantity").val();
-         sum=price*quantity;
+         sum=parseInt(price)*parseInt(quantity);
          total=total+sum;
       });
       if(total>=50000){

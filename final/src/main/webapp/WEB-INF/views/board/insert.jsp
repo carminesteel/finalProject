@@ -164,7 +164,7 @@ $(frm.files).on("change", function(){
 	
 	$.each(files, function(index, files){
 		$("#images").hide();
-		html += "<img class='details' src='" + URL.createObjectURL(files) + "'>";
+		html += "<img class='details' style='width:1100px' src='" + URL.createObjectURL(files) + "'>";
 		$("#listFile").html(html);
 	});	
 });
@@ -172,6 +172,7 @@ $(frm.files).on("change", function(){
 $(frm.file).on("change", function(){
 	var file=$(frm.file)[0].files[0];
 	$("#image").attr("src", URL.createObjectURL(file));
+	$("#image").css("max-width","1100px");
 });
 
 </script>

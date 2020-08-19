@@ -33,19 +33,19 @@ public void list() {
 
 @RequestMapping(value="read", method=RequestMethod.POST)
 @ResponseBody
-	public ArrayList<B_replyVO> read(int b_no,Model model,Criteria cri) {
-		cri.setPerPageNum(3);
-		PageMaker pm=new PageMaker();
-		pm.setCri(cri);
-		pm.setTotalCount(mapper.replyCount(b_no)-1);
-		model.addAttribute("cri",cri);
-		model.addAttribute("pm",pm);
-		
-		ArrayList<B_replyVO> array = new ArrayList<B_replyVO>();
-		array.addAll(mapper.rlist(b_no,cri));
-		model.addAttribute("replyCount",mapper.replyCount(b_no));
-		System.out.println(array.toString());
-		return array;
+public ArrayList<B_replyVO> read(int b_no,Model model,Criteria cri) {
+	cri.setPerPageNum(10);
+	PageMaker pm=new PageMaker();
+	pm.setCri(cri);
+	pm.setTotalCount(bmapper.r_cnt(b_no));
+	model.addAttribute("cri",cri);
+	model.addAttribute("pm",pm);
+	
+	ArrayList<B_replyVO> array = new ArrayList<B_replyVO>();
+	array.addAll(mapper.rlist(b_no,cri));
+	model.addAttribute("replyCount",bmapper.r_cnt(b_no));
+	System.out.println(array.toString());
+	return array;
 }
 
 @RequestMapping(value="insert", method=RequestMethod.POST)
