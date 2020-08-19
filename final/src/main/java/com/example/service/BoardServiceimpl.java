@@ -57,7 +57,7 @@ public class BoardServiceimpl implements BoardService{
 	@Transactional
 	@Override
 	public BoardVO read(int b_no) {
-		mapper.updateView(b_no);
+		
 		return mapper.read(b_no);
 	}
 }

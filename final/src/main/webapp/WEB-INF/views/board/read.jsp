@@ -141,8 +141,7 @@ body {
 		</div>	
 	</div>
 </body>
-<script>	
-
+<script>
 	getFollow();
 	var follower="${id}";
 	var target="${vo.id}";
@@ -185,10 +184,49 @@ $("#LikeBtn").on("click",function(){
  $(".lbClose").on("click", function(){
         	modal.style.display = "none";
         	$('html').css("overflow", "scroll");
-        	$('html').css("overflow-x", "hidden");    		
+        	$('html').css("overflow-x", "hidden");
           })
 
+/* $("#btnReply").on("click",function(){
+	$(rfrm).show();
+	$(rfrm1).show();
+	$("#btnReply").hide();
+	$("#btnReply2").show();
+})
+$("#btnReply2").on("click",function(){
+	$(rfrm).hide();
+	$(rfrm1).hide();
+	$("#btnReply").show();
+	$("#btnReply2").hide();
+}) */
 
+/* $(frm).submit(function(e){
+	e.preventDefault();
+	if(!confirm("수정하실래요?")) return;
+	frm.submit();
+	
+}); */
+$("#image").on("click", function(){
+	$(frm.file).click();
+});
+
+$("#btnImage").on("click", function(){
+	$(frm.files).click();
+});
+
+$(frm.files).on("change", function(){
+	var files=$(frm.files)[0].files;
+	var html="";
+	$.each(files, function(index, files){
+		html+="<img src='"+URL.createObjectURL(files)+"'>";
+		$("#listFile").html(html);
+	});
+});
+
+$(frm.file).on("change", function(){
+	var file=$(frm.file)[0].files[0];
+	$("#image").attr("src", URL.createObjectURL(file));
+});
 $("#btnDelete").on("click", function(){
 	if(!confirm("삭제하실래요?")) return;
 	frm.action="delete";

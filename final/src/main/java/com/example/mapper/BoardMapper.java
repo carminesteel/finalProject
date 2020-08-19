@@ -38,7 +38,7 @@
 		public void updateReport(BoardVO vo);
 		
 		//view
-		public void updateView(int b_no);
+		public void updateView(BoardVO vo);
 		
 		//foreign key �빐�젣 諛� �꽕�젙
 		public void finit();

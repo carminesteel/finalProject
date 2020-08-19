@@ -322,6 +322,7 @@ li {
 		<c:forEach items="${list}" var="vo">
 			<div class="imgContainer">
 				<input class="idxBno" type="hidden" value="${vo.b_no}"/>
+				<input class="idxView" type="hidden" value="${vo.view}"/>
 				<input type="hidden" class="r" data-r="${vo.r}" value="${vo.r}">
 				<img class="idxBimg" src="display?fileName=${vo.image}"/>
 				<div class="hoverInfo">
@@ -346,6 +347,7 @@ li {
 		<c:forEach items="${listA}" var="Avo">
 			<div class="imgContainer">
 				<input class="idxBno" type="hidden" value="${Avo.b_no}"/>
+				<input class="idxView" type="hidden" value="${Avo.view}"/>
 				<input type="hidden" class="Ar" data-r="${Avo.r}" value="${Avo.r}">
 				<img class="idxBimg" src="display?fileName=${Avo.image}"/>
 				<div class="hoverInfo">
@@ -370,6 +372,7 @@ li {
 		<c:forEach items="${listB}" var="Zvo">
 			<div class="imgContainer">
 				<input class="idxBno" type="hidden" value="${Zvo.b_no}"/>
+				<input class="idxView" type="hidden" value="${Zvo.view}"/>
 				<input type="hidden" class="Br" data-r="${Zvo.r}" value="${Zvo.r}">
 				<img class="idxBimg" src="display?fileName=${Zvo.image}"/>
 				<div class="hoverInfo">
@@ -444,9 +447,10 @@ li {
 
 	});
 	
-	$(".BestMenu").on("click",".imgContainer img", function() {
+	$(".BestMenu").on("click",".imgContainer .idxBimg", function() {
 		var b_no = $(this).parent().find(".idxBno").val();
-		$("#myModal").load("../board/read?b_no="+b_no)  
+		var view = $(this).parent().find(".idxView").val();
+		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);  
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");
@@ -456,7 +460,8 @@ li {
 	});
 	$(".ViewMenu").on("click",".imgContainer img", function() {
 		var b_no = $(this).parent().find(".idxBno").val();		
-		$("#myModal").load("../board/read?b_no="+b_no)
+		var view = $(this).parent().find(".idxView").val();
+		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);  
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");
@@ -466,7 +471,8 @@ li {
 	});
 	$(".NewMenu").on("click",".imgContainer img", function() {
 		var b_no = $(this).parent().find(".idxBno").val();
-		$("#myModal").load("../board/read?b_no="+b_no)
+		var view = $(this).parent().find(".idxView").val();
+		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);  
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");
@@ -483,7 +489,7 @@ li {
 					var lastr=$(".r:last").attr("data-r");
 					$.ajax({
 						type:"post",
-						url:"/board/infiniteScrollDown",
+						url:"infiniteScrollDown",
 						headers:{
 							"Content-Type":"application/json",
 							"X-HTTP-Method-Override":"POST",
@@ -501,7 +507,7 @@ li {
 							if(data!=""){
 								$(data).each(function(){
 									str += "<div class='imgContainer' style='margin-left:19px;'>"
-										+		"<input class='idxBno' type='hidden' value='"+this.b_no+"'>"
+										+		"<input class='idxBno' type='hidden' value='"+this.b_no+"'/>"
 										+		"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
 										+		"<img class='idxBimg' src='display?fileName="+this.image+"'/>"
 										+		"<div class='hoverInfo'>"
@@ -537,7 +543,7 @@ li {
 					var lastr=$(".Ar:last").attr("data-r");
 					 $.ajax({
 						type:"post",
-						url:"/board/AinfiniteScrollDown",
+						url:"AinfiniteScrollDown",
 						headers:{
 							"Content-Type":"application/json",
 							"X-HTTP-Method-Override":"POST",
@@ -555,7 +561,7 @@ li {
 							if(data!=""){
 								$(data).each(function(){
 									str += "<div class='imgContainer' style='margin-left:19px;'>"
-										+		"<input type='hidden' class='idxBno' value='"+this.b_no+"'>"
+										+		"<input class='AidxBno' type='hidden' value='"+this.b_no+"'/>"
 										+		"<input type='hidden' class='Ar' data-r='"+this.r+"' value='"+this.r+"'>"
 										+		"<img class='idxBimg' src='display?fileName="+this.image+"'/>"
 										+		"<div class='hoverInfo'>"
@@ -574,9 +580,6 @@ li {
 										+	"</div>"
 								});
 								$(".AscrollLocation").append(str);
-			 					$(".BestMenu").css("display","block");
-								$(".NewMenu").css("display","none");
-								$(".ViewMenu").css("display","none");
 							}else{
 								alert("더 불러올 데이터가 없습니다.");
 							}
@@ -590,7 +593,7 @@ li {
 					var lastr=$(".Br:last").attr("data-r");
 					$.ajax({
 						type:"post",
-						url:"/board/BinfiniteScrollDown",
+						url:"BinfiniteScrollDown",
 						headers:{
 							"Content-Type":"application/json",
 							"X-HTTP-Method-Override":"POST",
@@ -608,7 +611,7 @@ li {
 							if(data!=""){
 								$(data).each(function(){
 									str += "<div class='imgContainer' style='margin-left:19px;'>"
-										+		"<input type='hidden' class='idxBno' value='"+this.b_no+"'>"
+										+		"<input class='BidxBno' type='hidden' value='"+this.b_no+"'/>"
 										+		"<input type='hidden' class='Br' data-r='"+this.r+"' value='"+this.r+"'>"
 										+		"<img class='idxBimg' src='display?fileName="+this.image+"'/>"
 										+		"<div class='hoverInfo'>"
@@ -627,9 +630,6 @@ li {
 										+	"</div>"
 								});
 								$(".BscrollLocation").append(str);
-			 					$(".BestMenu").css("display","none");
-								$(".NewMenu").css("display","none");
-								$(".ViewMenu").css("display","block");
 							}else{
 								alert("더 불러올 데이터가 있을텐데????????????????있는데????????.");
 							}
@@ -643,7 +643,7 @@ li {
 	});
 
 	$(".scrollLocation").on("click",".imgContainer img", function() {
-		b_no=$(this).parent().find(".idxBno").val();
+		var b_no=$(this).parent().find(".idxBno").val();
 		$("#myModal").load("../board/read?b_no="+b_no)
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
@@ -653,28 +653,31 @@ li {
 	    myDiv.scrollTop = 0;
 	});
 	
-	$(".AscrollLocation").on("click",".imgContainer img", function() {
-		b_no=$(this).parent().find(".idxBno").val();
+	$(".AscrollLocation").on("click",".imgContainer .idxBimg", function() {
+		var b_no=$(this).parent().find(".AidxBno").val();
 		
+		alert(b_no);/* 
 		$("#myModal").load("../board/read?b_no="+b_no)
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");
 		$('.modal').css("overflow-x", "hidden");
 	    modal.style.display = "block";
-	    myDiv.scrollTop = 0; 
+	    myDiv.scrollTop = 0; */
 	});
 	
-	$(".BscrollLocation").on("click",".imgContainer img", function() {
-		b_no=$(this).parent().find(".idxBno").val();
+	$(".BscrollLocation").on("click",".imgContainer .idxBimg", function() {
+		var b_no=$(this).parent().find(".BidxBno").val();
 		
+		alert(b_no);
+		/* 
 		$("#myModal").load("../board/read?b_no="+b_no)
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");
 		$('.modal').css("overflow-x", "hidden");
 	    modal.style.display = "block";
-	    myDiv.scrollTop = 0;
+	    myDiv.scrollTop = 0; */
 	});
 </script>
 </html>

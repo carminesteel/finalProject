@@ -110,8 +110,9 @@
 		update board set report=#{report} where b_no=#{b_no}
 	</update>
 	<!-- view 부문 -->
+	
 	<update id="updateView">
-		update board set view = view +1 where b_no=#{b_no}
+		update board set view = #{view} +1 where b_no=#{b_no}
 	</update>
 	
 	<!-- reply 부문 -->
