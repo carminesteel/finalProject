@@ -2,11 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ProductMapper">
 	<select id="bestList" resultType="com.example.domain.ProductVO">
-		select p.*, quantity from product p left join purchase pu on p.p_no=pu.p_no order by quantity desc limit 0,10
+	<![CDATA[
+		select p.*, quantity from product p left join purchase pu on p.p_no=pu.p_no and report<10 order by quantity desc limit 0,10
+	]]>
 	</select>
 	
 	<select id="artgoods" resultType="com.example.domain.ProductVO">
-		select * from product limit 0,10
+	<![CDATA[
+		select * from product where report<10 limit 0,10
+	]]>
 	</select>
 	
 	<select id="proimage" resultType="com.example.domain.ProductVO">
