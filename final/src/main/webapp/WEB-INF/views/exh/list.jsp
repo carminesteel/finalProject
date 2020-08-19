@@ -135,7 +135,7 @@ html {
 	
 						if(data!=""){
 							$(data).each(function(){
-								str +=		"<div class='eTable'>"
+								str +=		"<div class='eTable' style='margin-left:1px;'>"
 									+			"<div class='box'>"
 									+				"<input type='hidden' value='"+this.e_no+"' class='e_no'>"
 									+				"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
@@ -144,12 +144,15 @@ html {
 									+				"<span style='font-size:18px;'><b>"+this.title+"</b></span><br>"
 									+				"<span style='color:#9da2a8;font-size:12px'>"+this.date+"</span><br>"
 									+				"<span>"+this.addr_detail+"</span>"
+									+				"</div>"
 									+			"</div>"
 									+		"</div>"
 							});
 							$(".scrollLocation").append(str);
+							mouseExh();
 						}else{
 							alert("더 불러올 데이터가 없습니다.");
+							mouseExh();
 						}
 					}
 				});
@@ -171,12 +174,14 @@ html {
 			$(this).css('border','1px solid #eeeeee');
 			$(this).css('box-shadow','');
 		})
+		
+		$(".box").on("click",function(e){
+			e.preventDefault();
+			var e_no= $(this).find(".e_no").val();
+			location.href="read?e_no="+e_no;
+		});
 	}
 	
-	$(".box").on("click",function(e){
-		e.preventDefault();
-		var e_no= $(this).find(".e_no").val();
-		location.href="read?e_no="+e_no;
-	});
+	
 </script>
 </html>
