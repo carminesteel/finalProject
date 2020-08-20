@@ -43,4 +43,12 @@
 		//foreign key �빐�젣 諛� �꽕�젙
 		public void finit();
 		public void fover();
+		
+		//admin
+		public List<BoardVO> reportList();
+		public int reportCount();
+		public List<BoardVO> reportContent(int b_no);
+		
+		public void boardReportZero(int b_no); 
+		public void reportDelete(int b_no);
 	}

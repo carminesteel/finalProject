@@ -155,15 +155,24 @@ input[type="password"] {
 
 .infoC {
 	width: 100%;
+	text-align: center;
+	margin-top:50px;
+	
 }
 
 .left {
+	margin-left:100px;
+	margin-right:100px;
 	width: 122px;
 	display: inline-block;
-	font-size: 17px;
 	height: 35px;
-	text-align: left
+	font-size:30px;
 }
+.left:hover {
+	cursor:pointer;
+}
+
+
 
 .right {
 	width: 122px;
@@ -197,10 +206,14 @@ input[type="password"] {
 <title>마이페이지</title>
 
 </head>
-<body style="padding-top: 73px; margin-left: 0px; width: 100%;height:1080px;background:#2b4163;">
+<body style="padding-top: 73px; margin-left: 0px; width: 100%;height:100%;background:#2b4163;">
 	<jsp:include page="../menu.jsp" />
-	<div style="background:#2b4163;height:1080px;padding:80px;padding-top:0px;padding-left:120px;">		
-	
+	<div class="infoC">
+						<div class=left id=user>유저관리</div>
+						<div class=left id=report>신고목록</div>
+					</div>
+	<div id=userList style="background:#2b4163;height:1080px;padding:80px;padding-top:0px;padding-left:120px;">		
+					
 		<table style="color:white;margin:auto;padding:50px;height:500px;width:1400px;">
 			<tr>
 				<td>ID</td>
@@ -281,13 +294,94 @@ input[type="password"] {
             </c:if>
          </div>
 	</div>
-	
+	<div id=reportList style="background:#2b4163;height:100%;padding:80px;padding-top:0px;padding-left:120px;">
+	<div style="color:white;margin:auto;padding:50px;height:hidden;width:1400px;text-align:center;">
+			<c:if test="${cnt!=0}">
+				<div>ID/ Title/ Content/ Image/ Date/ Report/ Reason</div>
+		
+			
+			<c:forEach items="${report}" var="vo">
+			<div>
+				<div>${vo.id}/ ${vo.title}/ ${vo.content}/ 
+				<img src="../display?fileName=${vo.image}" width=100 height=100>/ ${vo.date}/ ${vo.report}/ 
+				<input type="button" class="reason" value="Reason ↓">
+				
+				<input type="button"  b_no="${vo.b_no}" class=disable value="제한해제">
+				
+				</div>
+			
+			<!-- <tr class="ReportList" style="display:none;"> -->
+				
+					<c:forEach items="${reportContent}" var="report">
+					<c:if test="${vo.b_no==report.b_no}">
+					<div class="ReportList" style="display:none;">
+							${report.b_no}/////
+							${report.id}/
+							${report.content}/
+							${report.date}
+					</div>
+					</c:if>
+					 </c:forEach>
+				
+			<!-- </tr> -->
+			</div>
+			</c:forEach>
+			</c:if>
+			<c:if test="${cnt==0}">
+				<h1>출력이 제한된 게시물이 없습니다.</h1>
+			</c:if>
+			</div>
+			
+			
+		</div>
 	<br>
 	<br>
 	<br>
 	<jsp:include page="../footer.jsp" />
 </body>
 <script>
+$("#reportList").hide();
+
+$(".reason").click(function(){
+	var reason=$(this).val();
+	
+	if(reason=="Reason ↓"){
+		$(this).val("Reason ↑");
+		$(this).parent().parent().find(".ReportList").prop("style","display:block;");
+			}
+		
+	else{
+		$(this).val("Reason ↓");
+		$(this).parent().parent().find(".ReportList").prop("style","display:none;");
+	}
+	
+}) 
+
+$(".disable").click(function(){
+	var b_no=$(this).attr("b_no");
+	alert(b_no);
+	var div=$(this).parent();
+	if(!confirm("다시 출력 허용하시겠습니까?")) return;
+	$.ajax({
+		type:"post",
+		url:"/admin/boardReportZero",
+		data:{"b_no":b_no},
+		success:function(){
+			alert("해당 게시물의 제한이 풀렸습니다.");
+			div.prop("style","display:none");
+		}
+	})
+})
+
+$("#user").click(function(){
+	$("#userList").show();
+	$("#reportList").hide();
+})
+
+$("#report").click(function(){
+	$("#userList").hide();
+	$("#reportList").show();
+})
 var page=1;	
 $("#pagination").on("click", "a", function(e) {
     e.preventDefault();

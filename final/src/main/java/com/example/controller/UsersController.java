@@ -22,9 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.B_replyVO;
+import com.example.domain.BoardVO;
 import com.example.domain.Criteria;
 import com.example.domain.PageMaker;
 import com.example.domain.UsersVO;
+import com.example.mapper.BoardMapper;
 import com.example.mapper.MyPageMapper;
 import com.example.mapper.UsersMapper;
 import com.mysql.fabric.xmlrpc.base.Array;
@@ -37,6 +39,8 @@ public class UsersController {
    @Autowired
    MyPageMapper Mmapper;
    
+   @Autowired
+   BoardMapper Bmapper;
    
    @Autowired 
    BCryptPasswordEncoder passEncoder;
@@ -358,8 +362,25 @@ public class UsersController {
 	   model.addAttribute("cri",cri);
 	   model.addAttribute("pm",pm);
 	   model.addAttribute("user",mapper.userList(cri));
+	   model.addAttribute("report",Bmapper.reportList());
+	   
+	   ArrayList<BoardVO> array=new ArrayList<BoardVO>();
+	   ArrayList<BoardVO> reportList=new ArrayList<BoardVO>();
+	   array.addAll(Bmapper.reportList());
+	   for(BoardVO b_no:array) {
+		   reportList.addAll(Bmapper.reportContent(b_no.getB_no()));
+	   }
+	   model.addAttribute("reportContent",reportList);
+	   model.addAttribute("cnt",Bmapper.reportCount());
    }
    
+   @RequestMapping("/admin/reportList")
+   @ResponseBody
+   public ArrayList<BoardVO> reportList(int b_no){
+	   ArrayList<BoardVO> array=new ArrayList<BoardVO>();
+	   array.addAll(Bmapper.reportContent(b_no));
+	   return array;
+   }
    
    
    @RequestMapping("/admin/positionChange")
@@ -368,7 +389,12 @@ public class UsersController {
       mapper.positionChange(vo);
    }
    
-   
+   @RequestMapping("/admin/boardReportZero")
+   @ResponseBody
+   public void boardReportZero(int b_no){
+	   Bmapper.boardReportZero(b_no);
+	   Bmapper.reportDelete(b_no);
+   }
 
 
    

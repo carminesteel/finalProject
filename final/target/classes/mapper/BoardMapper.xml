@@ -122,4 +122,22 @@
 	<update id="board_r_cnt_update">
 		update board set r_cnt=#{r_cnt} where b_no=#{b_no}
 	</update>
+	
+	<select id="reportList" resultType="com.example.domain.BoardVO">
+		select * from board where report>=10 order by report desc
+	</select>
+
+	<select id="reportCount" resultType="int">
+		select count(*) from board where report>=10
+	</select>
+	<select id="reportContent" resultType="com.example.domain.BoardVO">
+		select b_no, id, content, date from report where b_no=#{b_no}
+	</select>
+	<update id="boardReportZero">
+		update board set report=0 where b_no=#{b_no}
+	</update>
+	<delete id="reportDelete">
+		delete from report where b_no=#{b_no}	
+	</delete>
+	
 </mapper>
