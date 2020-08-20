@@ -60,6 +60,7 @@ public class HomeController {
 		model.addAttribute("listA",bMapper.listA());
 		model.addAttribute("listB",bMapper.listB());
 		model.addAttribute("plist",pMapper.artgoods());
+		model.addAttribute("cnt",targetCnt);
 		model.addAttribute("flist",fMapper.feedList(id, targetCnt));
 		return "home";
 	}

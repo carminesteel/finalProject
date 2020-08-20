@@ -445,6 +445,10 @@ li {
       <a href="/feed/list" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
+  		 <c:if test="${cnt == 0}">
+				<h1>당신이 팔로우한 사람이 없습니다.</h1>
+		</c:if>
+   		<c:if test="${cnt != 0}">
 		<c:forEach items="${flist}" var="flist" begin="0" end="9">
 			<div class="imgContainer">
 				<input class="fdBno" type="hidden" value="${flist.b_no}"/>
@@ -467,6 +471,7 @@ li {
 			</div>
 			
 		</c:forEach>
+		</c:if>
 	</div>
    
    <div id=exhibition>
