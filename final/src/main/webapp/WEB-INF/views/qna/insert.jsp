@@ -1,15 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>ㄴ
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>문의하기</title>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<meta charset="UTF-8">
+	<title>문의하기</title>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<style>
+	#btnQnA{
+	all: unset;
+	margin-right:3px;
+	float:right;
+	background: #2b4163; 
+	width: 70px; 
+	height: 30px;
+	margin-left:3px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	#btnQnA:hover{
+	cursor:pointer;
+	}
+	
+	#btnReset{
+	all: unset;
+	margin-left:3px;
+	float:right;
+	background: #2b4163; 
+	width: 70px; 
+	height: 30px;
+	margin-right:280px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	#btnReset:hover{
+	cursor:pointer;
+	}
+	
+	#btnClose{
+	all: unset;
+	float:right;
+	margin-right:1px;
+	margin-left:1px; 
+	background: #2b4163; 
+	width: 50px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	#btnClose:hover{
+	cursor:pointer;
+	}
+	
+ 	body{
+	width:800px;
+	margin:auto;
+	padding-top:30px;
+	}
+	</style>
 </head>
 <body>
 	<h1>문의하기</h1>
@@ -18,22 +75,16 @@
 	<input type="hidden" name="p_no" value="${param.p_no}">
 	<%-- <input type="hidden" name="id" value="${id}"> --%>
 	<input type="hidden" name="id" value="${id}">
-	<table>
-		
-		<tr>
-		
-			<th>제목</th>
-			<td><input type="text" name="title" size=50></td>
+	<table>		
+		<tr>		
+			<td><b>TITLE : </b><input style=width:732px;height:20px;margin-top:20px;resize:none; type="text" name="title" size=50></td>
 		</tr>
 		<tr>
-			<td>내용</td>
-			<td><textarea rows="10" cols="52" name="content" value="${vo.content}"></textarea></td>
-		</tr>
-		
+			<td><b>문의 내용</b><textarea style=width:790px;height:150px;margin-bottom:15px;margin-top:3px;resize:none; name="content" value="${vo.content}"></textarea></td>
+		</tr>		
 	</table>
-	<input type="button" value="취소">
-	<input type="submit" value="문의하기" >
-	<input type="button" value="창닫기" onclick="javascript:self.close();">
+	<input id="btnClose" type="button" value="창닫기" onclick="javascript:self.close();">
+	<input id="btnQnA" type="submit" value="문의하기" >
 	</form>
 </body>
 <script>
@@ -48,6 +99,7 @@ var qe="${qe}";
 	location.href="/product/read?p_no="+p_no;
 	
 });*/
+
 $(frm).submit(function(e){
 	e.preventDefault();
 	if(!confirm("문의하시겠습니까?")) return;
@@ -62,16 +114,42 @@ $(frm).submit(function(e){
 			url:"/qna/insert",
 			data:{"p_no":p_no,"id":id,"title":title,"content":content},
 			success:function(){
-				$("#qe").html(++qe);
-				window.close();
-				
-			
-				
-			}
-		
+				location.reload();
+				$("#qe").html(++qe);			
+				window.close();	
+			}	
 		});
 	}
 });
+
+
+function getList2(){
+	$.ajax({
+		type:"get",
+		url:"/qna/list",
+		data:{"p_no":p_no,"page":page},
+		dataType:"json",
+		success:function(data){
+			var temp=Handlebars.compile($("#temp1").html());
+			$("#tbl1").html(temp(data));
+			var str="";
+			if(data.pm.prev){ 
+				str += "<a href='" + (data.pm.startPage-1) + "'>◀</a>"
+			}
+			for(var i=data.pm.startPage; i<= data.pm.endPage; i++){ 
+				if(page == i){ 
+					str += "[<a href='" + i + "' class='active'>" + i + "</a>]";
+				}else{ 
+					str += "[<a href='" + i + "'>" + i + "</a>]";
+				}
+			}
+			if(data.pm.next){ 
+				str += "<a href='" + (data.pm.endPage+1) + "'>▶</a>" 
+			} 
+			$("#pagination2").html(str);
+		}
+	});
+}
 	
 </script>
 </html>

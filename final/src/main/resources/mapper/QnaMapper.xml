@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.QnaMapper">
     <select id="list" resultType="com.example.domain.QnaVO">
-        select q.*, count(r.q_no) cnt from (select * from qna where p_no=#{p_no}) q left join qna_reply r on q.q_no=r.q_no group by q.q_no order by date desc limit #{cri.pageStart}, #{cri.perPageNum}
+        select q.*, count(r.q_no) cnt from (select q.*,u.nickname,u.u_image from qna q,users u where p_no=#{p_no} and q.id=u.id) q left join qna_reply r on q.q_no=r.q_no group by q.q_no order by date desc limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
     <insert id="insert">
     	insert into qna(p_no,id,title,content,date) values(#{p_no},#{id},#{title},#{content},now())
@@ -20,6 +20,6 @@
     	delete from qna_reply where qr_no=#{qr_no}
     </delete>
      <select id="read" resultType="com.example.domain.Qna_replyVO">
-        select r.* from qna_reply r , qna q where r.q_no=q.q_no and q.q_no=#{q_no} order by qr_no
+        select r.*,u.nickname,u.u_image from qna_reply r , users u, qna q where r.q_no=q.q_no and r.replyer=u.id and q.q_no=#{q_no} order by qr_no;
     </select>
 </mapper>

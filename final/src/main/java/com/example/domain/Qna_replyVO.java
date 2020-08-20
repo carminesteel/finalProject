@@ -7,9 +7,26 @@ private int qr_no;
 private String replyer;
 private String content;
 private Date writedate;
+private String nickname;
+private String u_image;
 private int p_no;
 private Integer q_no;
 private int cnt;
+
+
+
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+public String getU_image() {
+	return u_image;
+}
+public void setU_image(String u_image) {
+	this.u_image = u_image;
+}
 public int getQr_no() {
 	return qr_no;
 }

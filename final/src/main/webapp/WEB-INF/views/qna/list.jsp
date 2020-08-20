@@ -10,61 +10,74 @@
 <title>[Q&A]</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<style>
+	.btnReply{
+	all: unset;
 
+	background: #2b4163; 
+	width: 50px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	.btnReply:hover{
+	cursor:pointer;
+	}
+	#btnInsert3{
+	all: unset;
+	background: #2b4163; 
+	width: 50px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	#btnInsert3:hover{
+	cursor:pointer;
+	}
+	</style>
 </head>
 <body>
 	<input type="hidden" value="${id}" id="id">
 	<input type="hidden" value="${param.p_no}" id="p_no">
 
-<div id="tbl1"></div>
+<table id="tbl1" width=1130></table>
 	<script id="temp1" type="text/x-handlebars-template">
-	
-		{{#each list}}
-		<div class="qna1">		
-			<div class="replydate">
-				<b>{{q_no}}</b>
-				<b>{{id}}</b>
-				<b>{{title}}</b>
-				<b>{{content}}</b>
-				<b>{{date}}</b>
-				<button q_no={{q_no}} style="{{printStyle id}}" class="btnDelete">삭제</button>
-				<button q_no={{q_no}} class="btnReply">답글</button>	
-				<input type="text" class="txtReply" size=100 style="display:none;">&nbsp;&nbsp;
-   				<button q_no={{q_no}} class="btnInsert2" style="display:none;">입력</button>
-				<span >{{printValue cnt}}</span>
-			</div>
-			
-		</div>
-		{{/each}}
 
-	</script>
-<%-- 	<c:forEach items="${vo}" var="v">
-		<div class="reply1" >
-				<div class="replydate1">
-					<b>${v.replyer}</b>
-					<a>${v.writedate}</a>
-					<a class="q_no">${v.q_no}</a>
-					<button qr_no="${v.qr_no}" class="btnDelete2">삭제</button>
-				</div>
-			<div class="content">${v.content}</div>
-			</div>
-	</c:forEach>
-		 
-		<div class="tbl2" ></div>
-		<script id="temp2" type="text/x-handlebars-template">
-		{{#each list1}}
-			<div class="reply1">
-				<div class="replydate1">
-					<b>{{replyer}}</b>
-					<a>{{writedate}}</a>
-					<a class="q_no">{{q_no}}</a>
-					<button qr_no={{qr_no}} style="{{printStyle replyer}}" class="btnDelete2">삭제</button>
-				</div>
-			<div class="content">{{content}}</div>
-			</div>
+		{{#each list}}
+		<tr class="qna1" style="margin-bottom:110px; border=1px;">
+			<td class="u_image" width=70>
+				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}"/>
+			</td>
+			<td width=100 style="text-align:left; padding:10px;" class="replydate">
+				<input type="hidden" value={{q_no}}>
+				<b>{{nickname}}</b><br>
+				<b>{{date}}</b>
+			</td>
+			<td width=500 style="text-align:left; padding:10px;"  id="QnATitle">
+				<b>{{title}}</b><br>
+				<b>문의내용 : </b><a>{{content}}</a>
+			</td>		
+			<td width=200>
+				<span >{{printValue cnt}}</span>
+				{{#if ${id=='admin'}}}
+					<button q_no={{q_no}} style="{{printResend id}}" class="btnReply">답글</button>	
+				{{/if}}
+			</td>
+			<td width=50 q_no={{q_no}}>
+				<img width=20 height=20 style="{{printStyle id}}" class="btnDelete" src=../display?fileName=xicon.png>
+			</td>
+		</tr>
+		<tr>
+			<if
+		</tr>
 		{{/each}}
-	</script>--%>
-	<button id="btnInsert3">문의하기</button>
+	</script>
+
+	<button id="btnInsert3">문의</button>
 	<br><br>
 	
 	<div id="pagination2"></div>
@@ -75,11 +88,11 @@ var p_no="${param.p_no}";
 var id=$("#id").val();
 var page=1;
 var qe="${qe}";
-
+var admin="${id=='admin'}";
 $(".btnInsert2").hide();
 $(".txtReply").hide();
-
 getList2();
+
 
 
 Handlebars.registerHelper("printStyle",function(id){
@@ -100,21 +113,57 @@ Handlebars.registerHelper("printValue",function(cnt){
 	}
 	return src;
 });
+Handlebars.registerHelper("printResend",function(id){
+	var src;
+ 	if(admin){
+ 		src;
+	}else if(admin==false){	
+		src="display:none;";
+	} 
+	return src;
+});
+
+/*답글하기 */
+  
+ 
+/*  	function getList1(){
+		$.ajax({
+			type:"get",
+			url:"/qna/read",
+			data:{"q_no":q_no},
+			dataType:"json",
+			success:function(data){
+				var temp=Handlebars.compile($("#temp2").html());
+				$("#tbl2").html(temp(data));
+			}
+		});
+	} */
+ 
 
 
-
-
-/*답글하기*/
+/* $("#tbl1").on("click",".qna1 #QnATitle",function(){	
+	alert("asdf");
+	$.ajax({
+		type:"get",
+		url:"/qna/read",
+		data:{"q_no":q_no},
+		dataType:"json",
+		success:function(data){
+			var temp=Handlebars.compile($("#temp2").html());
+			$("#tbl2").html(temp(data));
+		}
+	});
+}); */
 
 /*문의하기*/
 $("#btnInsert3").on("click", function(){
-	window.open("/qna/insert?p_no="+p_no,"","width=500px, height=400px");
+	window.open("/qna/insert?p_no="+p_no,"","width=850px, height=450px");
 });
 
 /*답글목록띄우기*/
-$("#tbl1").on("click",".replydate .btnReply", function(){
+$("#tbl1").on("click",".qna1 .btnReply", function(){
 	var q_no=$(this).attr("q_no");
-	window.open("/qna/read?q_no="+q_no,"","width=500px, height=400px");
+	window.open("/qna/read?q_no="+q_no,"","width=850px, height=450px");
 
 });
 
@@ -130,17 +179,14 @@ $("#tbl1").on("click",".replydate .btnReply", function(){
 					url:"/qna/insert2",
 					data:{"q_no":q_no,"content":content,"replyer":replyer},
 					success:function(){
-						alert("입력!");
-						
+						alert("입력!");				
 					}
 				});
 		   }else{
 			alert("내용을 입력하세요");
-		}
-
-		
-		
-	});
+		}			
+	});	
+	
 	/*댓글목록띄우기*/
 	function getList2(){
 		$.ajax({
@@ -166,28 +212,25 @@ $("#tbl1").on("click",".replydate .btnReply", function(){
 					str += "<a href='" + (data.pm.endPage+1) + "'>▶</a>" 
 				} 
 				$("#pagination2").html(str);
-
 			}
 		});
 	}
 	
 	$("#pagination2").on("click", "a", function(e){ 
 		e.preventDefault();
-		page=$(this).attr("href");
-		
-		getList();
+		page=$(this).attr("href");		
+		getList2();
 	});
 	/*문의하기 삭제*/
 	$("#tbl1").on("click",".btnDelete",function(){
-		var q_no=$(this).attr("q_no");
-		if(!confirm("삭제 기기?")) return;
-		alert(q_no);
+		var q_no=$(this).parent().attr("q_no");
+		if(!confirm("문의글을 삭제 하시겠습니까?")) return;
 		$.ajax({
 			type:"post",
 			url:"/qna/delete",
 			data:{"q_no":q_no},
 			success:function(){
-				alert("댓글이 삭제되었당!");
+				alert("댓글이 삭제되었습니다!");
 				$("#qe").html(--qe);
 				getList2();
 			}
@@ -196,14 +239,14 @@ $("#tbl1").on("click",".replydate .btnReply", function(){
 	/*답글삭제*/
 	$(".tbl2").on("click",".btnDelete2",function(){
 		var qr_no=$(this).attr("qr_no");
-		if(!confirm("삭제 할래??")) return;
+		if(!confirm("답글을 삭제 하시겠습니까?")) return;
 		alert(qr_no);
 		$.ajax({
 			type:"post",
 			url:"/qna/delete2",
 			data:{"qr_no":qr_no},
 			success:function(){
-				alert("답글삭제완료!!");
+				alert("답글을 삭제했습니다!");
 			}
 		});
 	});

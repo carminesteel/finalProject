@@ -11,26 +11,31 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <style>
 	#txtReply{boader:bottom;}
+	#btnInsert2{
+	all: unset;
+	background: #2b4163; 
+	width: 50px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	#btnInsert2:hover{
+	cursor:pointer;
+	}
 </style>
 </head>
-<body>
-	
+<body>	
 	<c:forEach items="${vo}" var="v">
-		${v.content}<br>
-		${v.writedate}<br>
-		${v.replyer}<br>
-		${v.q_no}<br>
+		<div><img width=65px height=65px; style="border-radius:50%;" src="../display?fileName=${v.u_image}"/></div>
+		<b>${v.nickname}</b><br>
+		<b>답글 내용 : ${v.content}</b><br>
+		<b>답변 날짜 : ${v.writedate}</b><br>
 	</c:forEach>
 	<div>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<input type="text" id="txtReply" size=100>&nbsp;&nbsp;
+	<input style=width:732px;height:20px;margin-top:20px;resize:none; type="text" id="txtReply">
 	<button id="btnInsert2">입력</button>
 	</div>
 </body>

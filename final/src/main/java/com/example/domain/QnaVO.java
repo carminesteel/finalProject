@@ -4,12 +4,29 @@ import java.sql.Date;
 
 public class QnaVO {
 private int p_no;
+private String nickname;
+private String u_image;
 private String id;
 private String title;
 private String content;
 private Date date;
 private int q_no;
 private int cnt;
+
+
+
+public String getU_image() {
+	return u_image;
+}
+public void setU_image(String u_image) {
+	this.u_image = u_image;
+}
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
 public int getP_no() {
 	return p_no;
 }

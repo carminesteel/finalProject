@@ -43,7 +43,6 @@ public class QnaController {
 		pm.setTotalCount(pMapper.qnaCount(p_no));
 		map.put("pm",pm);
 		map.put("list", mapper.list(p_no,cri));
-		
 		map.put("count",pMapper.qnaCount(p_no));
 		return map;
 	}
