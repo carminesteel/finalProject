@@ -126,6 +126,14 @@ body {
                <div style="display:inline-block;float:right;"></div>
             </div>
             <br>
+               <div style="display:inline-block;float:right;">
+					<img style="width:15px;height:15px;" src="../display?fileName=views.png"/>
+						<span>${vo.view}</span>&emsp;
+					<img id="LikeBtn" style="width:15px;height:15px;" src="../display?fileName=likes.png"/>
+						<span>${vo.b_like}</span>&emsp;
+					<img style="width:15px;height:15px;" src="../display?fileName=comment.png"/>
+						<span>${vo.r_cnt}</span>
+				</div>
             <div style=text-align:left;display:inline-block;float:left;>
             <form name="frm" method="post" action="update" enctype="multipart/form-data">
             
@@ -147,8 +155,9 @@ body {
    </div>
 </body>
 <script>   
-var b_no="${vo.b_no}";
-var view="${vo.view}";
+	var b_no="${vo.b_no}";
+	var view="${vo.view}";
+	var id="${id}";
 
    getFollow();
    var follower="${id}";
@@ -156,8 +165,6 @@ var view="${vo.view}";
    
    $("#btnReply").hide();
    
-   var id="${id}";
-   var b_no="${vo.b_no}";
 
    $("#report").on("click", function(){
       var b_no="${vo.b_no}";
@@ -176,18 +183,18 @@ var view="${vo.view}";
       })
    });
 
-$("#LikeBtn").on("click",function(){
-   $.ajax({
-      type:"post",
-      url:"/board/like/update",
-      data:{"id":id,"b_no":b_no},
-      dataType:"json",
-      success:function(data){
-         $("#LikeBtn").val("좋아요/"+data);
-         location.reload()
-      }
-   })
-})
+	$("#lightBottom").on("click", "#LikeBtn", function(){
+	   $.ajax({
+	      type:"post",
+	      url:"/board/like/update",
+	      data:{"id":id,"b_no":b_no},
+	      dataType:"json",
+	      success:function(data){
+	         $("#LikeBtn").val("좋아요/"+data);
+	         location.reload()
+	      }
+	   });
+	});
 
  $(".lbClose").on("click", function(){
            modal.style.display = "none";

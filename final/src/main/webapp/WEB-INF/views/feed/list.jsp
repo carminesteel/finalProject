@@ -40,9 +40,6 @@
 	width:17px;height:17px;
 }
 
-	
-#tbl .row{}
-
 html {
 	font-family: Noto Sans KR
 }
@@ -198,13 +195,16 @@ html {
 						if(data!=""){
 							$(data).each(function(){
 									str +=		"<div style='width: 1130px; margin: auto;'>"
-										+			"<span style='display: inline-block; float:left;'>"
+										+			"<div class='ftbl'>"
 										+				"<input type='hidden' value='"+this.b_no+"' class='b_no'>"
 										+				"<input class='idxView' type='hidden' value='"+this.view+"'/>"
+										+				"<img class=fimg style='height: 100%; object-fit: contain;' src='../display?fileName="+this.image+"'>"
+										+			"</div>"
+										+			"<span style='display: inline-block; float:left;'>"
 										+				"<img style='border-radius:50%;' width=90px height=90px	src='../display?fileName='"+this.u_image+"'/>"
 										+			"</span>"
 										+			"<span style='display:inline-block; float:left; margin-left:18px; margin-top:18px;'>"
-										+				"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
+										+				"<input type='text' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
 										+				"<b style='font-size:20px'>"+this.nickname+"</b>&nbsp;&nbsp;"
 										+				"<a style='all: unset; font-size: 14px; cursor: pointer;'>팔로우</a><br>"
 										+				"<b style='all: unset; color: #93a1a2; font-size: 15px;'>"+this.introduce+"</b>"
@@ -224,9 +224,6 @@ html {
 										+				"<img class=icons src='../display?fileName=comment.png'/>"+this.r_cnt+""
 										+			"</div>"
 										+			"<hr style='width: 1127px;border:solid 1px #b3c6e6;'>"
-										+			"<div class='ftbl'>"
-										+				"<img class=fimg style='height: 100%; object-fit: contain;' src='../display?fileName="+this.image+"'>"
-										+			"</div>"
 										+		"</div><br><br>"
 							});
 							$(".scrollLocation").append(str);

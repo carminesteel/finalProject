@@ -22,9 +22,17 @@
 		values (#{id}, #{title}, #{content}, #{image}, #{price})
 	</insert>
 	
+	<update id="update">
+		update product set title=#{title}, content=#{content}, image=#{image}, price=#{price} where p_no=#{p_no}
+	</update>
+	
 	<insert id="attachInsert">
 		insert into p_imageList(p_no, images, p_images) values(#{p_no},#{images},#{images})
 	</insert>
+	
+	<update id="attachUpdate">
+		update p_imageList set images=#{images}, p_images=#{p_images} where p_no=#{p_no}
+	</update>
 	
 	<select id="P_noRead" resultType="int">
 		select p_no from product where id=#{id} and title=#{title} and content=#{content}

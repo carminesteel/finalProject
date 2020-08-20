@@ -86,10 +86,11 @@ body {
 </style>
 </head>
 <body>
+<body>
    
    <div id=lightBox>   
    
-      <div id=lightInfo>   
+      <div id=lightInfo>
          <img class=lbClose src="display?fileName=xiconWhite.png"/>
          <img id="image" src="display?fileName=${vo.u_image}"/>
          <div id=artInfo>
@@ -99,7 +100,7 @@ body {
          </div>
       </div>
       <div id=lightContent>
-      <img src="display?fileName=${vo.image}" width=100%>
+      <input type="hidden" name="image" value="${vo.image}">
          <br><br><br><br>
          <c:forEach items="${list}" var="image">
             <img src="display?fileName=${image}" name="files" width="100%"/>
@@ -126,23 +127,36 @@ body {
                <div style="display:inline-block;float:right;"></div>
             </div>
             <br>
+               <div style="display:inline-block;float:right;">
+					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+						<span>${vo.view}</span>&emsp;
+					<img id="LikeBtn" style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+						<span>${vo.b_like}</span>&emsp;
+					<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
+						<span>${vo.r_cnt}</span>
+				</div>
             <div style=text-align:left;display:inline-block;float:left;>
-           
+         
+            <form name="frm" method="post" action="delete" enctype="multipart/form-data">
+            
                <input type="hidden" name="b_no" value="${vo.b_no}">
                <input type="hidden" name="id" value="${vo.id}">
                <input type="hidden" name="image" value="${vo.image}">
                <c:if test="${id==vo.id}">
-                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="수정" id="btnUpdate">   
+                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="수정">   
                   <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
                </c:if>
                <c:if test="${id!=vo.id}">
                <input type="button" value="신고하기" id="report" style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:75px;height:28px;font-size:15px;">
            	   </c:if>
+          	   	
+            </form>
             </div>
-            <jsp:include page="../b_reply/list.jsp"/> 
+            <jsp:include page="../b_reply/list.jsp"/>
          </div> 
       </div>   
    </div>
+</body>
 </body>
 <script>   
 var b_no="${vo.b_no}";
@@ -175,7 +189,7 @@ var view="${vo.view}";
           }
       })
    });
-	
+
 	$("#LikeBtn").on("click",function(){
 		$.ajax({
 			type:"post",
