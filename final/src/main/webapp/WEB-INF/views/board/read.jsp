@@ -99,7 +99,7 @@ body {
          </div>
       </div>
       <div id=lightContent>
-      <input type="hidden" name="image" value="${vo.image}">
+      <img src="display?fileName=${vo.image}" width=100%>
          <br><br><br><br>
          <c:forEach items="${list}" var="image">
             <img src="display?fileName=${image}" name="files" width="100%"/>
@@ -127,19 +127,17 @@ body {
             </div>
             <br>
             <div style=text-align:left;display:inline-block;float:left;>
-            <form name="frm" method="post" action="delete" enctype="multipart/form-data">
-            
+           
                <input type="hidden" name="b_no" value="${vo.b_no}">
                <input type="hidden" name="id" value="${vo.id}">
                <input type="hidden" name="image" value="${vo.image}">
                <c:if test="${id==vo.id}">
-                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="수정">   
+                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="수정" id="btnUpdate">   
                   <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
                </c:if>
                <c:if test="${id!=vo.id}">
                <input type="button" value="신고하기" id="report" style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:75px;height:28px;font-size:15px;">
            	   </c:if>
-            </form>
             </div>
             <jsp:include page="../b_reply/list.jsp"/> 
          </div> 
@@ -149,8 +147,7 @@ body {
 <script>   
 var b_no="${vo.b_no}";
 var view="${vo.view}";
-var page=1;
-R_list();
+
    getFollow();
    var follower="${id}";
    var target="${vo.id}";
@@ -159,9 +156,11 @@ R_list();
    
    var id="${id}";
    var b_no="${vo.b_no}";
+   
 
    $("#report").on("click", function(){
       var b_no="${vo.b_no}";
+   
       window.open("/board/report?b_no="+b_no,"","width=600px, height=800px");
    });
 
@@ -176,7 +175,7 @@ R_list();
           }
       })
    });
-
+	
 	$("#LikeBtn").on("click",function(){
 		$.ajax({
 			type:"post",
@@ -192,7 +191,6 @@ R_list();
 
 	 $(".lbClose").on("click", function(){
 		modal.style.display = "none";
-		R_list();
 		$('html').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");          
 	})
@@ -202,7 +200,13 @@ R_list();
 		frm.action="/board/delete";
 		frm.submit();
 	});
-
+	
+	$("#btnUpdate").on("click", function(){
+		
+		var b_no="${vo.b_no}";
+		location.href="/board/update?b_no="+b_no;
+	});
+	
 	function getFollow(){
 		$.ajax({
 			type:"post",

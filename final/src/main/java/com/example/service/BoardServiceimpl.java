@@ -37,7 +37,6 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public void update(BoardVO vo) {
 		mapper.update(vo);
-		mapper.BnoRead(vo);
 		ArrayList<String> images=vo.getImages();
 		if(images.size() > 0) {
 			mapper.delB_imagelist(vo.getB_no());

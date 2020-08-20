@@ -192,16 +192,23 @@ public class BoardController {
 		service.insert(vo);
 		return "redirect:list";
 	}
-	@RequestMapping(value="update" , method=RequestMethod.POST)
+	@RequestMapping("update")
+	public void update(int b_no,Model model) {
+		model.addAttribute("vo",mapper.read(b_no));
+		model.addAttribute("imglist",mapper.getB_imagelist(b_no));
+	}
+	
+	@RequestMapping(value="boardUpdate" , method=RequestMethod.POST)
 	public String updatePost(BoardVO vo, MultipartHttpServletRequest multi)throws Exception {
 		MultipartFile file = multi.getFile("file");
-		
+		BoardVO imag=mapper.read(vo.getB_no());
+		String img=imag.getImage();
 		// �뜝�룞�삕�뜝�떦�뼲�삕�뜝�떥�벝�삕
 				if (!file.isEmpty()) { // �뜝�룞�삕�뜝�떥�벝�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 					
 					// �뜝�룞�삕�뜝�룞�삕�뜝�떛諭꾩삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 					String oldImage=vo.getImage();
-					if(!oldImage.equals("")) {
+					if(oldImage!=null) {
 						new File(path + File.separator + oldImage).delete();
 					}
 					
@@ -209,6 +216,10 @@ public class BoardController {
 					file.transferTo(new File(path + File.separator + image));
 					vo.setImage(image);
 				}
+				else{
+					vo.setImage(img);
+				}
+				
 				//泥ⓨ뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떥�벝�삕
 				List<MultipartFile> files =multi.getFiles("files");
 				ArrayList<String> images=new ArrayList<String>();
@@ -226,6 +237,7 @@ public class BoardController {
 					}
 				}
 			vo.setImages(images);
+		System.out.println(vo.toString());
 		service.update(vo);
 		return "redirect:list";
 	}
