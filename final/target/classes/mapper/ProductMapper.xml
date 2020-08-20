@@ -90,5 +90,21 @@
 	<insert id="InsertAddressList">
 		insert into address values(#{id},#{addr})
 	</insert>
-
+	
+		<!-- like 부문 -->
+	<select id="likeTableChk" resultType="int">
+		select count(*) from p_like where id=#{id} and r_no=#{r_no}
+	</select>
+	
+	<insert id="likeinsert">
+		insert into p_like values(#{id},#{r_no})
+	</insert>
+	
+	<delete id="likedelete">
+		delete from p_like where id=#{id} and r_no=#{r_no}
+	</delete>
+	
+	<select id="likeTableCnt" resultType="int">
+		select r.*, count(*) cnt from (select * from p_reply where p_no=#{p_no}) r , p_like p where p.r_no=r.r_no group by r_no;
+	</select>
 </mapper>

@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.p_replyMapper">
     <select id="list" resultType="com.example.domain.p_replyVO">
-        select * from p_reply where p_no=#{p_no} order by r_no desc limit #{cri.pageStart}, #{cri.perPageNum}
+       select r.*, count(p.r_no) cnt from 
+	(select p.*,u.u_image from p_reply p, users u where p_no=#{p_no} group by r_no) 
+	r left join p_like p on p.r_no=r.r_no group by r_no 
+	order by cnt desc limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
     <insert id="insert">
     	insert into p_reply(replyer,content,date,p_no) values(#{replyer},#{content},now(),#{p_no})
@@ -14,7 +17,7 @@
     <delete id="likeDelete">
     	delete from p_like where r_no=#{r_no}
     </delete>
-    <select id="likeTableChk" resultType="int">
+    <select id="likeCnt" resultType="int">
     	select count(*) from p_like where r_no=#{r_no}
     </select>
 </mapper>

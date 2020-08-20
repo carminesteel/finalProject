@@ -37,8 +37,9 @@
 				<b class="replyer">{{replyer}}</b>
 				<a>{{date}}</a>
 				<input class=r_no type="hidden" value={{r_no}}>
-				<img class="listBtn" style="width:20px;height:20px;" src=/display?fileName=likes.png/></img>
+				<img class="listBtn" style="width:20px;height:20px;" src=/display?fileName=likes.png/>{{cnt}}</img>
 				<img width=20 height=20 r_no={{r_no}} class="delBtn" style="{{printStyle replyer}}" src=/display?fileName=xicon.png></img>
+				
 			</div>
 		<div class="content">{{content}}</div>
 		</div>
@@ -48,10 +49,12 @@
 	<div style=display:inline-block;>
 		<span style="display:inline-block;float:left;margin-bottom:-4px;letter-spacing:-1px;font-size:14px;">리뷰 작성</span><br>
 		<textarea style="width:495px;height:60px;resize:none;padding:0" id="txtReply" ></textarea><br>
-		<button id="btnInsert">입력</button>
+		
 	</div>	
+	<button id="btnInsert" style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;margin-left:15px;">입력</button>
 	<div id="pagination"></div>
 	<br>
+	
 </body>
 <script>
 	var p_no="${param.p_no}";
@@ -78,7 +81,7 @@
 			success:function(data){
 				var temp=Handlebars.compile($("#temp").html());
 				$("#tbl").html(temp(data));
-				//페이지 리스트 출력
+				
 				var str="";
 				if(data.pm.prev){ 
 					str += "<a href='" + (data.pm.startPage-1) + "'>◀</a>"
@@ -103,7 +106,6 @@
 	$("#pagination").on("click", "a", function(e){ 
 		e.preventDefault();
 		page=$(this).attr("href");
-		//alert(page);
 		getList();
 	});
 	var re= "${re}";
@@ -163,7 +165,7 @@
 			data:{"id":id,"r_no":r_no},
 			success:function(){
 				getList();
-				alert("좋아요성공")
+				alert("dfads");
 			}
 		})
 	});

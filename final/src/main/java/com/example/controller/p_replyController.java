@@ -53,7 +53,13 @@ public class p_replyController {
 	@RequestMapping(value="delete",method=RequestMethod.POST)
 	@ResponseBody
 	public void delete(int r_no) {
-		mapper.delete(r_no);
+		int cnt=mapper.likeCnt(r_no);
+		if(cnt==0) {
+			mapper.delete(r_no);
+		}else {
+			mapper.likeDelete(r_no);
+			mapper.delete(r_no);
+		}
 	}
 	@RequestMapping("reply")
 	public void reply() { 
@@ -63,12 +69,13 @@ public class p_replyController {
 	@RequestMapping(value="/like/update", method = RequestMethod.POST)
 	@ResponseBody
 	public void LikeUpdate(Model model,@RequestParam(value ="id") String id,@RequestParam(value ="r_no") int r_no) {
-		int chk=mapper.likeTableChk(id, r_no);
+		int chk=pMapper.likeTableChk(id, r_no);
 		
 		if(chk==0) {
-			mapper.likeinsert(id, r_no);
+			pMapper.likeinsert(id, r_no);
 		}else {
-			mapper.likedelete(id, r_no);
+			pMapper.likedelete(id, r_no);
+
 
 		}
 	}
