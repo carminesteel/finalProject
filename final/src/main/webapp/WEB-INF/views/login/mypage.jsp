@@ -9,6 +9,38 @@ html {
 	font-family: Noto Sans KR;
 }
 
+
+/*       /* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: absolute; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	 /* Full width */
+	 /* Full height */
+	/* overflow: auto; */ /* Enable scroll if needed */
+	height:auto;
+	overflow : scroll;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9);
+
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.lbClose:hover{
+	cursor:pointer;
+}
+
+
 .myImgs {
 	width: 343px;
 	height: 272px;
@@ -272,7 +304,9 @@ input[type="password"] {
 							</div>
 							<c:forEach items="${blist}" var="bvo">
 								<div style="display:inline-block;float:left;margin:17px;">
-									<img class="myImgs" src="../display?fileName=${bvo.image}" onClick="location.href='../board/read?b_no=${bvo.b_no}'">
+									<img class="myImgs" src="../display?fileName=${bvo.image}">
+									<input type="hidden" value="${bvo.b_no}" class="b_bno">
+									<input type="hidden" value="${bvo.view}" class="b_view">
 								</div>
 							</c:forEach>
 						</c:if>
@@ -381,13 +415,34 @@ input[type="password"] {
 		</div>
 		</div>
 	<jsp:include page="../footer.jsp" />
+	<div id="myModal" class="modal"> 
+    </div>
 </body>
 <script>
+	var myDiv = document.getElementById('myModal');
+	
+	
+		// Get the modal
+	var modal = document.getElementById('myModal');
+	
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+	
+	var lastScrollTop=0;
+
+	$(".myImgs").on("click",function() {
+		var b_no =$(this).parent().find(".b_bno").val();
+		var view =$(this).parent().find(".b_view").val();
+		$("#myModal").load("../board/mypageRead?b_no="+b_no+"&view="+view);  		
+		$('html').css("overflow", "hidden");
+		$('.modal').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+		$('.modal').css("overflow-x", "hidden");
+	    modal.style.display = "block";
+	    myDiv.scrollTop = 0;
+	});
+	
 	var id="${id}";
-	/*  $("#userRead").hide();
-	$("#mypageList").hide(); 
-	 
-	$("#pDiv").hide(); */
 	
 	$("#Plist").hide();
 	$("#followingList").hide();

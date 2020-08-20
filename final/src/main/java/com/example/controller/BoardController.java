@@ -93,6 +93,23 @@ public class BoardController {
 		model.addAttribute("replyCount",rmapper.replyCount(b_no));
 	}
 	
+	@RequestMapping("mypageRead")
+	public void mypageRead(Model model, int b_no,Criteria cri,int view) {
+		BoardVO vo= new BoardVO();
+		vo.setB_no(b_no);
+		vo.setView(view);
+		cri.setPerPageNum(10);
+		PageMaker pm=new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(rmapper.replyCount(b_no));
+		model.addAttribute("cri",cri);
+		model.addAttribute("pm",pm);
+		model.addAttribute("list", mapper.getB_imagelist(b_no));
+		mapper.updateView(vo);
+		model.addAttribute("vo",mapper.read(b_no));
+		model.addAttribute("replyCount",rmapper.replyCount(b_no));
+	}
+	
 	@RequestMapping("insert")
 	public void insert() {
 	}
