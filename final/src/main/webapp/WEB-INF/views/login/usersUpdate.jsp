@@ -388,9 +388,9 @@ function click(){
 	$("#usersPosition").click(function(e){
 		e.preventDefault();
 		var id=$(frm).val();
+		if(!confirm("회원탈퇴시 복구는 할 수 없습니다.")) return;
 		if(!confirm("정말로 회원탈퇴를 하시겠습니까?")) return;
-		if(!confirm("ㄹㅇ???")) return;
-		if(!confirm("한번 하면 끝임 ㅋㅋㅋ")) return;		
+		alert("확인을 눌르면 탈퇴가 됩니다.");
 		$.ajax({
 			type:"post",
 			url:"/login/usersUpdate/updatePosition",
