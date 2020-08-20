@@ -7,25 +7,66 @@
 	<title>문의하기</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<style>
+	#btnSend{
+	all: unset;
+	float:right;
+	margin-right:330px;
+	margin-left:3px; 
+	background: #2b4163; 
+	width: 70px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	#btnSend:hover{
+	cursor:pointer;
+	}
+	
+	#btnReset{
+	all: unset;
+	margin-left:10px;
+	float:right;
+	background: #2b4163; 
+	width: 70px; 
+	height: 30px;
+	margin-left:10px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	#btnReset:hover{
+	cursor:pointer;
+	}
+	
+	body{
+	width:800px;
+	margin:auto;
+	padding-top:30px;
+	}
+	</style>
 </head>
 </head>
 <body>
 	<form action="paperInsert" name="frm" method="post">
 		<input type="hidden" name="p_no" value="${param.p_no}">
-		<input type="text" name="sender" value="${id}">
+		<input type="hidden" name="sender" value="${id}">
 		<table>
 			<tr>
-				<td><b>판매자 :</b> ${param.receiver}님</td>		
+				<td style="text-align:right"><b>판매자 :</b> ${param.receiver}님</td>		
 			</tr>
 			<tr>
-			<td><b>Title : </b><input type="text" name="title" placeholder="제목을입력하세요"></td>
+			<td><b>TITLE : </b><input type="text" name="title" style=width:732px;height:20px;margin-top:20px;resize:none; placeholder="제목을입력하세요"></td>
 			</tr>
 			<tr>
-			<td><textarea name="content" rows="10" cols="43" placeholder="내용을입력하세요"></textarea>
+			<td><textarea name="content" style=width:790px;height:150px;margin-bottom:15px;margin-top:3px;resize:none; placeholder="내용을입력하세요"></textarea>
 			</tr>
 		</table>
-		<input type="submit" value="보내기">
-		<input type="reset" value="취소">
+		<input id="btnSend" type="submit" value="보내기"> 
+		<input id="btnReset" type="reset" value="취소">
 	</form>
 </body>
 <script>

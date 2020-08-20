@@ -208,7 +208,6 @@ $("#reply2").hide();
 $("#qna1").hide();
 
 
-
 //상세정보 눌르면 사진만 보이게
 $(".information").on("click", function(){
    $(".images").show();
@@ -239,7 +238,7 @@ $(".qa").on("click", function(){
       var p_no="${read.p_no}";
       var receiver="${read.id}";
       var id="${id}";
-      window.open("/product/paper?p_no="+p_no + "&receiver=" + receiver,"","width=350px, height=400px");
+      window.open("/product/paper?p_no="+p_no + "&receiver=" + receiver,"","width=820px, height=350px");
    });
 
    $("#imgSection").on("click", "#thumbImg .thumbs img", function(){
