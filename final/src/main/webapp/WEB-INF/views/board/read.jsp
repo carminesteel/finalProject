@@ -111,7 +111,10 @@ body {
                   <img style="border-radius:50%;" width=90px height=90px src="display?fileName=${vo.u_image}"/>
                </span>
                <span style="display:inline-block;float:left;margin-left:18px;margin-top:18px;">
-                  <b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;<a style="all:unset;font-size:14px;cursor:pointer;" id="follow">팔로우</a><br>
+                  <b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;
+                   <c:if test="${id!=vo.id}">
+                  <a style="all:unset;font-size:14px;cursor:pointer;" id="follow">팔로우</a><br>
+                  </c:if>
                   <b style="all:unset;color:#93a1a2;font-size:15px">${vo.introduce}</b>
                </span>
             </div>
@@ -130,10 +133,12 @@ body {
                <input type="hidden" name="id" value="${vo.id}">
                <input type="hidden" name="image" value="${vo.image}">
                <c:if test="${id==vo.id}">
-                  <!-- <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="submit" value="수정"> -->      
+                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="submit" value="수정">   
                   <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
                </c:if>
+               <c:if test="${id!=vo.id}">
                <input type="button" value="신고하기" id="report" style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:75px;height:28px;font-size:15px;">
+           	   </c:if>
             </form>
             </div>
             <jsp:include page="../b_reply/list.jsp"/> 
