@@ -442,7 +442,9 @@ li {
    <div id=feed>
       <div id=fTitle>Feed</div>
       <div id=fContent>팔로우한 작가들의 최신 아트웍이에요.</div>
+      <c:if test="${cnt != 0}">
       <a href="/feed/list" class=more><img src="/display?fileName=more.png"/></a>
+      </c:if>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
   		 <c:if test="${cnt == 0}">
