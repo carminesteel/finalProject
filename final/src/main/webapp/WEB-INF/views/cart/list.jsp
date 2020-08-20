@@ -8,10 +8,10 @@
    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
    <style>
-   html{
-   	font-family:Noto Sans Kr
-   }
-   
+html {
+	font-family: Noto Sans Kr
+}
+
 #cart {
 	margin: auto;
 	text-align: center;
@@ -19,31 +19,6 @@
 	border-collapse: collapse;
 }
 
-.pButton {
-	cursor: pointer;
-	text-align: center;
-	margin: auto;
-}
-
-.pButton:hover {
-	background-color: #74a4d7;
-	color: white;
-	border-color: #74a4d7;
-}
-
-.pButtons {
-	font-size: 20px;
-	font-weight: 300;
-	text-align: center;
-	margin: auto;
-}
-
-#divFinal {
-	text-align: center;
-	padding-left: 185px;
-	margin-top: 20px;
-	height: 200px;
-}
 
 #exBody {
 	background-color: #e9ecef;
@@ -62,9 +37,9 @@
 	font-size: 30px;
 	font-weight: 300;
 	width: 600px;
-	color:black;
-	margin-left:115px;
-	margin-bottom:35px;
+	color: black;
+	margin-left: 115px;
+	margin-bottom: 35px;
 }
 
 #eTitle {
@@ -72,8 +47,41 @@
 	font-weight: bold;
 	font-size: 70px;
 	height: 80px;
-	color:black;
-	margin-left:115px;
+	color: black;
+	margin-left: 115px;
+}
+
+#cartdelete {
+	float: right;
+	padding-bottom: 5px;
+	margin-right: 100px;
+	margin-top: 15px;
+	background: #2b4163;
+	border: none;
+	width: 100px;
+	height: 28px;
+	font-weight: 600;
+	color: white;
+	border-radius: 5px 5px 5px 5px;
+	margin-top:50px;
+}
+
+#order{
+	float: right;
+	padding-bottom: 5px;
+	margin-right:5px;
+	background: #2b4163;
+	border: none;
+	width: 100px;
+	height: 28px;
+	font-weight: 600;
+	color: white;
+	border-radius: 5px 5px 5px 5px;
+	margin-top:50px;
+}
+
+#divFinal{
+	margin-left:110px;
 }
 </style>
 </head>
@@ -83,33 +91,6 @@
    	<div id=exCenter>
    		<div id=eTitle>Cart</div>
 			<div id=eContent>장바구니</div>
-<%--    <table id="cart" border=1>
-         <tr>
-            <td><input type="checkbox" id="checkAll" checked></td>
-            <td>상품정보</td>
-            <td>상품금액</td>
-            <td>수량</td>
-            <td>총액</td>
-         </tr>
-         <c:forEach items="${list}" var="cart">
-         <tr class="row">
-            <td width=70><input type="checkbox" class="check" checked></td>
-            <td width=488>
-               <div class="id" style="display:none;">${cart.id}</div>
-               <div class="p_no" style="display:none;">${cart.p_no}</div>
-               <img src="/display?fileName=${cart.p_image}" width=150 height=150>
-            </td>
-            <td width=233 class="price">${cart.price}</td>
-            <td width=344>
-               <input type="button" value="-" class="minus">
-               <input type="text" value="${cart.quantity}" size=2 style="text-align:center;" class="quantity">
-               <input type="button" value="+" class="plus">
-            </td>
-            <td width=235 class="total">${cart.price*cart.quantity}</td>
-         </tr>
-         </c:forEach>
-      </table> --%>
-      
       <table id="cart"></table>
       <script id="temp" type="text/x-handlebars-template">
          <tr style="height:50px;background:#2b4163;color:white;">
@@ -142,56 +123,23 @@
             </tr>
          {{/each}}
       </script>
-      <input style="float:right;padding-bottom:5px;margin-right:100px;margin-top:15px;background:#2b4163;border:none;width:100px;height:28px;font-weight:600;color:white;border-radius:5px 5px 5px 5px;" type="button" value="선택삭제" id="cartdelete">
-      
+      <input type="button" value="선택삭제" id="cartdelete">
+      <input type="button" value="구매하기" class="pButton" id="order">
+  
       <table id=divFinal>
-      	<tr>
+      	<tr height=50px>
       		<td>상품금액</td>
       		<td>총 배송비</td>
-      		<td>총 할인금액</td>
       		<td>결제예정금액</td>
       	</tr>
-      	<tr>
-      		<td><input type="text" id="totSum" readonly> 원</td>
-      		<td><input type="text" value="2500" readonly id="delivery"> 원</td>
-      		<td></td>
-      		<td><input type="text" id="ttotSum" readonly> 원 <br></td>
+      	<tr height=50px>
+      		<td><input type="text" style="width:120px;height:30px;" id="totSum" readonly> 원</td>
+      		<td><input type="text" style="width:120px;height:30px;" value="2500" readonly id="delivery"> 원</td>
+      		<td><input type="text" style="width:120px;height:30px;" id="ttotSum" readonly> 원 <br></td>
       	</tr>
-      </table>
-      
-     <!--  <div id="divFinal">
-         <div id="divSum">
-            <div>
-               <h5>상품금액</h5>
-               <input type="text" id="totSum" readonly> 원
-            </div>
-         </div>
-         <div id="divOper">
-            <div>+</div>
-         </div>
-         <div id="divShipping">
-            <div>
-               <h5>배송비</h5>
-               <input type="text" value="2500" readonly id="delivery"> 원
-            </div>
-         </div>
-         <div id="divOper">
-            <div>=</div>
-         </div>
-         <div id="divtotSum">
-            <div>
-            <h5>결제예정금액</h5>
-            <input type="text" id="ttotSum" readonly> 원 <br>
-            </div>
-         </div>
-      </div> -->
+      </table>          
       <br>
-       <div class="pButton" id="order" style="width:513px;height:51px;border-radius:10px 10px 10px 10px;border:1px solid #2b4163;display:inline-block;margin-top:5px;line-height:49px">
-   <t class="pButtons" style="font-size:25px">구매하기</t>
-   </div>
-   </div>
-   
-  
+   </div> 
    </div>
    <jsp:include page="../footer.jsp"></jsp:include>
 </body>
@@ -226,7 +174,7 @@
       alert("삭제 되었습니다.");
    });
    
-	$(".pButtons").on("click", function(){
+	$(".pButton").on("click", function(){
 		var id="${id}";
 		var p_images = new Array();
 		var tot=$("#ttotSum").val();
@@ -237,7 +185,7 @@
 			p_images[i]=$(this).parent().parent().find(".p_image").html();
 			i++;
 		});
-		
+		alert(tot)
 		location.href = "/product/order2?id="+id+"&tot="+tot+"&p_images="+p_images;
 	}); 
    
