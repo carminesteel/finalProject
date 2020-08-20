@@ -359,7 +359,6 @@ $(".reason").click(function(){
 
 $(".disable").click(function(){
 	var b_no=$(this).attr("b_no");
-	alert(b_no);
 	var div=$(this).parent();
 	if(!confirm("다시 출력 허용하시겠습니까?")) return;
 	$.ajax({
