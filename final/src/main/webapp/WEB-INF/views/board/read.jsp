@@ -127,13 +127,13 @@ body {
             </div>
             <br>
             <div style=text-align:left;display:inline-block;float:left;>
-            <form name="frm" method="post" action="update" enctype="multipart/form-data">
+            <form name="frm" method="post" action="delete" enctype="multipart/form-data">
             
                <input type="hidden" name="b_no" value="${vo.b_no}">
                <input type="hidden" name="id" value="${vo.id}">
                <input type="hidden" name="image" value="${vo.image}">
                <c:if test="${id==vo.id}">
-                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="submit" value="수정">   
+                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="수정">   
                   <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
                </c:if>
                <c:if test="${id!=vo.id}">
@@ -176,46 +176,45 @@ var view="${vo.view}";
       })
    });
 
-$("#LikeBtn").on("click",function(){
-   $.ajax({
-      type:"post",
-      url:"/board/like/update",
-      data:{"id":id,"b_no":b_no},
-      dataType:"json",
-      success:function(data){
-         $("#LikeBtn").val("좋아요/"+data);
-         location.reload()
-      }
-   })
-})
+	$("#LikeBtn").on("click",function(){
+		$.ajax({
+			type:"post",
+			url:"/board/like/update",
+			data:{"id":id,"b_no":b_no},
+			dataType:"json",
+			success:function(data){
+				$("#LikeBtn").val("좋아요/"+data);
+				location.reload();
+			}
+		});
+	});
 
- $(".lbClose").on("click", function(){
-           modal.style.display = "none";
-           $('html').css("overflow", "scroll");
-           $('html').css("overflow-x", "hidden");          
-          })
+	 $(".lbClose").on("click", function(){
+		modal.style.display = "none";
+		$('html').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");          
+	})
 
+	$("#btnDelete").on("click", function(){
+		if(!confirm("삭제하실래요?")) return;
+		frm.action="/board/delete";
+		frm.submit();
+	});
 
-$("#btnDelete").on("click", function(){
-   if(!confirm("삭제하실래요?")) return;
-   frm.action="delete";
-   frm.submit();
-});
-
-function getFollow(){
-   $.ajax({
-      type:"post",
-      url:"/user/followChk",
-      data:{"follower":follower,"target":target},
-      success:function(data){
-         if(data==1){
-            $("#follow").html("언팔로우");
-         }else{
-            $("#follow").html("팔로우");
-         }
-      }
-   });
-}
+	function getFollow(){
+		$.ajax({
+			type:"post",
+			url:"/user/followChk",
+			data:{"follower":follower,"target":target},
+				success:function(data){
+				if(data==1){
+					$("#follow").html("언팔로우");
+				}else{
+					$("#follow").html("팔로우");
+				}
+			}
+		});
+	}
 
 </script>
 

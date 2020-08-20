@@ -243,7 +243,7 @@ public class BoardController {
 		}
 		
 		service.delete(vo.getB_no());
-		return "redirect:list";
+		return "redirect:/board/list";
 	}
 	
 	//�뜝�떛諭꾩삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占�
