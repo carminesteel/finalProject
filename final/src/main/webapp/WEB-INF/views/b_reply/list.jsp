@@ -63,6 +63,7 @@
 	</script>
 	
 	<table id=tbl1></table>
+	<c:if test="${vo.r_cnt!=0}">
 	<script id="temp" type="text/x-handlebars-template">	
 		{{#each .}}
 		<tr class=reRow>
@@ -83,6 +84,7 @@
 		</tr>
 		{{/each}}
 	</script>
+	</c:if>
 	<br>
 	<form action="/b_reply/insert" method="post" name="rfrm">
 	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="display?fileName=${u_image}"/>
@@ -115,7 +117,7 @@
 	
 </body>
 <script>
-var page=1;
+
 $( document ).ready(function() {
 	R_list();
 	update();
