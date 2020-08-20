@@ -396,18 +396,18 @@ li {
 	<jsp:include page="../footer.jsp"></jsp:include>
 	
 	<!-- The Modal -->
-    <div id="myModal" class="modal"> 
+    <div id="myModal" class="modal">
     </div>
 </body>
 <script>
 	var myDiv = document.getElementById('myModal');
 
 
-	 	// Get the modal
-		var modal = document.getElementById('myModal');
-		
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
+ 	// Get the modal
+	var modal = document.getElementById('myModal');
+	
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
 
 	var lastScrollTop=0;
 	
@@ -634,7 +634,7 @@ li {
 								});
 								$(".BscrollLocation").append(str);
 							}else{
-								alert("더 불러올 데이터가 있을텐데????????????????있는데????????.");
+								alert("더 불러올 데이터가 없습니다.");
 							}
 						}
 					});

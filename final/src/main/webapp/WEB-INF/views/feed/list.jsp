@@ -7,7 +7,31 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <title>Feed List</title>
 <style>
+/*       /* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: absolute; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	 /* Full width */
+	 /* Full height */
+	/* overflow: auto; */ /* Enable scroll if needed */
+	height:auto;
+	overflow : scroll;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9);
 
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */
+}
 .ftbl{
 	width:1166px;height:714px; margin:auto;text-align:center;border:1px solid #eeeeee;margin-bottom:27px
 }
@@ -85,6 +109,8 @@ html {
 			<div class=lTbl>
 				<c:forEach items="${Flist}" var="fvo">
 					<div class=ftbl>
+						<input type="hidden" value="${fvo.b_no}" class="b_no">
+						<input class="idxView" type="hidden" value="${fvo.view}"/>
 						<img class=fimg style="height: 100%; object-fit: contain;" src="../display?fileName=${fvo.image}">
 					</div>
 					<div style="width: 1130px; margin: auto;">
@@ -109,7 +135,6 @@ html {
 						<br>
 						<div style="text-align: left; display: inline-block; float: left;">
 							<form name="frm" method="post" action="update" enctype="multipart/form-data">
-								<input type="hidden" value="${fvo.b_no}" class="b_no">
 								<input type="button" value="신고하기" class="report"
 									style="border: none; background: #2b4163; border-radius: 5px 5px 5px 5px;
 									color: white; width: 75px; height: 28px; font-size: 15px;margin-left:25px;">
@@ -132,10 +157,19 @@ html {
 	</div>
 	<div class="scrollLocation"></div>
 	<jsp:include page="../footer.jsp" />
+	<div id="myModal" class="modal"></div>
 </body>
 <script>
 	var id="${id}";
 	var lastScrollTop=0;
+	var myDiv = document.getElementById('myModal');
+
+
+ 	// Get the modal
+	var modal = document.getElementById('myModal');
+	
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
 	
 	$(window).scroll(function(){
 		var windowScrollTop=$(window).scrollTop();
@@ -165,6 +199,8 @@ html {
 							$(data).each(function(){
 									str +=		"<div style='width: 1130px; margin: auto;'>"
 										+			"<span style='display: inline-block; float:left;'>"
+										+				"<input type='hidden' value='"+this.b_no+"' class='b_no'>"
+										+				"<input class='idxView' type='hidden' value='"+this.view+"'/>"
 										+				"<img style='border-radius:50%;' width=90px height=90px	src='../display?fileName='"+this.u_image+"'/>"
 										+			"</span>"
 										+			"<span style='display:inline-block; float:left; margin-left:18px; margin-top:18px;'>"
@@ -203,6 +239,18 @@ html {
 			}
 			lastScrollTop=windowScrollTop;
 		}
+	});
+
+	$("#exCenter").on("click",".lTbl .ftbl .fimg", function() {
+		var b_no=$(this).parent().find(".b_no").val();
+		var view = $(this).parent().find(".idxView").val();
+		$("#myModal").load("../board/feedread?b_no="+b_no+"&view="+view);
+		$('html').css("overflow", "hidden");        	
+		$('.modal').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+		$('.modal').css("overflow-x", "hidden");
+	    modal.style.display = "block";
+	    myDiv.scrollTop = 0;
 	});
 	
 	$(".unfollow").on("click",function(){

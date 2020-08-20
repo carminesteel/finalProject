@@ -411,7 +411,7 @@ li {
    <div id=goods>
       <div id=gTitle>Goods</div>
       <div id=gContent>현재 제일 잘 나가는 굿즈에요.</div>
-      <a href="" class=more><img src="/display?fileName=more.png"/></a>
+      <a href="/product/list" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${plist}" var="plist" begin="0" end="9">
@@ -440,7 +440,7 @@ li {
    <div id=feed>
       <div id=fTitle>Feed</div>
       <div id=fContent>팔로우한 작가들의 최신 아트웍이에요.</div>
-      <a href="" class=more><img src="/display?fileName=more.png"/></a>
+      <a href="/feed/list" class=more><img src="/display?fileName=more.png"/></a>
    </div><br><br>
    <div class="imgDiv" style="width:1855px;height:666px;margin:auto;">
 		<c:forEach items="${flist}" var="flist" begin="0" end="9">
