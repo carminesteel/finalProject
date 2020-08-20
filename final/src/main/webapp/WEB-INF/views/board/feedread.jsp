@@ -200,6 +200,7 @@ body {
 		modal.style.display = "none";
 		$('html').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");
+        location.reload();
 	});
 
 
