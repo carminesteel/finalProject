@@ -93,6 +93,10 @@ html {
 	cursor:pointer;
 }
 
+.lbClose:hover{
+	cursor:pointer;
+}
+
 
 </style>
 </head>
@@ -140,6 +144,7 @@ html {
 
 						<div
 							style="text-align: right; display: inline-block; float: right;margin-right:25px;margin-bottom:30px;font-size:18px;">
+							<input type="hidden" value="${fvo.b_no}" class="b_no">
 							<img class=icons src="../display?fileName=views.png" />${fvo.view}&nbsp;
 							<img class=icons id="LikeBtn" src="../display?fileName=likes.png" /> ${fvo.b_like}&nbsp;
 							<img class=icons src="../display?fileName=comment.png" /> ${fvo.r_cnt}
@@ -161,6 +166,34 @@ html {
 	var lastScrollTop=0;
 	var myDiv = document.getElementById('myModal');
 
+	$("#exCenter").on("click", ".lightBottom #LikeBtn", function(){
+		var b_no=$(this).parent().find(".b_no").val();
+		$.ajax({
+			type:"post",
+			url:"/board/like/update",
+			data:{"id":id,"b_no":b_no},
+			dataType:"json",
+			success:function(data){
+			$("#LikeBtn").val("좋아요/"+data);
+				location.reload()
+			}
+		});
+	});
+
+	$(".scrollLocation").on("click", ".lightBottom #LikeBtn", function(){
+		var b_no=$(this).parent().find(".b_no").val();
+		alert(b_no);
+		$.ajax({
+			type:"post",
+			url:"/board/like/update",
+			data:{"id":id,"b_no":b_no},
+			dataType:"json",
+			success:function(data){
+			$("#LikeBtn").val("좋아요/"+data);
+				location.reload()
+			}
+		});
+	});
 
  	// Get the modal
 	var modal = document.getElementById('myModal');
@@ -204,7 +237,7 @@ html {
 										+				"<img style='border-radius:50%;' width=90px height=90px	src='../display?fileName='"+this.u_image+"'/>"
 										+			"</span>"
 										+			"<span style='display:inline-block; float:left; margin-left:18px; margin-top:18px;'>"
-										+				"<input type='text' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
+										+				"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
 										+				"<b style='font-size:20px'>"+this.nickname+"</b>&nbsp;&nbsp;"
 										+				"<a style='all: unset; font-size: 14px; cursor: pointer;'>팔로우</a><br>"
 										+				"<b style='all: unset; color: #93a1a2; font-size: 15px;'>"+this.introduce+"</b>"
@@ -219,6 +252,7 @@ html {
 										+				"</form>"
 										+			"</div>"
 										+			"<div style='text-align: right; display: inline-block; float: right;margin-right:25px;margin-bottom:30px;font-size:18px;'>"
+										+				"<input type='hidden' value='"+this.b_no+"' class='b_no'>"
 										+				"<img class=icons src='../display?fileName=views.png'/>"+this.view+"&nbsp;"
 										+				"<img class=icons id='LikeBtn' src='../display?fileName=likes.png'/>"+this.b_like+"&nbsp;"
 										+				"<img class=icons src='../display?fileName=comment.png'/>"+this.r_cnt+""
@@ -267,7 +301,7 @@ html {
 
 	$(".report").on("click", function(){
 		var b_no=$(this).parent().find(".b_no").val();
-		window.open("/board/report?b_no="+b_no,"","width=500px, height=400px");
+		window.open("/board/report?b_no="+b_no,"","width=600px, height=800px");
 	});
 </script>
 </html>

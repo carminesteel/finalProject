@@ -191,16 +191,16 @@ body {
 	      dataType:"json",
 	      success:function(data){
 	         $("#LikeBtn").val("좋아요/"+data);
-	         location.reload()
+	         location.reload();
 	      }
 	   });
 	});
 
- $(".lbClose").on("click", function(){
-           modal.style.display = "none";
-           $('html').css("overflow", "scroll");
-           $('html').css("overflow-x", "hidden");
-          })
+	 $(".lbClose").on("click", function(){
+		modal.style.display = "none";
+		$('html').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+	});
 
 
 $("#btnDelete").on("click", function(){
