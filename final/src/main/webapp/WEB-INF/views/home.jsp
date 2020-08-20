@@ -369,6 +369,7 @@ li {
 		<c:forEach items="${listA}" var="list" begin="0" end="9">
 			<div class="imgContainer">
 				<input class="idxBno" type="hidden" value="${list.b_no}"/>
+				<input class="idxView" type="hidden" value="${list.view}"/>
 				<img class="idxBimg" src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
 				<div class="hoverInfo1">${list.title}</div><br><br><br>
@@ -390,6 +391,7 @@ li {
 		<c:forEach items="${listB}" var="list" begin="0" end="9">
 			<div class="imgContainer">
 				<input class="idxBno" type="hidden" value="${list.b_no}"/>
+				<input class="idxView" type="hidden" value="${list.view}"/>
 				<img class="idxBimg" src="display?fileName=${list.image}"/>
 				<div class="hoverInfo">
 				<div class="hoverInfo1">${list.title}</div><br><br><br>
@@ -582,7 +584,29 @@ li {
         var span = document.getElementsByClassName("close")[0];                                          
  
         // When the user clicks on the button, open the modal 
-        $(".idxBimg").on("click", function(){
+         $(".ViewMenu").on("click",".idxBimg", function(){
+        	b_no=$(this).parent().find(".idxBno").val();
+    		var view = $(this).parent().find(".idxView").val();
+    		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
+        	$('html').css("overflow", "hidden");        	
+        	$('.modal').css("overflow", "scroll");
+        	$('html').css("overflow-x", "hidden");
+        	$('.modal').css("overflow-x", "hidden");
+            modal.style.display = "block";
+        })
+        
+         $(".BestMenu").on("click",".idxBimg", function(){
+        	b_no=$(this).parent().find(".idxBno").val();
+    		var view = $(this).parent().find(".idxView").val();
+    		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
+        	$('html').css("overflow", "hidden");        	
+        	$('.modal').css("overflow", "scroll");
+        	$('html').css("overflow-x", "hidden");
+        	$('.modal').css("overflow-x", "hidden");
+            modal.style.display = "block";
+        })
+        
+         $(".NewMenu").on("click",".idxBimg", function(){
         	b_no=$(this).parent().find(".idxBno").val();
     		var view = $(this).parent().find(".idxView").val();
     		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);

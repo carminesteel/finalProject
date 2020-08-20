@@ -42,7 +42,7 @@
       		<c:if test="${position==2}">
       			
       			<td style=float:right;padding-right:65px;>
-      			<a class=menuA href="/admin/usersAdmin?page=1" id=administration style="margin-right:30px">유저관리</a>
+      			<a class=menuA href="/admin/usersAdmin?page=1" id=administration style="margin-right:30px">설정</a>
       			관리자님&nbsp;&nbsp;
       			<a class=menuA href="/login/logout">로그아웃</a>
       			</td>
