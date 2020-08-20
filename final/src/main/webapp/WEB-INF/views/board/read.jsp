@@ -143,7 +143,7 @@ body {
                <input type="hidden" name="id" value="${vo.id}">
                <input type="hidden" name="image" value="${vo.image}">
                <c:if test="${id==vo.id}">
-                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="수정">   
+                  <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="수정" id="btnUpdate">   
                   <input style="border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;width:55px;height:28px;font-size:15px;" type="button" value="삭제" id="btnDelete">
                </c:if>
                <c:if test="${id!=vo.id}">
