@@ -161,10 +161,6 @@ a:hover{text-decoration:none;color:black;}
                      </div>
                </div>
             </div>
-            
-            <div style="font-family:Noto Sans KR;float:left;margin-left:70px;font-size:20px;"><br>
-               리뷰수 <span style="font-size:30px">N</span>&emsp; 평점 <span style="font-size:30px">N/N</span>
-            </div>
          </div>
          <div style="border-bottom:1px solid #74a4d7;border-top:1px solid #74a4d7;height:100px;width:1130px;margin:auto;font-family:Noto Sans KR;font-size:25px;font-weight:700;text-align:center;line-height:100px;">베스트 상품리뷰</div>
          <table style="height:475px;width:575px;margin:auto;border-collapse:collapse;">
@@ -187,13 +183,13 @@ a:hover{text-decoration:none;color:black;}
             <tr style="text-align:center">
                <td colspan=3>
                <c:forEach items="${p_image}" var="p_image">
-                  <div class="images"><img src="display?fileName=${p_image.p_images}"></div>
+                  <div class="images" style="padding-top:30px; padding-bottom:20px;"><img src="display?fileName=${p_image.p_images}"></div>
                </c:forEach>
                <div id="reply2">
-                  <h3>리뷰쓰기</h3><jsp:include page="../p_reply/reply.jsp"/>
+                  <h3><b>Review</b></h3><jsp:include page="../p_reply/reply.jsp"/>
                </div>
                <div id="qna1">
-                  <h4>Q&A</h4>
+                  <h3><b>Q&A</b></h3>
                   <jsp:include page="../qna/list.jsp"></jsp:include>               
                </div>
                </td>
