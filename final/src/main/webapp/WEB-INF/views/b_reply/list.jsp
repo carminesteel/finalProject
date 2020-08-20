@@ -85,7 +85,7 @@
 	</script>
 	<br>
 	<form action="/b_reply/insert" method="post" name="rfrm">
-	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="display?fileName=${vo.u_image}"/>
+	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="display?fileName=${u_image}"/>
 		<input type="hidden" name="b_no" value="${vo.b_no}">
 		<input type="hidden" name="replyer" value="${id}">
 		<textarea name="content" style=width:1030px;height:100px;resize:none></textarea>
