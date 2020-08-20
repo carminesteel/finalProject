@@ -145,7 +145,6 @@ height: 230px;
 border: 1px solid black; 
 font-size: 15px; 
 padding: 25px;
-
 }
 </style>
 </head>
@@ -164,7 +163,7 @@ padding: 25px;
 						<input type="file" name="file"> <img id="image"	style="display: block; margin: auto; margin-top: 30px; margin-bottom: 30px;"src="/display?fileName=mainIMG.png"> 
 						<input type="file" id="btnImage" name="files" accept="image/*" multiple><img id="images" src="/display?fileName=detailIMG.png">
 					<div id="listFile" style="width: 1100px"></div>
-				</div>
+					</div>
 				<textarea placeholder="상품에 대해 설명해주세요." name="content"	id="ProductExplain"></textarea>
 
 				</div>
