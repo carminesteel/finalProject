@@ -218,7 +218,7 @@ nav a {
       </tr>
    </table>
     <c:if test="${id!=null}">
-		<a href="/board/insert" class=more id=bButton style="margin-bottom:35px;">Upload</a>
+		<a href="/product/insert" class=more id=bButton style="margin-bottom:35px;">Upload</a>
 	</c:if>
 	<br><br>
    <div id=exBody style="padding-top:0px;">    
