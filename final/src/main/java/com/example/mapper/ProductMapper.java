@@ -35,4 +35,10 @@ public interface ProductMapper {
 	public int chkAddr(UsersVO vo);
 	public int chkAddrList(UsersVO vo);
 	public void InsertAddressList(UsersVO vo);
+	
+	public int likeTableChk(@Param(value = "id") String id,@Param(value = "r_no") int r_no);
+	public void likeinsert(@Param(value = "id") String id,@Param(value = "r_no") int r_no);
+	public void likedelete(@Param(value = "id") String id,@Param(value = "r_no") int r_no);
+	public int likeTableCnt(@Param(value = "r_no") int r_no);
+	public void E_likeUpdate(@Param(value = "r_no") int r_no, @Param(value = "like") int like);
 }

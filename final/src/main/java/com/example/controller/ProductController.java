@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.example.domain.CartVO;
+import com.example.domain.Criteria;
 import com.example.domain.MessageVO;
 import com.example.domain.ProductVO;
 import com.example.domain.PurchaseVO;
@@ -31,6 +32,7 @@ import com.example.mapper.CartMapper;
 import com.example.mapper.MessageMapper;
 import com.example.mapper.ProductMapper;
 import com.example.mapper.UsersMapper;
+import com.example.mapper.p_replyMapper;
 import com.example.service.ProductService;
 
 @Controller
@@ -51,6 +53,8 @@ public class ProductController {
 	@Autowired
 	CartMapper cmapper;
 	
+	@Autowired
+	p_replyMapper rmapper;
 	@RequestMapping("/message")
 	public void message() {		
 	}	
@@ -90,13 +94,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/read")
-	public void read(Model model, int p_no, String id) {
+	public void read(Model model, int p_no, String id,Criteria cri) {
 		pmapper.updateViewCnt(id);
 		model.addAttribute("p_image", pmapper.p_image(p_no));
 		model.addAttribute("readimage", pmapper.readimage(p_no));
 		model.addAttribute("read", pmapper.read(p_no));
 		model.addAttribute("re",pmapper.replyCount(p_no));
 		model.addAttribute("qe",pmapper.qnaCount(p_no));
+		model.addAttribute("review",rmapper.list(cri, p_no));
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
