@@ -124,36 +124,7 @@ Handlebars.registerHelper("printResend",function(id){
 });
 
 /*답글하기 */
-  
  
-/*  	function getList1(){
-		$.ajax({
-			type:"get",
-			url:"/qna/read",
-			data:{"q_no":q_no},
-			dataType:"json",
-			success:function(data){
-				var temp=Handlebars.compile($("#temp2").html());
-				$("#tbl2").html(temp(data));
-			}
-		});
-	} */
- 
-
-
-/* $("#tbl1").on("click",".qna1 #QnATitle",function(){	
-	alert("asdf");
-	$.ajax({
-		type:"get",
-		url:"/qna/read",
-		data:{"q_no":q_no},
-		dataType:"json",
-		success:function(data){
-			var temp=Handlebars.compile($("#temp2").html());
-			$("#tbl2").html(temp(data));
-		}
-	});
-}); */
 
 /*문의하기*/
 $("#btnInsert3").on("click", function(){
