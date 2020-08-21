@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 .btn-area button {
 	width: 222px;
 	height: 50px;

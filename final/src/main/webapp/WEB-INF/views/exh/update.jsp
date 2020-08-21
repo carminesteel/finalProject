@@ -11,6 +11,7 @@
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=285177e645b698276895abf188247b00&libraries=services"></script>
 	<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 		.image {
 			margin: auto;
 			padding: 50px;

@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Exhibition List</title>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 html {
 	font-family: Noto Sans KR
 }

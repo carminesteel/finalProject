@@ -9,6 +9,7 @@
 <title>[상품 등록]</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 #pTitle {
 	font-family: Noto Sans KR;
 	font-weight: bold;

@@ -7,6 +7,7 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 #bg {
 	margin-top: 10px;
 	position: fixed;

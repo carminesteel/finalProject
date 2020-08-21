@@ -6,7 +6,7 @@
 <title>웹 채팅</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <style>
-
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* pc 화면 */
 @media ( min-width : 768px) {
    #kakao-talk-channel-chat-button {

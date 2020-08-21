@@ -18,6 +18,7 @@
    crossorigin="anonymous">
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 	html{
 		font-family:Noto Sans Kr;
 	}

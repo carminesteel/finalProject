@@ -7,6 +7,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <title>Feed List</title>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 /*       /* The Modal (background) */
 .modal {
 	display: none; /* Hidden by default */

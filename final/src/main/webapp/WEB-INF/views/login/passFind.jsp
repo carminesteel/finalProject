@@ -6,6 +6,7 @@
 <head>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* .help-block 을 일단 보이지 않게 설정 */
 #myForm .help-block {
 	display: none;

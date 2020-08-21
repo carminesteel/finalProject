@@ -12,6 +12,7 @@
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 .images{min-width:100%}
 
 .input-group{

@@ -11,6 +11,7 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=285177e645b698276895abf188247b00&libraries=services"></script>
 <title>Insert title here</title>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 #selbox {
 	text-align: center;
 }

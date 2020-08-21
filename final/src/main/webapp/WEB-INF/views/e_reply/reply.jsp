@@ -9,6 +9,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 	html{font-family:Noto Sans Kr}
 	.reply1{margin:5px; padding:10px; width:650px;}
 	.replydate #btnDel{float:right;}

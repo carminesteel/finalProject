@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
    <title>index</title>
    <style>
+   @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 html {
 	font-family: Noto Sans KR;
 }

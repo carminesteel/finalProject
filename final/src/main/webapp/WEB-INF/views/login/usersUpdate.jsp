@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/bootstrap.css" />
 <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
 <style>
-
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 #passChk {
 	text-align: center;
 	width: 500px;

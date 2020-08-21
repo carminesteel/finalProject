@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>footer</title>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 body{width:100%;}
 #divFooter{width:100%;height:304px;background-color:#191919;}
 #fLogo{text-align:center;font-family:Helvetica33-ExtendedThin;font-size:45px;color:white;position:relative;top:45px;}

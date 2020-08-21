@@ -5,6 +5,7 @@
 
 <style>
 /*  폰트 적용 */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap');
 
 

@@ -10,6 +10,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 	.reply1{vertical-align:middle;border-bottom:none;font-size:17px;letter-spacing:-1px;margin:auto;magin-bottom:5px;padding:15px;padding-bottom:0px; padding-top:15px; width:500px; text-align:left; border-bottom:1px solid black;}
 	#btnInsert{
 		font-family:Noto Sans Kr;

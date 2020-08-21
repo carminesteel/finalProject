@@ -15,6 +15,7 @@
 <script
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=285177e645b698276895abf188247b00&libraries=services"></script>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* .help-block 을 일단 보이지 않게 설정 */
 #myForm .help-block {
 	display: none;

@@ -10,6 +10,7 @@
 	charset="utf-8"></script>
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 .btn-area button {
 	width: 100%;
 	height: 50px;

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>[상품목록]</title>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 html {
    font-family: Noto Sans KR
 }
