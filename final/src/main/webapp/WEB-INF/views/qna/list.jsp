@@ -49,31 +49,28 @@
 	<script id="temp1" type="text/x-handlebars-template">
 
 		{{#each list}}
-		<tr class="qna1" style="margin-bottom:110px; border=1px;">
+		<tr class="qna1" style="height=200px;">
 			<td class="u_image" width=70>
 				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}"/>
 			</td>
-			<td width=100 style="text-align:left; padding:10px;" class="replydate">
+			<td width=150 style="text-align:left;" class="replydate">
 				<input type="hidden" value={{q_no}}>
 				<b>{{nickname}}</b><br>
 				<b>{{date}}</b>
 			</td>
-			<td width=500 style="text-align:left; padding:10px;"  id="QnATitle">
+			<td width=500 style="text-align:left;"  id="QnATitle">
 				<b>{{title}}</b><br>
 				<b>문의내용 : </b><a>{{content}}</a>
 			</td>		
 			<td width=200>
-				<span >{{printValue cnt}}</span>
+				<span>{{printValue cnt}}</span>
 				{{#if ${id=='admin'}}}
 					<button q_no={{q_no}} style="{{printResend id}}" class="btnReply">답글</button>	
 				{{/if}}
 			</td>
 			<td width=50 q_no={{q_no}}>
-				<img width=20 height=20 style="{{printStyle id}}" class="btnDelete" src=../display?fileName=xicon.png>
+				<img width=20 cnt={{cnt}} style="{{printStyle id}}" class="btnDelete" src=../display?fileName=xicon.png>
 			</td>
-		</tr>
-		<tr>
-			<if
 		</tr>
 		{{/each}}
 	</script>
@@ -196,17 +193,23 @@ $("#tbl1").on("click",".qna1 .btnReply", function(){
 	/*문의하기 삭제*/
 	$("#tbl1").on("click",".btnDelete",function(){
 		var q_no=$(this).parent().attr("q_no");
+		var cnt=$(this).attr("cnt");
+
 		if(!confirm("문의글을 삭제 하시겠습니까?")) return;
-		$.ajax({
-			type:"post",
-			url:"/qna/delete",
-			data:{"q_no":q_no},
-			success:function(){
-				alert("댓글이 삭제되었습니다!");
-				$("#qe").html(--qe);
-				getList2();
-			}
-		});
+		if(cnt!=0){
+			alert("답변한 글이 있어 삭제할 수 없습니다.");
+		}else{
+			$.ajax({
+				type:"post",
+				url:"/qna/delete",
+				data:{"q_no":q_no},
+				success:function(){
+					alert("댓글이 삭제되었습니다!");
+					$("#qe").html(--qe);
+					getList2();
+				}
+			});
+		}
 	});
 	/*답글삭제*/
 	$(".tbl2").on("click",".btnDelete2",function(){
@@ -221,7 +224,6 @@ $("#tbl1").on("click",".qna1 .btnReply", function(){
 			}
 		});
 	});
-	
 		
 </script>
 </html>
