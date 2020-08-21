@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>menu</title>
 <style>
-   @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
    #menu{background-color:white;width:100%;text-align:center;font-family:YDIYGO330;font-size:21px;margin:auto;vertical-align:middle;position:fixed;top:0;left:0;right:0;z-index:999;}
    #logo{font-family:Helvetica83-ExtendedHeavy;font-size:30px;}
    .menuA{text-decoration:none;color:black;}
@@ -41,7 +40,7 @@
       		</c:if>
       		<c:if test="${position==2}">
       			
-      			<td style=float:right;padding-right:65px;>
+      			<td style=float:right;padding-right:65px;padding-top:27px;>
       			<a class=menuA href="/admin/usersAdmin?page=1" id=administration style="margin-right:30px">설정</a>
       			관리자님&nbsp;&nbsp;
       			<a class=menuA href="/login/logout">로그아웃</a>

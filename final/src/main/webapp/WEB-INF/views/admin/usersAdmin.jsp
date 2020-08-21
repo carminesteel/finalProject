@@ -10,6 +10,10 @@ html {
 	font-family: Noto Sans KR;
 }
 
+a{
+	text-decoration:none;
+}
+
 .myImgs {
 	width: 343px;
 	height: 272px;
@@ -162,15 +166,18 @@ input[type="password"] {
 }
 
 .left {
-	margin-left:100px;
-	margin-right:100px;
-	width: 122px;
-	display: inline-block;
-	height: 35px;
-	font-size:30px;
+	display:inline-block;
+	float:right;
+	font-weight:300;
+	color:#2b4163;
+	border:1px solid #2b4163;
+	border-radius:5px 5px 5px 5px;
+	padding:5px;
 }
 .left:hover {
 	cursor:pointer;
+	background:#2b4163;
+	color:white;
 }
 
 
@@ -200,7 +207,31 @@ input[type="password"] {
 	margin: 17px
 }
 
+.mspan,.cspan{
+	display:inline-block;
+	width:150px;
+	overflow:hidden;
+	text-overflow:ellipsis
+}
 
+#eTitle {
+	font-family: Noto Sans KR;
+	font-weight: bold;
+	font-size: 40px;
+	height: 40px;
+	color:black;
+	margin-left:40px;
+}
+
+#eTitle2 {
+	font-family: Noto Sans KR;
+	font-weight: bold;
+	font-size: 40px;
+	height: 60px;
+	color:black;
+	float:left;
+	margin-left:160px;
+}
 
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -209,21 +240,22 @@ input[type="password"] {
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;height:100%;background:#2b4163;">
 	<jsp:include page="../menu.jsp" />
+	<div style="width:1400px;background:white;color:black;margin:auto;border-radius:20px 20px 20px 20px;padding:20px;margin-top:40px;">
 	<div class="infoC">
-						<div class=left id=user>유저관리</div>
-						<div class=left id=report>신고목록</div>
-					</div>
-	<div id=userList style="background:#2b4163;height:1080px;padding:80px;padding-top:0px;padding-left:120px;">		
-					
-		<table style="color:white;margin:auto;padding:50px;height:500px;width:1400px;">
+		<div class=left id=user style="margin-right:130px;">유저관리</div>
+		<div class=left id=report style="margin-right:30px;">신고목록</div>
+	</div><br><br>
+	<div id=userList style="height:1080px;padding:80px;padding-top:0px;padding-left:120px;">		
+		<div id=eTitle>유저관리</div>
+		<table style="margin:auto;padding:50px;height:500px;">
 			<tr>
 				<td>ID</td>
 				<td>Name</td>
 				<td>Nick_Name</td>
 				<td>Phone</td>
-				<td>Address</td>
+				<td width=500px>Address</td>
 				<td>Email</td>
-				<td>Position</td>
+				<td width=100px>Position</td>
 				<td>Edit Position</td>
 			</tr>
 			<c:forEach items="${user}" var="vo">
@@ -278,16 +310,16 @@ input[type="password"] {
 			</c:forEach>
 		</table>
 		<br><br>
-		<div id="pagination" style="text-align:center;">
+		<div id="pagination" style="text-align:center;color:black;">
             <c:if test="${pm.prev}">
                <a href="${pm.startPage-1}">◀</a>
             </c:if>
             <c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
                <c:if test="${pm.cri.page == i }">
-                [<a href="${i}" class='active' style="color:white;">${i}</a>]
+                [<a href="${i}" class='active' style="color:black;">${i}</a>]
             </c:if>
                <c:if test="${pm.cri.page != i }">
-                [<a href="${i}" style="color:white;">${i}</a>]
+                [<a href="${i}" style="color:black;">${i}</a>]
             </c:if>
             </c:forEach>
             <c:if test="${pm.next}">
@@ -295,20 +327,25 @@ input[type="password"] {
             </c:if>
          </div>
 	</div>
-	<div id=reportList style="background:#2b4163;height:100%;padding:80px;padding-top:0px;padding-left:120px;">
-	<div style="color:white;margin:auto;padding:50px;height:hidden;width:1400px;text-align:center;">
+	<div id=reportList style="height:100%;text-align:center;">
+	<div id=eTitle2>신고관리</div><br><br>
+	<div style="margin:auto;padding:50px;height:hidden;text-align:center;">
 			<c:if test="${cnt!=0}">
-				<div>ID/ Title/ Content/ Image/ Date/ Report/ Reason</div>
-		
-			
+				<div><span class="mspan">ID</span>
+					<span class="mspan">title</span>
+					<span class="mspan">image</span>
+					<span class="mspan">date</span>
+					<span class="mspan">report</span>
+					<span class="mspan">reason</span></div>
 			<c:forEach items="${report}" var="vo">
 			<div>
-				<div>${vo.id}/ ${vo.title}/ ${vo.content}/ 
-				<img src="../display?fileName=${vo.image}" width=100 height=100>/ ${vo.date}/ ${vo.report}/ 
-				<input type="button" class="reason" value="Reason ↓">
-				
-				<input type="button"  b_no="${vo.b_no}" class=disable value="제한해제">
-				
+				<div>
+					<span class="cspan">${vo.id}</span>
+					<span class="cspan">${vo.title}</span>
+					<span class="cspan"><img src="../display?fileName=${vo.image}" width=100 height=100></span>
+					<span class="cspan">${vo.date}</span>
+					<span class="cspan">${vo.report}<input type="button" class="reason" value="reason ↓"></span>				
+					<span class="cspan"><input type="button"  b_no="${vo.b_no}" class=disable value="제한해제"></span>				
 				</div>
 			
 			<!-- <tr class="ReportList" style="display:none;"> -->
@@ -331,13 +368,12 @@ input[type="password"] {
 			<c:if test="${cnt==0}">
 				<h1>출력이 제한된 게시물이 없습니다.</h1>
 			</c:if>
+			</div>						
 			</div>
-			
-			
 		</div>
 	<br>
 	<br>
-	<br>
+	<br>	
 	<jsp:include page="../footer.jsp" />
 </body>
 <script>
@@ -346,14 +382,14 @@ $("#reportList").hide();
 $(".reason").click(function(){
 	var reason=$(this).val();
 	
-	if(reason=="Reason ↓"){
-		$(this).val("Reason ↑");
-		$(this).parent().parent().find(".ReportList").prop("style","display:block;");
+	if(reason=="reason ↓"){
+		$(this).val("reason ↑");
+		$(this).parent().parent().parent().find(".ReportList").prop("style","display:block;");
 			}
 		
 	else{
-		$(this).val("Reason ↓");
-		$(this).parent().parent().find(".ReportList").prop("style","display:none;");
+		$(this).val("reason ↓");
+		$(this).parent().parent().parent().find(".ReportList").prop("style","display:none;");
 	}
 	
 }) 
