@@ -46,16 +46,6 @@
 <body>
 	<br>
 	<hr>
-	<!-- 	<table id=tbl0>
-		<tr>
-			<td width=100>댓글번호</td>
-			<td width=200>작성자</td>
-			<td width=200>내용</td>
-			<td width=200>날짜</td>
-			<td width=50>삭제</td>
-		</tr>
-	</table> -->
-	
 	<div id="divStatus" style=text-align:right;display:inline-block;float:right;></div>
 	<script id="readStatus" type="text/x-handlebars-template">
 		<img class=icons src="../display?fileName=views.png"/> {{view}}&nbsp;
@@ -123,7 +113,6 @@ $( document ).ready(function() {
 	R_list();
 	update();
 });
-var b_no = "${vo.b_no}";
 
 $("#pagination").on("click", ".page-item .page-link", function(e) {
     e.preventDefault();
@@ -134,14 +123,6 @@ $("#pagination").on("click", ".page-item .page-link", function(e) {
 $("#tbl1").find(".reRow .b_no").hide();
 var id="${id}";
 
-/* var replyer=$("#tbl1 .reRow .replyer").html();
-alert(replyer);
-
-	if(id!=replyer){
-		$(".rbtnDelete").hide();	
-	}else if(id==replyer){
-		$(".rbtnDelete").show();
-	} */
 	
 	function update(){
 		$.ajax({
