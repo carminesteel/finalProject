@@ -329,7 +329,6 @@ $( document ).ready(function() {
 	 });
 	
 	function getRep(){
-		alert("dd");
 		page=1;
 		$(".page-link").click();
 		    R_list();  

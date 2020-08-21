@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,8 +93,7 @@ html {
    	<div id=exCenter>
    		<div id=eTitle>Cart</div>
 			<div id=eContent>장바구니</div>
-      <table id="cart"></table>
-      <script id="temp" type="text/x-handlebars-template">
+      <table id="cart">
          <tr style="height:50px;background:#2b4163;color:white;">
             <td><input type="checkbox" id="checkAll" checked></td>
             <td>상품이미지</td>
@@ -102,28 +102,27 @@ html {
             <td>수량</td>
             <td>총액</td>
          </tr>
-
-         {{#each .}}
+         <c:forEach items="${Clist}" var="cvo">
             <tr class="row" height=125px style="border-bottom:1px solid #b3c6e6;">
                <td width=30px><input type="checkbox" class="check" checked></td>
                <td width=90px;>
-                  <div class="id" style="display:none;">{{id}}</div>
-                  <div class="buydate" style="display:none;">{{buydate}}</div>
-                  <div class="p_no" style="display:none;">{{p_no}}</div>
-                  <div class="p_image" style="display:none;">{{p_image}}</div>
-                  <img src="/display?fileName={{p_image}}" height=90px style="object-fit:contain;">
+                  <div class="id" style="display:none;">${cvo.id}</div>
+                  <div class="buydate" style="display:none;">${cvo.buydate}</div>
+                  <div class="p_no" style="display:none;">${cvo.p_no}</div>
+                  <div class="p_image" style="display:none;">${cvo.p_image}</div>
+                  <img src="/display?fileName=${cvo.p_image}" height=90px style="object-fit:contain;">
                </td>
-				<td width=385px; style="font-weight:500">{{title}}</td>
-               <td width=233 class="price">{{price}}원</td>
+				<td width=350px; style="font-weight:500">${cvo.title}</td>
+               <td width=218px><input class="price" type="hidden" value="${cvo.price}"><fmt:formatNumber type="number" value="${cvo.price}"></fmt:formatNumber>원</td>
                <td width=120px>
                   <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;height:22px;width:22px;" type="button" value="-" class="minus">
-                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;text-align:center;" type="text" value="{{quantity}}" size=2 style="text-align:center;" class="quantity" readonly>
-                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;height:22px;width:22px;" type="button" value="+" class="plus">
+                  <input style="border:2px solid #b3c6e6;border-radius:10%;background:none;text-align:center;" type="text" value="${cvo.quantity}" size=2 style="text-align:center;" class="quantity" readonly>
+                  <input style="border	:2px solid #b3c6e6;border-radius:10%;background:none;height:22px;width:22px;" type="button" value="+" class="plus">
                </td>
-               <td width=70px class="total">{{sum}}원</td>
+               <td width=120px class="total"><fmt:formatNumber type="number" value="${cvo.price*cvo.quantity}"></fmt:formatNumber>원</td>
             </tr>
-         {{/each}}
-      </script>
+         </c:forEach>
+      </table>
       <input type="button" value="선택삭제" id="cartdelete">
       <input type="button" value="구매하기" class="pButton" id="order">
   
@@ -134,11 +133,11 @@ html {
       		<td>결제예정금액</td>
       	</tr>
       	<tr height=50px>
-      		<td><input type="text" style="width:120px;height:30px;" id="totSum" readonly> 원</td>
+      		<td><input type="number" style="width:120px;height:30px;" id="totSum" readonly> 원</td>
       		<td><input type="text" style="width:120px;height:30px;" value="2500" readonly id="delivery"> 원</td>
       		<td><input type="text" style="width:120px;height:30px;" id="ttotSum" readonly> 원 <br></td>
       	</tr>
-      </table>          
+      </table>
       <br>
    </div> 
    </div>
@@ -152,8 +151,8 @@ html {
    var total;
    var delivery;
    var ttotal;
+   cart();
    
-   getList();
    $("#cartdelete").on("click", function(){
       var is_check=$("input:checkbox[class=check]:checked").length;
       if(!confirm("선택한 "+is_check+"개의 상품을 장바구니에서 삭제하시겠습니까?")) return;
@@ -187,51 +186,7 @@ html {
 			i++;
 		});
 		location.href = "/product/order2?id="+id+"&tot="+tot+"&p_images="+p_images;
-	}); 
-   
-   function getList(){
-      var id="${id}";
-      $.ajax({
-         type:"get",
-         url:"/cart/rest/list",
-         data:{"id":id},
-         success:function(data){
-            var temp=Handlebars.compile($("#temp").html());
-            $("#cart").html(temp(data));
-            
-            $("#cart .row").each(function(){
-               price=$(this).find(".price").html();
-               quantity=$(this).find(".quantity").val();
-            });
-            
-            delivery=$("#delivery").val();
-            total=0;
-            ttotal=0;
-            
-            $("#cart .row .check:checked").each(function(){
-               var row=$(this).parent().parent();
-               price=row.find(".price").html();
-               quantity=row.find(".quantity").val();
-               sum=parseInt(price)*parseInt(quantity);
-               total=total+sum;
-            });
-            
-            if(total>=50000){
-               delivery=0;
-               ttotal=parseInt(total)+parseInt(delivery);
-               $("#totSum").val(total);
-               $("#ttotSum").val(ttotal);
-               $("#delivery").val(delivery);
-            }else{
-               delivery=2500;
-               ttotal=parseInt(total)+parseInt(delivery);
-               $("#totSum").val(total);
-               $("#ttotSum").val(ttotal);
-               $("#delivery").val(delivery);
-            }
-         }
-      });
-   }
+	});
    
    $("#cart").change(".row .check", function(){
       delivery=$("#delivery").val();
@@ -239,7 +194,7 @@ html {
       total=0;
       $("#cart .row .check:checked").each(function(){
          var row=$(this).parent().parent();
-         price=row.find(".price").html();
+         price=row.find(".price").val();
          quantity=row.find(".quantity").val();
          sum=parseInt(price)*parseInt(quantity);
          total=total+sum;
@@ -258,6 +213,32 @@ html {
          $("#delivery").val(delivery);
       }
    });
+   
+   function cart(){
+      delivery=$("#delivery").val();
+      ttotal=0;
+      total=0;
+      $("#cart .row .check:checked").each(function(){
+         var row=$(this).parent().parent();
+         price=row.find(".price").val();
+         quantity=row.find(".quantity").val();
+         sum=parseInt(price)*parseInt(quantity);
+         total=total+sum;
+      });
+      if(total>=50000){
+         delivery=0;
+         ttotal=parseInt(total)+parseInt(delivery);
+         $("#totSum").val(total);
+         $("#ttotSum").val(ttotal);
+         $("#delivery").val(delivery);
+      }else{
+         delivery=2500;
+         ttotal=parseInt(total)+parseInt(delivery);
+         $("#totSum").val(total);
+         $("#ttotSum").val(ttotal);
+         $("#delivery").val(delivery);
+      }
+   }
 
    $("#cart").on("click", ".row .minus", function(){
       var id=$(this).parent().parent().find(".id").html();
@@ -272,7 +253,7 @@ html {
             url:"/cart/minus",
             data:{"id":id, "p_no":p_no},
             success:function(){
-               getList();
+            	location.reload();
             }
          });
       }
@@ -289,7 +270,7 @@ html {
          url:"/cart/plus",
          data:{"id":id, "p_no":p_no},
          success:function(){
-        	 getList();
+         	location.reload();
          }
       });
    });

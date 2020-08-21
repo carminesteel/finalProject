@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,9 +115,9 @@ html {
 											src="../display?fileName=${cvo.p_image}" width=100 height=100></td>
 										<td width=175>${cvo.title}</td>
 										<td width=250>${cvo.nickname}</td>
-										<td width=250>${cvo.price}</td>
+										<td width=200><fmt:formatNumber type="number" value="${cvo.price}"></fmt:formatNumber>원</td>
 										<td width=250>${cvo.quantity}</td>
-										<td width=150>${cvo.price * cvo.quantity}</td>
+										<td width=150><fmt:formatNumber type="number" value="${cvo.price * cvo.quantity}"></fmt:formatNumber>원</td>
 										
 									</tr>
 								
@@ -229,7 +230,7 @@ html {
 				<div style="height: 300px">
 					<h2>결제 금액</h2>
 					<h1>
-						<span id=tot>${param.tot}</span>원
+						<span id=tot><fmt:formatNumber type="number" value="${param.tot}"></fmt:formatNumber>원</span>
 					</h1>
 					<h5>
 						적립 Point // <span id=savePoint>0 </span> Point

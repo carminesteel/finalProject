@@ -70,22 +70,10 @@ public class ProductController {
 	@RequestMapping("/list")
 	public void list(Model model) {
 		model.addAttribute("users", umapper.list());
-		
 		model.addAttribute("proimage", umapper.proimage());
+		model.addAttribute("Blist", pmapper.bestList());
+		model.addAttribute("Alist", pmapper.artgoods());
 	}
-	
-	@RequestMapping("/rest/bestlist")
-	@ResponseBody
-	public List<ProductVO> bestList(){
-		return pmapper.bestList();
-	}
-	
-	@RequestMapping("/rest/artgoods")
-	@ResponseBody
-	public List<ProductVO> artgoods(){
-		return pmapper.artgoods();
-	}
-	
 	
 	@RequestMapping("/rest/proimage")
 	@ResponseBody

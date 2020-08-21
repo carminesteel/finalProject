@@ -224,35 +224,32 @@ nav a {
 	<br><br>
    <div id=exBody style="padding-top:0px;">    
          <div id="best">
-            <div id="besttab"></div>
-            <script id="besttemp" type="text/x-handlebars-template">
-         {{#each .}}
-            <div class="box">
-               <input type="hidden" value="{{p_no}}" class="p_no">
-               <div class="image"><img src="/display?fileName={{image}}"/></div>
-               <div class="title" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{title}}</div>               
-               <div class="content" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{content}}</div>
-               <div class="price">{{price}}원</div>
-               <div class="id" style="display:none">{{id}}</div>
-            </div>
-         {{/each}}
-      </script>
+         	<div id="besttab">
+		         <c:forEach items="${Blist}" var="bvo">
+		            <div class="box">
+		               <input type="hidden" value="${bvo.p_no}" class="p_no">
+		               <div class="image"><img src="/display?fileName=${bvo.image}"/></div>
+		               <div class="title" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${bvo.title}</div>               
+		               <div class="content" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${bvo.content}</div>
+		               <div class="price"><fmt:formatNumber type="number" value="${bvo.price}"></fmt:formatNumber>원</div>
+		               <div class="id" style="display:none">${bvo.id}</div>
+		            </div>
+		         </c:forEach>
+			</div>
          </div>
-
          <div id="artgoods" style="display: none">
-            <div id="artgoodstab"></div>
-            <script id="artgoodstemp" type="text/x-handlebars-template">
-         {{#each .}}
-            <div class="box">
-               <input type="hidden" value="{{p_no}}" class="p_no">
-               <div class="image"><img src="/display?fileName={{image}}"/></div>
-               <div class="title" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{title}}</div>
-               <div class="content" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{content}}</div>
-               <div class="price">{{price}}원</div>
-               <div class="id" style="display:none">{{id}}</div>
+            <div id="artgoodstab">
+		         <c:forEach items="${Alist}" var="avo">
+		            <div class="box">
+		               <input type="hidden" value="${bvo.p_no}" class="p_no">
+		               <div class="image"><img src="/display?fileName=${avo.image}"/></div>
+		               <div class="title" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${avo.title}</div>               
+		               <div class="content" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${avo.content}</div>
+		               <div class="price"><fmt:formatNumber type="number" value="${avo.price}"></fmt:formatNumber>원</div>
+		               <div class="id" style="display:none">${avo.id}</div>
+		            </div>
+		         </c:forEach>
             </div>
-         {{/each}}
-      </script>
          </div>
 
          <div id="creater">
@@ -295,9 +292,6 @@ nav a {
 </body>
 
 <script>
-
-   getBest();
-   artgoods();
    $("#artgoods").hide();
    $("#creater").hide();
 
@@ -333,18 +327,6 @@ nav a {
       var id = $(this).parent().find(".id").html();
       location.href = "/product/read?p_no=" + p_no + "&id=" + id;
    });
-
-   function getBest() {
-      $.ajax({
-         type : "get",
-         url : "/product/rest/bestlist",
-         dataType : "json",
-         success : function(data) {
-            var temp = Handlebars.compile($("#besttemp").html());
-            $("#besttab").html(temp(data));
-         }
-      });
-   }
    
    $("#creater").on("click", ".creatertab .proimage .proImg", function(){
       var id = $(this).parent().parent().parent().find(".createrid").text();
@@ -357,18 +339,6 @@ nav a {
       var id = $(this).parent().find(".id").html();
       location.href = "/product/read?p_no=" + p_no + "&id=" + id;
    });
-
-   function artgoods() {
-      $.ajax({
-         type : "get",
-         url : "/product/rest/artgoods",
-         dataType : "json",
-         success : function(data) {
-            var temp = Handlebars.compile($("#artgoodstemp").html());
-            $("#artgoodstab").html(temp(data));
-         }
-      });
-   }
    
    //user read
    $(".creatertab").on("click",".creater #creater",function(){

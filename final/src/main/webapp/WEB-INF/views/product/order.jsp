@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,11 +112,11 @@ html {
 								src="../display?fileName=${pvo.image}" width=150 height=150></td>
 							<td width=150>${pvo.title}</td>
 							<td width=200>${pvo.id}</td>
-							<td width=200>${pvo.price}</td>
+							<td width=200><fmt:formatNumber type="number" value="${pvo.price}"></fmt:formatNumber>원</td>
 							<td width=200>${shipping_fee}</td>
 							<td width=100>${quan}</td>
-							<td width=100>${discount}</td>
-							<td width=100>${tot}</td>
+							<td width=100><fmt:formatNumber type="number" value="${discount}"></fmt:formatNumber>원</td>
+							<td width=100><fmt:formatNumber type="number" value="${tot}"></fmt:formatNumber>원</td>
 						</tr>
 					</table>
 				</div>
@@ -218,7 +219,7 @@ html {
 				<div style="height: 300px">
 					<h2>결제 금액</h2>
 					<h1>
-						<span id=tot>${param.tot}</span>원
+						<span id=tot><fmt:formatNumber type="number" value="${param.tot}"></fmt:formatNumber>원</span>
 					</h1>
 					<h5>
 						적립 Point // <span id=savePoint>0 </span> Point
