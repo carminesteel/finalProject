@@ -241,6 +241,7 @@ input[type="password"] {
 
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;height:100%;background:#2b4163;">
+	<c:if test="${position==2}">
 	<jsp:include page="../menu.jsp" />
 	<div style="width:1400px;background:white;color:black;margin:auto;border-radius:20px 20px 20px 20px;padding:20px;margin-top:40px;">
 	<div class="infoC">
@@ -386,6 +387,13 @@ input[type="password"] {
 			</div>						
 			</div>
 		</div>
+		</c:if>
+		<c:if test="${position!=2}">
+			<div style="margin:auto;">
+			<h1>접근 권한이 없습니다.</h1>
+			<button onClick="location.href='/'">Home</button>
+			</div>
+		</c:if>
 	<br>
 	<br>
 	<br>	

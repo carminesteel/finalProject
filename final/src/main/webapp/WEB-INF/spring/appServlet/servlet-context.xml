@@ -35,6 +35,7 @@
 			<mapping path="/product/read" />
 			<mapping path="/feed/list"/>
 			<mapping path="/board/list"/>
+			<mapping path="/admin/usersAdmin"/>
 			<beans:bean id="AuthInterceptor"
 				class="com.example.interceptor.AuthInterceptor" />
 		</interceptor>
