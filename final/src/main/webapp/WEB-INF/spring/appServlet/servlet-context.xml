@@ -31,10 +31,10 @@
 		<interceptors>
 		<interceptor>
 			<mapping path="/board/insert" />
-			<mapping path="/board/read" />
 			<mapping path="/e_reply/reply" />
 			<mapping path="/product/read" />
 			<mapping path="/feed/list"/>
+			<mapping path="/board/list"/>
 			<beans:bean id="AuthInterceptor"
 				class="com.example.interceptor.AuthInterceptor" />
 		</interceptor>

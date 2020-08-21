@@ -92,7 +92,7 @@ body {
 
 					<input
 						style="all: unset;float:right;margin-right:40px; background: #2e6cb5; width: 100px; height: 30px; color: white; border-radius: 5px 5px 5px 5px;text-align:center;"
-						type="submit" value="저장"> 
+						type="submit" value="등록"> 
 					<input
 						style="all: unset; background: #2e6cb5; width: 70px; height: 30px;margin-left:40px; color: white; border-radius: 5px 5px 5px 5px;text-align:center;"
 						 type="reset" value="취소">
@@ -174,5 +174,23 @@ $(frm.file).on("change", function(){
 	$("#image").css("max-width","1100px");
 });
 
+
+$(frm).submit(function(e){
+	e.preventDefault();
+	if($(frm.title).val()==""){
+		alert("제목을 입력해주세요");
+		$(frm.title).focus();
+		return;
+	}else if($(frm.file)[0].files[0]==null){
+		alert("대표이미지를 넣어주세요!");
+		return;
+	}else if($(frm.content).val()==""){
+		alert("내용을 입력해주세요");
+		return;
+	}else{
+		if(!confirm("등록 하시겠습니까?")) return;
+		frm.submit();
+	}
+})
 </script>
 </html>

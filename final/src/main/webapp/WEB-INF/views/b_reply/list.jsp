@@ -118,7 +118,6 @@
 	
 </body>
 <script>
-var page;
 $( document ).ready(function() {
 	R_list();
 	update();
@@ -172,7 +171,10 @@ alert(replyer);
 
 	$(rfrm).submit(function(e){
 		e.preventDefault();
-		if($(rfrm.content).val()==""){
+	if($(rfrm.replyer).val()==""){
+		if(!confirm("로그인이 필요합니다. 이동하시겠습니까?")) return;
+			location.href="/login/login";
+	}else if($(rfrm.content).val()==""){
 			alert("내용을 입력해주세요");
 		}else{
 			if(!confirm("입력하시겠습니까?")) return;
@@ -218,7 +220,6 @@ $("#tbl1").on("click", ".reRow .rbtnDelete", function(){
 	}
 	
 });
-
 
 
 </script>

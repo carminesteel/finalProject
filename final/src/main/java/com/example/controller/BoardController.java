@@ -167,6 +167,7 @@ public class BoardController {
 		model.addAttribute("vo",mapper.read(b_no));
 		model.addAttribute("replyCount",rmapper.replyCount(b_no));
 	}
+	
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insertPost(BoardVO vo, MultipartHttpServletRequest multi) throws Exception { //�뜝�룞�삕�뜝�떥�벝�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 		MultipartFile file=multi.getFile("file");

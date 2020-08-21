@@ -168,7 +168,7 @@ padding: 25px;
 				<textarea placeholder="상품에 대해 설명해주세요." name="content"	id="ProductExplain"></textarea>
 
 				</div>
-				<input	type="submit" value="저장" id="btnOne">
+				<input	type="submit" value="등록" id="btnOne">
 				<input  type="reset" value="취소" id="btnTwo"> 
 				<input	type="button" value="목록" id="btnThree" onClick="location.href='list'">
 			</form>
@@ -184,11 +184,7 @@ $(frm.files).hide();
 		location.href = "list";
 	});
 
-	$(frm).submit(function(e) {
-		e.preventDefault();
-		if (!confirm("저장하시겠습니까?"))return;
-		frm.submit();
-	});
+
 
 	$("#image").on("click", function() {
 		$(frm.file).click();
@@ -219,5 +215,33 @@ $(frm.files).hide();
 			$("#listFile").html(html);
 		});	
 	});
+	
+	$(frm).submit(function(e){
+		e.preventDefault();
+		if($(frm.title).val()==""){
+			alert("제목을 입력해주세요");
+			$(frm.title).focus();
+			return;
+		}
+		else if($(frm.price).val()==""){
+			alert("가격을 입력해주세요");
+			$(frm.price).focus();
+			return;
+		}
+		else if($(frm.file)[0].files[0]==null){
+		
+			alert("대표이미지를 넣어주세요!");
+			return;
+		}
+		else if($(frm.content).val()==""){
+			alert("내용을 입력해주세요");
+			$(frm.content).focus();
+			return;
+		}
+		else{
+			if(!confirm("등록 하시겠습니까?")) return;
+			frm.submit();
+		}
+	})
 </script>
 </html>
