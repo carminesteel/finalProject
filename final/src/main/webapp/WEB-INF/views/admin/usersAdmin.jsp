@@ -232,7 +232,9 @@ input[type="password"] {
 	float:left;
 	margin-left:160px;
 }
-
+#tbl td{
+	border-bottom:1px solid black;
+}
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>마이페이지</title>
@@ -247,7 +249,8 @@ input[type="password"] {
 	</div><br><br>
 	<div id=userList style="height:1080px;padding:80px;padding-top:0px;padding-left:120px;">		
 		<div id=eTitle>유저관리</div>
-		<table style="margin:auto;padding:50px;height:500px;">
+		<br><br>
+		<table id=tbl style="margin:auto;padding:10px;height:500px;border:1px solid black;">
 			<tr>
 				<td>ID</td>
 				<td>Name</td>
@@ -259,7 +262,7 @@ input[type="password"] {
 				<td>Edit Position</td>
 			</tr>
 			<c:forEach items="${user}" var="vo">
-			<tr class=row>
+			<tr class=row style="height:40px;border:1px solid black;">
 				<td class=id>${vo.id}</td>
 				<td>${vo.name}</td>
 				<td>${vo.nickname}</td>
@@ -307,6 +310,7 @@ input[type="password"] {
 					</select>
 				</td>
 			</tr>
+			
 			</c:forEach>
 		</table>
 		<br><br>
@@ -336,7 +340,9 @@ input[type="password"] {
 					<span class="mspan">image</span>
 					<span class="mspan">date</span>
 					<span class="mspan">report</span>
-					<span class="mspan">reason</span></div>
+					<span class="mspan">reason</span>
+				</div>
+			<hr>
 			<c:forEach items="${report}" var="vo">
 			<div>
 				<div>
@@ -350,17 +356,26 @@ input[type="password"] {
 			
 			<!-- <tr class="ReportList" style="display:none;"> -->
 				
+				<hr>
+					<div class="ReportList" style="display:none;">
+					<table style="margin:auto">
+						<tr>
+							<td width=200>신고유저ID</td>
+							<td width=500>신고내용</td>
+							<td width=200>신고일자</td>
+						</tr>
 					<c:forEach items="${reportContent}" var="report">
 					<c:if test="${vo.b_no==report.b_no}">
-					<div class="ReportList" style="display:none;">
-							${report.b_no}/////
-							${report.id}/
-							${report.content}/
-							${report.date}
-					</div>
+						<tr>
+							<td>${report.id}</td>
+							<td>${report.content}</td>
+							<td>${report.date}</td>
+						</tr>
 					</c:if>
 					 </c:forEach>
-				
+					 </table>
+					 <hr>
+					</div>
 			<!-- </tr> -->
 			</div>
 			</c:forEach>
@@ -396,7 +411,7 @@ $(".reason").click(function(){
 
 $(".disable").click(function(){
 	var b_no=$(this).attr("b_no");
-	var div=$(this).parent();
+	var div=$(this).parent().parent().parent();
 	if(!confirm("다시 출력 허용하시겠습니까?")) return;
 	$.ajax({
 		type:"post",
