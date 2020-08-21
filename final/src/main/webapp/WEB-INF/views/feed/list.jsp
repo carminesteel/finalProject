@@ -234,7 +234,7 @@ html {
 										+				"<img class=fimg style='height: 100%; object-fit: contain;' src='../display?fileName="+this.image+"'>"
 										+			"</div>"
 										+			"<span style='display: inline-block; float:left;'>"
-										+				"<img style='border-radius:50%;' width=90px height=90px	src='../display?fileName='"+this.u_image+"'/>"
+										+				"<img style='border-radius:50%;' width=90px height=90px	src='../display?fileName="+this.u_image+"'/>"
 										+			"</span>"
 										+			"<span style='display:inline-block; float:left; margin-left:18px; margin-top:18px;'>"
 										+				"<input type='hidden' class='r' data-r='"+this.r+"' value='"+this.r+"'>"
