@@ -31,7 +31,7 @@ public void list() {
 
 }
 
-@RequestMapping(value="read", method=RequestMethod.POST)
+@RequestMapping(value="read", method = {RequestMethod.GET, RequestMethod.POST})
 @ResponseBody
 public ArrayList<B_replyVO> read(int b_no,Model model,Criteria cri) {
 	cri.setPerPageNum(10);

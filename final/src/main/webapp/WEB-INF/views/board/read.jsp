@@ -56,9 +56,6 @@ html {
    height: 20px;
 }
 
-body {
-   margin: 0;
-}
 
 #lightBox {
    display: inline-block;
@@ -116,8 +113,7 @@ body {
 }
 </style>
 </head>
-<body>
-<body>
+<body style="margin:0">
    
    <div id=lightBox>   
    
@@ -241,7 +237,6 @@ body {
       </div>   
    </div>
 </body>
-</body>
 <script> 
 
 $( document ).ready(function() {
@@ -260,7 +255,7 @@ $( document ).ready(function() {
    
 
    $("#report").on("click", function(){
-      var b_no="${vo.b_no}";
+      b_no="${vo.b_no}";
    
       window.open("/board/report?b_no="+b_no,"","width=600px, height=800px");
    });
@@ -293,15 +288,8 @@ $( document ).ready(function() {
 	 $(".lbClose").on("click", function(){
 		
 		$('html').css("overflow", "scroll");
-		$('html').css("overflow-x", "hidden");    
+		$('html').css("overflow-x", "hidden");
 		modal.style.display = "none";
-	 	opener.$("#exBody").css("background-color","#e9ecef");
-	 	opener.$("#exBody").css("z-index","1");
-	 	opener.$("#exCenter").css("background-color","white");
-	 	opener.$("#exCenter").css("z-index","2");
-	 	opener.$("#exCenter").css("width","1186px");
-	 	opener.$("#exCenter").css("margin","auto");
-	 	opener.$("#exCenter").css("padding","45px"); 
 	})
 
 	$("#btnDelete").on("click", function(){
@@ -312,7 +300,7 @@ $( document ).ready(function() {
 	
 	$("#btnUpdate").on("click", function(){
 		
-		var b_no="${vo.b_no}";
+		b_no="${vo.b_no}";
 		location.href="/board/update?b_no="+b_no;
 	});
 	
@@ -334,11 +322,18 @@ $( document ).ready(function() {
 	var page;
 
 
-	$("#pagination").on("click", ".page-item .page-link", function(e) {
+	$("#pagination").on("click", ".page-item .page-link", function(e) {		
 	    e.preventDefault();
 	    page = $(this).attr("href");
 	    R_list();  
 	 });
+	
+	function getRep(){
+		alert("dd");
+		page=1;
+		$(".page-link").click();
+		    R_list();  
+		 };
 
 	$("#tbl1").find(".reRow .b_no").hide();
 	var id="${id}";
@@ -424,7 +419,7 @@ $( document ).ready(function() {
 		}
 		
 	});
-
+	getRep();
 </script>
 
 </html>

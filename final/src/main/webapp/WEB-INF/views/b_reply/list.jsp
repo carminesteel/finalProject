@@ -112,13 +112,20 @@ var page;
 $( document ).ready(function() {
 	R_list();
 	update();
+	getRep();
 });
 
 $("#pagination").on("click", ".page-item .page-link", function(e) {
-    e.preventDefault();
+    e.preventDefault();    
     page = $(this).attr("href");
     R_list();  
  });
+ 
+function getRep(){
+	page=1;
+	$(".page-link").click();
+	    R_list();  
+	 };
 
 $("#tbl1").find(".reRow .b_no").hide();
 var id="${id}";

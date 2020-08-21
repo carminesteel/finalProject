@@ -53,10 +53,9 @@ html {
 
 #exCenter {
 	background-color: white;
-	width: 1186px;
+	width: 1276px;
 	margin: auto;
 	z-index: 2;
-	padding: 45px;
 }
 
 
@@ -68,7 +67,8 @@ html {
 	color:black;
 	/* margin-top:5px; */
 	margin-left:-2px; 
-	letter-spacing:-1.5px
+	letter-spacing:-1.5px;
+	margin-left:45px;
 }
 
 #eContent {
@@ -78,7 +78,7 @@ html {
 	color:black;
 	margin-bottom:20px;
 	letter-spacing:-1px;
-	
+	margin-left:45px;
 }
 
 .tbl{
@@ -87,6 +87,8 @@ html {
 
 .lightBottom{
 	width:1166px;
+	height:35px;
+	padding-top:10px;
 	margin:auto;
 }
 
@@ -134,7 +136,6 @@ html {
 						<div style="display: inline-block; width: 100%;font-size:20px;">${fvo.content}</div>
 					</div>
 					<div class=lightBottom>
-						<br>
 						<div style="text-align: left; display: inline-block; float: left;">
 							<form name="frm" method="post" action="update" enctype="multipart/form-data">
 								<input type="button" value="신고하기" class="report"
@@ -150,15 +151,13 @@ html {
 							<img class=icons id="LikeBtn" src="../display?fileName=likes.png" /> ${fvo.b_like}&nbsp;
 							<img class=icons src="../display?fileName=comment.png" /> ${fvo.r_cnt}
 						</div>
-
-						<hr style="width: 1127px;border:solid 1px #b3c6e6;">
 					</div>
-					<br><br><br>
+					<br><br>			
 				</c:forEach>
 			</div>
+			<div class="scrollLocation"></div>
 		</div>
 	</div>
-	<div class="scrollLocation"></div>
 	<jsp:include page="../footer.jsp" />
 	<div id="myModal" class="modal"></div>
 </body>
@@ -245,7 +244,7 @@ html {
 										+			"<div style='display: inline-block; width: 825px;font-size:33px;margin-bottom:12px'>"+this.title+"</div>"
 										+			"<div style='display: inline-block; width: 100%;font-size:20px;'>"+this.content+"</div>"
 										+		"</div>"
-										+		"<div class=lightBottom><br>"
+										+		"<div class=lightBottom>"
 										+			"<div style='text-align: left; display: inline-block; float: left;'>"
 										+				"<form name='frm' method='post' action='update' enctype='multipart/form-data'>"
 										+					"<input type='button' value='신고하기' class='report' style='border: none; background: #2b4163; border-radius: 5px 5px 5px 5px; color: white; width: 75px; height: 28px; font-size: 15px;margin-left:25px;'>"
@@ -257,7 +256,6 @@ html {
 										+				"<img class=icons id='LikeBtn' src='../display?fileName=likes.png'/>"+this.b_like+"&nbsp;"
 										+				"<img class=icons src='../display?fileName=comment.png'/>"+this.r_cnt+""
 										+			"</div>"
-										+			"<hr style='width: 1127px;border:solid 1px #b3c6e6;'>"
 										+		"</div><br><br>"
 							});
 							$(".scrollLocation").append(str);
@@ -278,8 +276,6 @@ html {
 		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
-		$('html').css("overflow-x", "hidden");
-		$('.modal').css("overflow-x", "hidden");
 	    modal.style.display = "block";
 	    myDiv.scrollTop = 0;
 	});
@@ -290,8 +286,6 @@ html {
 		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
-		$('html').css("overflow-x", "hidden");
-		$('.modal').css("overflow-x", "hidden");
 	    modal.style.display = "block";
 	    myDiv.scrollTop = 0;
 	});

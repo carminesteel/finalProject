@@ -142,7 +142,58 @@ body {
            	   </c:if>
             </form>
             </div>
-            <jsp:include page="../b_reply/list.jsp"/> 
+            <table id=tbl1></table>
+	<c:if test="${vo.r_cnt!=0}">
+	<script id="temp" type="text/x-handlebars-template">	
+		{{#each .}}
+		<tr class=reRow>
+			<td class="u_image" width=70>				
+				<img width=65px height=65px; style="border-radius:50%;" src="../display?fileName={{u_image}}">				
+			</td>
+			<td  width=700 style="text-align:left;">
+				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>
+				<br>
+				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>
+				<input class=hId type="hidden" value=${id}>
+				<input class=rId type="hidden" value={{replyer}}>
+				<input class=r_no type="hidden" value={{r_no}}>
+			</td>	
+			<td width=50>
+				<img width=20 height=20 src="../display?fileName=xicon.png" class="rbtnDelete">	
+			</td><br><br>
+		</tr>
+		{{/each}}
+	</script>
+	</c:if>
+	<br>
+	<form action="/b_reply/insert" method="post" name="rfrm">
+	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="../display?fileName=${u_image}"/>
+		<input type="hidden" name="b_no" value="${vo.b_no}">
+		<input type="hidden" name="replyer" value="${id}">
+		<textarea name="content" style=width:1030px;height:100px;resize:none></textarea>
+		<input style="float:right;width:136px;height:38px;border:none;background:#2b4163;border-radius:5px 5px 5px 5px;color:white;margin-right:18px;" type="submit" value="댓글 남기기">		
+	</form>
+	<br><br><br>
+	<div id="pagination" >		
+			<ul class="pagination" style="margin-left:380px;">
+				<c:if test="${pm.prev}">
+					<li class="page-item"><a class="page-link"
+						href="${pm.startPage-1}" aria-label="Previous"> <span
+							aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+				<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+					<li class="page-item"><a class="page-link" href="${i}">${i}</a></li>
+				</c:forEach>
+				<c:if test="${pm.next}">
+					<li class="page-item"><a class="page-link"
+						href="${pm.endPage+1}" aria-label="Next"> <span
+							aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
+			</ul>
+		<br>
+	</div>
          </div> 
       </div>   
    </div>
@@ -150,15 +201,13 @@ body {
 <script>   
 var b_no="${vo.b_no}";
 var view="${vo.view}";
+var follower="${id}";
+var target="${vo.id}";
+var id="${id}";
 
    getFollow();
-   var follower="${id}";
-   var target="${vo.id}";
-   
+
    $("#btnReply").hide();
-   
-   var id="${id}";
-   var b_no="${vo.b_no}";
 
    $("#report").on("click", function(){
       var b_no="${vo.b_no}";

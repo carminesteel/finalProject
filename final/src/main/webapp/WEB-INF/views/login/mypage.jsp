@@ -416,8 +416,7 @@ input[type="password"] {
 		</div>
 		</div>
 	<jsp:include page="../footer.jsp" />
-	<div id="myModal" class="modal"> 
-    </div>
+	<div id="myModal" class="modal"></div>
 </body>
 <script>
 	var myDiv = document.getElementById('myModal');
@@ -434,7 +433,7 @@ input[type="password"] {
 	$(".myImgs").on("click",function() {
 		var b_no =$(this).parent().find(".b_bno").val();
 		var view =$(this).parent().find(".b_view").val();
-		$("#myModal").load("../board/mypageRead?b_no="+b_no+"&view="+view);  		
+		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);  		
 		$('html').css("overflow", "hidden");
 		$('.modal').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");
