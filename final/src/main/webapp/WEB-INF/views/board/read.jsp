@@ -249,6 +249,7 @@ body {
 </body>
 </body>
 <script> 
+
 $( document ).ready(function() {
 	R_list();
 	update();
@@ -393,7 +394,8 @@ $( document ).ready(function() {
 					url:"/b_reply/insert",
 					data:{"b_no":b_no,"replyer":replyer,"content":content},
 					success:function(){
-						view=parseInt(view)-1;
+						var a="${vo.view}";
+						var view=parseInt(a)-1;
 						$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 						$("#myModal").scrollTop($("#myModal")[0].scrollHeight);
 						alert("입력되었습니다.");
@@ -416,7 +418,8 @@ $( document ).ready(function() {
 			      url:"/b_reply/delete",
 			      data:{"r_no":r_no},
 			      success:function(){
-			    	view=parseInt(view)-1;
+			    	var a="${vo.view}";
+					var view=parseInt(a)-1;
 			    	$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 					$("#myModal").scrollTop($("#myModal")[0].scrollHeight);
 					alert("삭제되었습니다.");
