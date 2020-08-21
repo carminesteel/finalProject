@@ -56,8 +56,7 @@
 	<span style="display:inline-block;float:left;margin-bottom:8px;letter-spacing:-1px;font-size:14px;">리뷰 작성</span>
 		<textarea style="width:495px;height:60px;resize:none;padding:0" id="txtReply" ></textarea>
 	</div>
-	<button id="btnInsert" style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;margin-left:15px;">입력</button>
-	
+	<button id="btnInsert" style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;margin-left:15px;">입력</button>	
 	<br>
 	<div id="pagination"></div>
 </body>
@@ -78,7 +77,6 @@
 		}
 		return src;
 	});
-	
 	
 	//댓글이없을때
  	function getCnt(){

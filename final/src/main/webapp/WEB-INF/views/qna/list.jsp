@@ -26,6 +26,20 @@
 	.btnReply:hover{
 	cursor:pointer;
 	}
+	.btnReply2{
+	all: unset;
+
+	background: #2b4163; 
+	width: 70px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	.btnReply2:hover{
+	cursor:pointer;
+	}
 	#btnInsert3{
 	all: unset;
 	background: #2b4163; 
@@ -44,13 +58,16 @@
 <body>
 	<input type="hidden" value="${id}" id="id">
 	<input type="hidden" value="${param.p_no}" id="p_no">
+	<div id="QnAcnt" style="text-align:center;color:gray;display:none; padding:20px;">
+				아직 문의내용이 없습니다.
+	</div>	
 
 <table id="tbl1" width=1130></table>
 	<script id="temp1" type="text/x-handlebars-template">
-
 		{{#each list}}
 		<tr class="qna1" style="height=200px;">
 			<td class="u_image" width=70>
+				<input type="hidden" value="${qe}">
 				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}"/>
 			</td>
 			<td width=150 style="text-align:left;" class="replydate">
@@ -64,9 +81,12 @@
 			</td>		
 			<td width=200>
 				<span>{{printValue cnt}}</span>
-				{{#if ${id=='admin'}}}
-					<button q_no={{q_no}} style="{{printResend id}}" class="btnReply">답글</button>	
+				{{#if ${id=='zzz'}}}
+					<button q_no={{q_no}} class="btnReply">답글</button>
 				{{/if}}
+			</td>
+			<td width=30>
+				<button cnt={{cnt}} q_no={{q_no}} style="{{printResend id}}" class="btnReply2">답변확인</button>
 			</td>
 			<td width=50 q_no={{q_no}}>
 				<img width=20 cnt={{cnt}} style="{{printStyle id}}" class="btnDelete" src=../display?fileName=xicon.png>
@@ -90,15 +110,23 @@ var admin="${id=='admin'}";
 $(".btnInsert2").hide();
 $(".txtReply").hide();
 getList2();
+getQe();
 
-
+//QnA가없을때
+	function getQe(){
+	if($("#qe").html()==0){
+		$("#QnAcnt").show();
+	}else{
+		$("#QnAcnt").hide();
+	}
+} 
 
 Handlebars.registerHelper("printStyle",function(id){
 	var src;
 	if(id!="${id}"){
 		src="display:none;";
 	}else if(id=="${id}"){
-		src="color:red;";
+		$(".btnReply").css("display","block");
 	}
 	return src;
 });
@@ -113,16 +141,14 @@ Handlebars.registerHelper("printValue",function(cnt){
 });
 Handlebars.registerHelper("printResend",function(id){
 	var src;
- 	if(admin){
- 		src;
-	}else if(admin==false){	
+	
+ 	if(id=="${id}"){
+		src="display:block;";
+	}else{	
 		src="display:none;";
 	} 
 	return src;
 });
-
-/*답글하기 */
- 
 
 /*문의하기*/
 $("#btnInsert3").on("click", function(){
@@ -134,6 +160,16 @@ $("#tbl1").on("click",".qna1 .btnReply", function(){
 	var q_no=$(this).attr("q_no");
 	window.open("/qna/read?q_no="+q_no,"","width=850px, height=450px");
 
+});
+/*답변확인 띄우기*/
+$("#tbl1").on("click",".qna1 .btnReply2", function(){
+	var cnt=$(this).attr("cnt");
+	if(cnt==0){
+		alert("답변 대기중입니다")
+	}else{
+		var q_no=$(this).attr("q_no");
+		window.open("/qna/read?q_no="+q_no,"","width=850px, height=450px");
+	}
 });
 
 	/* 답글입력하기*/

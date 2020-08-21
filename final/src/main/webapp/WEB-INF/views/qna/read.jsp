@@ -27,7 +27,8 @@
 	}
 </style>
 </head>
-<body>	
+<body>
+	<input type="hidden" value="${id}">	
 	<c:forEach items="${vo}" var="v">
 		<div><img width=65px height=65px; style="border-radius:50%;" src="../display?fileName=${v.u_image}"/></div>
 		<b>${v.nickname}</b><br>
@@ -36,8 +37,10 @@
 	</c:forEach>
 	<div>
 	<br>
-	<input style=width:732px;height:20px;margin-top:20px;resize:none; type="text" id="txtReply">
-	<button id="btnInsert2">입력</button>
+	<c:if test="${id=='zzz'}">
+		<input style=width:732px;height:20px;margin-top:20px;resize:none; type="text" id="txtReply">
+		<button id="btnInsert2">입력</button>
+	</c:if>
 	</div>
 </body>
 <script>
@@ -54,6 +57,7 @@ var q_no="${q_no}";
 			url:"/qna/insert2",
 			data:{"q_no":q_no,"replyer":replyer,"content":content},
 			success:function(){
+				$('#tbl1').load(document.URL +  ' #tbl1');
 				location.reload();
 			}
 		});

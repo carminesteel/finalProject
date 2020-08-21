@@ -37,7 +37,10 @@
 </head>
 <body>
 	<input type="hidden" value="${id}" id="id">
-	<input type="hidden" value="${param.p_no}" id="p_no">	
+	<input type="hidden" value="${param.p_no}" id="p_no">
+	<div id="reviewcnt" style="text-align:center;color:gray;display:none;">
+				아직 작성 된 리뷰가 없습니다.
+	</div>	
 	<table id="tbl" width=500></table>
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each list}}
@@ -78,16 +81,26 @@
 	var id=$("#id").val();
 	var page=1;
 	getList();
+	getCnt();
+	
+	//댓글이없을때
+ 	function getCnt(){
+		if($("#re").html()==0){
+			$("#reviewcnt").show();
+		}else{
+			$("#reviewcnt").hide();
+		}
+	} 
 
 	Handlebars.registerHelper("printStyle",function(replyer){
 	var src;
-	if(id!=replyer){
-		src="display:none;";
-	}else if(id==replyer){
-		src="color:red;";
-	}
-	return src;
-});
+		if(id!=replyer){
+			src="display:none;";
+		}else if(id==replyer){
+			src="color:red;";
+		}
+		return src;
+	});
 	
 	function getList(){
 		$.ajax({
