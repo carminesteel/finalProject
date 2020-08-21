@@ -73,7 +73,7 @@ $("#check_module").click(function () {
 	*/
 	name: '주문명:결제테스트',
 	//결제창에서 보여질 이름
-	amount: 1000,
+	amount: totPay,
 	//가격
 	buyer_email: P_email,
 	buyer_name: '구매자이름',
