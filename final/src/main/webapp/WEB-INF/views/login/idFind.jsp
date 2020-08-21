@@ -7,7 +7,6 @@
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <style>
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 #bg {
 	margin-top: 10px;
 	position: fixed;
@@ -133,7 +132,7 @@ section {
 				<br>
 				<br>
 				<div class="int-area">
-					<input type="text" name="id" id="getId" autocomplete="off"	required readonly>
+					<input type="text" name="id" id="getId" autocomplete="off"	required>
 					<h5 style="margin-left: 88px; margin-top:4px; color:blue;">회원가입 당시 입력했던  아이디 입니다.</h5>					
 				</div>																		
 			</form>
@@ -161,12 +160,15 @@ section {
 						dataType:"json",
 						success : function(data) {
 							$("#getId").val(data.id);
+							alert(id);
 						}
 					})
 				} else {
 					alert("존재하지 않는 이메일 입니다.");
+
 				}
 			}
+
 		});
 	});
 </script>
