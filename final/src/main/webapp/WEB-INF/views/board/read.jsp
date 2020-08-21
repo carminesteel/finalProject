@@ -92,8 +92,8 @@ body {
    <div id=lightBox>   
    
       <div id=lightInfo>
-         <img class=lbClose src="display?fileName=xiconWhite.png"/>
-         <img id="image" src="display?fileName=${vo.u_image}"/>
+         <img class=lbClose src="../display?fileName=xiconWhite.png"/>
+         <img id="image" src="../display?fileName=${vo.u_image}"/>
          <div id=artInfo>
             <b name=title>${vo.title}</b>
             <br>
@@ -104,13 +104,13 @@ body {
       <input type="hidden" name="image" value="${vo.image}">
          <br><br><br><br>
          <c:forEach items="${list}" var="image">
-            <img src="display?fileName=${image}" name="files" width="100%"/>
+            <img src="../display?fileName=${image}" name="files" width="100%"/>
             <br><br><br><br>
          </c:forEach>
           <div id=lightBottom>
             <div style="height:100px;width:100%">
                <span style="display:inline-block;float:left;">
-                  <img style="border-radius:50%;" width=90px height=90px src="display?fileName=${vo.u_image}"/>
+                  <img style="border-radius:50%;" width=90px height=90px src="../display?fileName=${vo.u_image}"/>
                </span>
                <span style="display:inline-block;float:left;margin-left:18px;margin-top:18px;">
                   <b style="font-size:20px">${vo.nickname}</b>&nbsp;&nbsp;
@@ -129,11 +129,11 @@ body {
             </div>
             <br>
                <div style="display:inline-block;float:right;">
-					<img style="width:15px;height:15px;" src="display?fileName=views.png"/>
+					<img style="width:15px;height:15px;" src="../display?fileName=views.png"/>
 						<span>${vo.view}</span>&emsp;
-					<img id="LikeBtn" style="width:15px;height:15px;" src="display?fileName=likes.png"/>
+					<img id="LikeBtn" style="width:15px;height:15px;" src="../display?fileName=likes.png"/>
 						<span>${vo.b_like}</span>&emsp;
-					<img style="width:15px;height:15px;" src="display?fileName=comment.png"/>
+					<img style="width:15px;height:15px;" src="../display?fileName=comment.png"/>
 						<span>${vo.r_cnt}</span>
 				</div>
             <div style=text-align:left;display:inline-block;float:left;>

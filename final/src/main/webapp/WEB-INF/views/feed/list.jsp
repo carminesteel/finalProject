@@ -276,7 +276,7 @@ html {
 	$("#exCenter").on("click",".lTbl .ftbl .fimg", function() {
 		var b_no=$(this).parent().find(".b_no").val();
 		var view = $(this).parent().find(".idxView").val();
-		$("#myModal").load("../board/feedread?b_no="+b_no+"&view="+view);
+		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 		$('html').css("overflow", "hidden");        	
 		$('.modal').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");

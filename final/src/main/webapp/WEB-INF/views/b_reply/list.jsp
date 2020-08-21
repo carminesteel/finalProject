@@ -58,9 +58,9 @@
 	
 	<div id="divStatus" style=text-align:right;display:inline-block;float:right;></div>
 	<script id="readStatus" type="text/x-handlebars-template">
-		<img class=icons src="display?fileName=views.png"/> {{view}}&nbsp;
-		<img class=icons id="LikeBtn" src="display?fileName=likes.png"/> {{b_like}}&nbsp;
-		<img class=icons src="display?fileName=comment.png"/> {{r_cnt}}
+		<img class=icons src="../display?fileName=views.png"/> {{view}}&nbsp;
+		<img class=icons id="LikeBtn" src="../display?fileName=likes.png"/> {{b_like}}&nbsp;
+		<img class=icons src="../display?fileName=comment.png"/> {{r_cnt}}
 	</script>
 	
 	<table id=tbl1></table>
@@ -69,7 +69,7 @@
 		{{#each .}}
 		<tr class=reRow>
 			<td class="u_image" width=70>				
-				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}">				
+				<img width=65px height=65px; style="border-radius:50%;" src="../display?fileName={{u_image}}">				
 			</td>
 			<td  width=700 style="text-align:left;">
 				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>
@@ -80,7 +80,7 @@
 				<input class=r_no type="hidden" value={{r_no}}>
 			</td>	
 			<td width=50>
-				<img width=20 height=20 src="display?fileName=xicon.png" class="rbtnDelete">	
+				<img width=20 height=20 src="../display?fileName=xicon.png" class="rbtnDelete">	
 			</td><br><br>
 		</tr>
 		{{/each}}
@@ -88,7 +88,7 @@
 	</c:if>
 	<br>
 	<form action="/b_reply/insert" method="post" name="rfrm">
-	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="display?fileName=${u_image}"/>
+	<img width=70 height=70 style="border-radius:50%;float:left;margin-right:15px;" src="../display?fileName=${u_image}"/>
 		<input type="hidden" name="b_no" value="${vo.b_no}">
 		<input type="hidden" name="replyer" value="${id}">
 		<textarea name="content" style=width:1030px;height:100px;resize:none></textarea>
