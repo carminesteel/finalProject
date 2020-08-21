@@ -278,7 +278,6 @@ $("#use").on("click", function() {
 	if (point < 1000) {
 		alert("포인트는 최소 1000부터 사용가능합니다.");
 	} else {
-		alert(tot);
 		$("#usePoint").val(point);
 		$("#tot").html((tot - 2500) - point + 2500);
 		SavePoint();

@@ -186,7 +186,6 @@ html {
 			p_images[i]=$(this).parent().parent().find(".p_image").html();
 			i++;
 		});
-		alert(tot)
 		location.href = "/product/order2?id="+id+"&tot="+tot+"&p_images="+p_images;
 	}); 
    

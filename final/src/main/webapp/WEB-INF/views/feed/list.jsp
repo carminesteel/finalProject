@@ -176,14 +176,13 @@ html {
 			dataType:"json",
 			success:function(data){
 			$("#LikeBtn").val("좋아요/"+data);
-				location.reload()
+				location.reload();
 			}
 		});
 	});
 
 	$(".scrollLocation").on("click", ".lightBottom #LikeBtn", function(){
 		var b_no=$(this).parent().find(".b_no").val();
-		alert(b_no);
 		$.ajax({
 			type:"post",
 			url:"/board/like/update",
@@ -191,7 +190,7 @@ html {
 			dataType:"json",
 			success:function(data){
 			$("#LikeBtn").val("좋아요/"+data);
-				location.reload()
+				location.reload();
 			}
 		});
 	});
@@ -274,6 +273,18 @@ html {
 	});
 
 	$("#exCenter").on("click",".lTbl .ftbl .fimg", function() {
+		var b_no=$(this).parent().find(".b_no").val();
+		var view = $(this).parent().find(".idxView").val();
+		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
+		$('html').css("overflow", "hidden");        	
+		$('.modal').css("overflow", "scroll");
+		$('html').css("overflow-x", "hidden");
+		$('.modal').css("overflow-x", "hidden");
+	    modal.style.display = "block";
+	    myDiv.scrollTop = 0;
+	});
+
+	$(".scrollLocation").on("click",".ftbl .fimg", function() {
 		var b_no=$(this).parent().find(".b_no").val();
 		var view = $(this).parent().find(".idxView").val();
 		$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);

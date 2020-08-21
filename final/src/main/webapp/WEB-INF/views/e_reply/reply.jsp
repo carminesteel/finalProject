@@ -132,7 +132,6 @@
 	//좋아요
 	$("#tbl").on("click",".reRow .btnLike",function(){
 		var r_no=$(this).parent().parent().find(".r_no").val();
-		alert(r_no);
 		$.ajax({
 			type:"post",
 			url:"/like/update",
@@ -206,24 +205,6 @@
 					});				
 				}	
 		}
-	
-
-/* 	
-	//댓글삭제
-	$("#tbl").on("click",".replydate #btnDel",function(){
-		var r_no=$(this).attr("r_no");
-		if(!confirm("삭제하시겠습니까?")) return;
-		$.ajax({
-			type:"post",
-			url:"/reply/delete",
-			data:{"r_no":r_no},
-			success:function(){				
-				alert("댓글이 삭제되었습니다");				
-				$("#re").html(--re);
-				getList();
-			}
-		});
-	}); */
 	
 	$("#tbl").on("click", ".reRow .rbtnDelete", function(){
 		var r_no=$(this).parent().parent().find(".r_no").val();

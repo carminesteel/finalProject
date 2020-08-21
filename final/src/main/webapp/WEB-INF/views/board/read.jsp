@@ -183,12 +183,6 @@ body {
           	   	
             </form>
             </div>
-            <div id="divStatus" style=text-align:right;display:inline-block;float:right;></div>
-	<script id="readStatus" type="text/x-handlebars-template">
-		<img class=icons src="../display?fileName=views.png"/> {{view}}&nbsp;
-		<img class=icons id="LikeBtn" src="../display?fileName=likes.png"/> {{b_like}}&nbsp;
-		<img class=icons src="../display?fileName=comment.png"/> {{r_cnt}}
-	</script>
 	
 	<table id=tbl1></table>
 	<c:if test="${vo.r_cnt!=0}">
@@ -261,7 +255,7 @@ $( document ).ready(function() {
    
    $("#btnReply").hide();
    
-   var id="${id}";
+   id="${id}";
    var b_no="${vo.b_no}";
    
 
@@ -283,15 +277,15 @@ $( document ).ready(function() {
       })
    });
 
-	$("#LikeBtn").on("click",function(){
+	$("#lightBottom").on("click","#LikeBtn",function(){
 		$.ajax({
 			type:"post",
 			url:"/board/like/update",
 			data:{"id":id,"b_no":b_no},
-			dataType:"json",
 			success:function(data){
-				$("#LikeBtn").val("좋아요/"+data);
-				location.reload();
+				var a="${vo.view}";
+				var view=parseInt(a)-1;
+		    	$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);
 			}
 		});
 	});

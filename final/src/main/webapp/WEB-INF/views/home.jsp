@@ -557,11 +557,6 @@ li {
 </body>
 <script>
 	var b_no;
-/* 	$(".idxBimg").on("click", function(){
-		b_no=$(this).parent().find(".idxBno").val();
-		alert(b_no);
-		$("#dialog").load("/board/read?b_no="+b_no);
-	}) */
 	
 	//게시물 순서 
 	$(".BestMenu").hide();

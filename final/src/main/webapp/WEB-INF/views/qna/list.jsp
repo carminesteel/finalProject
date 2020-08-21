@@ -151,7 +151,7 @@ $("#tbl1").on("click",".qna1 .btnReply", function(){
 					url:"/qna/insert2",
 					data:{"q_no":q_no,"content":content,"replyer":replyer},
 					success:function(){
-						alert("입력!");				
+						alert("입력 되었습니다.");				
 					}
 				});
 		   }else{
@@ -212,7 +212,6 @@ $("#tbl1").on("click",".qna1 .btnReply", function(){
 	$(".tbl2").on("click",".btnDelete2",function(){
 		var qr_no=$(this).attr("qr_no");
 		if(!confirm("답글을 삭제 하시겠습니까?")) return;
-		alert(qr_no);
 		$.ajax({
 			type:"post",
 			url:"/qna/delete2",

@@ -161,7 +161,6 @@ section {
 						dataType:"json",
 						success : function(data) {
 							$("#getId").val(data.id);
-							alert(id);
 						}
 					})
 				} else {

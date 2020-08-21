@@ -186,8 +186,8 @@ section {height: 100%;}
   height: 1px;
   animation: spin 2s linear infinite;
   position:fixed;
-  top:43.5%;
-  left:45%;
+  top: 46%;
+  left: 44.5%;
   z-index: 999;
   
 }

@@ -509,7 +509,6 @@ input[type="password"] {
 						$("#userRead").show();
 						$("#mypageList").show();
 						$("#pDiv").show();
-						/*  getMyPageList();  */
 						
 					}
 				}
@@ -518,18 +517,8 @@ input[type="password"] {
 			alert("비밀번호를 입력해주세요");
 			$("#passChk").find("#chkPass").focus();
 		}
-	}) 
+	});
 	
-	/* function getMyPageList(){
-		$.ajax({
-			type:"post",
-			url:"/mypage/list",
-			data:{"id":id},
-			dataType:"json",
-			success:function(){
-			}
-		}) 
- 	} */ 		
 	$("#followingList").on("click",".BtnUnfollow",function(){
  		var target=$(this).parent().find(".unFolTarget").val();
  		var div=$(this).parent().parent().parent().parent();

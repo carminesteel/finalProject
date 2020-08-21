@@ -31,13 +31,14 @@
 @import url('https://fonts.google.com/css?family=Raleway&display=swap');
 
 #body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-	width:100%;
-	background: #2b4163;
-	font-family: 'Raleway', sans-serif;
+   display: flex;
+   over-flow-x:hidden;
+   justify-content: center;
+   align-items: center;
+   height: 1000px;
+   width:100%;
+   background: #2b4163;
+   font-family: 'Raleway', sans-serif;
 }
 
 h1 {
