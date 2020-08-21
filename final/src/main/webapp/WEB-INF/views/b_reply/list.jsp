@@ -118,6 +118,7 @@
 	
 </body>
 <script>
+var page;
 $( document ).ready(function() {
 	R_list();
 	update();

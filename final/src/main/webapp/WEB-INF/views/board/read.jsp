@@ -163,9 +163,6 @@ body {
 var b_no="${vo.b_no}";
 var view="${vo.view}";
 
-var page=1;
-R_list();
-
    getFollow();
    var follower="${id}";
    var target="${vo.id}";
@@ -209,7 +206,6 @@ R_list();
 
 	 $(".lbClose").on("click", function(){
 		modal.style.display = "none";
-		R_list();
 		$('html').css("overflow", "scroll");
 		$('html').css("overflow-x", "hidden");          
 	})
