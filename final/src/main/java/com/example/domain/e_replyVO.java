@@ -10,8 +10,23 @@ public class e_replyVO extends UsersVO{
 	private Date date;
 	private int e_no;
 	private int cnt;
+	private String nickname;
+	private String u_image;
+	
 
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getU_image() {
+		return u_image;
+	}
+	public void setU_image(String u_image) {
+		this.u_image = u_image;
+	}
 	public int getCnt() {
 		return cnt;
 	}

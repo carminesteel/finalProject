@@ -36,7 +36,7 @@
 				<img width=65px height=65px; style="border-radius:50%;" src="../display?fileName={{u_image}}">
 			</td>
 			<td  width=700 style="text-align:left;">
-				<b class="replyer" style="font-size:22px;margin-left:15px;">{{replyer}}</b>
+				<b class="replyer" style="font-size:22px;margin-left:15px;">{{nickname}}</b>
 				<br>
 				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>				
 				<input class=hId type="hidden" value=${id}>

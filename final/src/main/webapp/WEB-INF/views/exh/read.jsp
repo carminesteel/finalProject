@@ -121,7 +121,7 @@
 							begin="0" end="2">						  
 						   		<div
 									style="vertical-align:middle;border-bottom:none;font-size:17px;letter-spacing:-1px;margin:auto;magin-bottom:5px;padding:15px;padding-bottom:0px; padding-top:15px; width:500px; text-align:left; border-bottom:1px solid black;">	
-						   			<div width=700><b style="font-size:20px;">${list.replyer} <br> </b>${list.content}</div>
+						   			<div width=700><b style="font-size:20px;">${list.nickname} <br> </b>${list.content}</div>
 						   			<br>
 						   		</div>						   
 					   </c:forEach>
