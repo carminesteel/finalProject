@@ -79,9 +79,9 @@
 	</script>
 
 	<button id="btnInsert3">문의</button>
-	<br><br>
-	
+	<br><br>	
 	<div id="pagination2"></div>
+	<br>
 </body>
 <script>
 

@@ -186,7 +186,7 @@ a:hover{text-decoration:none;color:black;}
                <c:forEach items="${p_image}" var="p_image">
                   <div class="images" style="padding-top:30px; padding-bottom:20px;"><img src="display?fileName=${p_image.p_images}"></div>
                </c:forEach>
-               <div id="reply2">
+               <div id="reply2" width=650>
                   <h3><b>Review</b></h3><jsp:include page="../p_reply/reply.jsp"/>
                </div>
                <div id="qna1">

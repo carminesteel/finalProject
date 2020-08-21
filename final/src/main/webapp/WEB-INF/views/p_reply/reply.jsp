@@ -10,14 +10,23 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
-	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-	.reply1{vertical-align:middle;border-bottom:none;font-size:17px;letter-spacing:-1px;margin:auto;magin-bottom:5px;padding:15px;padding-bottom:0px; padding-top:15px; width:500px; text-align:left; border-bottom:1px solid black;}
+
+	html{font-family:Noto Sans Kr}
+	#tbl{
+		margin:auto;
+	}
+	.btnLike:hover{
+		cursor:pointer;
+	}
+	.delBtn:hover{
+		cursor:pointer;
+	}
+
 	#btnInsert{
 		font-family:Noto Sans Kr;
 		float:right;
 		width:60px;
-		height:30px;
-		
+		height:30px;		
 		background:#2b4163;
 		border:none;
 		border-radius:5px 5px 5px 5px;
@@ -28,31 +37,38 @@
 </head>
 <body>
 	<input type="hidden" value="${id}" id="id">
-	<input type="hidden" value="${param.p_no}" id="p_no">
-	
-	<div id="tbl"></div>
+	<input type="hidden" value="${param.p_no}" id="p_no">	
+	<table id="tbl" width=500></table>
 	<script id="temp" type="text/x-handlebars-template">
 		{{#each list}}
-		<div class="reply1">
-			<div class="replydate">Re
-				<b class="replyer">{{replyer}}</b>
-				<a>{{date}}</a>
+			<tr class=reRow style="height:100px;">
+			<td class="u_image" width=70>				
+				<img width=65px height=65px; style="border-radius:50%;" src="../display?fileName={{u_image}}">
+			</td>
+			<td  width=700 style="text-align:left;">
+				<b class="replyer" style="font-size:22px;margin-left:15px;">{{nickname}}</b>
+				<br>
+				<b class="content" style="font-weight:300;font-size:13px;margin-left:15px;">{{content}}</b>				
+				<input class=hId type="hidden" value=${id}>
+				<input class=rId type="hidden" value={{replyer}}>
 				<input class=r_no type="hidden" value={{r_no}}>
-				<img class="listBtn" style="width:20px;height:20px;" src=/display?fileName=likes.png/>{{cnt}}</img>
-				<img width=20 height=20 r_no={{r_no}} class="delBtn" style="{{printStyle replyer}}" src=/display?fileName=xicon.png></img>
-				
-			</div>
-		<div class="content">{{content}}</div>
-		</div>
+				<span style="display:inline-block;float:right;">
+				<img class="btnLike" style="width:13px;height:13px;" src=../display?fileName=likes.png/> {{cnt}}<span>
+			</td>
+			<td width=50>
+				<img width=20 height=20 r_no={{r_no}} class="delBtn" style="{{printStyle replyer}}" src=/display?fileName=xicon.png></img>	
+			</td><br>
+		</tr>
 		{{/each}}
 	</script>
 	<br><br>					
-	<div style=display:inline-block;>
-		<span style="display:inline-block;float:left;margin-bottom:-4px;letter-spacing:-1px;font-size:14px;">리뷰 작성</span><br>
-		<textarea style="width:495px;height:60px;resize:none;padding:0" id="txtReply" ></textarea><br>
-		
+	<div style="display:inline-block; width:500px;">
+		<div style="margin:auto;">
+			<span style="display:inline-block;padding-bottom:30px;float:left;margin-bottom:-4px;letter-spacing:-1px;font-size:14px;">리뷰 작성</span><br>
+			<textarea style=" width:495px;height:60px;resize:none;padding:0" id="txtReply" ></textarea><br>
+			<button id="btnInsert" style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;margin-left:15px;">입력</button>	
+		</div>	
 	</div>	
-	<button id="btnInsert" style="font-family:Noto Sans Kr;float:right;width:60px;height:30px;background:#2b4163;border:none;border-radius:5px 5px 5px 5px;color:white;font-size:16px;margin-left:15px;">입력</button>
 	<div id="pagination"></div>
 	<br>
 	
@@ -109,6 +125,8 @@
 		page=$(this).attr("href");
 		getList();
 	});
+	
+	//댓글등록
 	var re= "${re}";
 	$("#btnInsert").on("click", function(){
 		var content=$("#txtReply").val();
@@ -122,23 +140,24 @@
 			url:"/p_reply/insert",
 			data:{"p_no":p_no,"content":content,"replyer":replyer},
 			success:function(){
-				alert("띠용");
 				$("#re").html(++re);
+				$('#tbl').load(document.URL +  ' #tbl');
 				location.reload();
-			
 			}
 		});
 	});
-	$("#tbl").on("click",".replydate .delBtn",function(){
+	//댓글삭제
+	$("#tbl").on("click",".reRow .delBtn",function(){
 		var r_no=$(this).attr("r_no");
-		if(!confirm("삭제 기기?")) return;
+		if(!confirm("삭제 하시겠습니까?")) return;
 		$.ajax({
 			type:"post",
 			url:"/p_reply/delete",
 			data:{"r_no":r_no},
 			success:function(){
-				alert("댓글이 삭제되었당!");
+				alert("댓글이 삭제되었습니다!");
 				$("#re").html(--re);
+				$('#tbl').load(document.URL +  ' #tbl');
 				location.reload();
 			}
 		});
@@ -155,18 +174,14 @@
 	});
 	
 	//좋아요
-	$("#tbl").on("click",".reply1 .listBtn",function(){	
-		var id=$(this).parent().find(".replyer").html();
+	$("#tbl").on("click",".reRow .btnLike",function(){	
 		var r_no=$(this).parent().parent().find(".r_no").val();
-		alert(r_no);
-		alert(id);
 		$.ajax({
 			type:"post",
 			url:"/p_reply/like/update",
 			data:{"id":id,"r_no":r_no},
 			success:function(){
 				getList();
-				alert("dfads");
 			}
 		})
 	});

@@ -6,11 +6,27 @@ public class p_replyVO extends ProductVO{
 
 	private int r_no;
 	private String replyer;
+	private String u_image;
+	private String nickname;
 	private String content;
 	private Date date;
 	private int p_no;
 	private int cnt;
 
+	
+	
+	public String getU_image() {
+		return u_image;
+	}
+	public void setU_image(String u_image) {
+		this.u_image = u_image;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getR_no() {
 		return r_no;
 	}

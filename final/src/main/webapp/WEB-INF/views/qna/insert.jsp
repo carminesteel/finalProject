@@ -91,15 +91,6 @@
 <script>
 var p_no="${param.p_no}";
 var qe="${qe}";
-/*$(frm).submit(function(e) {
-	e.preventDefault();
-	if (!confirm("문의하시겠습니까?"))
-		return;
-	window.close();
-	frm.submit();
-	location.href="/product/read?p_no="+p_no;
-	
-});*/
 
 $(frm).submit(function(e){
 	e.preventDefault();
@@ -115,9 +106,10 @@ $(frm).submit(function(e){
 			url:"/qna/insert",
 			data:{"p_no":p_no,"id":id,"title":title,"content":content},
 			success:function(){
-				location.reload();
 				$("#qe").html(++qe);			
-				window.close();	
+				window.close();
+				opener.$("#pMenu").scrollTop(0);				
+				opener.location.reload();
 			}	
 		});
 	}

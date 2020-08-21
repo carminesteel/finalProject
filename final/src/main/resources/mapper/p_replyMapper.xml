@@ -3,7 +3,7 @@
 <mapper namespace="com.example.mapper.p_replyMapper">
     <select id="list" resultType="com.example.domain.p_replyVO">
        select r.*, count(p.r_no) cnt from 
-	(select p.*,u.u_image from p_reply p, users u where p_no=#{p_no} group by r_no) 
+	(select p.*,u.u_image,u.nickname from p_reply p, users u where p_no=#{p_no} and p.replyer=u.id group by r_no) 
 	r left join p_like p on p.r_no=r.r_no group by r_no 
 	order by cnt desc limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
