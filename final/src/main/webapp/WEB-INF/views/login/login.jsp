@@ -149,7 +149,7 @@ section{
 	</div> -->
 	<section class="login-form">
 		<div>
-			<div style="font-family: Helvetica33-ExtendedThin; font-size: 110px; text-align: left;
+			<div id="Artists" style="font-family: Helvetica33-ExtendedThin; font-size: 110px; text-align: left;
 				color: #fff;display:inline-block;margin-top:50px;"
 				>Artists</div>
 		</div>
@@ -282,6 +282,10 @@ var dest="${dest}";
 	//회원가입 버튼을 눌렀을 때
 	$("#userInsert").on("click", function() {
 		window.open("/login/agree", "", "width=600, height=800");
+	});
+	
+	$("#Artists").on("click", function(){
+		location.href="/";
 	});
 </script>
 </html>
