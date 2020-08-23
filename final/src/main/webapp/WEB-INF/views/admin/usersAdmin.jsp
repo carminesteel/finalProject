@@ -74,6 +74,15 @@ input[type="password"] {
 	cursor: pointer;
 }
 
+#btn {
+	all: unset;
+	background: #2e6cb5;
+	width: 160px;
+	height: 35px;
+	color: white;
+	border-radius: 20px 20px 20px 20px;
+}
+
 #blist {
 	width: 1118px;
 	height: 886px;
@@ -389,9 +398,18 @@ input[type="password"] {
 		</div>
 		</c:if>
 		<c:if test="${position!=2}">
-			<div style="margin:auto;">
-			<h1>접근 권한이 없습니다.</h1>
-			<button onClick="location.href='/'">Home</button>
+			<div style="text-align: center;
+						width: 800px;
+						height: 400px;
+						float: center;
+						margin: auto;
+						padding-top: 150px;">
+			<img style="width: 150px; height: 150px; float: left; margin-left:70px;"
+					src="../display?fileName=warning.png" /><br>
+			<div id=warning>
+					현재 ${id} 님은 접근 권한이 없습니다.<br>
+				</div>
+			<br><br><br><br><br><br><br><br><br><br><div><button id=btn onClick="location.href='/'">Home</button></div>
 			</div>
 		</c:if>
 	<br>
