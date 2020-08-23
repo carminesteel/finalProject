@@ -16,19 +16,19 @@ html {
 }
 
 #exBody {
-	background-color: #e9ecef;
+	background-color: #2b4163;
 	z-index: 1;
 }
 
-#exCenter {
+/* #exCenter {
 	width: 1276px;
 	margin: auto;
 	z-index: 2;
 	overflow:hidden;
 	position:relative;
-}
+} */
 
-#exCenter #divMenu a {
+ #exCenter #divMenu a {
 	display:inline-block;
 	text-decoration:none;
 	color:black;
@@ -37,8 +37,8 @@ html {
 	cursor:pointer;
 	
 }
-
-#tblMessage {
+ 
+/* #tblMessage {
 	position:relative;
 	left:7%;
 }
@@ -66,43 +66,70 @@ html {
 }
 #divcontent #tbl1 span {
 	margin-left:5px;
-}
+} */
+	.btnreSend{
+	all: unset;
+	background: #0f4c75; 
+	width: 50px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	.btnreSend:hover{
+	cursor:pointer;
+	}
+	.btnDel{
+	all: unset;
+	background: #0f4c75; 
+	width: 50px; 
+	height: 30px; 
+	color: white; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	}
+	
+	.btnDel:hover{
+	cursor:pointer;
+	}
 </style>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body style="padding-top: 73px; margin-left: 0px; width: 100%;">
 	<jsp:include page="../menu.jsp"></jsp:include>
-	<div id=exBody style="padding-top:0px;">
-		<div id=exCenter>
-			<div id="tblMessage" border=1>
-				<div id="divMenu" style="width:200px; float:left; padding-top:110px; padding-bottom:20px; border-right:0.5px solid black;">
-
-					<div><a id="receive">받은메세지함</a></div>
-					<div><a id="send">보낸메세지함</a></div>
+	<div id=exBody >
+		<div id=exCenter style="margin:auto;">
+			<div id="tblMessage" style="height:1080px; padding-top:50px; padding-bottom:50px; margin:auto;">
+				<div id="divMenu" style="width:1400px;background:white;color:black;margin:auto;border-radius:20px 20px 20px 20px;padding:20px;margin-top:40px;">
+					<div>
+						<a id="receive" style="text-align:center;background:#0f4c75;margin-right:10px;color:white;border-radius:20px 20px 20px 20px;">받은메세지함</a>
+						<a id="send" style="text-align:center;background:#0f4c75;color:white;border-radius:20px 20px 20px 20px;">보낸메세지함</a>
+					</div>
 				</div>
-				<div id="divcontent" style="width:900px; float:left; padding-top:40px;" >
-					<table id="Maintbl" width=900>
+				<div id="divcontent" style="width:1400px;background:white;color:black; padding-bottom:100px; height:900px;margin:auto;border-radius:20px 20px 20px 20px;padding:20px;margin-top:40px;" >
+					<table id="Maintbl" width=1400>
 						<tr>
-							<td width=40 style="border:0.5px solid black; border-left:none; text-align:center;">
+							<td width=40 style="border:0.1px solid black; border-left:none;border-right:none; text-align:center;">
 								<input type="checkbox" class="chkAll" style="cursor:pointer;">
 							</td>
-							<td width=214 style="border:0.5px solid black;">
+							<td width=214 style="border:0.1px solid black; border-left:none;border-right:none;">
 								<span>보낸날짜</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; ">
+							<td width=214 style="border:0.1px solid black; border-left:none;border-right:none; ">
 								<span>Title</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="border:0.1px solid black;border-left:none; border-right:none;">
 								<span>보낸사람</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="border:0.1px solid black; border-left:none;border-right:none;">
 								<span>읽은날짜</span>
 							</td>
 						</tr>
 					</table>
 					<!-- 받은메세지 -->
-					<table id="tbl" width=900></table>
+					<table id="tbl" width=1400 style="padding-bottom:20px;"></table>
 					<script id="temp" type="text/x-handlebars-template">
 						<tr id="button">
 							<td></td>
@@ -112,38 +139,38 @@ html {
 							</td>
 						</tr>
 						<tr>
-							<td width=40 style="border:0.5px solid black; border-left:none; text-align:center;">
+							<td width=40 style="text-align:center;height:50px;border:0.5px solid black; border-right:none; text-align:center;">
 								<input type="checkbox" class="chkAll" style="cursor:pointer;">
 							</td>
-							<td width=214 style="border:0.5px solid black;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none;">
 								<span>보낸날짜</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; ">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none; ">
 								<span>Title</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none;">
 								<span>보낸사람</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;">
 								<span>읽은날짜</span>
 							</td>
 						</tr>
 					{{#each .}}
 						<tr class="row">
-							<td width=40 style="border:0.5px solid black; border-left:none; text-align:center;">
+							<td width=40 style="border:0.1px solid black; border-left:none; text-align:center;">
 								<input type="checkbox" class="chk" style="cursor:pointer;">
 								<input type="hidden" value={{m_no}} class="m_no">
 							</td>
-							<td width=214 style="border:0.5px solid black;">
+							<td width=214 style="border:0.1px solid black;">
 								<span class="sendDate">{{sendDate}}</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; cursor:pointer;" >
+							<td width=214 style="border:0.1px solid black; cursor:pointer;" >
 								<span class="title">{{title}}</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="border:0.15px solid black; border-right:none;">
 								<span class="sender">{{sender}}</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; text-align:center;">
+							<td width=214 style="border:0.1px solid black; text-align:center;">
 							{{#if receiveDate}}
 								<span>{{receiveDate}}</span>
 								{{else}}
@@ -154,7 +181,7 @@ html {
 					{{/each}}
 					</script>
 					<!-- 보낸메세지 -->
-					<table id="tbl1" width=900></table>
+					<table id="tbl1" width=1400 style="padding-bottom:20px;"></table>
 					<script id="temp1" type="text/x-handlebars-template">
 						<tr>
 							<td></td>
@@ -163,38 +190,38 @@ html {
 							</td>
 						</tr>
 						<tr>
-							<td width=40 style="border:0.5px solid black; border-left:none; text-align:center;">
+							<td width=40 style="height:50px;border:0.1px solid black;text-align:center;">
 								<input type="checkbox" class="chkAll" style="cursor:pointer;">
 							</td>
-							<td width=214 style="border:0.5px solid black;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none; ">
 								<span>받는사람</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; ">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none; ">
 								<span>Title</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none;">
 								<span>보낸날짜</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;">
 								<span>읽은날짜</span>
 							</td>
 						</tr>
 					{{#each .}}
 						<tr class="row">
-							<td width=40 style="border:0.5px solid black; border-left:none; text-align:center;">
+							<td width=40 style="height:50px;border:0.1px solid black; text-align:center;">
 								<input type="checkbox" class="chk1" style="cursor:pointer;">
 								<input type="hidden" value={{m_no}} class="m_no">
 							</td>
-							<td width=214 style="border:0.5px solid black;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none; ">
 								<span>{{receiver}}</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; cursor:pointer;" >
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none; " >
 								<span class="title">{{title}}</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none; ">
 								<span class="sendDate">{{sendDate}}</span>
 							</td>
-							<td width=214 style="border:0.5px solid black; text-align:center;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;">
 							{{#if receiveDate}}
 								<span class="receiveDate">{{receiveDate}}</span>
 								{{else}}
@@ -204,14 +231,14 @@ html {
 						</tr>
 					{{/each}}
 					</script>
-					<div id="SendMessage" style="width: 880px; padding: 10px; margin-top: 10px;">
+					<div id="SendMessage" style="width: 1380px; padding: 10px; margin-top: 10px;">
 						보낸이: <span class="sender"></span><br> 
 						발신일: <span class="sendDate"></span><br> 
 						수신일: <span class="receiveDate"></span><br>
 						내용: <span class="content"></span><br>
 						<input type="button" value="답장" id="resend">
 					</div>
-					<div id="ReceiveMessage" style="width: 880px; padding: 10px; margin-top: 10px;">
+					<div id="ReceiveMessage" style="width: 1380px; padding: 10px; margin-top: 10px;">
 						받는사람: <span class="receiver"></span><br> 
 						발신일: <span class="sendDate"></span><br> 
 						수신일: <span class="receiveDate"></span><br>

@@ -25,22 +25,33 @@
 	#btnInsert2:hover{
 	cursor:pointer;
 	}
+	body{
+	width:800px;
+	margin:auto;
+	padding-top:30px;
+	background-color: #74a4d7;
+	z-index: 1;
+	}
 </style>
 </head>
 <body>
-	<input type="hidden" value="${id}">	
+	<input type="hidden" value="${id}">
 	<c:forEach items="${vo}" var="v">
-		<div><img width=65px height=65px; style="border-radius:50%;" src="../display?fileName=${v.u_image}"/></div>
-		<b>${v.nickname}</b><br>
-		<b>답글 내용 : ${v.content}</b><br>
-		<b>답변 날짜 : ${v.writedate}</b><br>
-	</c:forEach>
+		<div style="width:740px; background-color:white; border-radius:5px 5px 5px 5px;">
+			<div style="margin:10px; padding:10px">			
+					<div><img width=65px height=65px; style="border-radius:50%;" src="../display?fileName=${v.u_image}"/></div>
+					<b>${v.nickname}</b><br>
+					<b>답변 날짜 : ${v.writedate}</b><br>
+					<b>답글 내용 : ${v.content}</b><br>						
+			</div>
+		</div>
+	</c:forEach>	
 	<div>
-	<br>
-	<c:if test="${id=='zzz'}">
-		<input style=width:732px;height:20px;margin-top:20px;resize:none; type="text" id="txtReply">
-		<button id="btnInsert2">입력</button>
-	</c:if>
+		<br>
+		<c:if test="${id=='zzz'}">
+			<input style="width:732px;height:20px;margin-top:20px;resize:none;border-radius:5px 5px 5px 5px;" type="text" id="txtReply">
+			<button id="btnInsert2">입력</button>
+		</c:if>
 	</div>
 </body>
 <script>

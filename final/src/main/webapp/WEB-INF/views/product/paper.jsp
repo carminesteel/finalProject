@@ -8,7 +8,8 @@
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<style>
-	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);	
+	
 	#btnSend{
 	all: unset;
 	float:right;
@@ -47,6 +48,8 @@
 	width:800px;
 	margin:auto;
 	padding-top:30px;
+	background-color: #74a4d7;
+	z-index: 1;
 	}
 	</style>
 </head>
@@ -60,10 +63,10 @@
 				<td style="text-align:right"><b>판매자 :</b> ${param.receiver}님</td>		
 			</tr>
 			<tr>
-			<td><b>TITLE : </b><input type="text" name="title" style=width:732px;height:20px;margin-top:20px;resize:none; placeholder="제목을입력하세요"></td>
+			<td><b>TITLE : </b><input type="text" name="title" style="width:732px;height:20px;margin-top:20px;resize:none;border-radius:5px 5px 5px 5px;" placeholder="제목을입력하세요"></td>
 			</tr>
 			<tr>
-			<td><textarea name="content" style=width:790px;height:150px;margin-bottom:15px;margin-top:3px;resize:none; placeholder="내용을입력하세요"></textarea>
+			<td><textarea name="content" style="width:790px;height:150px;margin-bottom:15px;margin-top:3px;resize:none;border-radius:5px 5px 5px 5px; "placeholder="내용을입력하세요"></textarea>
 			</tr>
 		</table>
 		<input id="btnSend" type="submit" value="보내기"> 
