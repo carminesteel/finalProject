@@ -241,7 +241,7 @@ nav a {
             <div id="artgoodstab">
 		         <c:forEach items="${Alist}" var="avo">
 		            <div class="box">
-		               <input type="hidden" value="${bvo.p_no}" class="p_no">
+		               <input type="hidden" value="${avo.p_no}" class="p_no">
 		               <div class="image"><img src="/display?fileName=${avo.image}"/></div>
 		               <div class="title" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${avo.title}</div>               
 		               <div class="content" style="width:245px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">${avo.content}</div>
@@ -336,6 +336,7 @@ nav a {
 
    $("#artgoodstab").on("click", ".image", function() {
       var p_no = $(this).parent().find(".p_no").val();
+      alert(p_no);
       var id = $(this).parent().find(".id").html();
       location.href = "/product/read?p_no=" + p_no + "&id=" + id;
    });
