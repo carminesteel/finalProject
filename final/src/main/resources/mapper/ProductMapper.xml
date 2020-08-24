@@ -3,13 +3,13 @@
 <mapper namespace="com.example.mapper.ProductMapper">
 	<select id="bestList" resultType="com.example.domain.ProductVO">
 	<![CDATA[
-		select p.*, quantity from product p left join purchase pu on p.p_no=pu.p_no and report<10 order by quantity desc limit 0,10
+		select p.*, quantity from product p left join purchase pu on p.p_no=pu.p_no and report<10 order by quantity desc
 	]]>
 	</select>
 	
 	<select id="artgoods" resultType="com.example.domain.ProductVO">
 	<![CDATA[
-		select * from product where report<10 limit 0,10
+		select * from product where report<10
 	]]>
 	</select>
 	
