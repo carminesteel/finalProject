@@ -66,6 +66,8 @@
 	width:800px;
 	margin:auto;
 	padding-top:30px;
+	background-color: #74a4d7;
+	z-index: 1;
 	}
 	</style>
 </head>
@@ -74,14 +76,13 @@
 	
 	<form name="frm" method="post" action="insert">
 	<input type="hidden" name="p_no" value="${param.p_no}">
-	<%-- <input type="hidden" name="id" value="${id}"> --%>
 	<input type="hidden" name="id" value="${id}">
 	<table>		
 		<tr>		
-			<td><b>TITLE : </b><input style=width:732px;height:20px;margin-top:20px;resize:none; type="text" name="title" size=50></td>
+			<td><b>TITLE : </b><input style="width:732px;height:20px;margin-top:20px;resize:none;border-radius:5px 5px 5px 5px;" type="text" name="title" size=50></td>
 		</tr>
 		<tr>
-			<td><b>문의 내용</b><textarea style=width:790px;height:150px;margin-bottom:15px;margin-top:3px;resize:none; name="content" value="${vo.content}"></textarea></td>
+			<td><b>문의 내용</b><textarea style="width:790px;height:150px;margin-bottom:15px;margin-top:3px;resize:none;border-radius:5px 5px 5px 5px;" name="content" value="${vo.content}"></textarea></td>
 		</tr>		
 	</table>
 	<input id="btnClose" type="button" value="창닫기" onclick="javascript:self.close();">

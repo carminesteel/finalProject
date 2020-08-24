@@ -168,11 +168,14 @@ a:hover{text-decoration:none;color:black;}
 	         <table style="height:475px;width:575px;margin:auto;border-collapse:collapse;">
 	            <c:forEach items="${review}" var="list" varStatus="status" begin="0" end="2">
 	               <tr>
+	                  <td width=50px>
+	                  	 <b>${status.count}위</b>
+	                  </td>
 	               	  <td class="u_image" width=70>				
 						 <img width=65px height=65px; style="border-radius:50%;" src="../display?fileName=${list.u_image}">
 			 	 	  </td>
-	                  <td style="border-bottom:none;font-size:17px;letter-spacing:-1px; margin-auto; margin:50px; magin-bottom:5px; padding:20px; width:500px; text-align:left; border-bottom:1px solid #74a4d7;">   
-	                    <div width=700><b>${list.nickname} : <br><br></b>${list.content}</div>
+	                  <td style="border-bottom:none;font-size:17px;letter-spacing:-1px; margin-auto; margin:50px; magin-bottom:5px; padding:20px; width:500px; text-align:left;">   
+	                    <div width=700><b>${list.nickname} <br></b>${list.content}</div>
 	                    <br>       
 	                  </td>                   
 	               </tr>

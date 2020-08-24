@@ -15,18 +15,14 @@ html {
 	font-family: Noto Sans KR
 }
 
+#send{
+	width:130px;
+}
+
 #exBody {
 	background-color: #2b4163;
 	z-index: 1;
 }
-
-/* #exCenter {
-	width: 1276px;
-	margin: auto;
-	z-index: 2;
-	overflow:hidden;
-	position:relative;
-} */
 
  #exCenter #divMenu a {
 	display:inline-block;
@@ -37,36 +33,7 @@ html {
 	cursor:pointer;
 	
 }
- 
-/* #tblMessage {
-	position:relative;
-	left:7%;
-}
-#exCenter #divcontent input[type="button"] {
-	width:50px;
-	padding:3px;
-	border-radius:2px 2px 2px 2px;
-	background:white;
-	outline:none;
-	border:0.5px solid gray;
-	margin-bottom:10px;
-	cursor:pointer;
-}
-#exCenter #divcontent input[type="button"]:hover {
-	color:red;
-}
-#divcontent #tbl {
-	border-collapse:collapse;
-}
-#divcontent #tbl span {
-	margin-left:5px;
-}
-#divcontent #tbl1 {
-	border-collapse:collapse;
-}
-#divcontent #tbl1 span {
-	margin-left:5px;
-} */
+
 	.btnreSend{
 	all: unset;
 	background: #0f4c75; 
@@ -102,13 +69,13 @@ html {
 	<div id=exBody >
 		<div id=exCenter style="margin:auto;">
 			<div id="tblMessage" style="height:1080px; padding-top:50px; padding-bottom:50px; margin:auto;">
-				<div id="divMenu" style="width:1400px;background:white;color:black;margin:auto;border-radius:20px 20px 20px 20px;padding:20px;margin-top:40px;">
+				<div id="divMenu" style="width:1400px;background:white;color:black;margin:auto;border-radius:5px 5px 5px 5px;padding:20px;margin-top:40px;">
 					<div>
-						<a id="receive" style="text-align:center;background:#0f4c75;margin-right:10px;color:white;border-radius:20px 20px 20px 20px;">받은메세지함</a>
-						<a id="send" style="text-align:center;background:#0f4c75;color:white;border-radius:20px 20px 20px 20px;">보낸메세지함</a>
+						<a id="receive" style="width:110px;text-align:center;background:#0f4c75;margin-right:10px;color:white;border-radius:5px 5px 5px 5px;font-weight:300">받은메세지함</a>
+						<a id="send" style="width:110px;text-align:center;background:#0f4c75;color:white;border-radius:5px 5px 5px 5px;font-weight:300">보낸메세지함</a>
 					</div>
 				</div>
-				<div id="divcontent" style="width:1400px;background:white;color:black; padding-bottom:100px; height:900px;margin:auto;border-radius:20px 20px 20px 20px;padding:20px;margin-top:40px;" >
+				<div id="divcontent" style="width:1400px;background:white;color:black; padding-bottom:100px; height:900px;margin:auto;border-radius:5px 5px 5px 5px;padding:20px;margin-top:40px;" >
 					<table id="Maintbl" width=1400>
 						<tr>
 							<td width=40 style="border:0.1px solid black; border-left:none;border-right:none; text-align:center;">
@@ -132,14 +99,14 @@ html {
 					<table id="tbl" width=1400 style="padding-bottom:20px;"></table>
 					<script id="temp" type="text/x-handlebars-template">
 						<tr id="button">
-							<td></td>
-							<td colspan=3>
-								<input type="button" class="btnDel" value="삭제" style="float:left; margin-right:5px;">
-								<input type="button" class="btnreSend" value="답장" style="float:left; ">
+							<td colspan=4></td>
+							<td>
+								<input type="button" class="btnDel" value="삭제" style="float:right; margin-right:5px;">
+								<input type="button" class="btnreSend" value="답장" style="float:right;margin-right:5px; ">
 							</td>
 						</tr>
-						<tr>
-							<td width=40 style="text-align:center;height:50px;border:0.5px solid black; border-right:none; text-align:center;">
+						<tr style="height:50px;background:#2b4163;color:white;">
+							<td width=40 style="text-align:center;height:50px;border:0.5px solid black; text-align:center;">
 								<input type="checkbox" class="chkAll" style="cursor:pointer;">
 							</td>
 							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none;">
@@ -156,21 +123,21 @@ html {
 							</td>
 						</tr>
 					{{#each .}}
-						<tr class="row">
-							<td width=40 style="border:0.1px solid black; border-left:none; text-align:center;">
+						<tr class="row" style="text-align:center;">
+							<td width=40 style="border:0.1px solid black;height:50px;text-align:center;">
 								<input type="checkbox" class="chk" style="cursor:pointer;">
 								<input type="hidden" value={{m_no}} class="m_no">
 							</td>
-							<td width=214 style="border:0.1px solid black;">
+							<td width=214 style="border:0.1px solid black;height:50px;border-left:none;border-right:none;">
 								<span class="sendDate">{{sendDate}}</span>
 							</td>
-							<td width=214 style="border:0.1px solid black; cursor:pointer;" >
+							<td width=214 style="border:0.1px solid black; cursor:pointer;height:50px;border-left:none;border-right:none;" >
 								<span class="title">{{title}}</span>
 							</td>
-							<td width=214 style="border:0.15px solid black; border-right:none;">
+							<td width=214 style="border:0.15px solid black; border-right:none;height:50px;border-left:none;border-right:none;">
 								<span class="sender">{{sender}}</span>
 							</td>
-							<td width=214 style="border:0.1px solid black; text-align:center;">
+							<td width=214 style="border:0.1px solid black; text-align:center;height:50px;border-left:none;">
 							{{#if receiveDate}}
 								<span>{{receiveDate}}</span>
 								{{else}}
@@ -184,12 +151,12 @@ html {
 					<table id="tbl1" width=1400 style="padding-bottom:20px;"></table>
 					<script id="temp1" type="text/x-handlebars-template">
 						<tr>
-							<td></td>
-							<td colspan=3>
-								<input type="button" class="btnDel" value="삭제" style="float:left; margin-right:5px;">
+							<td colspan=4></td>
+							<td>
+								<input type="button" class="btnDel" value="삭제" style="float:right; margin-right:5px;">
 							</td>
 						</tr>
-						<tr>
+						<tr style="background:#2b4163;color:white;">
 							<td width=40 style="height:50px;border:0.1px solid black;text-align:center;">
 								<input type="checkbox" class="chkAll" style="cursor:pointer;">
 							</td>
