@@ -336,7 +336,6 @@ nav a {
 
    $("#artgoodstab").on("click", ".image", function() {
       var p_no = $(this).parent().find(".p_no").val();
-      alert(p_no);
       var id = $(this).parent().find(".id").html();
       location.href = "/product/read?p_no=" + p_no + "&id=" + id;
    });

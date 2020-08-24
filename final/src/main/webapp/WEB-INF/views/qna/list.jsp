@@ -62,11 +62,11 @@
 				아직 문의내용이 없습니다.
 	</div>	
 
-<table id="tbl1" width=1130></table>
+<table id="tbl1" style="width:1130px;"></table>
 	<script id="temp1" type="text/x-handlebars-template">
 		{{#each list}}
-		<tr class="qna1" style="height=200px;">
-			<td class="u_image" width=70>
+		<tr class="qna1" style="height:80px; margin:10px; padding:10px;">
+			<td class="u_image" width=70;>
 				<input type="hidden" value="${qe}">
 				<img width=65px height=65px; style="border-radius:50%;" src="display?fileName={{u_image}}"/>
 			</td>

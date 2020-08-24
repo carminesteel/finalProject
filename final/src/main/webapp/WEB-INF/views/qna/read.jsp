@@ -37,7 +37,7 @@
 <body>
 	<input type="hidden" value="${id}">
 	<c:forEach items="${vo}" var="v">
-		<div style="width:740px; background-color:white; border-radius:5px 5px 5px 5px;">
+		<div style="width:790px; background-color:white; border-radius:5px 5px 5px 5px;">
 			<div style="margin:10px; padding:10px">			
 					<div><img width=65px height=65px; style="border-radius:50%;" src="../display?fileName=${v.u_image}"/></div>
 					<b>${v.nickname}</b><br>
