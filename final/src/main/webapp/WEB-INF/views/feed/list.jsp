@@ -108,8 +108,21 @@ html {
 	<div id=exBody>
 		<div id=exCenter>
 			<div id=eTitle>Feed</div>
-			<div id=eContent>팔로우 중인 작가들의 소식입니다.</div>
-
+			<c:if test="${cnt == 0 or empty flist}">
+				<c:if test="${not empty flist}">
+				<div id=eContent>팔로우 중인 작가들의 소식입니다.</div>
+				</c:if>
+	  			<div style="text-align: center;
+							width: 800px;
+							height: 600px;
+							float: center;
+							margin: auto;
+							margin-top:100px;">
+					<img style="float: center;margin:auto;"
+						src="../display?fileName=noFeed.png" /><br>
+				</div>
+		</c:if>
+		<c:if test="${cnt != 0}">
 			<div class=lTbl>
 				<c:forEach items="${Flist}" var="fvo">
 					<div class=ftbl>
@@ -155,6 +168,7 @@ html {
 					<br><br>			
 				</c:forEach>
 			</div>
+			</c:if>
 			<div class="scrollLocation"></div>
 		</div>
 	</div>

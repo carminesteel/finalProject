@@ -30,6 +30,7 @@ public class FeedController {
 	@RequestMapping("/feed/list")
 	public String list(HttpSession session,Model model) {
 		
+		
 		ArrayList<B_replyVO> array = new ArrayList<B_replyVO>();
 		String id = (String)session.getAttribute("id");
 		ArrayList<BoardVO> b_nos=(ArrayList<BoardVO>)mapper.feedView(id);
@@ -40,6 +41,8 @@ public class FeedController {
 			 }
 			 
 		}
+		int targetCnt = mapper.getFollowing(id);
+		model.addAttribute("cnt",targetCnt);
 		model.addAttribute("Flist",mapper.feedView(id));
 		model.addAttribute("Rlist",array);
 		return "/feed/list";
