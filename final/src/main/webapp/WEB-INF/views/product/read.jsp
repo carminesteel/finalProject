@@ -110,7 +110,7 @@ a:hover{text-decoration:none;color:black;}
             <div id="pInfo"><br>
                <h1 id=pTitle>${read.title}</h1>
                <p>
-               <h1 id="pPrice">${read.price}원</h1>
+               <h1 id="pPrice"><input id="proPrice" type="hidden" value="${read.price}"><fmt:formatNumber type="number" value="${read.price}"></fmt:formatNumber>원</h1>
                <br>
                <div id="pointArea">
                   <div style="display: inline-block; float: left;">
@@ -269,22 +269,25 @@ $(".qa").on("click", function(){
       $("#quant").html("수량 "+quantity+"개");
    }
 
-   function getTotal(){
-      var price = $("#pPrice").html();
-      var quantity = $("#quantity").val();
-      var pr=parseInt(price);
-      var quan=parseInt(quantity);
+	function getTotal(){
+		var price = $("#proPrice").val();
+		var quantity = $("#quantity").val();
+		var pr=parseInt(price);
+		var quan=parseInt(quantity);
    
-      totPrice = pr*quan;
-      var point=parseInt(totPrice*0.01);
-      $("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
-      $("#point").html(point+" point");
-      if(totPrice>=50000){
-         $("#totPrice").html(totPrice);
-      }else{
-         $("#totPrice").html(totPrice+2500);
-      }
-   }
+		totPrice = pr*quan;
+		var point=parseInt(totPrice*0.01);
+		$("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
+		$("#point").html(point+" point");
+		if(totPrice>=50000){
+			totPrice=totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$("#totPrice").html(totPrice+"원");
+		}else{
+			totPrice=parseInt(totPrice)+2500;
+			totPrice=totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$("#totPrice").html(totPrice+"원");
+		}
+	}
 
    /* 수량버튼 관련 스크립트 */
    $('.btn-number').click(function(e){
