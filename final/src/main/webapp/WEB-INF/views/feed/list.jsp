@@ -108,8 +108,8 @@ html {
 	<div id=exBody>
 		<div id=exCenter>
 			<div id=eTitle>Feed</div>
-			<c:if test="${cnt == 0 or empty flist}">
-				<c:if test="${not empty flist}">
+			<c:if test="${cnt == 0 or empty Flist}">
+				<c:if test="${not empty Flist}">
 				<div id=eContent>팔로우 중인 작가들의 소식입니다.</div>
 				</c:if>
 	  			<div style="text-align: center;
@@ -122,8 +122,9 @@ html {
 						src="../display?fileName=noFeed.png" /><br>
 				</div>
 		</c:if>
-		<c:if test="${cnt != 0}">
-			<div class=lTbl>
+		<c:if test="${cnt != 0 }">
+			<div class=lTbl style="margin-top:100px;">
+			
 				<c:forEach items="${Flist}" var="fvo">
 					<div class=ftbl>
 						<input type="hidden" value="${fvo.b_no}" class="b_no">
