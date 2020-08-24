@@ -261,8 +261,8 @@ nav a {
                         <input type=hidden id="c_id" value="${creater.id}">
                         <img src="/display?fileName=${creater.u_image}"   style="float: left; border-radius: 50%;" width=75 height=75 />
                         <span style="text-align: left; width: 200px; float: left; padding-left: 25px;">
-                              <p class="createrid" style="font-weight: bold; font-size: 24px; margin: 0;">${creater.nickname}</p>
-                              <p style="font-size:15px;margin:0;white-space:nowrap;text-overflow:ellipsis">${creater.introduce}</p>
+                              <p class="createrid" style="font-weight: 500; font-size: 24px; margin: 0;">${creater.nickname}</p>
+                              <p style="font-size:15px;font-weight: 300;margin:0;white-space:nowrap;text-overflow:ellipsis">${creater.introduce}</p>
                         </span>
 						<span id="total" style="float: right; background: #e9e9e9; position: relative;
 							top: 15px; padding: 5px; border-radius: 20px 20px 20px 20px; font-size: 13px;
