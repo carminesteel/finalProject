@@ -60,6 +60,30 @@ html {
 	.btnDel:hover{
 	cursor:pointer;
 	}
+	
+	#resend{
+	all: unset;
+	background: white; 
+	width: 50px; 
+	height: 30px; 
+	color: #2b4163; 
+	border-radius: 5px 5px 5px 5px;
+	text-align:center;
+	float:right;
+	margin-right:30px;
+	}
+	
+	#resend:hover{
+	cursor:pointer;
+	}
+	#tbl .row:hover{
+	background:gray;
+	cursor:pointer;
+	}
+	#tbl1 .row:hover{
+	background:gray;
+	cursor:pointer;
+	}
 </style>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -76,25 +100,25 @@ html {
 					</div>
 				</div>
 				<div id="divcontent" style="width:1400px;background:white;color:black; padding-bottom:100px; height:900px;margin:auto;border-radius:5px 5px 5px 5px;padding:20px;margin-top:40px;" >
-					<table id="Maintbl" width=1400>
-						<tr>
-							<td width=40 style="border:0.1px solid black; border-left:none;border-right:none; text-align:center;">
+<!-- 					<table id="Maintbl" width=1400>
+						<tr style="height:50px;background:#2b4163;color:white;">
+							<td width=40 style="text-align:center;height:50px;border:0.5px solid black; text-align:center;">
 								<input type="checkbox" class="chkAll" style="cursor:pointer;">
 							</td>
-							<td width=214 style="border:0.1px solid black; border-left:none;border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none;">
 								<span>보낸날짜</span>
 							</td>
-							<td width=214 style="border:0.1px solid black; border-left:none;border-right:none; ">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none; ">
 								<span>Title</span>
 							</td>
-							<td width=214 style="border:0.1px solid black;border-left:none; border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;border-right:none;">
 								<span>보낸사람</span>
 							</td>
-							<td width=214 style="border:0.1px solid black; border-left:none;border-right:none;">
+							<td width=214 style="text-align:center;height:50px;border:0.1px solid black;border-left:none;">
 								<span>읽은날짜</span>
 							</td>
 						</tr>
-					</table>
+					</table> -->
 					<!-- 받은메세지 -->
 					<table id="tbl" width=1400 style="padding-bottom:20px;"></table>
 					<script id="temp" type="text/x-handlebars-template">
@@ -102,7 +126,6 @@ html {
 							<td colspan=4></td>
 							<td>
 								<input type="button" class="btnDel" value="삭제" style="float:right; margin-right:5px;">
-								<input type="button" class="btnreSend" value="답장" style="float:right;margin-right:5px; ">
 							</td>
 						</tr>
 						<tr style="height:50px;background:#2b4163;color:white;">
@@ -198,14 +221,14 @@ html {
 						</tr>
 					{{/each}}
 					</script>
-					<div id="SendMessage" style="width: 1380px; padding: 10px; margin-top: 10px;">
+					<div id="SendMessage" style="width:1360px; height:140px; background-color:#2b4163; color:white;border-radius:5px 5px 5px 5px; padding-left:30px; padding-top:30px">
 						보낸이: <span class="sender"></span><br> 
 						발신일: <span class="sendDate"></span><br> 
 						수신일: <span class="receiveDate"></span><br>
 						내용: <span class="content"></span><br>
 						<input type="button" value="답장" id="resend">
 					</div>
-					<div id="ReceiveMessage" style="width: 1380px; padding: 10px; margin-top: 10px;">
+					<div id="ReceiveMessage" style="width:1360px; height:140px; background-color:#2b4163; color:white;border-radius:5px 5px 5px 5px; padding-left:30px; padding-top:30px">
 						받는사람: <span class="receiver"></span><br> 
 						발신일: <span class="sendDate"></span><br> 
 						수신일: <span class="receiveDate"></span><br>
@@ -229,7 +252,7 @@ html {
  	$("#SendMessage").on("click", "#resend", function(){
  		var receiver=$("#SendMessage .sender").html();
  		var id="${id}";
- 		window.open("/product/paper?receiver=" + receiver,"","width=350px, height=400px");
+ 		window.open("/product/paper?receiver=" + receiver,"","width=820px, height=350px");
 	});
 	
 	//보낸 메세지 읽기
