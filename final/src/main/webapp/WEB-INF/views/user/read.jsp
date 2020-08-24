@@ -182,6 +182,21 @@ input[type="password"] {
 	float: left;
 	margin: 17px
 }
+.modal {
+	display: none; /* Hidden by default */
+	position: absolute; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	 /* Full width */
+	 /* Full height */
+	/* overflow: auto; */ /* Enable scroll if needed */
+	height:auto;
+	overflow : scroll;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9);
+
+}
 
 </style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -251,6 +266,8 @@ input[type="password"] {
 							<c:forEach items="${blist}" var="bvo">
 								<div style="display:inline-block;float:left;margin:17px;">
 									<img class="myImgs" src="../display?fileName=${bvo.image}">
+									<input type="hidden" value="${bvo.b_no}" class="b_bno">
+									<input type="hidden" value="${bvo.view}" class="b_view">
 								</div>
 							</c:forEach>
 						</c:if>
@@ -262,7 +279,7 @@ input[type="password"] {
 						<c:if test="${not empty plist}">
 						<c:forEach items="${plist}" var="pvo">
 							<div style="display:inline-block;float:left;margin:17px;">
-								<img class="myImgs" src="../display?fileName=${pvo.image}">
+								<img class="myImgs" src="../display?fileName=${pvo.image}" onClick="location.href='../product/read?p_no=${pvo.p_no}'">
 							</div>
 						</c:forEach>
 						</c:if>
@@ -317,11 +334,22 @@ input[type="password"] {
 	</div>
 
 	<jsp:include page="../footer.jsp" />
+	<div id="myModal" class="modal"></div>
 </body>
 <script>
 var follower="${id}";
 var target="${vo.id}";
 
+var myDiv = document.getElementById('myModal');
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+var lastScrollTop=0;
 
 $("#Plist").hide();
 $("#followingList").hide();
@@ -370,6 +398,20 @@ $.ajax({
 	}
 })
 }
+	
+
+$(".myImgs").on("click",function() {
+	
+	var b_no =$(this).parent().find(".b_bno").val();
+	var view =$(this).parent().find(".b_view").val();
+	$("#myModal").load("../board/read?b_no="+b_no+"&view="+view);  		
+	$('html').css("overflow", "hidden");
+	$('.modal').css("overflow", "scroll");
+	$('html').css("overflow-x", "hidden");
+	$('.modal').css("overflow-x", "hidden");
+    modal.style.display = "block";
+    myDiv.scrollTop = 0;
+});
 	
 	$("#follow").click(function(){
 		$.ajax({

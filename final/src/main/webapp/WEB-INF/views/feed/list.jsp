@@ -129,7 +129,7 @@ html {
 					<div class=ftbl>
 						<input type="hidden" value="${fvo.b_no}" class="b_no">
 						<input class="idxView" type="hidden" value="${fvo.view}"/>
-						<img class=fimg style="height: 100%; object-fit: contain;" src="../display?fileName=${fvo.image}">
+						<img class=fimg style="height: 100%;max-width:100%; object-fit: contain;" src="../display?fileName=${fvo.image}">
 					</div>
 					<div style="width: 1130px; margin: auto;">
 						<span style="display: inline-block; float: left;"> <img

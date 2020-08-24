@@ -396,6 +396,12 @@ public class UsersController {
 	   Bmapper.reportDelete(b_no);
    }
 
+   @RequestMapping("/insert/eread")
+   @ResponseBody
+   public int Eread(String email) {
+
+      return mapper.eread(email);
+   }
 
    
 }

@@ -93,5 +93,8 @@
     <update id="positionChange">
     	update users set position=#{position} where id=#{id}
     </update>
-	
+
+   <select id="eread" resultType="int">
+       select count(*) from users where email=#{email}
+    </select>
 </mapper>

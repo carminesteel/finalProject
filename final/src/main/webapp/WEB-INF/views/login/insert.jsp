@@ -339,34 +339,7 @@ body {
 		}
 	})
 
-	//이메일 중복
-	$(frm).keyup("#email_row",function(e) {
-		e.preventDefault();
-		var email = $(frm.email).val();
-		var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		if (reg.test(email)) {
-			if (email != "") {
-				$.ajax({
-					type:"get",
-					url:"/insert/eread",
-					data:{"email" : email},
-					dataType : "json",
-					success : function(data) {
-						if (data == 0) {
-							$(frm).find("#email_row #idchk").val(data);
-							$("#emailOk").show();
-							$("#emailErrr").hide();
-						}else{
-							$(frm).find("#email_row #idchk").val(data);
-							$("#emailErrr").show();
-							$("#emailOk").hide();
-						}
-					}
-	
-				});
-			}
-		}
-	});
+
 	
 	//아이디 중복
 	$(frm).keyup("#id_row", function(e) {
@@ -397,21 +370,38 @@ body {
 	});
 	
 	//이메일 정규식
-	$("#email").keyup(function() {
-		var email = $(this).val();
-		// 이메일 검증할 정규 표현식
-		var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		if (reg.test(email)) {//정규표현식을 통과 한다면
-			$("#emailErr").hide();
-			$("#emailOk").hide();
-			successState("#email");
-		} else {//정규표현식을 통과하지 못하면
-			$("#emailErr").show();
-			$("#emailOk").hide();
-			errorState("#email");
-		}
-	});
+	   $("#email").keyup(function() {
+	      var email = $(this).val();
+	      // 이메일 검증할 정규 표현식
+	      var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	      if (reg.test(email)) {//정규표현식을 통과 한다면
+	         $("#emailErr").hide();
+	         $.ajax({
+	            type:"get",
+	            url:"/insert/eread",
+	            data:{"email" : email},
+	            dataType:"json",
+	            success : function(data) {
+	               if (data == 0) {
+	                  $(frm).find("#email_row #idchk").val(data);
+	                  $("#emailOk").show();
+	                  $("#emailErrr").hide();
+	               }else{
+	                  $(frm).find("#email_row #idchk").val(data);
+	                  $("#emailErrr").show();
+	                  $("#emailOk").hide();
+	               }
+	            }
 
+	         });
+	         successState("#email");
+	      } else {//정규표현식을 통과하지 못하면
+	         $("#emailErr").show();
+	         $("#emailOk").hide();
+	         $("#emailErrr").hide();
+	         errorState("#email");
+	      }
+	   });
 	//아이디 정규식
 	$("#regId").keyup(function() {
 		var id = $(this).val();

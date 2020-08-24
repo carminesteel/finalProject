@@ -3,8 +3,10 @@
 <mapper namespace="com.example.mapper.FeedMapper">
      
      <select id="feedView" resultType="com.example.domain.BoardVO">
-		select b.*, u.u_image, u.nickname, u.introduce, @rownum := @rownum+1 AS r from board b, (SELECT @rownum :=0) AS R, (select target from follower where follower=#{id}) a,users u 
-		where b.id=a.target and b.id=u.id order by r desc limit 0,5
+	     <![CDATA[
+			select b.*, u.u_image, u.nickname, u.introduce, @rownum := @rownum+1 AS r from board b, (SELECT @rownum :=0) AS R, (select target from follower where follower=#{id}) a,users u 
+			where b.id=a.target and b.id=u.id and report < 10 order by r desc limit 0,5
+		]]>
     </select>
 	
 	<select id="infiniteScrollDown" resultType="com.example.domain.BoardVO">

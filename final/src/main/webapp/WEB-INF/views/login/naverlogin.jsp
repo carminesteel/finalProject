@@ -16,11 +16,10 @@
 <script type="text/javascript">
 	var naver_id_login = new naver_id_login("mqYaOfp45EbLfF5Ed8in","http://localhost:8088/login/naverlogin");
 	// 접근 토큰 값 출력
-	alert(naver_id_login.oauthParams.access_token);
 	// 네이버 사용자 프로필 조회
 	naver_id_login.get_naver_userprofile("naverSignInCallback()");
 	function naverSignInCallback() { // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-		alert(naver_id_login.getProfileData('email')); //
+		alert("로그인이 성공하였습니다!"); //
 		//alert(naver_id_login.getProfileData('nickname')); //
 		location.href = "/loginNaverResult?email="+ naver_id_login.getProfileData('email');
 	}

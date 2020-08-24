@@ -35,9 +35,10 @@ public interface UsersMapper {
    public void profile_passUpdate(UsersVO vo);
    
    public void updatePosition(String id);
-   
+   public int eread(String email);
    //admin 유저관리
    public List<UsersVO> userList(Criteria cri);
    public int usercnt();
    public void positionChange(UsersVO vo);
+   
 }
