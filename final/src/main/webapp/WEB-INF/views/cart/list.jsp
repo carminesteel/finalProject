@@ -167,11 +167,11 @@ html {
                alert("xxxx");
             },
             success:function(){
-               getList();
             }
          });
       });
       alert("삭제 되었습니다.");
+      location.reload();
    });
    
 	$(".pButton").on("click", function(){

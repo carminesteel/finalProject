@@ -274,8 +274,8 @@ $(".qa").on("click", function(){
 		var quantity = $("#quantity").val();
 		var pr=parseInt(price);
 		var quan=parseInt(quantity);
-   
 		totPrice = pr*quan;
+		
 		var point=parseInt(totPrice*0.01);
 		$("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
 		$("#point").html(point+" point");
@@ -388,12 +388,15 @@ $(".qa").on("click", function(){
       });
    });
    
-   $("#order").on("click",function(){
-      var p_no = getParameterByName('p_no');
-      var id="${id}";
-      quantity = $("#quantity").val(); 
-      var tot= $("#totPrice").html();
-      location.href="/product/order?id="+id+"&p_no="+p_no+"&quantity="+quantity+"&tot="+tot;
-   });
+	$("#order").on("click",function(){
+		var price = $("#proPrice").val();
+		var quantity = $("#quantity").val();
+		var pr=parseInt(price);
+		var quan=parseInt(quantity);
+		totPrice = pr*quan;
+		var p_no = getParameterByName('p_no');
+		var id="${id}";
+		location.href="/product/order?id="+id+"&p_no="+p_no+"&quantity="+quantity+"&tot="+totPrice;
+	});
 </script>
 </html>
