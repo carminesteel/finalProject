@@ -278,6 +278,7 @@ $(".qa").on("click", function(){
 		
 		var point=parseInt(totPrice*0.01);
 		$("#pointCal").html("총 상품금액 "+(pr*quan)+"원의 1%");
+		point=point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		$("#point").html(point+" point");
 		if(totPrice>=50000){
 			totPrice=totPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
